@@ -38,8 +38,9 @@ git merge main										# Merge the main branch into yours. Will pull up your ed
 
 # When you're done with your task, you can merge your branch with the main branch.
 git checkout main                                   # Switch to the main branch
-git pull                                            # Pull the latest changes from the remote main branch
-
+git pull origin main                                # Pull the latest changes from the remote main branch
+git merge <featureName>                             # Merge your branch into the main branch
+git push origin main                                # Push the changes to the remote main branch
 ```
 
 
