@@ -68,5 +68,21 @@ public class Course {
     public String toString() {
         return getCode() + ": " + getName();
     }
+
+    // TODO - Properly implement this
     public static void addListener(CourseEventListener listener) {CourseDataModel.addListener(listener);}
+    public static void removeListener(CourseEventListener listener) {CourseDataModel.removeListener(listener);}
+
+    public static Course getCourse(String courseCode) {
+        return CourseDataModel.getCourse(courseCode);
+    }
+
+    public void addCourseListener(CourseEventListener listener) {
+        CourseDataModel.getCourseDataModel(courseCode).addCourseListener(listener);
+    }
+
+    public void removeCourseListener(CourseEventListener listener) {
+        CourseDataModel.getCourseDataModel(courseCode).removeCourseListener(listener);
+    }
+
 }
