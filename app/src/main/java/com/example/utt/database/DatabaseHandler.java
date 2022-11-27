@@ -167,7 +167,7 @@ public abstract class DatabaseHandler {
         CourseDataModel output;
         if (CourseDataModel.getCourses().containsKey(course.getCode())) {
             Log.d(TAG, "Course already exists!? What to do...");
-            output = CourseDataModel.getCourse(course.getCode());
+            output = CourseDataModel.getCourseDataModel(course.getCode());
         } else {
             Log.d(TAG, "Converting Course object to CourseDataModel");
             output = CourseDataModel.readCourse(course);

@@ -57,29 +57,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCourseAdded(Course course) {
                 Log.d("Render", "Course Added: " + course);
-//                if (Course.getCourse("CSCA08") != null) {
-//                    Log.d("NOOOOO", "FAILrrrrURE");
-//                    CourseEventListener single = new CourseEventListener() {
-//                        @Override
-//                        public void onCourseAdded(Course course) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onCourseChanged(Course course) {
-//                            Log.d("OK", course.code);
-//                        }
-//
-//                        @Override
-//                        public void onCourseRemoved(Course course) {
-//
-//                        }
-//                    };
-                    // Attach a test listener to CSCA08
-//                    Course.getCourse("CSCA08").addCourseListener(single);
-//                } else {
-//                    Log.d("DNE", "Failed to find CSCA08");
-//                }
+                if (Course.getCourse("CSCA08") != null) {
+                    Log.d("NOOOOO", "FAILrrrrURE");
+                    CourseEventListener single = new CourseEventListener() {
+                        @Override
+                        public void onCourseAdded(Course course) {
+
+                        }
+
+                        @Override
+                        public void onCourseChanged(Course course) {
+                            Log.d("OK", course.getCode());
+                        }
+
+                        @Override
+                        public void onCourseRemoved(Course course) {
+
+                        }
+                    };
+                     //Attach a test listener to CSCA08
+                    Course.getCourse("CSCA08").addCourseListener(single);
+                } else {
+                    Log.d("DNE", "Failed to find CSCA08");
+                }
             }
 
             @Override

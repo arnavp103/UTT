@@ -84,11 +84,15 @@ public class CourseDataModel { // implements Serializable
 
         // Log.d(TAG, "Updated Course Object: " + courseObject.toString());
     }
-    public static CourseDataModel getCourse(String courseCode) {
+    public static CourseDataModel getCourseDataModel(String courseCode) {
         //Log.d("RETURNING", courses.get(courseCode).toString());
         return courses.get(courseCode);
     }
 
+    public static Course getCourse(String course) {
+        if (getCourseDataModel(course) == null) return null;
+        return getCourseDataModel(course).getCourseObject();
+    }
     // This does not check to see if a course code exists...
 
     public static void updateCourse(CourseDataModel course, String key) {
