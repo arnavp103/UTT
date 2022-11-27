@@ -24,7 +24,7 @@ git checkout -b <featureName>  origin/<startingBranch>      # Create and swap to
 These are some general commands that you will probably be using every day.
 Note that when you do merges git will ask you to write something, and it will generally pull up the
 default editor which is vim. You can fix that by setting git to use a different editor once. Type this into the terminal
-```bash git config --global core.editor "code --wait"```
+```git config --global core.editor "code --wait"```
 ```bash
 # Here you make your changes and add your stuff. You should be pushing to remote after every few hours of work.
 git add .                                       	# Add all files to be tracked by git
