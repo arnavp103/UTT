@@ -1,9 +1,11 @@
 package com.example.utt.algorithm.model;
 
-import java.time.Year;
+
+import com.example.utt.models.Course;
+
 import java.util.List;
 
-public class CourseOfferings extends Course{
+public class CourseOfferings extends Course {
     //basically what the admin inputs
     List<Course> unlockedCourses;
 
@@ -19,7 +21,7 @@ public class CourseOfferings extends Course{
      */
     public List<Course> UnlockedCourses(Course course, List<CourseOfferings> allCourses) {
         for (CourseOfferings courseOffer : allCourses) {
-            if (courseOffer.prerequisites.contains(course)) {
+            if (courseOffer.getPrerequisites().contains(course)) {
                 unlockedCourses.add(courseOffer);
             }
         }

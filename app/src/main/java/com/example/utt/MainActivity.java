@@ -1,6 +1,7 @@
 package com.example.utt;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,8 +12,17 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.utt.algorithm.model.CourseScheduling;
+import com.example.utt.algorithm.model.SearchAlgorithm;
+import com.example.utt.algorithm.model.Term;
+import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.ActivityMainBinding;
+import com.example.utt.models.Course;
+import com.example.utt.models.CourseEventListener;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        DatabaseHandler.initialise();
         setSupportActionBar(binding.toolbar);
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -39,6 +50,71 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        /// TESTING STUFF
+
+        CourseEventListener render = new CourseEventListener() {
+            @Override
+            public void onCourseAdded(Course course) {
+                Log.d("Render", "Course Added: " + course);
+//                if (Course.getCourse("CSCA08") != null) {
+//                    Log.d("NOOOOO", "FAILrrrrURE");
+//                    CourseEventListener single = new CourseEventListener() {
+//                        @Override
+//                        public void onCourseAdded(Course course) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onCourseChanged(Course course) {
+//                            Log.d("OK", course.code);
+//                        }
+//
+//                        @Override
+//                        public void onCourseRemoved(Course course) {
+//
+//                        }
+//                    };
+                    // Attach a test listener to CSCA08
+//                    Course.getCourse("CSCA08").addCourseListener(single);
+//                } else {
+//                    Log.d("DNE", "Failed to find CSCA08");
+//                }
+            }
+
+            @Override
+            public void onCourseChanged(Course course) {
+                Log.d("Render", "Course Changed" + course.toString());
+            }
+
+            @Override
+            public void onCourseRemoved(Course course) {
+                Log.d("Render", "Course Removed" + course.toString());
+            }
+        };
+
+         Course.addListener(render);
+         // Course.getCourse("CSCA08");
+
+//        ArrayList<CourseScheduling> coursesTaken = new ArrayList<CourseScheduling>();
+//        CourseScheduling csca08_scheduling = new CourseScheduling(csca08.getName(), csca08.getCode(), csca08.getSessionOffering(), csca08.getPrerequisites());
+//        CourseScheduling csca48_scheduling = new CourseScheduling(csca48.getName(), csca48.getCode(), csca48.getSessionOffering(), csca48.getPrerequisites());
+//        coursesTaken.add(csca08_scheduling);
+//        coursesTaken.add(csca48_scheduling);
+//
+//        List<Course> targets = new ArrayList<>();
+//        targets.add(cscb36);
+//        SearchAlgorithm search = new SearchAlgorithm(coursesTaken);
+//        search.findBeginningNodes(targets);
+//
+//        List<CourseScheduling> result = search.search(Term.FALL, 2022);
+//        assertEquals("CSCA67", result.get(0).getCode());
+//        assertEquals(Term.WINTER, result.get(0).sessionBeingTaken.term);
+//        assertEquals(2023, result.get(0).sessionBeingTaken.year);
+//
+//        assertEquals("CSCB36", result.get(1).getCode());
+//        assertEquals(Term.SUMMER, result.get(1).sessionBeingTaken.term);
+//        assertEquals(2023, result.get(1).sessionBeingTaken.year);
     }
 
     @Override

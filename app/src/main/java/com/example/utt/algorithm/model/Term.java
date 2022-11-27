@@ -9,5 +9,9 @@ public enum Term {
     Term(int i) {
         this.term = i;
     }
+
+    public int getTerm() {
+        return term;
+    }
 }
 

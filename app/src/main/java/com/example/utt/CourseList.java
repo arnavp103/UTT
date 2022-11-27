@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.utt.models.Course;
+
 import java.util.List;
 
 public class CourseList extends ArrayAdapter<Course> {
@@ -33,7 +35,7 @@ public class CourseList extends ArrayAdapter<Course> {
         TextView textViewSeason = (TextView) listViewItem.findViewById(R.id.textViewSeason);
         Course course = courseList.get(position);
         textViewName.setText(course.getName());
-        textViewSeason.setText(course.getSeason());
+        textViewSeason.setText("OK");//course.getSeason());
 
         return listViewItem;
     }
