@@ -5,4 +5,5 @@ public class YearlySession {
     public YearlySession(Term term) {
         this.term = term;
     }
+    public Term getTerm() { return term; }
 }

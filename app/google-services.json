@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "759859132756",
+    "firebase_url": "https://utsc-b07-projcourses-default-rtdb.firebaseio.com",
+    "project_id": "utsc-b07-projcourses",
+    "storage_bucket": "utsc-b07-projcourses.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759859132756:android:cfd032fbc92e943ed530c1",
+        "android_client_info": {
+          "package_name": "com.example.b07projectdesign"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759859132756-3r14n30urlrpssfn9vfcaevevqm5gpbm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWO_dpUDA8m53RJjOD8cqZ_U_Go-z3paE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "759859132756-3r14n30urlrpssfn9vfcaevevqm5gpbm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759859132756:android:caa1f4b05c68762fd530c1",
+        "android_client_info": {
+          "package_name": "com.example.utt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759859132756-3r14n30urlrpssfn9vfcaevevqm5gpbm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWO_dpUDA8m53RJjOD8cqZ_U_Go-z3paE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "759859132756-3r14n30urlrpssfn9vfcaevevqm5gpbm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
