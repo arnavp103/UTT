@@ -53,18 +53,6 @@ public abstract class DatabaseHandler {
 
     private DatabaseHandler() {initialise();}
 
-//    public DatabaseReference getCoursesWithFieldEqualTo(String fieldName, String value) {
-//        return dbRootRef.child("course").orderByChild(fieldName).equalTo(value).getRef();
-//    }
-
-//    /**
-//     * Returns the DatabaseReference pointing to the entire database
-//     * @return DatabaseReference
-//     */
-//    public DatabaseReference getReference() {
-//        return dbRootRef;
-//    }
-
     /**
      * Converts plaintext string into hashed string
      * @param plain the input string
@@ -104,12 +92,12 @@ public abstract class DatabaseHandler {
     }
 
     /**
-     * Queries the database for a user whos email and password match the given input
+     * Queries the database for a user whose email and password match the given input
      * @param email The email provided by the user
      * @param rawPassword The password provided by the user
      * @param callback A callback interface to call after events are triggered
      */
-    public static void getUser(String email, String rawPassword, Listener callback) {
+    public static void getUser(String email, String rawPassword, Listener<User> callback) {
         String password = hashString(rawPassword);
         dbUsersRef.orderByChild("password").equalTo(password).getRef()
                 .orderByChild("email").equalTo(email).get()
@@ -167,7 +155,8 @@ public abstract class DatabaseHandler {
         CourseDataModel output;
         if (CourseDataModel.getCourses().containsKey(course.getCode())) {
             Log.d(TAG, "Course already exists!? What to do...");
-            output = CourseDataModel.getCourseDataModel(course.getCode());
+//            output = CourseDataModel.getCourseDataModel(course.getCode());
+            output = CourseDataModel.readCourse(course);
         } else {
             Log.d(TAG, "Converting Course object to CourseDataModel");
             output = CourseDataModel.readCourse(course);

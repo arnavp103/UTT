@@ -57,29 +57,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCourseAdded(Course course) {
                 Log.d("Render", "Course Added: " + course);
-                if (Course.getCourse("CSCA08") != null) {
-                    Log.d("NOOOOO", "FAILrrrrURE");
-                    CourseEventListener single = new CourseEventListener() {
-                        @Override
-                        public void onCourseAdded(Course course) {
-
-                        }
-
-                        @Override
-                        public void onCourseChanged(Course course) {
-                            Log.d("OK", course.getCode());
-                        }
-
-                        @Override
-                        public void onCourseRemoved(Course course) {
-
-                        }
-                    };
-                     //Attach a test listener to CSCA08
-                    Course.getCourse("CSCA08").addCourseListener(single);
-                } else {
-                    Log.d("DNE", "Failed to find CSCA08");
-                }
             }
 
             @Override
@@ -94,27 +71,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
          Course.addListener(render);
-         // Course.getCourse("CSCA08");
 
-//        ArrayList<CourseScheduling> coursesTaken = new ArrayList<CourseScheduling>();
-//        CourseScheduling csca08_scheduling = new CourseScheduling(csca08.getName(), csca08.getCode(), csca08.getSessionOffering(), csca08.getPrerequisites());
-//        CourseScheduling csca48_scheduling = new CourseScheduling(csca48.getName(), csca48.getCode(), csca48.getSessionOffering(), csca48.getPrerequisites());
-//        coursesTaken.add(csca08_scheduling);
-//        coursesTaken.add(csca48_scheduling);
-//
-//        List<Course> targets = new ArrayList<>();
-//        targets.add(cscb36);
-//        SearchAlgorithm search = new SearchAlgorithm(coursesTaken);
-//        search.findBeginningNodes(targets);
-//
-//        List<CourseScheduling> result = search.search(Term.FALL, 2022);
-//        assertEquals("CSCA67", result.get(0).getCode());
-//        assertEquals(Term.WINTER, result.get(0).sessionBeingTaken.term);
-//        assertEquals(2023, result.get(0).sessionBeingTaken.year);
-//
-//        assertEquals("CSCB36", result.get(1).getCode());
-//        assertEquals(Term.SUMMER, result.get(1).sessionBeingTaken.term);
-//        assertEquals(2023, result.get(1).sessionBeingTaken.year);
     }
 
     @Override

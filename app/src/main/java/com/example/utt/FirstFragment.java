@@ -15,7 +15,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.utt.algorithm.model.CourseScheduling;
+import com.example.utt.algorithm.model.SearchAlgorithm;
+import com.example.utt.algorithm.model.Term;
 import com.example.utt.algorithm.model.YearlySession;
+import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.FragmentFirstBinding;
 import com.example.utt.models.Course;
 import com.example.utt.models.firebase.datamodel.CourseDataModel;
@@ -27,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class FirstFragment extends Fragment {
 
@@ -70,6 +75,68 @@ public class FirstFragment extends Fragment {
                 addCourse();
             }
         });
+
+        binding.buttonTesting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Map<String, Course> courses = Course.getCourses();
+                for (Map.Entry<String, Course> entry : courses.entrySet()) {
+                    Log.d("Entry", entry.getKey() + ": " + entry.getValue());
+                    Log.d("-> ", String.valueOf(entry.getValue().getPrerequisites()));
+                    Log.d("-> ", String.valueOf(entry.getValue().getSessionOffering()));
+
+                }
+
+                Log.d("Page Break", "-------------------------------------------------");
+                ArrayList<CourseScheduling> coursesTaken = new ArrayList<CourseScheduling>();
+
+                // Below is strictly for testing. The call is invoked by the user knowing the courses exist.
+                Course csca08 = Course.getCourse("CSCA08");
+                Course csca48 = Course.getCourse("CSCA48");
+                Course cscb36 = Course.getCourse("CSCB36");
+                Course csca67 = Course.getCourse("CSCA67");
+                Course java22 = Course.getCourse("JAVA22");
+
+                List<Course> debuggable = List.of(csca08, csca48, cscb36, csca67);
+                for (Course c : debuggable) {
+                    Log.d(c.getName(), String.valueOf(c));
+                    Log.d("-> ", String.valueOf(c.getPrerequisites()));
+                    Log.d("-> ", String.valueOf(c.getSessionOffering()));
+                }
+                Log.d("CSCB36", String.valueOf(cscb36));
+                Log.d("JAVA22", String.valueOf(java22));
+
+                CourseScheduling csca08_scheduling = new CourseScheduling(
+                        csca08.getName(),
+                        csca08.getCode(),
+                        csca08.getSessionOffering(),
+                        csca08.getPrerequisites());
+
+                CourseScheduling csca48_scheduling = new CourseScheduling(
+                        csca48.getName(),
+                        csca48.getCode(),
+                        csca48.getSessionOffering(),
+                        csca48.getPrerequisites());
+
+                coursesTaken.add(csca08_scheduling);
+                coursesTaken.add(csca48_scheduling);
+
+                List<Course> targets = new ArrayList<>();
+                targets.add(cscb36);
+                SearchAlgorithm search = new SearchAlgorithm(coursesTaken);
+                search.findBeginningNodes(targets);
+
+                List<CourseScheduling> result = search.search(Term.FALL, 2022);
+                Log.d("RESULT", String.valueOf(result));
+                Log.d("->", String.valueOf("CSCA67" == result.get(0).getCode()));
+                Log.d("->", String.valueOf(Term.WINTER == result.get(0).sessionBeingTaken.term));
+                Log.d("->", String.valueOf(2023 == result.get(0).sessionBeingTaken.year));
+
+                Log.d("->", String.valueOf("CSCB36" == result.get(1).getCode()));
+                Log.d("->", String.valueOf(Term.SUMMER == result.get(1).sessionBeingTaken.term));
+                Log.d("->", String.valueOf(2023 == result.get(1).sessionBeingTaken.year));
+            }
+        });
         listViewCourses = (ListView)getView().findViewById(R.id.listViewCourses);
         courseList = new ArrayList<>();
     }
@@ -83,7 +150,7 @@ public class FirstFragment extends Fragment {
             String courseID = databaseCourses.push().getKey();
             Course course = new Course(name, "CSCA08", season, prereq);
             // databaseCourses.child(courseID).setValue(course);
-
+            DatabaseHandler.addCourse(course);
             // Output this message if course was successfully added to the database
             Toast.makeText(getActivity(), "Course added", Toast.LENGTH_LONG).show();
         }
