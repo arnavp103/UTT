@@ -20,24 +20,17 @@ public class DatabaseSamples {
 
     /**
      * Rewrites the given input from an arraylist to the required Map type to work with the datamodel
-     * @return
+     * @return The Boolean list after conversion
      */
     private static List<Boolean> mapSessions(List<String> sessions) {
-//        Map<Integer, Boolean> result = Map.of(0,false,1,false,2,false);
-//        if (sessions.contains("Winter")) result.put(0, true);
-//        if (sessions.contains("Summer")) result.put(1, true);
-//        if (sessions.contains("Fall")) result.put(2, true);
-
-//        ArrayList<Boolean> result = List.of(false, false, false);
         ArrayList<Boolean> result = new ArrayList<>();
         result.add(false);
         result.add(false);
         result.add(false);
 
-
-        if (sessions.contains("Winter")) result.set(0, true); // result.put(0, true);
-        if (sessions.contains("Summer")) result.set(1, true); //  result.put(1, true);
-        if (sessions.contains("Fall")) result.set(2, true); //  result.put(2, true);
+        if (sessions.contains("Winter")) result.set(0, true);
+        if (sessions.contains("Summer")) result.set(1, true);
+        if (sessions.contains("Fall")) result.set(2, true);
         return result;
     }
 
@@ -57,7 +50,6 @@ public class DatabaseSamples {
         courses.add(new CourseDataModel(
                 "Software Design",
                 "CSCB07",
-//                Map.of(0, false, 1, true, 2, true),
                 mapSessions(List.of("Fall", "Summer")),
                 List.of("CSCA48"))
         );
@@ -65,7 +57,6 @@ public class DatabaseSamples {
         courses.add(new CourseDataModel(
                 "Software Tools and Systems Programming",
                 "CSCB09",
-//                Map.of(0, true, 1, true, 2, false),
                 mapSessions(List.of("Winter", "Summer")),
                 List.of("CSCA48"))
         );
@@ -73,7 +64,6 @@ public class DatabaseSamples {
         courses.add(new CourseDataModel(
                 "Introduction to Compute Science II",
                 "CSCA48",
-//                Map.of(0, true,1, true, 2, false),
                 mapSessions(List.of("Winter", "Summer")),
                 List.of("CSCA08"))
         );
@@ -81,7 +71,6 @@ public class DatabaseSamples {
         courses.add(new CourseDataModel(
                 "Introduction to Compute Science I",
                 "CSCA08",
-//                Map.of(0, true, 1, false, 2, true),
                 mapSessions(List.of("Fall", "Winter")),
                 List.of())
         );
@@ -89,7 +78,6 @@ public class DatabaseSamples {
         courses.add(new CourseDataModel(
                 "Computability and Computational Complexity",
                 "CSCC63",
-//                Map.of(0, true, 1, false, 2, true),
                 mapSessions(List.of("Fall", "Winter")),
                 List.of("CSCB63", "CSCB36"))
 
@@ -98,7 +86,6 @@ public class DatabaseSamples {
         courses.add(new CourseDataModel(
                 "Design and Analysis of Data Structures",
                 "CSCB63",
-//                Map.of(0, true, 1, true, 2, false),
                 mapSessions(List.of("Winter", "Summer")),
                 List.of("CSCB36"))
         );
@@ -113,7 +100,6 @@ public class DatabaseSamples {
         courses.add(new CourseDataModel( // Problem course as there exists MATA67
                 "Discrete Mathematics",
                 "CSCA67",
-//                Map.of(0, true, 1, false, 2, true),
                 mapSessions(List.of("Fall", "Winter")),
                 List.of())
         );
