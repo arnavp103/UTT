@@ -48,7 +48,6 @@ public abstract class DatabaseHandler {
     private static DatabaseReference dbUsersRef;
     private static DatabaseReference dbStudentsRef;
 
-    private static ValueEventListener listener;
     private static ChildEventListener onCourseAdded;
 
     private DatabaseHandler() {initialise();}
@@ -70,10 +69,6 @@ public abstract class DatabaseHandler {
                     public void onSuccess(DataSnapshot dataSnapshot) {
                         // Check length
                         int i = (int) dataSnapshot.getChildrenCount();
-
-                        // Log.d("Data", " " + dataSnapshot.toString());
-
-                        //for (DataSnapshot d : dataSnapshot.getChildren()) i++;
                         if (i > 1 || i == 0) { callback.onFailure(null); }
                         else {
                             List<String> result = new ArrayList<>();
@@ -107,7 +102,6 @@ public abstract class DatabaseHandler {
                         // Check length
                         int i = (int) dataSnapshot.getChildrenCount();
 
-                        //for (DataSnapshot d : dataSnapshot.getChildren()) i++;
                         if (i > 1 || i == 0) {callback.onFailure(null);}
                         else {
                             User instance;
@@ -149,24 +143,12 @@ public abstract class DatabaseHandler {
     /**
      * Searches our collection for an existing course that shares the code, if it doesn't exist
      * then read the course object and insert into our database.
-     * @param course
+     * @param course The course to add into the database.
      */
     public static void addCourse(Course course) {
-        CourseDataModel output;
-        if (CourseDataModel.getCourses().containsKey(course.getCode())) {
-            Log.d(TAG, "Course already exists!? What to do...");
-//            output = CourseDataModel.getCourseDataModel(course.getCode());
-            output = CourseDataModel.readCourse(course);
-        } else {
-            Log.d(TAG, "Converting Course object to CourseDataModel");
-            output = CourseDataModel.readCourse(course);
-        }
+        CourseDataModel output = CourseDataModel.readCourse(course);
         DatabaseReference id = dbCoursesRef.push();
-        id.setValue(output)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {}
-                }).addOnFailureListener(new OnFailureListener() {
+        id.setValue(output).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.d(TAG, "Failure: " + e);
@@ -238,9 +220,7 @@ public abstract class DatabaseHandler {
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot,
-                                     @Nullable String previousChildName) {
-                //Log.d(TAG, "Child Moved: " + snapshot.toString());
-            }
+                                     @Nullable String previousChildName) {}
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
