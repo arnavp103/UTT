@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Course {
-//    private CourseDataModel dataModel;
-
     private String name;
     private String courseCode;
     private List<YearlySession> sessionOffering; //make sure the order is always: winter, summer, fall
@@ -69,15 +67,7 @@ public class Course {
 
     @NonNull
     public String toString() {
-        StringBuilder session = new StringBuilder();
-        if (getSessionOffering() != null) {
-            for (YearlySession y : getSessionOffering()) {
-                session.append(y.getTerm()).append(" ");
-            }
-        }
-
-        Log.d("TOSTRING", getCode() + " was called: " + session);
-        return getCode() + ": " + getName() + "\n" + "[ " + session.toString() + "]";
+        return getCode() + ": " + getName();
     }
 
     // TODO - Properly implement this
