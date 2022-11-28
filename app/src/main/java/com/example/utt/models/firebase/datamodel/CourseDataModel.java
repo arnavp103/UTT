@@ -10,17 +10,14 @@ import com.example.utt.models.Course;
 import com.example.utt.models.CourseEventListener;
 import com.google.firebase.firestore.Exclude;
 
-import org.checkerframework.checker.units.qual.A;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-// Only accessed by DatabaseHandler.java
-
-public class CourseDataModel { // implements Serializable
+// Accessed by DatabaseHandler.java and Course.java
+public class CourseDataModel {
     private final static String TAG = "Course DataModel";
     // Global collection of listeners.
     private static List<CourseEventListener> listeners;
@@ -41,7 +38,8 @@ public class CourseDataModel { // implements Serializable
     // Will be converted into Database Fields
     protected String code;
     private String name;
-    private Map<Integer, Boolean> sessionOffering;
+//    private Map<Integer, Boolean> sessionOffering;
+    private List<Boolean> sessionOffering;
     private List<String> prerequisites;
 
     // Constructors
@@ -50,8 +48,12 @@ public class CourseDataModel { // implements Serializable
         if (courses == null) {coursesID_CODE = new HashMap<>(); courses = new HashMap<>();}
         if (myListeners == null) { myListeners = new ArrayList<>(); }
         prerequisites = new ArrayList<>();
+//        sessionOffering = new HashMap<>();
+        sessionOffering = List.of(false, false, false);
     }
-    public CourseDataModel(String name, String code, Map<Integer, Boolean> sessions, List<String> prerequisites) {
+
+//    public CourseDataModel(String name, String code, Map<Integer, Boolean> sessions, List<String> prerequisites) {
+    public CourseDataModel(String name, String code, List<Boolean> sessions, List<String> prerequisites) {
         this();
         setCode(code);
         this.name = name;
@@ -68,6 +70,7 @@ public class CourseDataModel { // implements Serializable
         return result;
     }
 
+    @Exclude
     public Course getCourseObject() { return courseObject; }
 
     public void setCourseObject(Course course) {
@@ -81,11 +84,9 @@ public class CourseDataModel { // implements Serializable
         courseObject.setName(newContent.getName());
         courseObject.setPrerequisites(newContent.getPrerequisites());
         courseObject.setSessionOffering(newContent.getSessionOffering());
-
-        // Log.d(TAG, "Updated Course Object: " + courseObject.toString());
     }
+
     public static CourseDataModel getCourseDataModel(String courseCode) {
-        //Log.d("RETURNING", courses.get(courseCode).toString());
         return courses.get(courseCode);
     }
 
@@ -93,8 +94,8 @@ public class CourseDataModel { // implements Serializable
         if (getCourseDataModel(course) == null) return null;
         return getCourseDataModel(course).getCourseObject();
     }
-    // This does not check to see if a course code exists...
 
+    // This does not check to see if a course code exists
     public static void updateCourse(CourseDataModel course, String key) {
         // Fetch the course with the given key:
         Log.i(TAG, "Modified Information: " + course.toString());
@@ -102,13 +103,14 @@ public class CourseDataModel { // implements Serializable
 
         if (courses.containsKey(keyRef)) {
             CourseDataModel oldCourse = Objects.requireNonNull(courses.get(keyRef));
-            // Call that courses local listeners
-            oldCourse.callCourseChangedListeners(course);
             course.transferCourseListeners(Objects.requireNonNull(courses.get(keyRef)).myListeners);
 
             // Transfer child
             course.setCourseObject(oldCourse.getCourseObject());
             course.updateCourseObject();
+
+            // Call that courses local listeners
+            oldCourse.callCourseChangedListeners(course);
 
             Log.d(TAG, "Updated Courses ID_CODE: " + coursesID_CODE.get(key));
 
@@ -166,8 +168,11 @@ public class CourseDataModel { // implements Serializable
     public String getName() { return name; }
     public Map<String, Boolean> getSessionOffering() {
         Map<String, Boolean> result = new HashMap<>();
-        for (Integer c : sessionOffering.keySet())
-            result.put(c.toString(), sessionOffering.get(c));
+        //for (Integer c : sessionOffering)//sessionOffering.keySet())
+        //    result.put(c.toString(), sessionOffering.get(c));
+        for (int i = 0; i < sessionOffering.size(); i++) {
+            result.put(Integer.toString(i), sessionOffering.get(i));
+        }
         return result;
     }
     public Map<String, String> getPrerequisites() {
@@ -177,7 +182,7 @@ public class CourseDataModel { // implements Serializable
         return result;
     }
 
-    private static HashMap<String, Course> nonExistantCourses = new HashMap<>();
+    private static final HashMap<String, Course> nonExistentCourses = new HashMap<>();
 
     // TODO - Simplify this
     // Called by setKey()
@@ -191,30 +196,32 @@ public class CourseDataModel { // implements Serializable
             // check if course exists.
             Course prerequisiteCourse = CourseDataModel.getCourses().get(prerequisite);
             if (prerequisiteCourse == null) {
-
                 // Check if prerequisite exists in the Nonexistent-Course Collection
-                if (!nonExistantCourses.containsKey(prerequisite)) {    // Course not yet in NEC
-
-                    Log.d(TAG, code + " | Looking for: " + prerequisite + " | NEC: " + nonExistantCourses);
-
+                if (!nonExistentCourses.containsKey(prerequisite)) {    // Course not yet in NEC
                     prerequisiteCourse = new Course();
-                    nonExistantCourses.put(prerequisite, prerequisiteCourse);
-
+                    nonExistentCourses.put(prerequisite, prerequisiteCourse);
+                    Log.d(TAG, code + " | Looking for: " + prerequisite + " | -> NEC: " + nonExistentCourses);
                 } else {    // Course exists so placeholder reference it.
-                    prerequisiteCourse = nonExistantCourses.get(code);
+                    prerequisiteCourse = nonExistentCourses.get(code);
                 }
             }
             Log.d("Adding: ", prerequisite + prerequisiteCourse.toString());
-            child_prerequisites.add(CourseDataModel.getCourses().get(prerequisite));
+            child_prerequisites.add(prerequisiteCourse);
+            //CourseDataModel.getCourses().get(prerequisite));
         }
 
         // TODO - Fix this
-        if (Boolean.TRUE.equals(sessionOffering.get("0"))) child_sessionOfferings.add(new YearlySession(Term.WINTER));
-        if (Boolean.TRUE.equals(sessionOffering.get("1"))) child_sessionOfferings.add(new YearlySession(Term.SUMMER));
-        if (Boolean.TRUE.equals(sessionOffering.get("2"))) child_sessionOfferings.add(new YearlySession(Term.FALL));
+        if (Boolean.TRUE.equals(sessionOffering.get(0))) child_sessionOfferings.add(new YearlySession(Term.WINTER));
+        if (Boolean.TRUE.equals(sessionOffering.get(1))) child_sessionOfferings.add(new YearlySession(Term.SUMMER));
+        if (Boolean.TRUE.equals(sessionOffering.get(2))) child_sessionOfferings.add(new YearlySession(Term.FALL));
 
+//        StringBuilder res = new StringBuilder();
+//        for (YearlySession y : child_sessionOfferings) {
+//            res.append(y.getTerm());
+//        }
+//        Log.d("Session Offering", res.toString());
         // Check if this course exists in our nonexistant Course collection
-        Course child = nonExistantCourses.remove(code);
+        Course child = nonExistentCourses.remove(code);
         if (child == null) child = new Course();
 
         child.setCourseCode(code);
@@ -241,27 +248,21 @@ public class CourseDataModel { // implements Serializable
 
         setCourseObject(generateCourseObject());
         CourseDataModel.addCourse(this);
-
     }
+
     public void setName(String name) { this.name = name; }
     public void setCode(String code) {
         this.code = code;
     }
-
-    public void setSessionOffering(ArrayList<Boolean> session) {// Map<Integer, Boolean> session) {
-        Map<Integer, Boolean> result = new HashMap<>();
-        for (int i = 0 ; i < session.size(); i++)
-            result.put(i, session.get(i));
-        sessionOffering = result;
+    public void setSessionOffering(ArrayList<Boolean> session) {
+        sessionOffering = session;
     }
     public void setPrerequisites(List<String> prerequisites) {
         this.prerequisites = prerequisites;
     }
 
     public boolean equals(Object other) {
-        if (!(other instanceof CourseDataModel))
-            return false;
-
+        if (!(other instanceof CourseDataModel)) return false;
         return name.equals(((CourseDataModel) other).getName());
     }
 
@@ -293,13 +294,19 @@ public class CourseDataModel { // implements Serializable
         // Convert YearlySession objects to ArrayList<Boolean> session
         ArrayList<Boolean> sessions = new ArrayList<>(List.of(false, false, false));
 
-        for (YearlySession session : course.getSessionOffering()) {
-            sessions.set(session.getTerm().getTerm(), true);
+        if (course.getSessionOffering() != null) {
+            for (YearlySession session : course.getSessionOffering()) {
+                sessions.set(session.getTerm().getTerm(), true);
+            }
         }
+
         // Convert Course object Prerequisites
         List<String> prerequisites = new ArrayList<>();
-        for (Course prerequisite : course.getPrerequisites()) {
-            prerequisites.add(prerequisite.getCode());
+
+        if (course.getPrerequisites() != null) {
+            for (Course prerequisite : course.getPrerequisites()) {
+                prerequisites.add(prerequisite.getCode());
+            }
         }
 
         CourseDataModel result = new CourseDataModel();
