@@ -1,11 +1,14 @@
 package com.example.utt.models;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.utt.algorithm.model.YearlySession;
 import com.example.utt.models.firebase.datamodel.CourseDataModel;
 
 import java.util.List;
+import java.util.Map;
 
 public class Course {
 //    private CourseDataModel dataModel;
@@ -66,12 +69,22 @@ public class Course {
 
     @NonNull
     public String toString() {
-        return getCode() + ": " + getName();
+        StringBuilder session = new StringBuilder();
+        if (getSessionOffering() != null) {
+            for (YearlySession y : getSessionOffering()) {
+                session.append(y.getTerm()).append(" ");
+            }
+        }
+
+        Log.d("TOSTRING", getCode() + " was called: " + session);
+        return getCode() + ": " + getName() + "\n" + "[ " + session.toString() + "]";
     }
 
     // TODO - Properly implement this
     public static void addListener(CourseEventListener listener) {CourseDataModel.addListener(listener);}
     public static void removeListener(CourseEventListener listener) {CourseDataModel.removeListener(listener);}
+
+    public static Map<String, Course> getCourses() { return CourseDataModel.getCourses(); }
 
     public static Course getCourse(String courseCode) {
         return CourseDataModel.getCourse(courseCode);
