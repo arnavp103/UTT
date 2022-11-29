@@ -2,6 +2,7 @@ package com.example.utt;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.utt.algorithm.model.CourseScheduling;
+import com.example.utt.algorithm.model.SearchAlgorithm;
+import com.example.utt.algorithm.model.Term;
+import com.example.utt.algorithm.model.YearlySession;
+import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.FragmentFirstBinding;
+import com.example.utt.models.Course;
+import com.example.utt.models.firebase.datamodel.CourseDataModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class FirstFragment extends Fragment {
 
@@ -56,7 +65,8 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+//                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                        .navigate(R.id.action_FirstFragment_to_recyclerListFragment);
             }
         });
         binding.buttonAdd.setOnClickListener(new View.OnClickListener() {
@@ -65,20 +75,21 @@ public class FirstFragment extends Fragment {
                 addCourse();
             }
         });
+
         listViewCourses = (ListView)getView().findViewById(R.id.listViewCourses);
         courseList = new ArrayList<>();
     }
 
     private void addCourse() {
         String name = editTextName.getText().toString().trim();
-        String season = null;
-        String prereq = null;
+        List<YearlySession> season = null;
+        List<Course> prereq = null;
         // Check if search bar is empty
         if(!TextUtils.isEmpty(name)){
             String courseID = databaseCourses.push().getKey();
-            Course course = new Course(name, season, prereq);
-            databaseCourses.child(courseID).setValue(course);
-
+            Course course = new Course(name, courseID, season, prereq);
+            // databaseCourses.child(courseID).setValue(course);
+            DatabaseHandler.addCourse(course);
             // Output this message if course was successfully added to the database
             Toast.makeText(getActivity(), "Course added", Toast.LENGTH_LONG).show();
         }

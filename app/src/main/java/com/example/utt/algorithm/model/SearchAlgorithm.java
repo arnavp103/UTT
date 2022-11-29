@@ -1,5 +1,9 @@
 package com.example.utt.algorithm.model;
 
+
+import com.example.utt.models.Course;
+import com.example.utt.models.firebase.datamodel.CourseDataModel;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -19,10 +23,10 @@ public class SearchAlgorithm {
                 continue;
             }
             needToTake.add(target);
-            if ((target.prerequisites.size() == 0)) { //if the course you want to add to the schedule has no prerequisites
+            if ((target.getPrerequisites().size() == 0)) { //if the course you want to add to the schedule has no prerequisites
                 boolean toAdd = true;
                 for(CourseScheduling course : coursesTaken) {
-                    if (course.name.equals(target.name)) {
+                    if (course.getName().equals(target.getName())) {
                         toAdd = false;
                         break;
                     }
@@ -32,7 +36,7 @@ public class SearchAlgorithm {
                 }
                 //OR if you have recursed to the end of the tree and you have reached the first prerequisite
             } else {
-                findBeginningNodes(target.prerequisites);
+                findBeginningNodes(target.getPrerequisites());
             }
         }
     }
@@ -47,7 +51,7 @@ public class SearchAlgorithm {
         //once the courses in beginningNodes are taken, move the courses to satisfiedPrerequisites
         //also move the taken courses to satisfiedPrerequisites
         for (CourseScheduling course : coursesTaken) {
-            Course C_course = new Course(course.name, course.courseCode, course.sessionOffering, course.prerequisites);
+            Course C_course = new Course(course.getName(), course.getCode(), course.getSessionOffering(), course.getPrerequisites());
             satisfiedPrerequisites.add(C_course); //satisfiedPrerequisites are not initialized with the courses that student has already taken
         }
     int a = 0;
@@ -55,7 +59,7 @@ public class SearchAlgorithm {
             // for all the courses that have no prerequisites that you have not taken yet, find the soonest time to take them
             int yearToTake = currentYear;
             int termToTake = currentTerm.term;
-            for (YearlySession term : course.sessionOffering) {
+            for (YearlySession term : course.getSessionOffering()) {
                 if (term.term.term > termToTake) { //find the next most term offered this year
                     termToTake = term.term.term;
                     break;
@@ -63,11 +67,11 @@ public class SearchAlgorithm {
             }
             if (termToTake == currentTerm.term) {
                 yearToTake++;
-                termToTake = course.sessionOffering.get(0).term.term; //else take the first term this course is offered next year
+                termToTake = course.getSessionOffering().get(0).term.term; //else take the first term this course is offered next year
             }
             int c = 0;
-            CourseScheduling addCourse = new CourseScheduling(course.name, course.courseCode,
-                                                                course.sessionOffering, course.prerequisites);
+            CourseScheduling addCourse = new CourseScheduling(course.getName(), course.getCode(),
+                                                                course.getSessionOffering(), course.getPrerequisites());
             addCourse.sessionBeingTaken.term.term = termToTake;
             addCourse.sessionBeingTaken.year = yearToTake;
 
@@ -76,7 +80,7 @@ public class SearchAlgorithm {
             coursesTaken.add(addCourse);
             satisfiedPrerequisites.add(course); //add course to satisfied prerequisites
             for(Course courseRemove : needToTake) {
-                if (courseRemove.courseCode == addCourse.courseCode) {
+                if (Objects.equals(courseRemove.getCode(), addCourse.getCode())) {
                     needToTake.remove(courseRemove);
                     break;
                 }
@@ -89,7 +93,7 @@ public class SearchAlgorithm {
             //add all the courses you can currently take to canTake
             for (Course course : needToTake) {
                 boolean allSatisfied = true;
-                for (Course prereq: course.prerequisites) {
+                for (Course prereq: course.getPrerequisites()) {
                     if (!satisfiedPrerequisites.contains(prereq)) {
                         allSatisfied = false;
                         break;
@@ -106,8 +110,8 @@ public class SearchAlgorithm {
                 int LargestYear = currentYear;
                 Term term = Term.WINTER;
                 for(CourseScheduling prerequisiteOfCourse : coursesTaken) {
-                    for(Course prerequisite : course.prerequisites) {
-                        if (Objects.equals(prerequisite.courseCode, prerequisiteOfCourse.courseCode)) {
+                    for(Course prerequisite : course.getPrerequisites()) {
+                        if (Objects.equals(prerequisite.getCode(), prerequisiteOfCourse.getCode())) {
                             if (prerequisiteOfCourse.sessionBeingTaken.year > LargestYear) {
                                 LargestYear = prerequisiteOfCourse.sessionBeingTaken.year; //finds the largest year
                             }
@@ -120,7 +124,7 @@ public class SearchAlgorithm {
                 }
                 Term termToTake = term;
                 int yearToTake = LargestYear;
-                for (YearlySession offered : course.sessionOffering){
+                for (YearlySession offered : course.getSessionOffering()){
                     if (offered.term.term > term.term) {
                         termToTake = offered.term;
                         break;
@@ -128,9 +132,9 @@ public class SearchAlgorithm {
                 }
                 if (termToTake == term) {
                     yearToTake ++;
-                    termToTake = course.sessionOffering.get(0).term;
+                    termToTake = course.getSessionOffering().get(0).term;
                 }
-                CourseScheduling scheduledCourse = new CourseScheduling(course.name, course.courseCode, course.sessionOffering, course.prerequisites);
+                CourseScheduling scheduledCourse = new CourseScheduling(course.getName(), course.getCode(), course.getSessionOffering(), course.getPrerequisites());
                 scheduledCourse.sessionBeingTaken.term = termToTake;
                 scheduledCourse.sessionBeingTaken.year = yearToTake;
 
