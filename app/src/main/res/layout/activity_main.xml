@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -11,17 +12,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/Theme.UTT.AppBarOverlay"
-        android:background="@android:color/transparent"
-        android:visibility="gone">
+        android:background="@android:color/transparent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@null"
+            android:background="@color/design_default_color_primary_dark"
             app:popupTheme="@style/Theme.UTT.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <FrameLayout android:id="@+id/fragment_placeholder"
+        android:layout_width="0px"
+        android:layout_height="match_parent" />
 
     <include layout="@layout/content_main" />
 

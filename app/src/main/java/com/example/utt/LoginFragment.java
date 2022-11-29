@@ -18,6 +18,8 @@ import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.FragmentLoginPageBinding;
 import com.example.utt.models.Listener;
 import com.example.utt.models.User;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -35,8 +37,9 @@ public class LoginFragment extends Fragment {
 
     }
 
-    public void checkUserStatus(User user) {
-        Toast.makeText(getActivity(), "Success!", Toast.LENGTH_SHORT).show();
+    public void checkUserStatus(User user, View view) {
+//        Toast.makeText(getActivity(), "Logged in as " + user.getEmail(), Toast.LENGTH_SHORT).show();
+        Snackbar.make(view, "Logged in as " + user.getEmail(), BaseTransientBottomBar.LENGTH_SHORT).show();
         if (user.isStudent()) {
             DatabaseHandler.getStudentData(user.getId(), new Listener<String>() {
                 @Override
@@ -51,7 +54,7 @@ public class LoginFragment extends Fragment {
                 public void onComplete(String data) {}
             });
         } else if (user.getIsAdmin()) {
-
+            // Notify other fragments that user is Admin
         }
     }
 
@@ -69,14 +72,15 @@ public class LoginFragment extends Fragment {
                 @Override
                 public void onSuccess(String data, List<User> user) {
                     assert user != null;
-                    checkUserStatus(user.get(0));
+                    checkUserStatus(user.get(0), view);
                     NavHostFragment.findNavController(LoginFragment.this)
                             .navigate(R.id.action_loginFragment_to_FirstFragment);
                 }
 
                 @Override
                 public void onFailure(String data) {
-                    Toast.makeText(getActivity(), "Authentication Failed!", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "Authentication Failed!", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Authentication Failed!", BaseTransientBottomBar.LENGTH_SHORT).show();
                     Log.d("AUTH FAIL", "-"+data);
                 }
 
