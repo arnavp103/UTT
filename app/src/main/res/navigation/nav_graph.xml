@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/LoginFragment">
 
     <fragment
         android:id="@+id/FirstFragment"
@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_recyclerListFragment"
             app:destination="@id/recyclerListFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_loginFragment"
+            app:destination="@id/LoginFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -33,4 +36,13 @@
         android:name="com.example.utt.RecyclerListFragment"
         android:label="fragment_recycler_list"
         tools:layout="@layout/fragment_recycler_list" />
+    <fragment
+        android:id="@+id/LoginFragment"
+        android:name="com.example.utt.LoginFragment"
+        android:label="fragment_login_page"
+        tools:layout="@layout/fragment_login_page" >
+        <action
+            android:id="@+id/action_loginFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
 </navigation>

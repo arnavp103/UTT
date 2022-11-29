@@ -9,14 +9,19 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="logout">Logout</string>
     <string name="login_title">Login to UTT</string>
     <string name="login_button">Login</string>
+    <string name="signup_nav">Sign up</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
+    <string name="invalid_login">Incorrect username or password</string>
+
+    <!-- compilation error fix below -->
     <string name="Enter_course_code">Enter Course Code</string>
     <string name="Search">Search</string>
     <string name="Add_course">Add Course</string>
     <string name="Back">Back</string>
     <string name="Text">Text</string>
-    <string name="Textview">TextView</string>
+    <string name="Textview">Textview</string>
 </resources>

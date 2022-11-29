@@ -87,7 +87,7 @@ public class FirstFragment extends Fragment {
         // Check if search bar is empty
         if(!TextUtils.isEmpty(name)){
             String courseID = databaseCourses.push().getKey();
-            Course course = new Course(name, "CSCA08", season, prereq);
+            Course course = new Course(name, courseID, season, prereq);
             // databaseCourses.child(courseID).setValue(course);
             DatabaseHandler.addCourse(course);
             // Output this message if course was successfully added to the database
