@@ -131,9 +131,12 @@ public class CourseDataModel {
         Log.d(TAG, courses.toString() + "\n\t with key reference (" + keyRef + ")");
         CourseDataModel oldCourse = Objects.requireNonNull(courses.get(keyRef));
         oldCourse.callCourseRemovedListeners();
-        courses.remove(course.code);
-        coursesID_CODE.remove(course.key);
+
+        // Remove the references
+//        courses.remove(course.code);
+//        coursesID_CODE.remove(course.key);
         if (listeners != null) for (CourseEventListener obj : listeners) obj.onCourseRemoved(oldCourse.getCourseObject());
+
     }
 
     /**
@@ -178,11 +181,12 @@ public class CourseDataModel {
         return result;
     }
 
+    // Contains the courses that are prerequisites or have been recently deleted
     private static final HashMap<String, Course> nonExistentCourses = new HashMap<>();
 
     // TODO - Simplify this
     // Called by setKey()
-    private Course generateCourseObject() {
+    protected Course generateCourseObject() {
         Log.d(TAG, "Generating Course Object for " + code);
         // Convert to the required types
         List<Course> child_prerequisites = new ArrayList<>();

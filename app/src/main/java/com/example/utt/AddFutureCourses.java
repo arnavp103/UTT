@@ -57,18 +57,14 @@ public class AddFutureCourses extends AppCompatActivity {
     private Button addButton, home;
     private ListView courseView;
 
-
-
     private FirebaseFirestore courseCode = FirebaseFirestore.getInstance();
-
 
     private ArrayAdapter<String> viewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_add_future_courses);
 
         //arraylist that stores the course codes
         textView = findViewById(R.id.text_view);
@@ -77,13 +73,11 @@ public class AddFutureCourses extends AppCompatActivity {
         //setting up database retrieval for courses
         courseCode = FirebaseFirestore.getInstance();
 
-
         //arraylist that stores future student courses
         futureList = new ArrayList<>();
 
-
         //initialize buttons and search, lists
-        courseView = findViewById(R.id.courseView); //this is the layout that displays selected courses
+        courseView =  findViewById(R.id.courseView); //this is the layout that displays selected courses
         addButton = findViewById(R.id.addFutureCourse);
         home = findViewById(R.id.home_button);
         //gen_time = findViewById(R.id.generate_btn);
@@ -94,8 +88,6 @@ public class AddFutureCourses extends AppCompatActivity {
         viewAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, futureList);
 
         loadCourses();
-
-
 
 
         //goes to home button
