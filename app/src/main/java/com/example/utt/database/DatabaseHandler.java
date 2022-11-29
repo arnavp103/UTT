@@ -50,7 +50,7 @@ public abstract class DatabaseHandler {
     private DatabaseHandler() {initialise();}
 
     /**
-     * Converts plaintext string into hashed string
+     * Converts plaintext string into hashed string for password storage
      * @param plain the input string
      * @return sha256 hashed input string
      */
@@ -66,7 +66,10 @@ public abstract class DatabaseHandler {
                     public void onSuccess(DataSnapshot dataSnapshot) {
                         // Check length
                         int i = (int) dataSnapshot.getChildrenCount();
-                        if (i > 1 || i == 0) { callback.onFailure(null); }
+                        // there should be exactly one user with the a certain userID
+                        if (i > 1 || i == 0) {
+                            callback.onFailure("Wrong num of students found");
+                        }
                         else {
                             List<String> result = new ArrayList<>();
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
@@ -85,6 +88,7 @@ public abstract class DatabaseHandler {
 
     /**
      * Queries the database for a user whose email and password match the given input
+     * for login purposes as well as to retrieve stored courses.
      * @param email The email provided by the user
      * @param rawPassword The password provided by the user
      * @param callback A callback interface to call after events are triggered
