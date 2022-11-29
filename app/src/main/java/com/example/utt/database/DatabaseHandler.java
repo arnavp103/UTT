@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 
 import com.example.utt.models.Course;
 import com.example.utt.models.firebase.datamodel.CourseDataModel;
-import com.example.utt.models.ExcludableCourse;
+import com.example.utt.models.firebase.datamodel.ExcludedCourseDataModel;
 import com.example.utt.models.Listener;
 import com.example.utt.models.Student;
 import com.example.utt.models.User;
@@ -19,14 +19,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import kotlin.NotImplementedError;
 
 /** This class connects directly to the firebase database
  *
@@ -122,11 +119,27 @@ public abstract class DatabaseHandler {
                 });
     }
 
+    public static void updateCourse(CourseDataModel course)  {
+        dbCoursesRef.child(course.getKey()).setValue(course)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d(TAG, "Updated course.");
+                    }
+                }).addOnFailureListener(e -> {Log.d(TAG, "Failure: " + e.toString());});
+    }
     /**
      * Inserts into database.courses a new course.
      * @param course The object model of the course
      */
     public static void addCourse(CourseDataModel course) {
+        // Check if the course already exists.
+//        if (CourseDataModel.getCourse(course.getCode()) != null) {
+//            Log.d(TAG, "The course: " + course.getCode() + " already exists.\n"+
+//                    "Updating that course i guess");
+//            updateCourse(course);
+//            return;
+//        }
         DatabaseReference id = dbCoursesRef.push();
         id.setValue(course)
             .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -147,17 +160,20 @@ public abstract class DatabaseHandler {
      */
     public static void addCourse(Course course) {
         CourseDataModel output = CourseDataModel.readCourse(course);
-        DatabaseReference id = dbCoursesRef.push();
-        id.setValue(output).addOnFailureListener(new OnFailureListener() {
+        addCourse(output);
+    }
+
+    public static void removeCourse(CourseDataModel course) {
+        dbCoursesRef.child(course.getKey()).removeValue()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {}
+                }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.d(TAG, "Failure: " + e);
                     }
                 });
-    }
-
-    public static void removeCourse(CourseDataModel course) {
-        throw new NotImplementedError();
     }
 
     /**
@@ -204,7 +220,7 @@ public abstract class DatabaseHandler {
                                        @Nullable String previousChildName) {
                 Log.d(TAG, "Child Changed: " + snapshot + "\n" + previousChildName);
 
-                CourseDataModel photo = snapshot.getValue(ExcludableCourse.class);
+                CourseDataModel photo = snapshot.getValue(ExcludedCourseDataModel.class);
                 CourseDataModel.updateCourse(Objects.requireNonNull(photo), snapshot.getKey());//previousChildName);
             }
 
@@ -212,7 +228,7 @@ public abstract class DatabaseHandler {
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "Removed Course: " + snapshot);
                 // TODO: Safety Checks
-                CourseDataModel photo = snapshot.getValue(ExcludableCourse.class);
+                CourseDataModel photo = snapshot.getValue(ExcludedCourseDataModel.class);
                 assert photo != null;
                 photo.setKey(snapshot.getKey());
                 CourseDataModel.removeCourse(Objects.requireNonNull(photo));
@@ -255,36 +271,71 @@ public abstract class DatabaseHandler {
 
         // Begin listening to new data provided
         attachCourseListener();
-        generateSample();
+//        generateSample();
 
+        // Testing
+        Listener<Course> testListener = new Listener<Course>() {
+            @Override
+            public void onSuccess(String data, @Nullable List<Course> objectModel) {
+                Log.d("Query Result:", "-> " + objectModel.toString());
+            }
+
+            @Override
+            public void onFailure(String data) {
+                Log.e(TAG, "Failure: " + data);
+            }
+
+            @Override
+            public void onComplete(String data) {
+
+            }
+        };
+        queryCourseWithCode("CSCB", testListener);
+        queryCourseWithName("Introduction", testListener);
         Log.d(TAG, "Database initialised.");
     }
 
-    // TODO - Solve this and then remove it
-    private static void queryTesting() {
-        // Testing stuff again
-        String query = "CSC";
-
-        dbCoursesRef.orderByChild("code")
-                .startAt("%${query}%")
-                .endAt(query+"\uf8ff")
+    private static void queryCourseWithName(String name, Listener<Course> callback) {
+        dbCoursesRef.orderByChild("name")
+                .startAt(name)
+                .endAt(name+"\uf8ff")
                 .get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                     @Override
                     public void onSuccess(DataSnapshot dataSnapshot) {
-                        Log.d("DATABASE STUFF", dataSnapshot.toString());
-                        ArrayList<CourseDataModel> courses = new ArrayList<>();
+//                        Log.d("DATABASE STUFF", dataSnapshot.toString());
+                        ArrayList<Course> courses = new ArrayList<>();
                         for (DataSnapshot s : dataSnapshot.getChildren()) {
-                            courses.add(s.getValue(CourseDataModel.class));
+                            ExcludedCourseDataModel courseObject = s.getValue(ExcludedCourseDataModel.class);
+                            assert courseObject != null;
+                            courseObject.setKey(dataSnapshot.getKey());
+                            courses.add(courseObject.getCourseObject());
                         }
 
-                        Log.d("DATABASE: ", courses.toString());
+                        callback.onSuccess(dataSnapshot.toString(), courses);
                     }
-                }).addOnFailureListener(new OnFailureListener() {
+                }).addOnFailureListener(e -> callback.onFailure(e.toString()));
+    }
+
+    private static void queryCourseWithCode(String code, Listener<Course> callback) {
+
+        dbCoursesRef.orderByChild("code")
+                .startAt(code)
+                .endAt(code+"\uf8ff")
+                .get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                     @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("DATABASE STUFF", e.toString());
+                    public void onSuccess(DataSnapshot dataSnapshot) {
+//                        Log.d("DATABASE STUFF", dataSnapshot.toString());
+                        ArrayList<Course> courses = new ArrayList<>();
+                        for (DataSnapshot s : dataSnapshot.getChildren()) {
+                            ExcludedCourseDataModel courseObject = s.getValue(ExcludedCourseDataModel.class);
+                            assert courseObject != null;
+                            courseObject.setKey(dataSnapshot.getKey());
+                            courses.add(courseObject.getCourseObject());
+                        }
+
+                        callback.onSuccess(dataSnapshot.toString(), courses);
                     }
-                });
+                }).addOnFailureListener(e -> callback.onFailure(e.toString()));
     }
 
     //    public static void queryCourseMatchString(String childName)

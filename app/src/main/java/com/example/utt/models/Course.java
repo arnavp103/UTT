@@ -4,19 +4,30 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.utt.algorithm.model.Term;
 import com.example.utt.algorithm.model.YearlySession;
 import com.example.utt.models.firebase.datamodel.CourseDataModel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class Course {
     private String name;
     private String courseCode;
+
+    // Algorithm requires sessionOffering contain at least one element.
+    // This could be a problem unless we reject any course adds that have no session entered.
     private List<YearlySession> sessionOffering; //make sure the order is always: winter, summer, fall
     private List<Course> prerequisites;
 
-    public Course() {}
+    public Course() {
+        name = "Missing";
+        courseCode = "Missing";
+        sessionOffering = new ArrayList<>();
+        sessionOffering.add(new YearlySession(Term.NULL));
+        prerequisites = new ArrayList<>();
+    }
 
     public Course(String name, String courseCode, List<YearlySession> sessionOffering,
                   List<Course> prerequisites) {
@@ -61,7 +72,6 @@ public class Course {
     public boolean equals(Object other) {
         if (!(other instanceof Course))
             return false;
-
         return name.equals(((Course) other).getName());
     }
 
@@ -70,7 +80,7 @@ public class Course {
         return getCode() + ": " + getName();
     }
 
-    // TODO - Properly implement this
+    // TODO - Properly implement the below implementations
     public static void addListener(CourseEventListener listener) {CourseDataModel.addListener(listener);}
     public static void removeListener(CourseEventListener listener) {CourseDataModel.removeListener(listener);}
 
