@@ -21,18 +21,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import com.example.utt.algorithm.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FirstFragment extends Fragment {
 
     EditText editTextName;
+    // EditText editCourseName;
     Button buttonAdd;
 
     private FragmentFirstBinding binding;
-    DatabaseReference databaseCourses;
+    DatabaseReference databaseCourseCode;
     ListView listViewCourses;
-    List<Course> courseList;
+    List<CourseTest> courseList;
 
     @Override
     public View onCreateView(
@@ -42,17 +44,18 @@ public class FirstFragment extends Fragment {
 
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        databaseCourses = FirebaseDatabase.getInstance("https://b07-final-db5c5-default-rtdb.firebaseio.com").getReference("Course");
-        editTextName = (EditText)getView().findViewById(R.id.editTextName);
+        databaseCourseCode = FirebaseDatabase.getInstance("https://b07-final-db5c5-default-rtdb.firebaseio.com").getReference("Course Code");
+        editTextName = (EditText)getView().findViewById(R.id.editCourseCode);
+        // editCourseName = (EditText)getView().findViewById(R.id.courseName);
+
         buttonAdd = (Button)getView().findViewById(R.id.buttonAdd);
 
-        binding.buttonSearch.setOnClickListener(new View.OnClickListener() {
+        binding.buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(FirstFragment.this)
@@ -62,25 +65,28 @@ public class FirstFragment extends Fragment {
         binding.buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                addCourse();
+                addCourseCode();
             }
         });
         listViewCourses = (ListView)getView().findViewById(R.id.listViewCourses);
         courseList = new ArrayList<>();
     }
 
-    private void addCourse() {
-        String name = editTextName.getText().toString().trim();
-        String season = null;
-        String prereq = null;
+    public void addCourseCode() {
+        String code = editTextName.getText().toString().trim();
+        String name = null;
+        List<YearlySession> season = null;
+        List<Course> prerequisites = null;
         // Check if search bar is empty
-        if(!TextUtils.isEmpty(name)){
-            String courseID = databaseCourses.push().getKey();
-            Course course = new Course(name, season, prereq);
-            databaseCourses.child(courseID).setValue(course);
+        if(!TextUtils.isEmpty(code)){
+            String courseID = databaseCourseCode.push().getKey();
+            // String courseName = databaseCourseCode.push().getKey();
+            CourseTest course = new CourseTest(name, code, season, prerequisites);
+            databaseCourseCode.child(courseID).setValue(course);
+            //databaseCourseCode.child(courseName).setValue(course);
 
             // Output this message if course was successfully added to the database
-            Toast.makeText(getActivity(), "Course added", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Course code added", Toast.LENGTH_LONG).show();
         }
         // If no course was entered into the search bar
         else{
@@ -91,13 +97,13 @@ public class FirstFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        databaseCourses.addValueEventListener(new ValueEventListener() {
+        databaseCourseCode.addValueEventListener(new ValueEventListener() {
             @Override
             // Executed every time we change something in the database
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 courseList.clear();
                 for(DataSnapshot courseSnapshot: snapshot.getChildren()){
-                    Course course = courseSnapshot.getValue(Course.class);
+                    CourseTest course = courseSnapshot.getValue(CourseTest.class);
                     courseList.add(course);
                 }
 

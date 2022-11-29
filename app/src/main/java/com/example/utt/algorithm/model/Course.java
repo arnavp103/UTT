@@ -20,7 +20,7 @@ public class Course {
         if (!(other instanceof Course))
             return false;
 
-        return name.equals(((Course) other).name);
+        return name.equals(((Course)other).name);
     }
 
 }

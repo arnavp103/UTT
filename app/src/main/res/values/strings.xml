@@ -9,4 +9,15 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="enter_course_code">Enter course code</string>
+    <string name="add_course">Add course</string>
+    <string name="search">Search</string>
+    <string name="back">Back</string>
+    <string name="enter_course_name">Enter course name</string>
+    <string name="add_course_name">Add course name</string>
+    <string name="enter_name">Enter course name</string>
+    <string name="enterName">Enter course name</string>
+    <string name="text">Text</string>
+    <string name="textview">Textview</string>
+    <string name="nextt">Next</string>
 </resources>

@@ -7,7 +7,7 @@
     tools:context=".FirstFragment">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
+        android:id="@+id/appBarLayout1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:theme="@style/Theme.UTT.AppBarOverlay"
@@ -19,17 +19,16 @@
     <ListView
         android:id="@+id/listViewCourses"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/appBarLayout"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+        app:layout_constraintStart_toStartOf="@+id/appBarLayout1" />
 
     <EditText
-        android:id="@+id/editTextName"
+        android:id="@+id/editCourseCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/Enter_course_code"
+        android:hint="@string/enter_course_code"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textColorHint="#757575"
@@ -40,21 +39,21 @@
         android:autofillHints="" />
 
     <Button
-        android:id="@+id/buttonSearch"
+        android:id="@+id/buttonNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Search"
+        android:text="@string/nextt"
         app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextName" />
+        app:layout_constraintTop_toBottomOf="@+id/editCourseCode" />
 
     <Button
         android:id="@+id/buttonAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Add_course"
+        android:text="@string/add_course"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
