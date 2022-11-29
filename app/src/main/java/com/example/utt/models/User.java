@@ -9,9 +9,11 @@ import com.google.firebase.database.Exclude;
 // We shouldn't generate multiple of these.
 public class User {
     private String email;
+    private String index;
 
     @Exclude
     private String id;
+
 
     @Exclude
     private String password;
@@ -22,11 +24,13 @@ public class User {
     public User(String email, String password) {
         this.email = email;
         setPassword(password);
+        index = email + this.password;
     }
 
     public User(String email, String password, boolean isAdmin) {
         this(email, password);
         this.isAdmin = isAdmin;
+        index = email + this.password;
     }
 
     @Exclude
@@ -43,11 +47,15 @@ public class User {
         return password;
     }
 
+    public String getIndex() { return index;}
+
     public Boolean getIsAdmin() {
         return isAdmin;
     }
 
     // Redundant with above
+
+    @Exclude
     public Boolean isStudent() { return !isAdmin; }
 
     public void setPassword(String password) {

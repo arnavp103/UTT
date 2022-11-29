@@ -94,8 +94,7 @@ public abstract class DatabaseHandler {
      */
     public static void getUser(String email, String rawPassword, Listener<User> callback) {
         String password = hashString(rawPassword);
-        dbUsersRef.orderByChild("password").equalTo(password).getRef()
-                .orderByChild("email").equalTo(email).get()
+        dbUsersRef.orderByChild("index").equalTo(email+password).get()
                 .addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                     @Override
                     public void onSuccess(DataSnapshot dataSnapshot) {
