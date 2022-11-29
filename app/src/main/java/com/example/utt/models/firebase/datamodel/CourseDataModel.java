@@ -50,7 +50,7 @@ public class CourseDataModel {
         sessionOffering = List.of(false, false, false);
     }
 
-//    public CourseDataModel(String name, String code, Map<Integer, Boolean> sessions, List<String> prerequisites) {
+    // public CourseDataModel(String name, String code, Map<Integer, Boolean> sessions, List<String> prerequisites) {
     public CourseDataModel(String name, String code, List<Boolean> sessions, List<String> prerequisites) {
         this();
         setCode(code);

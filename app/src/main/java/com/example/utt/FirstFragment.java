@@ -80,6 +80,7 @@ public class FirstFragment extends Fragment {
         courseList = new ArrayList<>();
     }
 
+    // Admin create function
     private void addCourse() {
         String name = editTextName.getText().toString().trim();
         List<YearlySession> season = null;
@@ -87,6 +88,7 @@ public class FirstFragment extends Fragment {
         // Check if search bar is empty
         if(!TextUtils.isEmpty(name)){
             String courseID = databaseCourses.push().getKey();
+           //TODO: Shouldn't this be Course course = new Course(name, courseID, season, prereq);
             Course course = new Course(name, "CSCA08", season, prereq);
             // databaseCourses.child(courseID).setValue(course);
             DatabaseHandler.addCourse(course);
@@ -105,6 +107,7 @@ public class FirstFragment extends Fragment {
         databaseCourses.addValueEventListener(new ValueEventListener() {
             @Override
             // Executed every time we change something in the database
+            // sets courseList to the most current version of the database
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 courseList.clear();
                 for(DataSnapshot courseSnapshot: snapshot.getChildren()){
