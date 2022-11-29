@@ -53,14 +53,10 @@ public class MainActivity extends AppCompatActivity {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
         navController = Objects.requireNonNull(navHostFragment).getNavController();
         navController.addOnDestinationChangedListener((firstArg, destination, thirdArg) -> {
-//            Integer destinationId = destination.getId();
-            Log.d("Destination", String.valueOf(destination.getId()));
             if(destination.getId() == R.id.LoginFragment) {
                 binding.toolbar.setVisibility(View.GONE);
-                Log.d("Help1", "Pls help");
             } else {
                 binding.toolbar.setVisibility(View.VISIBLE);
-                Log.d("Help2", "Nothing is real, everything is a lie");
             }
         });
 
