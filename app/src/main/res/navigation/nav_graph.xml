@@ -6,9 +6,9 @@
     app:startDestination="@id/LoginFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/Home"
         android:name="com.example.utt.Home"
-        android:label="@string/first_fragment_label"
+        android:label="@string/home_label"
         tools:layout="@layout/fragment_home">
 
         <action
@@ -29,7 +29,27 @@
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/Home" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFuture"
+        android:name="com.example.utt.addFuture"
+        android:label="@string/addFuture_label"
+        tools:layout="@layout/fragment_add_future">
+        <action
+            android:id="@+id/action_addFuture_to_Home"
+            app:destination="@id/Home" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/addPrev"
+        android:name="com.example.utt.addPrev"
+        android:label="@string/addPrev_label"
+        tools:layout="@layout/fragment_add_prev">
+        <action
+            android:id="@+id/action_addPrev_to_Home"
+            app:destination="@id/Home" />
+
     </fragment>
     <fragment
         android:id="@+id/recyclerListFragment"
