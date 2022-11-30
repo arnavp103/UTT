@@ -29,11 +29,10 @@ public class Home extends Fragment {
 
 //    EditText searchTextName;
 //    Button searchButton;
-//    Button gotoAddCourses;
+//    Button gotoAddCourses;s
 
     private FragmentHomeBinding binding;
    // DatabaseReference databaseCourses;
-
 
     @Override
     public View onCreateView(
@@ -69,6 +68,7 @@ public class Home extends Fragment {
 //                Toast myToast = Toast.makeText(getActivity(), "Hello toast!", Toast.LENGTH_SHORT);
 //                myToast.show();
 
+                    // User Data Testing
 
                     HomeToGenerate();
 

@@ -58,6 +58,10 @@ public abstract class DatabaseHandler {
         return Hashing.sha256().hashBytes(plain.getBytes(StandardCharsets.UTF_8)).toString();
     }
 
+    public static void updateStudentData(Student student) {
+        dbStudentsRef.child(student.getId()).setValue(student._getCoursesTaken());
+    }
+
     public static void getStudentData(String userId, Listener<String> callback) {
         Log.d("USER ID: ", userId);
         dbStudentsRef.orderByKey().equalTo(userId).get()
@@ -294,35 +298,14 @@ public abstract class DatabaseHandler {
 
             }
         };
-        queryCourseWithCode("CSCB", testListener);
-        queryCourseWithName("Introduction", testListener);
+        queryCourseWithField("code", "CSCB", testListener);
+        queryCourseWithField("name", "Introduction", testListener);
         Log.d(TAG, "Database initialised.");
     }
 
-    private static void queryCourseWithName(String name, Listener<Course> callback) {
-        dbCoursesRef.orderByChild("name")
-                .startAt(name)
-                .endAt(name+"\uf8ff")
-                .get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-                    @Override
-                    public void onSuccess(DataSnapshot dataSnapshot) {
-//                        Log.d("DATABASE STUFF", dataSnapshot.toString());
-                        ArrayList<Course> courses = new ArrayList<>();
-                        for (DataSnapshot s : dataSnapshot.getChildren()) {
-                            ExcludedCourseDataModel courseObject = s.getValue(ExcludedCourseDataModel.class);
-                            assert courseObject != null;
-                            courseObject.setKey(dataSnapshot.getKey());
-                            courses.add(courseObject.getCourseObject());
-                        }
+    private static void queryCourseWithField(String field, String code, Listener<Course> callback) {
 
-                        callback.onSuccess(dataSnapshot.toString(), courses);
-                    }
-                }).addOnFailureListener(e -> callback.onFailure(e.toString()));
-    }
-
-    private static void queryCourseWithCode(String code, Listener<Course> callback) {
-
-        dbCoursesRef.orderByChild("code")
+        dbCoursesRef.orderByChild(field)
                 .startAt(code)
                 .endAt(code+"\uf8ff")
                 .get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
