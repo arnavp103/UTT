@@ -1,7 +1,7 @@
 package com.example.utt;
 
-import com.example.utt.algorithm.model.Course;
 import com.example.utt.algorithm.model.YearlySession;
+import com.example.utt.models.Course;
 
 import java.util.List;
 
@@ -12,6 +12,7 @@ public class CourseTest {
     public List<Course> prerequisites;
 
     public CourseTest(){}
+
     public CourseTest(String name, String code,  List<YearlySession> season,
                       List<Course> prerequisites){
         this.name = name;

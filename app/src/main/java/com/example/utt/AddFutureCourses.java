@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.utt.Home;
+import com.example.utt.models.Course;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -233,7 +234,7 @@ public class AddFutureCourses extends AppCompatActivity {
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            String course = ((document.toObject(Course.class)).code + " ");
+                            String course = ((document.toObject(Course.class)).getCode() + " ");
 
                             courseList.add(course);
 

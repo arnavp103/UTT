@@ -19,6 +19,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.FragmentFirstBinding;
+import com.example.utt.models.Course;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -181,7 +182,7 @@ public class FirstFragment extends Fragment {
             }
             if(exist == false) {
                 DatabaseHandler.addCourse(course);
-                databaseCourseCode.child(courseID).setValue(course);
+//                databaseCourseCode.child(courseID).setValue(course);
 //                for(YearlySession session : season){
 //                    databaseCourseCode.child(courseID).child(session.toString()).setValue(true);
 //                }

@@ -23,4 +23,14 @@
     <string name="enter_course_session_offerings">Enter course session offerings</string>
     <string name="enter_course_prerequisites">Enter course prerequisites</string>
     <string name="textView3">textView3</string>
+
+    <string name="generate_timeline">Generate Timeline</string>
+    <string name="select_course">select_add_future</string>
+    <string name="enter_course_code_home">Enter Course Code</string>
+    <string name="deleteFuturebtn">deleteFuture</string>
+    <string name="select_course_future">Select Course</string>
+    <string name="add_course_future">Add Course</string>
+    <string name="home_futuretohome">Home</string>
+    <string name="generate_future">GENERATE</string>
+    <string name="homefuturetohome">futuretohome</string>
 </resources>

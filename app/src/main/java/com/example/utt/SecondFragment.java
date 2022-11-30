@@ -13,13 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.utt.algorithm.model.Course;
 import com.example.utt.algorithm.model.YearlySession;
 import com.example.utt.databinding.FragmentSecondBinding;
+import com.example.utt.models.Course;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
