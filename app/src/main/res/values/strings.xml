@@ -9,13 +9,20 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="logout">Logout</string>
+    <string name="login_title">Login</string>
+    <string name="login_button">Login</string>
+    <string name="signup_nav">Sign up</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="invalid_login">Incorrect username or password</string>
+
+    <!-- compilation error fix below -->
+    <string name="Enter_course_code">Enter Course Code</string>
+    <string name="Search">Search</string>
+    <string name="Add_course">Add Course</string>
     <string name="Back">Back</string>
-    <string name="Enter_course_code">enter_course_code_prev</string>
-    <string name="Search">search</string>
-    <string name="Add_course">add_course_student</string>
-    <string name="Text">text_student</string>
-    <string name="Textview">textview_student</string>
-    <string name="enter_course_code">course_code</string>
+     <string name="enter_course_code">course_code</string>
     <string name="generate_timeline">Generate Timeline</string>
     <string name="search">SEARCH</string>
     <string name="select_course">select_add_future</string>
@@ -26,4 +33,8 @@
     <string name="home_futuretohome">Home</string>
     <string name="generate_future">GENERATE</string>
     <string name="homefuturetohome">futuretohome</string>
+    <string name="Text">Text</string>
+    <string name="Textview">Textview</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
