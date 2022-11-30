@@ -17,6 +17,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 
 import com.example.utt.databinding.FragmentHomeBinding;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 //import com.google.firebase.database.DataSnapshot;
 //import com.google.firebase.database.DatabaseError;
@@ -33,6 +34,8 @@ public class Home extends Fragment {
 
     private FragmentHomeBinding binding;
    // DatabaseReference databaseCourses;
+   //private FirebaseFirestore courseCode = FirebaseFirestore.getInstance();
+
 
 
     @Override
@@ -55,7 +58,7 @@ public class Home extends Fragment {
         view.findViewById(R.id.searchTextNameHome).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                NavHostFragment.findNavController(FirstFragment.this)
+//                NavHostFragment.findNavController(Home.this)
 //                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
 
                 //start activity for searchbar
@@ -68,9 +71,20 @@ public class Home extends Fragment {
             public void onClick(View view) {
 //                Toast myToast = Toast.makeText(getActivity(), "Hello toast!", Toast.LENGTH_SHORT);
 //                myToast.show();
+                NavHostFragment.findNavController(Home.this)
+                        .navigate(R.id.action_home_to_addFuture);//add action fragment from future courses to home
 
 
-                    HomeToGenerate();
+            }
+        });
+
+        view.findViewById(R.id.view_my_courses).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(Home.this)
+                        .navigate(R.id.action_Home_to_addPrev);
+
+
 
             }
         });
@@ -79,16 +93,8 @@ public class Home extends Fragment {
 
 
 
-
     }
-    public void HomeToGenerate()
-    {
-        Intent in = new Intent(getActivity(), AddFutureCourses.class);
-        startActivity(in);
-//            Toast myToast = Toast.makeText(getActivity(), "We will connect this today!", Toast.LENGTH_SHORT);
-//            myToast.show();
 
-    }
 
     @Override
     public void onDestroyView() {
@@ -96,4 +102,6 @@ public class Home extends Fragment {
         binding = null;
     }
 
+    public void HomeToGenerate(View view) {
+    }
 }

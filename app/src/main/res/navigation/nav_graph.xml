@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/Home">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/Home"
         android:name="com.example.utt.Home"
-        android:label="@string/first_fragment_label"
+        android:label="@string/home_label"
         tools:layout="@layout/fragment_home">
 
         <action
@@ -17,6 +17,13 @@
         <action
             android:id="@+id/action_FirstFragment_to_recyclerListFragment"
             app:destination="@id/recyclerListFragment" />
+        <action
+            android:id="@+id/action_home_to_addFuture"
+            app:destination="@id/addFuture" />
+        <action
+            android:id="@+id/action_Home_to_addPrev"
+            app:destination="@id/addPrev" />
+
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -26,11 +33,36 @@
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/Home" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFuture"
+        android:name="com.example.utt.addFuture"
+        android:label="@string/addFuture_label"
+        tools:layout="@layout/fragment_add_future">
+        <action
+            android:id="@+id/action_addFuture_to_Home"
+            app:destination="@id/Home" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/addPrev"
+        android:name="com.example.utt.addPrev"
+        android:label="@string/addPrev_label"
+        tools:layout="@layout/fragment_add_prev">
+        <action
+            android:id="@+id/action_addPrev_to_Home"
+            app:destination="@id/Home" />
+
     </fragment>
     <fragment
         android:id="@+id/recyclerListFragment"
         android:name="com.example.utt.RecyclerListFragment"
         android:label="fragment_recycler_list"
         tools:layout="@layout/fragment_recycler_list" />
+    <action
+        android:id="@+id/action_home_to_addFuture"
+        app:destination="@id/addFuture"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim" />
 </navigation>
