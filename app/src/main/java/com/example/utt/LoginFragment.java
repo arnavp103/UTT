@@ -2,6 +2,7 @@ package com.example.utt;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -84,7 +85,7 @@ public class LoginFragment extends Fragment {
         }
     }
 
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
         uEdit = (EditText) view.findViewById(R.id.editTextUsername);
@@ -110,7 +111,8 @@ public class LoginFragment extends Fragment {
         binding.buttonLogin.setOnClickListener(this::submit);
 
         binding.signup.setOnClickListener(view1 -> {
-            // nav to sign up fragment
+            Intent intent = new Intent(view.getContext(), SignUpPage.class);
+            startActivity(intent);
         });
     }
 
