@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/firstFragment">
 
     <fragment
         android:id="@+id/FirstFragment"
@@ -33,4 +33,9 @@
         android:name="com.example.utt.RecyclerListFragment"
         android:label="fragment_recycler_list"
         tools:layout="@layout/fragment_recycler_list" />
+    <fragment
+        android:id="@+id/firstFragment"
+        android:name="com.example.utt.FirstFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/fragment_first" />
 </navigation>
