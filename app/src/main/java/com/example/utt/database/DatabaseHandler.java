@@ -61,6 +61,10 @@ public abstract class DatabaseHandler {
         return Hashing.sha256().hashBytes(plain.getBytes(StandardCharsets.UTF_8)).toString();
     }
 
+    public static void updateStudentData(Student student) {
+        dbStudentsRef.child(student.getId()).setValue(student._getCoursesTaken());
+    }
+
     public static void getStudentData(String userId, Listener<String> callback) {
         Log.d("USER ID: ", userId);
         dbStudentsRef.orderByKey().equalTo(userId).get()
