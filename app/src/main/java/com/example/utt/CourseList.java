@@ -14,12 +14,12 @@ import com.example.utt.algorithm.model.Course;
 
 import java.util.List;
 
-public class CourseList extends ArrayAdapter<CourseTest> {
+public class CourseList extends ArrayAdapter<Course> {
 
     private Activity context;
-    private List<CourseTest> courseList;
+    private List<Course> courseList;
 
-    public CourseList(Activity context, List<CourseTest> courseList){
+    public CourseList(Activity context, List<Course> courseList){
         super(context, R.layout.list_layout, courseList);
         this.context = context;
         this.courseList = courseList;
@@ -31,11 +31,11 @@ public class CourseList extends ArrayAdapter<CourseTest> {
         LayoutInflater inflater = context.getLayoutInflater();
 
         View listViewItem = inflater.inflate(R.layout.list_layout, null, true);
-        TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewName);
-        TextView textViewSeason = (TextView) listViewItem.findViewById(R.id.textViewSeason);
-        CourseTest course = courseList.get(position);
-        textViewName.setText(course.getCode());
-        textViewSeason.setText(course.getName());
+        TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewCode);
+        TextView textViewSeason = (TextView) listViewItem.findViewById(R.id.textViewName);
+        Course course = courseList.get(position);
+        textViewName.setText(course.courseCode);
+        textViewSeason.setText(course.name);
 
         return listViewItem;
     }

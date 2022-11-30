@@ -150,15 +150,15 @@ public abstract class DatabaseHandler {
 //        }
         DatabaseReference id = dbCoursesRef.push();
         id.setValue(course)
-            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {}
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.d(TAG, "Failure: " + e);
-                }
-            });
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {}
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, "Failure: " + e);
+                    }
+                });
     }
 
     /**
@@ -190,7 +190,7 @@ public abstract class DatabaseHandler {
      * @param student The object model of the student
      */
     private static void addStudent(String userId, Student student) {
-       dbStudentsRef.child(userId).setValue(student._getCoursesTaken());
+        dbStudentsRef.child(userId).setValue(student._getCoursesTaken());
     }
 
     /**

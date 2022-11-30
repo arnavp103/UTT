@@ -19,5 +19,8 @@
     <string name="enterName">Enter course name</string>
     <string name="text">Text</string>
     <string name="textview">Textview</string>
-    <string name="nextt">Next</string>
+    <string name="enterCourseName">Enter course name</string>
+    <string name="enter_course_session_offerings">Enter course session offerings</string>
+    <string name="enter_course_prerequisites">Enter course prerequisites</string>
+    <string name="textView3">textView3</string>
 </resources>

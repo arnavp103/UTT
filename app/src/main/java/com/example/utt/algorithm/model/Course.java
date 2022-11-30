@@ -8,6 +8,7 @@ public class Course {
     public List<YearlySession> sessionOffering; //make sure the order is always: winter, summer, fall
     public List<Course> prerequisites;
 
+    public Course(){}
     public Course(String name, String courseCode, List<YearlySession> sessionOffering,
                   List<Course> prerequisites) {
         this.name = name;
