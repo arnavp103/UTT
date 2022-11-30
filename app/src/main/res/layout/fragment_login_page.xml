@@ -10,65 +10,121 @@
 
     <EditText
         android:id="@+id/editTextUsername"
-        android:layout_width="226dp"
-        android:layout_height="74dp"
-        android:layout_marginTop="88dp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/edit_text_border"
         android:ems="10"
         android:hint="@string/username"
         android:inputType="text"
+        android:textAlignment="center"
+        android:textColor="@color/slategray"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEndGuideline"
+        app:layout_constraintStart_toStartOf="@+id/buttonStartGuideline"
         app:layout_constraintTop_toBottomOf="@+id/titleLogin" />
 <!--    android:textColor="@color/antique"-->
 <!--    android:textColorHint="@color/antique"-->
 
     <EditText
         android:id="@+id/editTextTextPassword"
-        android:layout_width="220dp"
-        android:layout_height="68dp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
         android:layout_marginTop="15dp"
+        android:background="@drawable/edit_text_border"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
+        android:shadowColor="#340B0A0A"
+        android:textAlignment="center"
+        android:textColor="@color/slategray"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEndGuideline"
+        app:layout_constraintStart_toStartOf="@+id/buttonStartGuideline"
         app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
 
     <Button
         android:id="@+id/buttonLogin"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="188dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="185dp"
+        android:backgroundTint="@color/slategray"
+        android:fontFamily="@font/fira_sans_light"
         android:text="@string/login_button"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintEnd_toStartOf="@+id/buttonEndGuideline"
+        app:layout_constraintStart_toStartOf="@+id/buttonStartGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
+        tools:ignore="DuplicateSpeakableTextCheck" />
+
 
     <TextView
         android:id="@+id/titleLogin"
-        android:layout_width="wrap_content"
+        style="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/fira_sans_medium_italic"
         android:text="@string/login_title"
         android:textAlignment="center"
-        android:textSize="28sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/gray20"
+        android:textSize="60sp"
+        app:layout_constraintEnd_toStartOf="@+id/titleEndGuideline"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/titleStartGuideline"
+        app:layout_constraintTop_toTopOf="@+id/titleTopGuideline" />
 
     <TextView
         android:id="@+id/signup"
-        android:layout_width="67dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/signup_nav"
         android:textAlignment="center"
-        android:textSize="16sp"
+        android:textColor="@color/teal_700"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/buttonStartGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/buttonEndGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/titleTopGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/titleStartGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/titleEndGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
