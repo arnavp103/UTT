@@ -1,6 +1,7 @@
 package com.example.utt;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,8 +12,17 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.utt.algorithm.model.CourseScheduling;
+import com.example.utt.algorithm.model.SearchAlgorithm;
+import com.example.utt.algorithm.model.Term;
+import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.ActivityMainBinding;
+import com.example.utt.models.Course;
+import com.example.utt.models.CourseEventListener;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,19 +36,34 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        DatabaseHandler.initialise();
         setSupportActionBar(binding.toolbar);
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
+        /// TESTING STUFF
+
+        CourseEventListener render = new CourseEventListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onCourseAdded(Course course) {
+                Log.d("Render", "Course Added: " + course);
             }
-        });
+
+            @Override
+            public void onCourseChanged(Course course) {
+                Log.d("Render", "Course Changed" + course.toString());
+            }
+
+            @Override
+            public void onCourseRemoved(Course course) {
+                Log.d("Render", "Course Removed" + course.toString());
+            }
+        };
+
+         Course.addListener(render);
+
     }
 
     @Override

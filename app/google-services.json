@@ -1,34 +1,59 @@
 {
   "project_info": {
+<<<<<<< HEAD
     "project_number": "989046350920",
     "firebase_url": "https://b07-final-db5c5-default-rtdb.firebaseio.com",
     "project_id": "b07-final-db5c5",
     "storage_bucket": "b07-final-db5c5.appspot.com"
+=======
+    "project_number": "759859132756",
+    "firebase_url": "https://utsc-b07-projcourses-default-rtdb.firebaseio.com",
+    "project_id": "utsc-b07-projcourses",
+    "storage_bucket": "utsc-b07-projcourses.appspot.com"
+>>>>>>> origin/database
   },
   "client": [
     {
       "client_info": {
+<<<<<<< HEAD
         "mobilesdk_app_id": "1:989046350920:android:d91f5f19cd7737f79aa47d",
         "android_client_info": {
           "package_name": "com.example.b07finalproject"
+=======
+        "mobilesdk_app_id": "1:759859132756:android:cfd032fbc92e943ed530c1",
+        "android_client_info": {
+          "package_name": "com.example.b07projectdesign"
+>>>>>>> origin/database
         }
       },
       "oauth_client": [
         {
+<<<<<<< HEAD
           "client_id": "989046350920-2162db8ff3b71f9prs957req2e7l6s21.apps.googleusercontent.com",
+=======
+          "client_id": "759859132756-3r14n30urlrpssfn9vfcaevevqm5gpbm.apps.googleusercontent.com",
+>>>>>>> origin/database
           "client_type": 3
         }
       ],
       "api_key": [
         {
+<<<<<<< HEAD
           "current_key": "AIzaSyDopkl9zwAsbyf4z7oe3PRp_t4MOJG0Rqk"
+=======
+          "current_key": "AIzaSyAWO_dpUDA8m53RJjOD8cqZ_U_Go-z3paE"
+>>>>>>> origin/database
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
+<<<<<<< HEAD
               "client_id": "989046350920-2162db8ff3b71f9prs957req2e7l6s21.apps.googleusercontent.com",
+=======
+              "client_id": "759859132756-3r14n30urlrpssfn9vfcaevevqm5gpbm.apps.googleusercontent.com",
+>>>>>>> origin/database
               "client_type": 3
             }
           ]
@@ -37,6 +62,7 @@
     },
     {
       "client_info": {
+<<<<<<< HEAD
         "mobilesdk_app_id": "1:989046350920:android:a84002b64f2954529aa47d",
         "android_client_info": {
           "package_name": "com.example.b07test"
@@ -67,26 +93,41 @@
     {
       "client_info": {
         "mobilesdk_app_id": "1:989046350920:android:c2be2062985eecb39aa47d",
+=======
+        "mobilesdk_app_id": "1:759859132756:android:caa1f4b05c68762fd530c1",
+>>>>>>> origin/database
         "android_client_info": {
           "package_name": "com.example.utt"
         }
       },
       "oauth_client": [
         {
+<<<<<<< HEAD
           "client_id": "989046350920-2162db8ff3b71f9prs957req2e7l6s21.apps.googleusercontent.com",
+=======
+          "client_id": "759859132756-3r14n30urlrpssfn9vfcaevevqm5gpbm.apps.googleusercontent.com",
+>>>>>>> origin/database
           "client_type": 3
         }
       ],
       "api_key": [
         {
+<<<<<<< HEAD
           "current_key": "AIzaSyDopkl9zwAsbyf4z7oe3PRp_t4MOJG0Rqk"
+=======
+          "current_key": "AIzaSyAWO_dpUDA8m53RJjOD8cqZ_U_Go-z3paE"
+>>>>>>> origin/database
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
+<<<<<<< HEAD
               "client_id": "989046350920-2162db8ff3b71f9prs957req2e7l6s21.apps.googleusercontent.com",
+=======
+              "client_id": "759859132756-3r14n30urlrpssfn9vfcaevevqm5gpbm.apps.googleusercontent.com",
+>>>>>>> origin/database
               "client_type": 3
             }
           ]

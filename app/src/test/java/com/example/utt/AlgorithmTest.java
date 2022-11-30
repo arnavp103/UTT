@@ -2,11 +2,12 @@ package com.example.utt;
 
 import static org.junit.Assert.assertEquals;
 
-import com.example.utt.algorithm.model.Course;
 import com.example.utt.algorithm.model.CourseScheduling;
 import com.example.utt.algorithm.model.SearchAlgorithm;
 import com.example.utt.algorithm.model.Term;
 import com.example.utt.algorithm.model.YearlySession;
+import com.example.utt.models.Course;
+import com.example.utt.models.firebase.datamodel.CourseDataModel;
 
 import org.junit.Test;
 
@@ -58,8 +59,8 @@ public class AlgorithmTest {
                 b36sessionOfferings, b36Prerequisites);
 
         ArrayList<CourseScheduling> coursesTaken = new ArrayList<CourseScheduling>();
-        CourseScheduling csca08_scheduling = new CourseScheduling(csca08.name, csca08.courseCode, csca08.sessionOffering, csca08.prerequisites);
-        CourseScheduling csca48_scheduling = new CourseScheduling(csca48.name, csca48.courseCode, csca48.sessionOffering, csca48.prerequisites);
+        CourseScheduling csca08_scheduling = new CourseScheduling(csca08.getName(), csca08.getCode(), csca08.getSessionOffering(), csca08.getPrerequisites());
+        CourseScheduling csca48_scheduling = new CourseScheduling(csca48.getName(), csca48.getCode(), csca48.getSessionOffering(), csca48.getPrerequisites());
         coursesTaken.add(csca08_scheduling);
         coursesTaken.add(csca48_scheduling);
 
@@ -69,11 +70,11 @@ public class AlgorithmTest {
         search.findBeginningNodes(targets);
         
         List<CourseScheduling> result = search.search(Term.FALL, 2022);
-        assertEquals("CSCA67", result.get(0).courseCode);
+        assertEquals("CSCA67", result.get(0).getCode());
         assertEquals(Term.WINTER, result.get(0).sessionBeingTaken.term);
         assertEquals(2023, result.get(0).sessionBeingTaken.year);
 
-        assertEquals("CSCB36", result.get(1).courseCode);
+        assertEquals("CSCB36", result.get(1).getCode());
         assertEquals(Term.SUMMER, result.get(1).sessionBeingTaken.term);
         assertEquals(2023, result.get(1).sessionBeingTaken.year);
     }
