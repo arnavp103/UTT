@@ -225,25 +225,20 @@ public class AddFutureCourses extends AppCompatActivity {
     }
 
     public void loadCourses() {
-        DocumentReference ref = courseCode.collection("courses").document();
-
-        courseCode.collection("courses")
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
-                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            String course = ((document.toObject(Course.class)).getCode() + " ");
-
-                            courseList.add(course);
-
-                            //Log.d(TAG, p.getName() + " " + p.getAge());
-                        }
-
-                    }
-                });
-
+//        DocumentReference ref = courseCode.collection("courses").document();
+//
+//        courseCode.collection("courses")
+//                .get()
+//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+//                            String course = ((document.toObject(Course.class)).getCode() + " ");
+//                            courseList.add(course);
+//                            //Log.d(TAG, p.getName() + " " + p.getAge());
+//                        }
+//                    }
+//                });
     }
 }
 
