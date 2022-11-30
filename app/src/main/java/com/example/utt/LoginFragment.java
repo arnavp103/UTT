@@ -1,5 +1,6 @@
 package com.example.utt;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ import com.example.utt.models.CourseEventListener;
 import com.example.utt.models.Listener;
 import com.example.utt.models.Student;
 import com.example.utt.models.User;
+import com.example.utt.SharedMethods;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -31,13 +34,14 @@ public class LoginFragment extends Fragment {
     private FragmentLoginPageBinding binding;
     private EditText uEdit;
     private EditText pEdit;
+    private Context context;
 
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
+        context = this.getContext();
         binding = FragmentLoginPageBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
@@ -96,7 +100,8 @@ public class LoginFragment extends Fragment {
                     (keyCode == KeyEvent.KEYCODE_ENTER)) {
                 // Perform action on key press
                 this.submit(v);
-                return true;
+                SharedMethods.collapseKeyboard(context);
+//                return true;
             }
             return false;
         });
@@ -132,7 +137,6 @@ public class LoginFragment extends Fragment {
             public void onComplete(String data) {}
         };
         DatabaseHandler.getUser(username, password, authCallback);
-
     }
 
 

@@ -38,6 +38,7 @@
         android:shadowColor="#340B0A0A"
         android:textAlignment="center"
         android:textColor="@color/slategray"
+        android:imeOptions="actionDone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonEndGuideline"
         app:layout_constraintStart_toStartOf="@+id/buttonStartGuideline"
