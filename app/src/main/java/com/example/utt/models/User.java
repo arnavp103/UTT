@@ -1,6 +1,8 @@
 package com.example.utt.models;
 
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.utt.database.DatabaseHandler;
@@ -18,6 +20,9 @@ public class User {
     private String password;
     private boolean isAdmin;
 
+    @Exclude
+    private static User currentUser;
+
     public User() {}
 
     public User(String email, String password) {
@@ -31,6 +36,17 @@ public class User {
         this.isAdmin = isAdmin;
         index = email + this.password;
     }
+
+    public static void logout() {
+        // TODO - implement.
+    }
+
+    public static void login(User user) {
+        if (currentUser != null) logout();
+        currentUser = user;
+    }
+
+    public static User getInstance() { return currentUser; }
 
     @Exclude
     public String getId() { return id; }

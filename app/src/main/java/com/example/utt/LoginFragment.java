@@ -55,15 +55,16 @@ public class LoginFragment extends Fragment {
             DatabaseHandler.getStudentData(user.getId(), new Listener<String>() {
                 @Override
                 public void onSuccess(String data, @Nullable List<String> objectModel) {
-                    Log.d("User Courses Taken: " , String.valueOf(objectModel));
                     assert objectModel != null;
-                    //if (!objectModel.contains("None")) {
-                        Student s = new Student(user.getEmail(), user.getPassword());
-                        s.setId(user.getId());
-                        s.addCourse(List.of("MATA41",  "CSCB36",  "CSCA08", "BBBC"));
+                    Student s = new Student(user.getEmail(), user.getPassword());
+                    s.setId(user.getId());
 
-                        DatabaseHandler.updateStudentData(s);
-//                    }
+                    Student.login(s, objectModel);
+//                        s.addCourse(List.of("MATA41",  "CSCB36",  "CSCA08", "BBBC"));
+//                        DatabaseHandler.updateStudentData(s);
+
+                    NavHostFragment.findNavController(LoginFragment.this)
+                            .navigate(R.id.action_loginFragment_to_FirstFragment);
                 }
 
                 @Override
@@ -74,8 +75,6 @@ public class LoginFragment extends Fragment {
             });
 
 
-            NavHostFragment.findNavController(LoginFragment.this)
-                    .navigate(R.id.action_loginFragment_to_FirstFragment);
 
         } else if (user.getIsAdmin()) {
             // Notify other fragments that user is Admin
