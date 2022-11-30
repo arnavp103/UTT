@@ -3,6 +3,7 @@ package com.example.utt;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +29,12 @@ import java.util.List;
 
 public class LoginFragment extends Fragment {
     private FragmentLoginPageBinding binding;
+    private EditText uEdit;
+    private EditText pEdit;
 
     @Override
     public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
+            @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
 
@@ -80,39 +83,56 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonLogin.setOnClickListener(view1 -> {
-            // Validate Login Credentials
-            EditText uEdit = (EditText) view.findViewById(R.id.editTextUsername);
-            EditText pEdit = (EditText) view.findViewById(R.id.editTextTextPassword);
-            String username = uEdit.getText().toString();
-            String password = pEdit.getText().toString();
+        uEdit = (EditText) view.findViewById(R.id.editTextUsername);
+        pEdit = (EditText) view.findViewById(R.id.editTextTextPassword);
 
-            Listener<User> authCallback = new Listener<User>() {
-                @Override
-                public void onSuccess(String data, List<User> user) {
-                    assert user != null;
-                    checkUserStatus(user.get(0), view);
-                }
+        // Force focus to View
+        pEdit.setFocusableInTouchMode(true);
+        pEdit.requestFocus();
 
-                @Override
-                public void onFailure(String data) {
-//                    Toast.makeText(getActivity(), "Authentication Failed!", Toast.LENGTH_SHORT).show();
-                    Snackbar.make(view, "Authentication Failed!", BaseTransientBottomBar.LENGTH_SHORT).show();
-                    Log.d("AUTH FAIL", "-"+data);
 
-                }
-
-                @Override
-                public void onComplete(String data) {}
-            };
-
-            DatabaseHandler.getUser(username, password, authCallback);
-
+        pEdit.setOnKeyListener((v, keyCode, event) -> {
+            if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                    (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                // Perform action on key press
+                this.submit(v);
+                return true;
+            }
+            return false;
         });
+
+        // Validate Login Credentials
+        binding.buttonLogin.setOnClickListener(this::submit);
 
         binding.signup.setOnClickListener(view1 -> {
             // nav to sign up fragment
         });
+    }
+
+    private void submit(View view) {
+        String username = uEdit.getText().toString();
+        String password = pEdit.getText().toString();
+
+        Listener<User> authCallback = new Listener<User>() {
+            @Override
+            public void onSuccess(String data, List<User> user) {
+                assert user != null;
+                checkUserStatus(user.get(0), view);
+            }
+
+            @Override
+            public void onFailure(String data) {
+//                    Toast.makeText(getActivity(), "Authentication Failed!", Toast.LENGTH_SHORT).show();
+                Snackbar.make(view, "Authentication Failed!", BaseTransientBottomBar.LENGTH_SHORT).show();
+                Log.d("AUTH FAIL", "-"+data);
+
+            }
+
+            @Override
+            public void onComplete(String data) {}
+        };
+        DatabaseHandler.getUser(username, password, authCallback);
+
     }
 
 
