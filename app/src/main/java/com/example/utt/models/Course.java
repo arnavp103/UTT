@@ -18,7 +18,9 @@ public class Course {
 
     // Algorithm requires sessionOffering contain at least one element.
     // This could be a problem unless we reject any course adds that have no session entered.
+    // make sure the order is always: winter, summer, fall
     private List<YearlySession> sessionOffering; //make sure the order is always: winter, summer, fall
+
     private List<Course> prerequisites;
 
     public Course() {
@@ -37,37 +39,42 @@ public class Course {
         this.prerequisites = prerequisites;
     }
 
+    //  =========== getters ===========
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getCode() {
         return courseCode;
     }
 
-    public List<YearlySession> getSessionOffering() {
+   public List<YearlySession> getSessionOffering() {
         return sessionOffering;
+   }
+
+
+    public List<Course> getPrerequisites() {
+        return prerequisites;
     }
+
+    // ========= setters ==========
 
     public void setSessionOffering(List<YearlySession> sessionOffering) {
         this.sessionOffering = sessionOffering;
     }
 
-    public List<Course> getPrerequisites() {
-        return prerequisites;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 
     public void setPrerequisites(List<Course> prerequisites) {
         this.prerequisites = prerequisites;
     }
 
-    public void setCourseCode(String courseCode) {
-        this.courseCode = courseCode;
-    }
 
     public boolean equals(Object other) {
         if (!(other instanceof Course))

@@ -29,10 +29,11 @@ public class Home extends Fragment {
 
 //    EditText searchTextName;
 //    Button searchButton;
-//    Button gotoAddCourses;s
+//    Button gotoAddCourses;
 
     private FragmentHomeBinding binding;
    // DatabaseReference databaseCourses;
+
 
     @Override
     public View onCreateView(
