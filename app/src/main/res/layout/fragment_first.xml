@@ -41,6 +41,7 @@
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textColorHint="#757575"
+        android:drawableStart="@drawable/ic_baseline_search_24"
         app:layout_constraintBottom_toBottomOf="@+id/listViewCourses"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
