@@ -59,10 +59,16 @@ public class MainActivity extends AppCompatActivity {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
         navController = Objects.requireNonNull(navHostFragment).getNavController();
         navController.addOnDestinationChangedListener((firstArg, destination, thirdArg) -> {
+            View back_button = binding.toolbar.getChildAt(2);
             if(destination.getId() == R.id.LoginFragment) {
                 binding.toolbar.setVisibility(View.GONE);
-            } else {
+            }
+            else {
                 binding.toolbar.setVisibility(View.VISIBLE);
+                back_button.setVisibility(View.VISIBLE);
+            }
+            if(destination.getId() == R.id.FirstFragment || destination.getId() == R.id.adminPlaceholder) {
+                back_button.setVisibility(View.GONE);
             }
         });
 
@@ -86,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
         };
 
          Course.addListener(render);
-
     }
 
     @SuppressLint("RestrictedApi")
