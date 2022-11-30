@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+<!--    android:background="@color/gray20"-->
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -18,7 +19,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/design_default_color_primary_dark"
+            android:background="@color/gray20"
             app:popupTheme="@style/Theme.UTT.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>

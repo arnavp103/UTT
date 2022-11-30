@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/loginpage"
-    android:background="@color/teal_700"
     tools:context=".LoginFragment">
 
     <EditText
@@ -21,6 +20,8 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleLogin" />
+<!--    android:textColor="@color/antique"-->
+<!--    android:textColorHint="@color/antique"-->
 
     <EditText
         android:id="@+id/editTextTextPassword"

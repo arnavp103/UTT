@@ -31,13 +31,13 @@
         android:id="@+id/editTextName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_marginBottom="200dp"
         android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/Enter_course_code"
-        android:layout_centerInParent="true"
         android:ellipsize="start"
+        android:ems="10"
         android:gravity="center_horizontal"
+        android:hint="@string/Enter_course_code"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textColorHint="#757575"
@@ -48,21 +48,41 @@
 
     <Button
         android:id="@+id/buttonSearch"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_alignStart="@id/buttonAdd"
+        android:layout_alignEnd="@id/buttonAdd"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/Search"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEndGuideline"
+        app:layout_constraintStart_toStartOf="@+id/buttonStartGuideline"
         app:layout_constraintTop_toBottomOf="@+id/editTextName" />
 
     <Button
         android:id="@+id/buttonAdd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/Add_course"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEndGuideline"
+        app:layout_constraintStart_toStartOf="@+id/buttonStartGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSearch" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/buttonStartGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Add_course"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSearch" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="101dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/buttonEndGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="311dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
