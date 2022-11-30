@@ -24,4 +24,6 @@
     <string name="Back">Back</string>
     <string name="Text">Text</string>
     <string name="Textview">Textview</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
