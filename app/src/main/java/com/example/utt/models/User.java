@@ -14,7 +14,6 @@ public class User {
     @Exclude
     private String id;
 
-
     @Exclude
     private String password;
     private boolean isAdmin;

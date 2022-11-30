@@ -11,11 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.utt.databinding.FragmentRecyclerListBinding;
+import com.example.utt.models.Course;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 
-public class RecyclerListFragment extends Fragment {
+public class  RecyclerListFragment extends Fragment {
 
     private FragmentRecyclerListBinding binding;
 
@@ -24,47 +26,49 @@ public class RecyclerListFragment extends Fragment {
 
         // Here, we have created new array list and added data to it
         ArrayList<CourseModel> courseModelArrayList = new ArrayList<>();
-        ArrayList<String> sessionList = new ArrayList<>();
-        ArrayList<String> prereqsList = new ArrayList<>();
-        sessionList.add("Fall");
-        sessionList.add("Winter");
-        courseModelArrayList.add(new CourseModel("CSCA08",
-                "CSCA08 Name", sessionList));
-        sessionList = new ArrayList<>();
-        prereqsList = new ArrayList<>();
-        sessionList.add("Winter");
-        sessionList.add("Summer");
-        prereqsList.add("CSCA08");
-        courseModelArrayList.add(new CourseModel("CSCA48",
-                "Yummy Yummy Paco Tacos", sessionList, prereqsList));
-        sessionList = new ArrayList<>();
-        sessionList.add("Fall");
-        sessionList.add("Winter");
-        courseModelArrayList.add(new CourseModel("CSCA67", "Counting",
-                sessionList));
-        sessionList = new ArrayList<>();
-        prereqsList = new ArrayList<>();
-        sessionList.add("Fall");
-        sessionList.add("Summer");
-        prereqsList.add("CSCA48");
-        courseModelArrayList.add(new CourseModel("CSCB07", "orz",
-                sessionList, prereqsList));
-        sessionList = new ArrayList<>();
-        prereqsList = new ArrayList<>();
-        sessionList.add("Fall");
-        sessionList.add("Summer");
-        prereqsList.add("CSCA48");
-        prereqsList.add("CSCA67");
-        courseModelArrayList.add(new CourseModel("CSCB36", "BIG Result",
-                sessionList, prereqsList));
-        sessionList = new ArrayList<>();
-        prereqsList = new ArrayList<>();
-        sessionList.add("Winter");
-        sessionList.add("Summer");
-        prereqsList.add("CSCB36");
-        courseModelArrayList.add(new CourseModel("CSCB63", "Idk",
-                sessionList, prereqsList));
+//        ArrayList<String> sessionList = new ArrayList<>();
+//        ArrayList<String> prereqsList = new ArrayList<>();
+//        sessionList.add("Fall");
+//        sessionList.add("Winter");
+//        courseModelArrayList.add(new CourseModel("CSCA08",
+//                "CSCA08 Name", sessionList));
+//        sessionList = new ArrayList<>();
+//        prereqsList = new ArrayList<>();
+//        sessionList.add("Winter");
+//        sessionList.add("Summer");
+//        prereqsList.add("CSCA08");
+//        courseModelArrayList.add(new CourseModel("CSCA48",
+//                "Yummy Yummy Paco Tacos", sessionList, prereqsList));
+//        sessionList = new ArrayList<>();
+//        sessionList.add("Fall");
+//        sessionList.add("Winter");
+//        courseModelArrayList.add(new CourseModel("CSCA67", "Counting",
+//                sessionList));
+//        sessionList = new ArrayList<>();
+//        prereqsList = new ArrayList<>();
+//        sessionList.add("Fall");
+//        sessionList.add("Summer");
+//        prereqsList.add("CSCA48");
+//        courseModelArrayList.add(new CourseModel("CSCB07", "orz",
+//                sessionList, prereqsList));
+//        sessionList = new ArrayList<>();
+//        prereqsList = new ArrayList<>();
+//        sessionList.add("Fall");
+//        sessionList.add("Summer");
+//        prereqsList.add("CSCA48");
+//        prereqsList.add("CSCA67");
+//        courseModelArrayList.add(new CourseModel("CSCB36", "BIG Result",
+//                sessionList, prereqsList));
+//        sessionList = new ArrayList<>();
+//        prereqsList = new ArrayList<>();
+//        sessionList.add("Winter");
+//        sessionList.add("Summer");
+//        prereqsList.add("CSCB36");
+//        courseModelArrayList.add(new CourseModel("CSCB63", "Idk",
+//                sessionList, prereqsList));
+        Map<String, Course> courses = Course.getCourses();
 
+        for (Course course : courses.values()) courseModelArrayList.add(new CourseModel(course));
 
 
         // we are initializing our adapter class and passing our arraylist to it.
