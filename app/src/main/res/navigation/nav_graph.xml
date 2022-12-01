@@ -37,5 +37,19 @@
         android:id="@+id/firstFragment"
         android:name="com.example.utt.FirstFragment"
         android:label="fragment_first"
-        tools:layout="@layout/fragment_first" />
+        tools:layout="@layout/fragment_first">
+        <action
+            android:id="@+id/action_firstFragment_to_secondFragment"
+            app:destination="@id/secondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/secondFragment"
+        android:name="com.example.utt.SecondFragment"
+        android:label="fragment_second"
+        tools:layout="@layout/fragment_second" />
+    <fragment
+        android:id="@+id/timeline"
+        android:name="com.example.utt.Timeline"
+        android:label="fragment_timeline"
+        tools:layout="@layout/fragment_timeline" />
 </navigation>

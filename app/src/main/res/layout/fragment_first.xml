@@ -4,32 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/screenBack"
     android:padding="16dp"
     tools:context=".FirstFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout1"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
         android:theme="@style/Theme.UTT.AppBarOverlay"
-        app:layout_constraintBottom_toTopOf="@+id/listViewCourses"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editCourseName"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintTop_toBottomOf="@+id/editCourseName" />
 
     <!--Admin can add course code-->
-    <ListView
-        android:id="@+id/listViewCourses"
-        style="@style/Widget.AppCompat.ListView.DropDown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="378dp"
+        android:layout_height="436dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
-        app:layout_constraintStart_toStartOf="@+id/appBarLayout1" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editCoursePrerequisites">
+
+        <ListView
+            android:id="@+id/listViewCourses"
+            style="@style/Base.CardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            android:layout_weight="0.5"
+            android:background="@color/listviewBackground"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll"
+            android:focusableInTouchMode="false"
+            android:isScrollContainer="false"
+            app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </LinearLayout>
 
     <EditText
         android:id="@+id/editCourseCode"

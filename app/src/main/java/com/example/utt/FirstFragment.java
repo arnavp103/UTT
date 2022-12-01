@@ -3,13 +3,10 @@ package com.example.utt;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -137,14 +134,16 @@ public class FirstFragment extends Fragment {
             }
         });
 
+        // Retrieve data from database
         CourseEventListener listener = new CourseEventListener() {
             @Override
             public void onCourseAdded(Course course) {
                 courseList.clear();
 
                 for (Course courseObject : Course.getCourses().values()) {
-                    courseList.add(courseObject);
+                    courseList.add(0, courseObject);
                 }
+                listViewCourses.setStackFromBottom(true);
                 CourseList adapter = new CourseList(getActivity(), courseList);
                 listViewCourses.setAdapter(adapter);
             }
@@ -161,26 +160,6 @@ public class FirstFragment extends Fragment {
         };
 
         Course.addListener(listener);
-//
-//        databaseCourseCode.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                courseList.clear();
-//                for(DataSnapshot courseSnapshot: dataSnapshot.getChildren()){
-//                    CourseDataModel course = courseSnapshot.getValue(CourseDataModel.class);
-//                    course.setKey(dataSnapshot.getKey());
-//                    Log.d("Database", "Received: " + dataSnapshot.toString());
-//                    courseList.add(course.getCourseObject());
-//                }
-//                CourseList adapter = new CourseList(getActivity(), courseList);
-//                listViewCourses.setAdapter(adapter);
-//            }
-//            // Executed if there is some error
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Log.d("Database", "FailureHIII: " + error.toString());
-//            }
-//        });
 
         buttonAdd = (Button)getView().findViewById(R.id.buttonAdd);
 
@@ -221,7 +200,6 @@ public class FirstFragment extends Fragment {
 //            }
 //        });
 //    }
-
 
     public void addCourseCode() {
         String code = editTextName.getText().toString().trim();

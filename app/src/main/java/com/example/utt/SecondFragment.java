@@ -27,7 +27,7 @@ public class SecondFragment extends Fragment {
     private FragmentSecondBinding binding;
     DatabaseReference databaseCourseName;
     ListView listCourseName;
-    List<CourseTest> courseList;
+    List<Course> courseList;
     EditText editCourseName;
 
     @Override
@@ -70,7 +70,7 @@ public class SecondFragment extends Fragment {
         if(!TextUtils.isEmpty(code)){
             // String courseID = databaseCourseName.push().getKey();
             String courseName = databaseCourseName.push().getKey();
-            CourseTest course = new CourseTest(name, code, season, prerequisites);
+            Course course = new Course(name, code, season, prerequisites);
             // databaseCourseName.child(courseID).setValue(course);
             databaseCourseName.child(courseName).setValue(course);
 
