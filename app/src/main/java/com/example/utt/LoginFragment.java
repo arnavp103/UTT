@@ -1,6 +1,5 @@
 package com.example.utt;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +8,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,19 +17,18 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.FragmentLoginPageBinding;
-import com.example.utt.models.Course;
-import com.example.utt.models.CourseEventListener;
 import com.example.utt.models.Listener;
 import com.example.utt.models.Student;
 import com.example.utt.models.User;
-import com.example.utt.SharedMethods;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
+import com.example.utt.CookieLogin;
 
 import java.util.List;
 
 public class LoginFragment extends Fragment {
     private FragmentLoginPageBinding binding;
+    // username and password edit
     private EditText uEdit;
     private EditText pEdit;
     private Context context;
@@ -40,16 +36,24 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+            Bundle savedInstanceState) {
         context = this.getContext();
         binding = FragmentLoginPageBinding.inflate(inflater, container, false);
-        return binding.getRoot();
 
+        if(CookieLogin.getUserName(context).length() == 0) {
+            ;   // if they don't have anything saved to shared pref continue as normal
+        } else {
+
+            NavHostFragment.findNavController(LoginFragment.this)
+                    .navigate(R.id.action_loginFragment_to_FirstFragment);
+        }
+        return binding.getRoot();
     }
 
+    /// The method to check if the user's credentials are valid
     public void checkUserStatus(User user, View view) {
-//        Toast.makeText(getActivity(), "Logged in as " + user.getEmail(), Toast.LENGTH_SHORT).show();
+        // Toast.makeText(getActivity(), "Logged in as " + user.getEmail(),
+        // Toast.LENGTH_SHORT).show();
         Snackbar.make(view, "Logged in as " + user.getEmail(), BaseTransientBottomBar.LENGTH_SHORT).show();
         if (user.isStudent()) {
             DatabaseHandler.getStudentData(user.getId(), new Listener<String>() {
@@ -60,31 +64,29 @@ public class LoginFragment extends Fragment {
                     s.setId(user.getId());
 
                     Student.login(s, objectModel);
-//                        s.addCourse(List.of("MATA41",  "CSCB36",  "CSCA08", "BBBC"));
-//                        DatabaseHandler.updateStudentData(s);
-
+                    // s.addCourse(List.of("MATA41", "CSCB36", "CSCA08", "BBBC"));
+                    // DatabaseHandler.updateStudentData(s);
                     NavHostFragment.findNavController(LoginFragment.this)
                             .navigate(R.id.action_loginFragment_to_FirstFragment);
                 }
 
                 @Override
-                public void onFailure(String data) {}
+                public void onFailure(String data) {
+                }
 
                 @Override
-                public void onComplete(String data) {}
+                public void onComplete(String data) {
+                }
             });
-
-
 
         } else if (user.getIsAdmin()) {
             // Notify other fragments that user is Admin
-
             NavHostFragment.findNavController(LoginFragment.this)
                     .navigate(R.id.action_LoginFragment_to_adminPlaceholder);
         }
     }
 
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         uEdit = (EditText) view.findViewById(R.id.editTextUsername);
@@ -94,20 +96,19 @@ public class LoginFragment extends Fragment {
         pEdit.setFocusableInTouchMode(true);
         pEdit.requestFocus();
 
-
         pEdit.setOnKeyListener((v, keyCode, event) -> {
             if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                     (keyCode == KeyEvent.KEYCODE_ENTER)) {
                 // Perform action on key press
                 this.submit(v);
                 SharedMethods.collapseKeyboard(context);
-//                return true;
+                // return true;
             }
             return false;
         });
 
         // Validate Login Credentials
-//        binding.buttonLogin.setOnClickListener(this::submit);
+        // binding.buttonLogin.setOnClickListener(this::submit);
 
         binding.buttonLogin.setOnClickListener(view2 -> {
             this.submit(view2);
@@ -128,23 +129,27 @@ public class LoginFragment extends Fragment {
             @Override
             public void onSuccess(String data, List<User> user) {
                 assert user != null;
+                // Write their data to their local storage
                 checkUserStatus(user.get(0), view);
+                CookieLogin.setUserName(getContext(), user.get(0).getId());
             }
 
             @Override
             public void onFailure(String data) {
-//                    Toast.makeText(getActivity(), "Authentication Failed!", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getActivity(), "Authentication Failed!",
+                // Toast.LENGTH_SHORT).show();
                 Snackbar.make(view, "Authentication Failed!", BaseTransientBottomBar.LENGTH_SHORT).show();
-                Log.d("AUTH FAIL", "-"+data);
+                Log.d("AUTH FAIL", "-" + data);
 
             }
 
             @Override
-            public void onComplete(String data) {}
+            public void onComplete(String data) {
+            }
         };
+
         DatabaseHandler.getUser(username, password, authCallback);
     }
-
 
     @Override
     public void onDestroyView() {

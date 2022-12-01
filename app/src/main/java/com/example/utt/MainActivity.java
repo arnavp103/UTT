@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        Integer fragId = fragmentInstance.getId();
-//        Log.d("Current Frag", fragId.toString());
+        // Integer fragId = fragmentInstance.getId();
+        // Log.d("Current Frag", fragId.toString());
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
