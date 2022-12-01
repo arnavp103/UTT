@@ -3,10 +3,13 @@ package com.example.utt;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -32,9 +35,9 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class FirstFragment extends Fragment {
-
     EditText editTextName;
     EditText editCourseName;
     Button buttonAdd;
@@ -42,7 +45,7 @@ public class FirstFragment extends Fragment {
     private FragmentFirstBinding binding;
     DatabaseReference databaseCourseCode;
     ListView listViewCourses;
-    List<Course> courseList;
+    List<Course> courseList = new ArrayList<>();
     TextView sessionOffering;
     boolean[] selectedSession;
     ArrayList<Integer> sessionList = new ArrayList<>();
@@ -61,7 +64,8 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        databaseCourseCode = FirebaseDatabase.getInstance("https://b07-final-db5c5-default-rtdb.firebaseio.com").getReference("Course");
+        databaseCourseCode = FirebaseDatabase.getInstance("https://b07-final-db5c5-default-rtdb.firebaseio.com")
+                .getReference("Course");
         editTextName = (EditText)getView().findViewById(R.id.editCourseCode);
         editCourseName = (EditText)getView().findViewById(R.id.editCourseName);
 
@@ -69,63 +73,84 @@ public class FirstFragment extends Fragment {
         sessionOffering = getView().findViewById(R.id.sessionoffering);
         //Initialize selected session array
         selectedSession = new boolean[sessionArray.length];
+        listViewCourses = (ListView)getView().findViewById(R.id.listViewCourses);
+
         sessionOffering.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view){
+            // Create new alert dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Select session offering(s)");
+            builder.setCancelable(false);
+            builder.setMultiChoiceItems(sessionArray, selectedSession, new DialogInterface.OnMultiChoiceClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                    if (b){
+                        // Check if checkbox is selected
+                        sessionList.add(i);
+                        Collections.sort(sessionList);
+                    }
+                    else{
+                        // If checkbox is unselected, remove position from sessionList
+                        sessionList.remove(i);
+                    }
+                }
+            });
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    StringBuilder sessionOutput = new StringBuilder();
+                    for(int j = 0; j < sessionList.size(); j++) {
+                        sessionOutput.append(sessionArray[sessionList.get(j)]);
+                        // When j value is not equal to the sessionList size-1, add comma
+                        if (j != sessionList.size() - 1) {
+                            sessionOutput.append(", ");
+                        }
+                    }
+                    sessionOffering.setText(sessionOutput.toString());
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    // Dismiss dialog
+                    dialogInterface.dismiss();
+                }
+            });
+            builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    for(int j = 0; j < selectedSession.length; j++){
+                        // Remove all selections
+                        selectedSession[j] = false;
+                        // Clear session list
+                        sessionList.clear();
+                        // Clear text view value
+                        sessionOffering.setText("");
+                    }
+                }
+            });
+            // Show dialog
+            builder.show();
+        }
+    });
+
+        databaseCourseCode.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view){
-                // Create new alert dialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Select session offering(s)");
-                builder.setCancelable(false);
-                builder.setMultiChoiceItems(sessionArray, selectedSession, new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i, boolean b) {
-                        if (b){
-                            // Check if checkbox is selected
-                            sessionList.add(i);
-                            Collections.sort(sessionList);
-                        }
-                        else{
-                            // If checkbox is unselected, remove position from sessionList
-                            sessionList.remove(i);
-                        }
-                    }
-                });
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        StringBuilder sessionOutput = new StringBuilder();
-                        for(int j = 0; j < sessionList.size(); j++) {
-                            sessionOutput.append(sessionArray[sessionList.get(j)]);
-                            // When j value is not equal to the sessionList size-1, add comma
-                            if (j != sessionList.size() - 1) {
-                                sessionOutput.append(", ");
-                            }
-                        }
-                        sessionOffering.setText(sessionOutput.toString());
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // Dismiss dialog
-                        dialogInterface.dismiss();
-                    }
-                });
-                builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        for(int j = 0; j < selectedSession.length; j++){
-                            // Remove all selections
-                            selectedSession[j] = false;
-                            // Clear session list
-                            sessionList.clear();
-                            // Clear text view value
-                            sessionOffering.setText("");
-                        }
-                    }
-                });
-                // Show dialog
-                builder.show();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                courseList.clear();
+                for(DataSnapshot courseSnapshot: dataSnapshot.getChildren()){
+                    Course course = courseSnapshot.getValue(Course.class);
+                    Log.d("Database", "Received: " + dataSnapshot.toString());
+                    courseList.add(course);
+                }
+                CourseList adapter = new CourseList(getActivity(), courseList);
+                listViewCourses.setAdapter(adapter);
+            }
+            // Executed if there is some error
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("Database", "FailureHIII: " + error.toString());
             }
         });
 
@@ -144,9 +169,31 @@ public class FirstFragment extends Fragment {
                 addCourseCode();
             }
         });
-        listViewCourses = (ListView)getView().findViewById(R.id.listViewCourses);
-        courseList = new ArrayList<>();
+        //courseList = new ArrayList<>();
     }
+
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        databaseCourseCode.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                courseList.clear();
+//                for(DataSnapshot courseSnapshot: dataSnapshot.getChildren()){
+//                    Course course = courseSnapshot.getValue(Course.class);
+//                    courseList.add(course);
+//                }
+//                CourseList adapter = new CourseList(getActivity(), courseList);
+//                listViewCourses.setAdapter(adapter);
+//            }
+//            // Executed if there is some error
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
+
 
     public void addCourseCode() {
         String code = editTextName.getText().toString().trim();
@@ -169,24 +216,21 @@ public class FirstFragment extends Fragment {
         List<Course> prerequisites = null;
         // Check if search bar is empty
         if(!TextUtils.isEmpty(code) && !TextUtils.isEmpty(name)){
-            String courseID = databaseCourseCode.push().getKey();
+            // String courseID = databaseCourseCode.push().getKey();
             Course course = new Course(name, code, season, prerequisites);
             Boolean exist = false;
             // Check if there are duplicates of a course created
             for(int i = 0; i < courseList.size(); i++){
+                Toast.makeText(getActivity(), course.getCode(),Toast.LENGTH_LONG).show();
                 if(course.equals(courseList.get(i))){
-                    Toast.makeText(getActivity(), "Course already created", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Course already created",Toast.LENGTH_LONG).show();
                     exist = true;
                     break;
                 }
             }
             if(exist == false) {
+                // Add the course to the database
                 DatabaseHandler.addCourse(course);
-//                databaseCourseCode.child(courseID).setValue(course);
-//                for(YearlySession session : season){
-//                    databaseCourseCode.child(courseID).child(session.toString()).setValue(true);
-//                }
-                // Output this message if course was successfully added to the database
                 Toast.makeText(getActivity(), "Course added", Toast.LENGTH_LONG).show();
             }
         }
@@ -194,30 +238,6 @@ public class FirstFragment extends Fragment {
         else{
             Toast.makeText(getActivity(), "Enter course information", Toast.LENGTH_LONG).show();
         }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        databaseCourseCode.addValueEventListener(new ValueEventListener() {
-            @Override
-            // Executed every time we change something in the database
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                courseList.clear();
-                for(DataSnapshot courseSnapshot: snapshot.getChildren()){
-                    Course course = courseSnapshot.getValue(Course.class);
-                    courseList.add(course);
-                }
-
-                CourseList adapter = new CourseList(getActivity(), courseList);
-                listViewCourses.setAdapter(adapter);
-            }
-            // Executed if there is some error
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
     @Override

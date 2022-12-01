@@ -20,9 +20,9 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.utt.SecondFragment"
+        android:name="com.example.utt.Home"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_home">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"

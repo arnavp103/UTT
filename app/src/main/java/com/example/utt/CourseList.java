@@ -31,11 +31,20 @@ public class CourseList extends ArrayAdapter<Course> {
         LayoutInflater inflater = context.getLayoutInflater();
 
         View listViewItem = inflater.inflate(R.layout.list_layout, null, true);
-        TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewCode);
-        TextView textViewSeason = (TextView) listViewItem.findViewById(R.id.textViewName);
+        TextView textViewCode = (TextView) listViewItem.findViewById(R.id.textViewCode);
+        TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewName);
+        TextView textViewSeason = (TextView) listViewItem.findViewById(R.id.textViewSeason);
         Course course = courseList.get(position);
-        textViewName.setText(course.getCode());
-        textViewSeason.setText(course.getName());
+        textViewCode.setText(course.getCode());
+        textViewName.setText(course.getName());
+        String sessionOutput = "";
+        for(int i = 0; i < course.getSessionOffering().size(); i++){
+            sessionOutput.concat(course.getSessionOffering().get(i).toString());
+            if((i+1) != course.getSessionOffering().size()){
+                sessionOutput.concat(", ");
+            }
+        }
+        textViewSeason.setText(sessionOutput);
 
         return listViewItem;
     }
