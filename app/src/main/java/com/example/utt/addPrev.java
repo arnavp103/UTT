@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,16 +46,13 @@ public class addPrev extends Fragment {
 
     //these fields are to store the code, session, and year of the course previously taken
     private String addCourse;
-//    private String addSession;
-//    private String addYear;
+    private ImageButton info;
 
 
     private Button addButton, home, save;
     private ListView courseView;
 
-//    private RadioButton fall;
-//    private RadioButton winter;
-//    private RadioButton summer;
+
     private String student_id;
 
 
@@ -90,13 +88,13 @@ public class addPrev extends Fragment {
 
         //arraylist that stores past student courses
         pastList = new ArrayList<>();
-        //pastList.add("CSCA48");
 
 
         //initialize buttons and search, lists
         addButton = (Button)v.findViewById(R.id.addFutureCourse);
         home = (Button)v.findViewById(R.id.home_button);
         save = (Button) v.findViewById(R.id.save_button);
+        info = v.findViewById(R.id.infoButton);
 
         //initialize our strings
         addCourse = "";
@@ -136,7 +134,14 @@ public class addPrev extends Fragment {
 
             }
         });
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(@NonNull View view) {
 
+                Toast.makeText(getContext(), "Click on the item to remove it!", Toast.LENGTH_LONG).show();
+
+            }
+        });
 
 
         //remove item function
@@ -322,6 +327,7 @@ public class addPrev extends Fragment {
                     System.out.println(student_id);
 
 
+
                     //if (id.equals(student_id)) {
                     for (DataSnapshot past: courseSnapshot.getChildren()){
                         pastList.add((String) past.getValue());
@@ -333,7 +339,7 @@ public class addPrev extends Fragment {
 //                        pastList = (ArrayList<String>) snapshot.getValue();
 //text view for headers
 //                    }
-
+Student.getReference.getId();
                 }
                 //System.out.println(pastList);
 

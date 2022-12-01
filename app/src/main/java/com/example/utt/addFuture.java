@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,7 +44,7 @@ public class addFuture extends Fragment {
     private ArrayList<String> futureList;
     private Dialog dialog;
     private String addCourse;
-
+    private ImageButton info;
     private Button addButton, home;
     private ListView courseView;
 
@@ -83,7 +84,7 @@ public class addFuture extends Fragment {
         //initialize buttons and search, lists
         addButton =(Button) v.findViewById(R.id.addFutureCourse);
         home = (Button)v.findViewById(R.id.home_button);
-        //gen_time = findViewById(R.id.generate_btn);
+        info = v.findViewById(R.id.infoButton);
 
         addCourse = "";
 
@@ -102,6 +103,15 @@ public class addFuture extends Fragment {
                 NavHostFragment.findNavController(addFuture.this)
                         .navigate(R.id.action_addFuture_to_Home);//add action fragment from future courses to home
 
+
+            }
+        });
+
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(@NonNull View view) {
+
+                Toast.makeText(getContext(), "Click on the item to remove it!", Toast.LENGTH_LONG).show();
 
             }
         });
@@ -215,7 +225,7 @@ public class addFuture extends Fragment {
 
                 if (addCourse.equals("")) {
                     Toast.makeText(getContext(), "Select a valid course!", Toast.LENGTH_LONG).show();
-                } else if (!(addCourse.isEmpty()) && futureList.contains(addCourse) == false) {
+                } else if (!(addCourse.isEmpty()) && !(futureList.contains(addCourse))) {
                     futureList.add(addCourse);
                     //viewAdapter.notifyDataSetChanged();
                     //Log.i("RM", futureList.get(futureList.size()));
