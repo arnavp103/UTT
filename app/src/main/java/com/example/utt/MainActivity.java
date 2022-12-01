@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 binding.toolbar.setVisibility(View.VISIBLE);
                 back_button.setVisibility(View.VISIBLE);
             }
-            if(destination.getId() == R.id.Home || destination.getId() == R.id.adminPlaceholder) {
+            if(destination.getId() == R.id.Home || destination.getId() == R.id.firstFragment) {
                 back_button.setVisibility(View.GONE);
             }
         });

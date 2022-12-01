@@ -17,7 +17,6 @@ import com.example.utt.algorithm.model.YearlySession;
 import com.example.utt.databinding.FragmentSecondBinding;
 import com.example.utt.models.Course;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;

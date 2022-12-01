@@ -82,7 +82,7 @@ public class LoginFragment extends Fragment {
         } else if (user.getIsAdmin()) {
             // Notify other fragments that user is Admin
             NavHostFragment.findNavController(LoginFragment.this)
-                    .navigate(R.id.action_LoginFragment_to_adminPlaceholder);
+                    .navigate(R.id.action_loginFragment_to_FirstFragment);
         }
     }
 
