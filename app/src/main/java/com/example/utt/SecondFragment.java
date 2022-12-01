@@ -17,7 +17,6 @@ import com.example.utt.algorithm.model.YearlySession;
 import com.example.utt.databinding.FragmentSecondBinding;
 import com.example.utt.models.Course;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +44,7 @@ public class SecondFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         binding.buttonBack.setOnClickListener(view1 -> NavHostFragment.findNavController(SecondFragment.this)
-                .navigate(R.id.action_SecondFragment_to_FirstFragment));
+                .navigate(R.id.action_SecondFragment_to_Home));
         binding.buttonAddName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { addCourseName(); }

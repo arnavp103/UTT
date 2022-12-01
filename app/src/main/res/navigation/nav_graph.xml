@@ -35,7 +35,7 @@
         tools:layout="@layout/fragment_second">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            android:id="@+id/action_SecondFragment_to_Home"
             app:destination="@id/Home" />
     </fragment>
     <fragment
@@ -72,17 +72,8 @@
             android:id="@+id/action_loginFragment_to_FirstFragment"
             app:destination="@id/Home" />
         <action
-            android:id="@+id/action_LoginFragment_to_adminPlaceholder"
-            app:destination="@id/adminPlaceholder" />
-    </fragment>
-    <fragment
-        android:id="@+id/adminPlaceholder"
-        android:name="com.example.utt.AdminPlaceholder"
-        android:label="fragment_admin_placeholder"
-        tools:layout="@layout/fragment_admin_placeholder">
-        <action
-            android:id="@+id/action_adminPlaceholder_to_LoginFragment"
-            app:destination="@id/LoginFragment" />
+            android:id="@+id/action_LoginFragment_to_firstFragment"
+            app:destination="@id/firstFragment" />
     </fragment>
     <action
         android:id="@+id/action_global_LoginFragment"
@@ -99,6 +90,15 @@
         tools:layout="@layout/fragment_startup_transition">
         <action
             android:id="@+id/action_startupTransitionFragment_to_LoginFragment"
+            app:destination="@id/LoginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/firstFragment"
+        android:name="com.example.utt.FirstFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/fragment_first" >
+        <action
+            android:id="@+id/action_firstFragment_to_LoginFragment"
             app:destination="@id/LoginFragment" />
     </fragment>
 </navigation>
