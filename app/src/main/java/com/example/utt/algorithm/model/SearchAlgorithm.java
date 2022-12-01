@@ -41,7 +41,6 @@ public class SearchAlgorithm {
         }
     }
     //now we should have both arrays for the courses we have taken, and the initial prerequisite courses
-
     public ArrayList<CourseScheduling> search(Term currentTerm, int currentYear) {
         ArrayList<Course> satisfiedPrerequisites = new ArrayList<Course>();
         ArrayList<CourseScheduling> order = new ArrayList<CourseScheduling>();
@@ -54,25 +53,24 @@ public class SearchAlgorithm {
             Course C_course = new Course(course.getName(), course.getCode(), course.getSessionOffering(), course.getPrerequisites());
             satisfiedPrerequisites.add(C_course); //satisfiedPrerequisites are not initialized with the courses that student has already taken
         }
-    int a = 0;
         for (Course course : beginningNodes) {
             // for all the courses that have no prerequisites that you have not taken yet, find the soonest time to take them
             int yearToTake = currentYear;
-            int termToTake = currentTerm.term;
+            Term termToTake = currentTerm;
             for (YearlySession term : course.getSessionOffering()) {
-                if (term.term.term > termToTake) { //find the next most term offered this year
-                    termToTake = term.term.term;
+                if (term.term.term > termToTake.term) { //find the next most term offered this year
+                    termToTake = term.term;
                     break;
                 }
             }
-            if (termToTake == currentTerm.term) {
+            if (termToTake.term == currentTerm.term) {
                 yearToTake++;
-                termToTake = course.getSessionOffering().get(0).term.term; //else take the first term this course is offered next year
+                termToTake = course.getSessionOffering().get(0).term; //else take the first term this course is offered next year
             }
             int c = 0;
             CourseScheduling addCourse = new CourseScheduling(course.getName(), course.getCode(),
                                                                 course.getSessionOffering(), course.getPrerequisites());
-            addCourse.sessionBeingTaken.term.term = termToTake;
+            addCourse.sessionBeingTaken.term = termToTake;
             addCourse.sessionBeingTaken.year = yearToTake;
 
             int d = 0;
@@ -130,8 +128,9 @@ public class SearchAlgorithm {
                         break;
                     }
                 }
-                if (termToTake == term) {
-                    yearToTake ++;
+
+                if ((termToTake.term <= term.term) || ((termToTake.term < currentTerm.term) && (yearToTake == currentYear))) {
+                    yearToTake++;
                     termToTake = course.getSessionOffering().get(0).term;
                 }
                 CourseScheduling scheduledCourse = new CourseScheduling(course.getName(), course.getCode(), course.getSessionOffering(), course.getPrerequisites());
@@ -139,9 +138,12 @@ public class SearchAlgorithm {
                 scheduledCourse.sessionBeingTaken.year = yearToTake;
 
                 order.add(scheduledCourse);
+                coursesTaken.add(scheduledCourse);
                 needToTake.remove(course);
                 satisfiedPrerequisites.add(course);
+
             }
+            canTake.clear();
 
         }
         return order;
