@@ -24,7 +24,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.utt.databinding.FragmentAddFutureBinding;
+import com.example.utt.models.Course;
 import com.example.utt.models.Student;
+import com.example.utt.models.firebase.datamodel.ExcludedCourseDataModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -289,7 +291,7 @@ public class addPrev extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 for(DataSnapshot courseSnapshot: snapshot.getChildren()){
-                    String course = (courseSnapshot.getValue(Course.class)).code + " ";
+                    String course = (courseSnapshot.getValue(ExcludedCourseDataModel.class)).getCode() + " ";
                     allCourses.add(course);
                     //Log.i("RM", course);
 

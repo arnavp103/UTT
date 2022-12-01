@@ -20,11 +20,8 @@
 
     <!-- compilation error fix below -->
     <string name="Enter_course_code">Enter Course Code</string>
-    <string name="Search">Search</string>
-    <string name="Add_course">Add Course</string>
     <string name="Back">Back</string>
     <string name="Text">Text</string>
     <string name="Textview">Textview</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

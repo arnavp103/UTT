@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.utt.Home;
 import com.example.utt.models.Course;
+import com.example.utt.models.firebase.datamodel.ExcludedCourseDataModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -53,7 +54,7 @@ public class addFuture extends Fragment {
     private Button addButton, home;
     private ListView courseView;
 
-    private FirebaseFirestore courseCode = FirebaseFirestore.getInstance();
+//    private FirebaseFirestore courseCode = FirebaseFirestore.getInstance();
 
     private ArrayAdapter<String> viewAdapter;
 
@@ -256,7 +257,7 @@ public class addFuture extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 for(DataSnapshot courseSnapshot: snapshot.getChildren()){
-                    String course = (courseSnapshot.getValue(Course.class)).code + " ";
+                    String course = (courseSnapshot.getValue(ExcludedCourseDataModel.class)).getCode() + " ";
                     courseList.add(course);
                     Log.i("RM", course);
 
