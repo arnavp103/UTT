@@ -64,7 +64,7 @@ public class SignUpPage extends AppCompatActivity {
                     Toast.makeText(SignUpPage.this, "Passwords are not matching", Toast.LENGTH_SHORT).show();
                 } else {
                     databaseReference.orderByChild("email").
-                        equalTo(emailText).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                            equalTo(emailText).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                                 @Override
                                 public void onSuccess(DataSnapshot dataSnapshot) {
                                     Log.d("VLL", String.valueOf(dataSnapshot.exists()));
@@ -97,10 +97,10 @@ public class SignUpPage extends AppCompatActivity {
             }
         });
 
-//        backButton.setOnClickListener(view -> {
-//            public void onClick(View v) {
-//                Navigation.findNavController(this, R.id.nav_host_fragment_content_main).navigate(R.id.action_global_LoginFragment);
-//            }
-//        });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                finish();
+            }
+        });
     }
 }
