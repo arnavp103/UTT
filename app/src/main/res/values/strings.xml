@@ -3,10 +3,12 @@
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">Home</string>
+    <string name="home_label">Home</string>
     <string name="second_fragment_label">Second Fragment</string>
+    <string name="addFuture_label">Add Future Courses</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
+    <string name="addPrev_label">View My Courses</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="logout">Logout</string>
@@ -22,6 +24,56 @@
     <string name="Search">Search</string>
     <string name="Add_course">Add Course</string>
     <string name="Back">Back</string>
+    <string name="Search">search</string>
+    <string name="Add_course">add_course_student</string>
+    <string name="Text">text_student</string>
+    <string name="Textview">textview_student</string>
+    <string name="enter_course_code">course_code</string>
+    <string name="generate_timeline">Generate Timeline</string>
+    <string name="search">Search</string>
+    <string name="select_course">Select Course </string>
+    <string name="enter_course_code_home">Enter Course Code</string>
+    <string name="deleteFuturebtn">Delete</string>
+    <string name="select_course_future">Select Course</string>
+    <string name="add_course_future">Add Course</string>
+    <string name="home_futuretohome">Home</string>
+    <string name="generate_future">GENERATE</string>
+    <string name="homefuturetohome">Home</string>
+    <string name="Home">Home</string>
+    <string name="select_future_course">Select Course</string>
+    <string name="generate">Generate</string>
+    <string name="view_my_courses">View My Courses</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="winter">Winter</string>
+    <string name="summer">Summer</string>
+    <string name="fall">Fall</string>
+    <string name="enter_year">Enter Year</string>
+    <string name="save_btn">Save</string>
+    <string name="welcome_to_utt">Welcome to UTT</string>
+
+
+    <array name="courses_array">
+        <item></item>
+        <item>Fall</item>
+        <item>Winter</item>
+        <item>Summer</item>
+    </array>
+
+    <array name="year_array">
+        <item></item>
+        <item>2015</item>
+        <item>2016</item>
+        <item>2017</item>
+        <item>2018</item>
+        <item>2019</item>
+        <item>2020</item>
+        <item>2021</item>
+        <item>2022</item>
+
+    </array>
+
+
     <string name="Text">Text</string>
     <string name="Textview">Textview</string>
     <!-- TODO: Remove or change this placeholder text -->

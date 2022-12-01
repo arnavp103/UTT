@@ -7,16 +7,15 @@
     android:layout_height="match_parent"
 
     android:padding="16dp"
-    tools:context=".AddFutureCourses">
+    tools:context=".addFuture">
 
     <TextView
         android:id="@+id/text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-
         android:layout_marginTop="80dp"
-        android:hint="@string/select_course_future"
+        android:hint="@string/select_future_course"
         android:padding="12dp"
         android:textColorHint="#757575"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,32 +24,52 @@
 
     <Button
         android:id="@+id/addFutureCourse"
+        app:drawableEndCompat="@drawable/ic_add_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="128dp"
+        android:layout_marginStart="108dp"
         android:layout_marginTop="152dp"
+        android:layout_marginEnd="108dp"
         android:text="@string/add_course_future"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/courseView"
-        android:layout_width="386dp"
-        android:layout_height="308dp"
-        android:layout_marginTop="25dp"
+        android:layout_width="353dp"
+        android:layout_height="283dp"
+        android:layout_marginTop="16dp"
+        android:background="#2D3F51B5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.519"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addFutureCourse" />
 
     <Button
         android:id="@+id/home_button"
+        app:drawableEndCompat="@drawable/ic_home_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="289dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="33dp"
-        android:text="@string/homefuturetohome"
+        android:text="@string/Home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/courseView" />
+
+    <Button
+        android:id="@+id/generate_timeline"
+        app:drawableEndCompat="@drawable/ic_generate_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="108dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginBottom="100dp"
+        android:text="@string/generate"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

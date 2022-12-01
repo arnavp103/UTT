@@ -1,16 +1,8 @@
 package com.example.utt;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -25,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,16 +29,23 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
-import java.sql.Array;
+import com.example.utt.databinding.FragmentAddFutureBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 
-
-
-public class AddFutureCourses extends AppCompatActivity {
-
+public class addFuture extends Fragment {
 
     private TextView textView;
     private ArrayList<String> courseList;
@@ -60,41 +58,57 @@ public class AddFutureCourses extends AppCompatActivity {
 
     private FirebaseFirestore courseCode = FirebaseFirestore.getInstance();
 
+
+
+    private DatabaseReference courseCode;
+    private FragmentAddFutureBinding binding;
+
     private ArrayAdapter<String> viewAdapter;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_future_courses);
 
-        //arraylist that stores the course codes
-        textView = findViewById(R.id.text_view);
+    public addFuture() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState
+    ) {
+
+        View v = inflater.inflate(R.layout.fragment_add_future, container, false);
+
+        textView = (TextView)v.findViewById(R.id.text_view);
         courseList = new ArrayList<>();
 
         //setting up database retrieval for courses
-        courseCode = FirebaseFirestore.getInstance();
+        courseCode = FirebaseDatabase.getInstance("https://utsc-b07-projcourses-default-rtdb.firebaseio.com/").getReference("courses");
 
         //arraylist that stores future student courses
         futureList = new ArrayList<>();
 
         //initialize buttons and search, lists
-        courseView =  findViewById(R.id.courseView); //this is the layout that displays selected courses
-        addButton = findViewById(R.id.addFutureCourse);
-        home = findViewById(R.id.home_button);
+        addButton =(Button) v.findViewById(R.id.addFutureCourse);
+        home = (Button)v.findViewById(R.id.home_button);
         //gen_time = findViewById(R.id.generate_btn);
 
         addCourse = "";
 
+        //initialize list view which shows the layout of the added courses
+        courseView = (ListView) v.findViewById(R.id.courseView);
+        viewAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, futureList);
 
-        viewAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, futureList);
+        loadData();
 
-        loadCourses();
 
 
         //goes to home button
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(@NonNull View view) {
+                NavHostFragment.findNavController(addFuture.this)
+                        .navigate(R.id.action_addFuture_to_Home);//add action fragment from future courses to home
+
 
             }
         });
@@ -110,7 +124,7 @@ public class AddFutureCourses extends AppCompatActivity {
 
                 final int to_remove = i;
 
-                new AlertDialog.Builder(AddFutureCourses.this)
+                new AlertDialog.Builder(getContext())
                         .setIcon(android.R.drawable.ic_delete)
                         .setTitle("Are you sure you want to delete course from list?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -138,7 +152,7 @@ public class AddFutureCourses extends AppCompatActivity {
 
 
                 //Initialize dialog
-                dialog = new Dialog(AddFutureCourses.this);
+                dialog = new Dialog(getContext());
 
                 //set custom dialog
                 dialog.setContentView((R.layout.dialog_searchable_spinner));
@@ -158,7 +172,7 @@ public class AddFutureCourses extends AppCompatActivity {
 
                 //Initialize array adaptor
 
-                ArrayAdapter<String> course_adapter = new ArrayAdapter<>(AddFutureCourses.this, android.R.layout.simple_list_item_1, courseList);
+                ArrayAdapter<String> course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, courseList);
 
                 listView.setAdapter(course_adapter);
 
@@ -169,7 +183,7 @@ public class AddFutureCourses extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {//if changed, filter out non-similar results
                         //Filter array list
                         course_adapter.getFilter().filter(charSequence);
 
@@ -207,7 +221,7 @@ public class AddFutureCourses extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (addCourse.equals("")) {
-                    //Toast.makeText(this, "Select a course first", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Select a valid course!", Toast.LENGTH_LONG).show();
                 } else if (!(addCourse.isEmpty()) && futureList.contains(addCourse) == false) {
                     futureList.add(addCourse);
                     //viewAdapter.notifyDataSetChanged();
@@ -222,28 +236,38 @@ public class AddFutureCourses extends AppCompatActivity {
         });
 
 
-    }
-
-    public void loadCourses() {
-        DocumentReference ref = courseCode.collection("courses").document();
-
-        courseCode.collection("courses")
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
-                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            String course = ((document.toObject(Course.class)).getCode() + " ");
-
-                            courseList.add(course);
-
-                            //Log.d(TAG, p.getName() + " " + p.getAge());
-                        }
-
-                    }
-                });
+        return v;
 
     }
+    private void loadData() {
+
+        courseCode.addValueEventListener(new ValueEventListener() {
+            @Override
+            // Executed every time we change something in the database
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot courseSnapshot: snapshot.getChildren()){
+                    String course = (courseSnapshot.getValue(Course.class)).code + " ";
+                    courseList.add(course);
+                    Log.i("RM", course);
+
+                }
+
+
+            }
+            // Executed if there is some error
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
 }
-
