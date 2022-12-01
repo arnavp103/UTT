@@ -18,13 +18,11 @@
         android:hint="@string/username"
         android:inputType="text"
         android:textAlignment="center"
-        android:textColor="@color/slategray"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/antique"
+        android:textColorHint="@color/antique"
         app:layout_constraintEnd_toStartOf="@+id/buttonEndGuideline"
         app:layout_constraintStart_toStartOf="@+id/buttonStartGuideline"
         app:layout_constraintTop_toBottomOf="@+id/titleLogin" />
-<!--    android:textColor="@color/antique"-->
-<!--    android:textColorHint="@color/antique"-->
 
     <EditText
         android:id="@+id/editTextTextPassword"
@@ -34,12 +32,12 @@
         android:background="@drawable/edit_text_border"
         android:ems="10"
         android:hint="@string/password"
+        android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:shadowColor="#340B0A0A"
         android:textAlignment="center"
-        android:textColor="@color/slategray"
-        android:imeOptions="actionDone"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/antique"
+        android:textColorHint="@color/antique"
         app:layout_constraintEnd_toStartOf="@+id/buttonEndGuideline"
         app:layout_constraintStart_toStartOf="@+id/buttonStartGuideline"
         app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
@@ -48,14 +46,13 @@
         android:id="@+id/buttonLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="185dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:backgroundTint="@color/slategray"
         android:fontFamily="@font/fira_sans_light"
         android:text="@string/login_button"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonEndGuideline"
         app:layout_constraintStart_toStartOf="@+id/buttonStartGuideline"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
@@ -68,34 +65,36 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/fira_sans_medium_italic"
         android:text="@string/login_title"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/gray20"
+        android:textColor="@color/eggshell"
         android:textSize="60sp"
         app:layout_constraintEnd_toStartOf="@+id/titleEndGuideline"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/titleStartGuideline"
         app:layout_constraintTop_toTopOf="@+id/titleTopGuideline" />
 
+
     <Button
         android:id="@+id/signup"
-        android:layout_width="200dp"
-        android:layout_height="47dp"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
 
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="36dp"
         android:backgroundTint="@color/slategray"
         android:fontFamily="@font/fira_sans_light"
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEndGuideline"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/buttonStartGuideline"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
         app:layout_constraintVertical_bias="0.0" />
-
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/buttonStartGuideline"
