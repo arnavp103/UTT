@@ -174,7 +174,7 @@ public class DatabaseSamples {
                 "tea"
         );
 
-        s.addCourse(List.of());
+        s.addCourse(List.of("CSCA08", "CSCA67"));
         users.add(s);
 
         users.add(new User(

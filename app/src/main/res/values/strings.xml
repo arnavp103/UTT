@@ -9,28 +9,21 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="enter_course_code">Enter course code</string>
-    <string name="add_course">Add course</string>
-    <string name="search">Search</string>
-    <string name="back">Back</string>
-    <string name="enter_course_name">Enter course name</string>
-    <string name="add_course_name">Add course name</string>
-    <string name="enter_name">Enter course name</string>
-    <string name="enterName">Enter course name</string>
-    <string name="text">Text</string>
-    <string name="textview">Textview</string>
-    <string name="enterCourseName">Enter course name</string>
-    <string name="enter_course_session_offerings">Enter course session offerings</string>
-    <string name="enter_course_prerequisites">Enter course prerequisites</string>
-    <string name="textView3">textView3</string>
+    <string name="logout">Logout</string>
+    <string name="login_title">Login</string>
+    <string name="login_button">Login</string>
+    <string name="signup_nav">Sign up</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="invalid_login">Incorrect username or password</string>
 
-    <string name="generate_timeline">Generate Timeline</string>
-    <string name="select_course">select_add_future</string>
-    <string name="enter_course_code_home">Enter Course Code</string>
-    <string name="deleteFuturebtn">deleteFuture</string>
-    <string name="select_course_future">Select Course</string>
-    <string name="add_course_future">Add Course</string>
-    <string name="home_futuretohome">Home</string>
-    <string name="generate_future">GENERATE</string>
-    <string name="homefuturetohome">futuretohome</string>
+    <!-- compilation error fix below -->
+    <string name="Enter_course_code">Enter Course Code</string>
+    <string name="Search">Search</string>
+    <string name="Add_course">Add Course</string>
+    <string name="Back">Back</string>
+    <string name="Text">Text</string>
+    <string name="Textview">Textview</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

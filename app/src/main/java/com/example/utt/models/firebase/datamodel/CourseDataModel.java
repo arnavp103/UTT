@@ -205,7 +205,7 @@ public class CourseDataModel {
                     prerequisiteCourse = nonExistentCourses.get(code);
                 }
             }
-            Log.d("Adding: ", prerequisite + prerequisiteCourse);
+            Log.d("Adding: ", prerequisite + " " + prerequisiteCourse);
             child_prerequisites.add(prerequisiteCourse);
             //CourseDataModel.getCourses().get(prerequisite));
         }
