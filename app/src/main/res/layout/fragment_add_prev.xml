@@ -25,17 +25,16 @@
 
     <Button
         android:id="@+id/addFutureCourse"
+        app:drawableEndCompat="@drawable/ic_add_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="160dp"
-        android:layout_marginEnd="108dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="34dp"
         android:layout_marginBottom="23dp"
         android:text="@string/add_course_future"
         app:layout_constraintBottom_toTopOf="@+id/courseView"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view" />
 
     <ListView
         android:id="@+id/courseView"
@@ -49,6 +48,7 @@
 
     <Button
         android:id="@+id/home_button"
+        app:drawableEndCompat="@drawable/ic_home_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="289dp"
@@ -60,7 +60,22 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-<!--    <RadioButton-->
+    <Button
+        android:id="@+id/save_button"
+        app:drawableEndCompat="@drawable/ic_save_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="69dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="69dp"
+        android:layout_marginBottom="23dp"
+        android:text="@string/save_btn"
+        app:layout_constraintBottom_toTopOf="@+id/courseView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/addFutureCourse"
+        app:layout_constraintTop_toBottomOf="@+id/text_view" />
+
+    <!--    <RadioButton-->
 <!--        android:id="@+id/radioFall"-->
 <!--        android:layout_width="95dp"-->
 <!--        android:layout_height="70dp"-->
