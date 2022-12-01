@@ -25,16 +25,82 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="10dp">
 
         <!-- Text View to display Course Code -->
+
+        <LinearLayout
+            android:id="@+id/bababa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idTVCourseName"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/idTVCoursePrereqsHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="Prerequisites:"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:typeface="normal" />
+
+            <TextView
+                android:id="@+id/idTVCoursePrereqs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/idTVCourseSessionHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="Course Offerings:"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/idTVCourseSession"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:id="@+id/actionButtons"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/purple_700"
+                    android:text="Modify"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/idTVCourseCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            tools:text="help" />
+            android:textStyle="bold"
+            tools:text="CSCB07" />
 
         <!-- Text View to display Course Name -->
         <TextView
@@ -46,19 +112,6 @@
             tools:text="crop" />
 
         <!-- Text View to display Course Sessions -->
-        <TextView
-            android:id="@+id/idTVCourseSession"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/idTVCourseName"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/idTVCoursePrereqs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/idTVCourseSession"
-            android:textColor="@color/black" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

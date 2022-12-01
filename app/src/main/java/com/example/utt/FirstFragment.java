@@ -105,8 +105,8 @@ public class FirstFragment extends Fragment {
     public void onStart() {
         super.onStart();
         // !!! STUDENT DATA HAS BEEN LOADED.
-        Log.d("Here", Student.getInstance().toString());
-        Log.d("Here", Student.getInstance().getCoursesTaken().toString());
+        Log.d("HERE", Student.getInstance().getId());
+
         databaseCourses.addValueEventListener(new ValueEventListener() {
             @Override
             // Executed every time we change something in the database
@@ -114,6 +114,7 @@ public class FirstFragment extends Fragment {
                 courseList.clear();
                 for(DataSnapshot courseSnapshot: snapshot.getChildren()){
                     Course course = courseSnapshot.getValue(Course.class);
+
                     courseList.add(course);
                 }
 
