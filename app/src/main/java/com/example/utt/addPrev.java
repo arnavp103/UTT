@@ -103,18 +103,22 @@ public class addPrev extends Fragment {
 
 
         //Eric passes the student id
-        student_id = "-NI5kKJxm-NWSTdCAlTL";
+        //Student student = new Student();
+        student_id = "";
 //        addSession = "";
 //        addYear = "";
 
 
         //initialize list view
         courseView = (ListView) v.findViewById(R.id.courseView);
-        viewAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, pastList);
-        course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, allCourses);
 
-        courseView.setAdapter(viewAdapter);
+        course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, allCourses);
+        viewAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, pastList);
+
         loadPreviousCourses();
+        courseView.setAdapter(viewAdapter);
+        viewAdapter.notifyDataSetChanged();
+
 
         loadData();
 
@@ -159,6 +163,7 @@ public class addPrev extends Fragment {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 pastList.remove(to_remove);
                                 viewAdapter.notifyDataSetChanged();
+
                             }
                         })
 
@@ -198,6 +203,8 @@ public class addPrev extends Fragment {
                 ListView listView = dialog.findViewById(R.id.list_view);
 
                 //Initialize array adaptor
+                viewAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, pastList);
+
 
                 listView.setAdapter(course_adapter);
 
@@ -252,7 +259,7 @@ public class addPrev extends Fragment {
 
                 }else if (!(addCourse.isEmpty()) && !(pastList.contains(addCourse))) {
                     pastList.add(addCourse);
-
+                    //courseView.notifyDataSetChanged();
                     courseView.setAdapter(viewAdapter);
 
 
@@ -301,21 +308,25 @@ public class addPrev extends Fragment {
                 Map<String, String> result = new HashMap<>();
 
                 for(DataSnapshot courseSnapshot: snapshot.getChildren()){
-                    String id = snapshot.getKey();
-                    result = (Map<String, String>) snapshot.getValue();
-                    //if (id.equals("-NI8TWF3kJML3Bz1BLFx")) {
+                    //String id = courseSnapshot.getKey();
+                    System.out.println(student_id);
+
+
+                    //if (id.equals(student_id)) {
                     for (DataSnapshot past: courseSnapshot.getChildren()){
                         pastList.add((String) past.getValue());
                     }
+                    viewAdapter.notifyDataSetChanged();
                     break;
                     //}
 //                    if (id.equals(student_id)){
 //                        pastList = (ArrayList<String>) snapshot.getValue();
-//
+//text view for headers
 //                    }
 
                 }
                 //System.out.println(pastList);
+
 
 
 
@@ -330,6 +341,7 @@ public class addPrev extends Fragment {
         });
     }
 
+    //save button
 
     @Override
     public void onDestroyView() {
