@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -213,7 +214,7 @@ public class addFuture extends Fragment {
             public void onClick(View view) {
 
                 if (addCourse.equals("")) {
-                    //Toast.makeText(this, "Select a course first", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Select a valid course!", Toast.LENGTH_LONG).show();
                 } else if (!(addCourse.isEmpty()) && futureList.contains(addCourse) == false) {
                     futureList.add(addCourse);
                     //viewAdapter.notifyDataSetChanged();

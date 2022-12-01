@@ -49,7 +49,7 @@ public class addPrev extends Fragment {
 //    private String addYear;
 
 
-    private Button addButton, home;
+    private Button addButton, home, save;
     private ListView courseView;
 
 //    private RadioButton fall;
@@ -96,7 +96,7 @@ public class addPrev extends Fragment {
         //initialize buttons and search, lists
         addButton = (Button)v.findViewById(R.id.addFutureCourse);
         home = (Button)v.findViewById(R.id.home_button);
-        //gen_time = findViewById(R.id.generate_btn);
+        save = (Button) v.findViewById(R.id.save_button);
 
         //initialize our strings
         addCourse = "";
@@ -116,19 +116,13 @@ public class addPrev extends Fragment {
         viewAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, pastList);
 
         loadPreviousCourses();
+
         courseView.setAdapter(viewAdapter);
-        viewAdapter.notifyDataSetChanged();
+        //viewAdapter.notifyDataSetChanged();
 
 
         loadData();
 
-
-
-
-//        //set up radio buttons
-//        fall =(RadioButton) v.findViewById(R.id.radioFall);
-//        winter =(RadioButton) v.findViewById(R.id.radioWinter);
-//        summer =(RadioButton) v.findViewById(R.id.radioSummer);
 
 
 
@@ -203,7 +197,7 @@ public class addPrev extends Fragment {
                 ListView listView = dialog.findViewById(R.id.list_view);
 
                 //Initialize array adaptor
-                viewAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, pastList);
+                //viewAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, pastList);
 
 
                 listView.setAdapter(course_adapter);
@@ -255,7 +249,7 @@ public class addPrev extends Fragment {
             public void onClick(View view) {
 
                 if (addCourse.equals("")) {
-                    Toast.makeText(getContext(), "Select a course!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Select a valid course!", Toast.LENGTH_LONG).show();
 
                 }else if (!(addCourse.isEmpty()) && !(pastList.contains(addCourse))) {
                     pastList.add(addCourse);
@@ -268,6 +262,20 @@ public class addPrev extends Fragment {
 
             }
         });
+
+        //save button
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Student get ID
+                //save to database
+                //save to field
+
+
+            }
+        });
+
 
 
         return v;
@@ -297,7 +305,9 @@ public class addPrev extends Fragment {
         });
     }
 
-    //still need to work on this
+    //still need to work on this, have to get student id
+    //I think I need to have the field coursesTaken in student equal to pastList
+    //the same goes for future list
     private void loadPreviousCourses() {
 
         studentCode.addValueEventListener(new ValueEventListener() {
@@ -341,7 +351,11 @@ public class addPrev extends Fragment {
         });
     }
 
-    //save button
+
+
+
+
+
 
     @Override
     public void onDestroyView() {

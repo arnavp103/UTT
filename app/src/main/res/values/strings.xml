@@ -36,6 +36,8 @@
     <string name="summer">Summer</string>
     <string name="fall">Fall</string>
     <string name="enter_year">Enter Year</string>
+    <string name="save_btn">Save</string>
+    <string name="welcome_to_utt">Welcome to UTT</string>
 
 
     <array name="courses_array">

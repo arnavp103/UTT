@@ -51,20 +51,18 @@ public class Home extends Fragment {
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //searchTextName = getView().findViewById(R.id.searchTextNameHome);
-        //searchButton = getView().findViewById(R.id.searchButtonHome);
-        //gotoAddCourses = getView().findViewById(R.id.gen_addButton);
 
-        view.findViewById(R.id.searchTextNameHome).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                NavHostFragment.findNavController(Home.this)
-//                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
-
-                //start activity for searchbar
-
-            }
-        });
+//search button
+//        view.findViewById(R.id.searchTextNameHome).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                NavHostFragment.findNavController(Home.this)
+////                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+//
+//                //start activity for searchbar
+//
+//            }
+//        });
 
         view.findViewById(R.id.gen_addButton).setOnClickListener(new View.OnClickListener() {
             @Override
