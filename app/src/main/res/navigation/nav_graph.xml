@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/firstFragment">
+    app:startDestination="@id/LoginFragment">
 
     <fragment
         android:id="@+id/FirstFragment"
@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_recyclerListFragment"
             app:destination="@id/recyclerListFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_loginFragment"
+            app:destination="@id/LoginFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -33,6 +36,30 @@
         android:name="com.example.utt.RecyclerListFragment"
         android:label="fragment_recycler_list"
         tools:layout="@layout/fragment_recycler_list" />
+    <fragment
+        android:id="@+id/LoginFragment"
+        android:name="com.example.utt.LoginFragment"
+        android:label="fragment_login_page"
+        tools:layout="@layout/fragment_login_page" >
+        <action
+            android:id="@+id/action_loginFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_LoginFragment_to_adminPlaceholder"
+            app:destination="@id/adminPlaceholder" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminPlaceholder"
+        android:name="com.example.utt.AdminPlaceholder"
+        android:label="fragment_admin_placeholder"
+        tools:layout="@layout/fragment_admin_placeholder" >
+        <action
+            android:id="@+id/action_adminPlaceholder_to_LoginFragment"
+            app:destination="@id/LoginFragment" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_LoginFragment"
+        app:destination="@id/LoginFragment" />
     <fragment
         android:id="@+id/firstFragment"
         android:name="com.example.utt.FirstFragment"

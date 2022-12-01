@@ -2,6 +2,7 @@ package com.example.utt;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,18 +36,20 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // to set data to textview of each card layout
         CourseModel model = courseModelArrayList.get(position);
-        holder.bind(model);
-
-        holder.courseCodeTV.setOnClickListener(view -> {
-            boolean expanded = model.isExpanded();
-            model.setExpanded(!expanded);
-            holder.bind(model);
+        holder.itemView.setOnClickListener(view1 -> {
+            boolean expanded = !model.isExpanded();
+            model.setExpanded(expanded);
             notifyItemChanged(position);
+
+            holder.bind(model);
         });
+
+        holder.bind(model);
     }
 
     @Override
@@ -61,53 +64,65 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         private final TextView courseNameTV;
         private final TextView courseSessionTV;
         private final TextView coursePrereqTV;
+        private final TextView coursePrereqHeader;
         private final LinearLayout detailsLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             courseCodeTV = itemView.findViewById(R.id.idTVCourseCode);
             courseNameTV = itemView.findViewById(R.id.idTVCourseName);
-            detailsLayout = new LinearLayout(itemView.getContext()) {
-                @Override
-                protected void onLayout(boolean changed, int l, int t, int r, int b) {
-                    final int count = getChildCount();
-                    for (int i = 0; i < count; i++) {
-                        View child = getChildAt(i);
-                        int width = child.getMeasuredWidth();
-                        int height = child.getMeasuredHeight();
-                        child.layout(width * i,
-                                height * i,
-                                width * (i + 1),
-                                height * (i + 1));
-                    }
-                }
-            };
+
+//            detailsLayout = new LinearLayout(itemView.getContext()) {
+//                @Override
+//                protected void onLayout(boolean changed, int l, int t, int r, int b) {
+//                    final int count = getChildCount();
+//                    for (int i = 0; i < count; i++) {
+//                        View child = getChildAt(i);
+//                        int width = child.getMeasuredWidth();
+//                        int height = child.getMeasuredHeight();
+//                        child.layout(width * i,
+//                                height * i,
+//                                width * (i + 1),
+//                                height * (i + 1));
+//                    }
+//                }
+//            };
+            detailsLayout = itemView.findViewById(R.id.bababa);
             courseSessionTV = itemView.findViewById(R.id.idTVCourseSession);
-            addViewToLayout(courseSessionTV, detailsLayout);
             coursePrereqTV = itemView.findViewById(R.id.idTVCoursePrereqs);
-            addViewToLayout(coursePrereqTV, detailsLayout);
+            coursePrereqHeader = itemView.findViewById(R.id.idTVCoursePrereqsHeader);
+
         }
 
         // Reset parent and adding view to layout
-        private void addViewToLayout(TextView tv, LinearLayout layout) {
-            if(tv.getParent() != null) {
-                ((ViewGroup)tv.getParent()).removeView(tv); // <- fix
-            }
-            layout.addView(tv);
-        }
+//        private void addViewToLayout(TextView tv, LinearLayout layout) {
+//            if(tv.getParent() != null) // {
+//                ((ViewGroup)tv.getParent()).removeView(tv); // <- fix
+////            }
+//            layout.addView(tv);
+//        }
 
         private void bind(CourseModel model) {
             // Get the state
             boolean expanded = model.isExpanded();
             // Set the visibility based on state
+            // detailsLayout.setVisibility(expanded ? View.VISIBLE : View.GONE);
             detailsLayout.setVisibility(expanded ? View.VISIBLE : View.GONE);
-
             courseCodeTV.setText(model.getCourseCode());
             courseCodeTV.setTypeface(null, Typeface.BOLD);
 
             courseNameTV.setText(model.getCourseName());
             courseSessionTV.setText(model.getCourseSession());
             coursePrereqTV.setText(model.getCoursePrereqs());
+
+            if (model.getCoursePrereqs().isEmpty()) {
+                if (coursePrereqTV.getParent() != null) {
+                    ((ViewGroup) detailsLayout).removeView(coursePrereqTV);
+                    ((ViewGroup) detailsLayout).removeView(coursePrereqHeader);
+                }
+            }
+//            courseSessionTV.setVisibility(expanded ? View.VISIBLE : View.GONE);
+//            coursePrereqTV.setVisibility(expanded ? View.VISIBLE : View.GONE);
         }
     }
 }

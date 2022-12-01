@@ -4,7 +4,13 @@ package com.example.utt;
    Other course info should be included (11/25)
 */
 
+import android.util.Log;
+
+import com.example.utt.algorithm.model.YearlySession;
+import com.example.utt.models.Course;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class CourseModel {
 
@@ -16,8 +22,29 @@ public class CourseModel {
     private ArrayList<String> sessionList;
     private ArrayList<String> prereqsList;
     private boolean expanded;
+    private static CourseModel currentExpanded;
+
+    final static List<String> sessionNames = List.of("Winter", "Summer", "Fall");
 
     // Constructor
+    public CourseModel(Course model) {
+        this.courseCode = model.getCode();
+        this.courseName = model.getName();
+        ArrayList<String> sessions = new ArrayList<>();
+        ArrayList<String> prereqs = new ArrayList<>();
+
+        for (YearlySession session : model.getSessionOffering()) {
+            sessions.add( sessionNames.get(session.getTerm().getTerm()));
+        }
+
+        for (Course course : model.getPrerequisites()) {
+            prereqs.add(course.getCode());
+        }
+        setCourseSession(sessions);
+        setCoursePrereqs(prereqs);
+        this.expanded = false;
+    }
+
     public CourseModel(String courseCode, String courseName, ArrayList<String> sessionList,
                        ArrayList<String> prereqsList) {
         this.courseCode = courseCode;
@@ -94,4 +121,5 @@ public class CourseModel {
     public void setExpanded(boolean new_state) {
         this.expanded = new_state;
     }
+
 }

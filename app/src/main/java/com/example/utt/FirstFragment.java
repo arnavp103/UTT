@@ -20,6 +20,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.FragmentFirstBinding;
 import com.example.utt.models.Course;
+import com.example.utt.models.Student;
+import com.example.utt.models.User;
 import com.example.utt.models.CourseEventListener;
 import com.example.utt.models.firebase.datamodel.CourseDataModel;
 import com.google.firebase.database.DataSnapshot;
@@ -244,6 +246,30 @@ public class FirstFragment extends Fragment {
         else{
             Toast.makeText(getActivity(), "Enter course information", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        databaseCourses.addValueEventListener(new ValueEventListener() {
+            @Override
+            // Executed every time we change something in the database
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                courseList.clear();
+                for(DataSnapshot courseSnapshot: snapshot.getChildren()){
+                    Course course = courseSnapshot.getValue(Course.class);
+                    courseList.add(course);
+                }
+
+                CourseList adapter = new CourseList(getActivity(), courseList);
+                listViewCourses.setAdapter(adapter);
+            }
+            // Executed if there is some error
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
