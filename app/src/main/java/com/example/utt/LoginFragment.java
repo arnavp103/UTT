@@ -1,6 +1,5 @@
 package com.example.utt;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +8,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,12 +17,9 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.FragmentLoginPageBinding;
-import com.example.utt.models.Course;
-import com.example.utt.models.CourseEventListener;
 import com.example.utt.models.Listener;
 import com.example.utt.models.Student;
 import com.example.utt.models.User;
-import com.example.utt.SharedMethods;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -64,7 +58,7 @@ public class LoginFragment extends Fragment {
 //                        DatabaseHandler.updateStudentData(s);
 
                     NavHostFragment.findNavController(LoginFragment.this)
-                            .navigate(R.id.action_loginFragment_to_FirstFragment);
+                            .navigate(R.id.action_loginFragment_to_Home);
                 }
 
                 @Override
@@ -80,7 +74,7 @@ public class LoginFragment extends Fragment {
             // Notify other fragments that user is Admin
 
             NavHostFragment.findNavController(LoginFragment.this)
-                    .navigate(R.id.action_loginFragment_to_FirstFragment);
+                    .navigate(R.id.action_LoginFragment_to_firstFragment);
         }
     }
 
