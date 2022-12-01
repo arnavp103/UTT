@@ -5,12 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.utt.database.DatabaseHandler;
 import com.example.utt.models.Course;
+import com.example.utt.models.firebase.datamodel.CourseDataModel;
 
 import java.util.List;
 
@@ -37,14 +40,36 @@ public class CourseList extends ArrayAdapter<Course> {
         Course course = courseList.get(position);
         textViewCode.setText(course.getCode());
         textViewName.setText(course.getName());
-        String sessionOutput = "";
+        String sessionOutput = "Offered: ";
         for(int i = 0; i < course.getSessionOffering().size(); i++){
-            sessionOutput.concat(course.getSessionOffering().get(i).toString());
-            if((i+1) != course.getSessionOffering().size()){
-                sessionOutput.concat(", ");
+            sessionOutput += course.getSessionOffering().get(i).toString();
+            if ((i+1) != course.getSessionOffering().size()){
+                sessionOutput += ", ";
             }
         }
         textViewSeason.setText(sessionOutput);
+
+        String prereqs = "Prerequisites: ";
+
+        for (int i = 0; i < course.getPrerequisites().size(); i++) {
+            prereqs += course.getPrerequisites().get(i).getCode();
+
+            if (i != course.getPrerequisites().size() - 1) {
+                prereqs += ", ";
+            }
+        }
+
+        ((TextView) listViewItem.findViewById(R.id.coursePrerequisites)).setText(prereqs);
+
+        ImageView edit = listViewItem.findViewById(R.id.deleteCourse);
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CourseDataModel.removeCourse(CourseDataModel.getCourseByCode(course.getCode()));
+                notifyDataSetChanged();
+            }
+        });
 
         return listViewItem;
     }

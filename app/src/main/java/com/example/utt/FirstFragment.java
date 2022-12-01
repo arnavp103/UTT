@@ -134,6 +134,10 @@ public class FirstFragment extends Fragment {
             }
         });
 
+        CourseList adapter = new CourseList(getActivity(), courseList);
+        listViewCourses.setStackFromBottom(true);
+        listViewCourses.setAdapter(adapter);
+
         // Retrieve data from database
         CourseEventListener listener = new CourseEventListener() {
             @Override
@@ -143,19 +147,27 @@ public class FirstFragment extends Fragment {
                 for (Course courseObject : Course.getCourses().values()) {
                     courseList.add(0, courseObject);
                 }
-                listViewCourses.setStackFromBottom(true);
-                CourseList adapter = new CourseList(getActivity(), courseList);
-                listViewCourses.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCourseChanged(Course course) {
+                courseList.clear();
 
+                for (Course courseObject : Course.getCourses().values()) {
+                    courseList.add(0, courseObject);
+                }
+                adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCourseRemoved(Course course) {
+                courseList.clear();
 
+                for (Course courseObject : Course.getCourses().values()) {
+                    courseList.add(0, courseObject);
+                }
+                adapter.notifyDataSetChanged();
             }
         };
 

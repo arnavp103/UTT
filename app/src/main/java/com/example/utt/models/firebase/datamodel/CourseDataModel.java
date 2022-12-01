@@ -133,8 +133,8 @@ public class CourseDataModel {
         oldCourse.callCourseRemovedListeners();
 
         // Remove the references
-//        courses.remove(course.code);
-//        coursesID_CODE.remove(course.key);
+        courses.remove(course.code);
+        coursesID_CODE.remove(course.key);
         if (listeners != null) for (CourseEventListener obj : listeners) obj.onCourseRemoved(oldCourse.getCourseObject());
 
     }
@@ -179,6 +179,10 @@ public class CourseDataModel {
         for (int i = 0; i < prerequisites.size(); i++)
             result.put(Integer.toString(i), prerequisites.get(i));
         return result;
+    }
+
+    static public CourseDataModel getCourseByCode(String code) {
+        return courses.get(code);
     }
 
     // Contains the courses that are prerequisites or have been recently deleted
