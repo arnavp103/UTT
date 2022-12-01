@@ -21,10 +21,7 @@
 
     <!-- compilation error fix below -->
     <string name="Enter_course_code">Enter Course Code</string>
-    <string name="Search">Search</string>
-    <string name="Add_course">Add Course</string>
     <string name="Back">Back</string>
-    <string name="Search">search</string>
     <string name="Add_course">add_course_student</string>
     <string name="Text">text_student</string>
     <string name="Textview">textview_student</string>
@@ -73,9 +70,13 @@
 
     </array>
 
+    <string name="Search">Search</string>
+    <string name="enterName">Enter Name</string>
+    <string name="add_course_name">Add Course Name</string>
+    <string name="back">Back</string>
+    <string name="text">Text</string>
+    <string name="textview">Text View</string>
+    <string name="textView3">Text View 3</string>
 
-    <string name="Text">Text</string>
-    <string name="Textview">Textview</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
