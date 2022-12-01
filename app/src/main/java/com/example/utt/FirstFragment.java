@@ -21,6 +21,7 @@ import com.example.utt.algorithm.model.Term;
 import com.example.utt.algorithm.model.YearlySession;
 import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.FragmentFirstBinding;
+import com.example.utt.databinding.FragmentRecyclerListBinding;
 import com.example.utt.models.Course;
 import com.example.utt.models.Student;
 import com.example.utt.models.User;
@@ -67,8 +68,8 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(FirstFragment.this)
-//                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
-                        .navigate(R.id.action_FirstFragment_to_recyclerListFragment);
+                        // .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                        .navigate(R.id.action_firstFragment_to_recyclerListFragment);
             }
         });
         binding.buttonAdd.setOnClickListener(new View.OnClickListener() {
@@ -105,8 +106,8 @@ public class FirstFragment extends Fragment {
     public void onStart() {
         super.onStart();
         // !!! STUDENT DATA HAS BEEN LOADED.
-        Log.d("Here", Student.getInstance().toString());
-        Log.d("Here", Student.getInstance().getCoursesTaken().toString());
+        // Log.d("Here", Student.getInstance().toString());
+        // Log.d("Here", Student.getInstance().getCoursesTaken().toString());
         databaseCourses.addValueEventListener(new ValueEventListener() {
             @Override
             // Executed every time we change something in the database

@@ -33,7 +33,7 @@
             android:id="@+id/idTVCourseCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/antique"
+            android:textColor="@color/black"
             tools:text="help" />
 
         <!-- Text View to display Course Name -->
@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/idTVCourseCode"
-            android:textColor="@color/antique"
+            android:textColor="@color/black"
             tools:text="crop" />
 
         <!-- Text View to display Course Sessions -->
@@ -51,14 +51,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/idTVCourseName"
-            android:textColor="@color/antique" />
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/idTVCoursePrereqs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/idTVCourseSession"
-            android:textColor="@color/antique" />
+            android:textColor="@color/black" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
