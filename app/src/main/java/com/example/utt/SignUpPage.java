@@ -1,10 +1,12 @@
 package com.example.utt;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,6 +15,12 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.utt.database.DatabaseHandler;
+import com.example.utt.models.Student;
+import com.example.utt.models.User;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -30,7 +38,7 @@ public class SignUpPage extends AppCompatActivity {
         final EditText passwd = findViewById(R.id.editTextTextPassword2);
         final EditText passwdAuth = findViewById(R.id.editTextTextPassword3);
         final Button registerButton = findViewById(R.id.registration_button);
-//        final ImageButton backButton = findViewById(R.id.back_button);
+        final ImageButton backButton = findViewById(R.id.back_button);
 
 
 
@@ -54,19 +62,37 @@ public class SignUpPage extends AppCompatActivity {
                 }
                 else if(!passwordText.equals(passwdAuthText)){
                     Toast.makeText(SignUpPage.this, "Passwords are not matching", Toast.LENGTH_SHORT).show();
-                } else if (databaseReference.orderBy("email", emailText).equals(emailText)) {
-                    Toast.makeText(SignUpPage.this, "Email already used", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (adminOrStudentChoice.equals("Admin")) {
-                        Admin admin = new Admin(emailText, passwordText);
-                        databaseReference.child("admins").child(admin.getId()).setValue(admin);
-                        Toast.makeText(SignUpPage.this, "Admin registered successfully", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Student student = new Student(emailText, passwordText);
-                        databaseReference.child("students").child(student.getId()).setValue(student);
-                        Toast.makeText(SignUpPage.this, "Student registered successfully", Toast.LENGTH_SHORT).show();
-                    }
-                    finish();
+                    databaseReference.orderByChild("email").
+                        equalTo(emailText).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                                @Override
+                                public void onSuccess(DataSnapshot dataSnapshot) {
+                                    Log.d("VLL", String.valueOf(dataSnapshot.exists()));
+                                    if (dataSnapshot.exists()) {
+                                        Toast.makeText(SignUpPage.this, "Email already used", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        if (adminOrStudentChoice.equals("Admin")) {
+                                            User admin = new User(emailText, passwordText, true);
+                                            DatabaseHandler.addUser(admin);
+//                                            databaseReference.child("users").child(admin.getId()).setValue(admin);
+                                            Toast.makeText(SignUpPage.this, "Admin registered successfully", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            User student = new Student(emailText, passwordText);
+                                            DatabaseHandler.addUser(student);
+//                                            databaseReference.child("students").child(student.getId()).setValue(student);
+                                            Toast.makeText(SignUpPage.this, "Student registered successfully", Toast.LENGTH_SHORT).show();
+                                        }
+                                        finish();
+                                    }
+                                }}).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+
+                                }
+                            });
+
+
+
                 }
             }
         });

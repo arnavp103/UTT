@@ -74,6 +74,9 @@
         <action
             android:id="@+id/action_LoginFragment_to_firstFragment"
             app:destination="@id/firstFragment" />
+        <action
+            android:id="@+id/action_LoginFragment_to_signUpPage"
+            app:destination="@id/signUpPage" />
     </fragment>
     <action
         android:id="@+id/action_global_LoginFragment"
@@ -104,4 +107,9 @@
             android:id="@+id/action_firstFragment_to_recyclerListFragment"
             app:destination="@id/recyclerListFragment" />
     </fragment>
+    <activity
+        android:id="@+id/signUpPage"
+        android:name="com.example.utt.SignUpPage"
+        android:label="activity_sign_up_page"
+        tools:layout="@layout/activity_sign_up_page" />
 </navigation>
