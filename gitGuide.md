@@ -44,6 +44,5 @@ git push origin main                                # Push the changes to the re
 git push origin --delete <featureName>              # Delete the remote branch if you don't need it anymore
 git branch -d <featureName>                         # Delete the local branch if you don't need it anymore
 ```
-```
 
 
