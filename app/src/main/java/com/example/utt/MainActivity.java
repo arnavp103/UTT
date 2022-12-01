@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.fragment.app.Fragment;
@@ -60,16 +61,18 @@ public class MainActivity extends AppCompatActivity {
         navController = Objects.requireNonNull(navHostFragment).getNavController();
         navController.addOnDestinationChangedListener((firstArg, destination, thirdArg) -> {
             // The back_button should be referenced with a better method
-            View back_button = binding.toolbar.getChildAt(1);
+            ActionBar actionBar = getSupportActionBar();
             if(destination.getId() == R.id.LoginFragment) {
                 binding.toolbar.setVisibility(View.GONE);
             }
             else {
                 binding.toolbar.setVisibility(View.VISIBLE);
-                back_button.setVisibility(View.VISIBLE);
+                assert actionBar != null;
+                actionBar.setDisplayHomeAsUpEnabled(true);
             }
             if(destination.getId() == R.id.Home || destination.getId() == R.id.firstFragment) {
-                back_button.setVisibility(View.GONE);
+                assert actionBar != null;
+                actionBar.setDisplayHomeAsUpEnabled(false);
             }
         });
 
