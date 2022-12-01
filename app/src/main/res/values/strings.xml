@@ -2,11 +2,28 @@
     <string name="app_name">UTT</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
+    <string name="first_fragment_label">Home</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="logout">Logout</string>
+    <string name="login_title">Login</string>
+    <string name="login_button">Login</string>
+    <string name="signup_nav">Sign up</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="invalid_login">Incorrect username or password</string>
+
+    <!-- compilation error fix below -->
+    <string name="Enter_course_code">Enter Course Code</string>
+    <string name="Search">Search</string>
+    <string name="Add_course">Add Course</string>
+    <string name="Back">Back</string>
+    <string name="Text">Text</string>
+    <string name="Textview">Textview</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
