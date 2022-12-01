@@ -34,12 +34,16 @@ git push -u origin <featureName>                	# Push your changes to the remo
 
 # While you do your task someone might have merged to main so you could update your branch with the changes.
 git checkout <featureName>                        	# Swap to your branch
-git merge main										# Merge the main branch into yours. Might pull up your editor, write a message and save.
+git merge main                                      # Merge the main branch into yours. Might pull up your editor, write a message and save.
 
 # When you're done with your task, you can merge your branch with the main branch.
 git checkout main                                   # Switch to the main branch
 git pull origin main                                # Pull the latest changes from the remote main branch
 git merge <featureName>                             # Merge your branch into the main branch
 git push origin main                                # Push the changes to the remote main branch
+git push origin --delete <featureName>              # Delete the remote branch if you don't need it anymore
+git branch -d <featureName>                         # Delete the local branch if you don't need it anymore
 ```
+```
+
 
