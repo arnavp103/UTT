@@ -67,7 +67,7 @@ public class LoginFragment extends Fragment {
                     // s.addCourse(List.of("MATA41", "CSCB36", "CSCA08", "BBBC"));
                     // DatabaseHandler.updateStudentData(s);
                     NavHostFragment.findNavController(LoginFragment.this)
-                            .navigate(R.id.action_loginFragment_to_FirstFragment);
+                            .navigate(R.id.action_loginFragment_to_Home);
                 }
 
                 @Override
@@ -82,7 +82,7 @@ public class LoginFragment extends Fragment {
         } else if (user.getIsAdmin()) {
             // Notify other fragments that user is Admin
             NavHostFragment.findNavController(LoginFragment.this)
-                    .navigate(R.id.action_loginFragment_to_FirstFragment);
+                    .navigate(R.id.action_LoginFragment_to_firstFragment);
         }
     }
 

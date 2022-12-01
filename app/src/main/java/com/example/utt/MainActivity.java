@@ -59,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
         navController = Objects.requireNonNull(navHostFragment).getNavController();
         navController.addOnDestinationChangedListener((firstArg, destination, thirdArg) -> {
-            View back_button = binding.toolbar.getChildAt(2);
+            // The back_button should be referenced with a better method
+            View back_button = binding.toolbar.getChildAt(1);
             if(destination.getId() == R.id.LoginFragment) {
                 binding.toolbar.setVisibility(View.GONE);
             }
