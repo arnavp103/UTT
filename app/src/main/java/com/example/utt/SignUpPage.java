@@ -46,6 +46,7 @@ public class SignUpPage extends AppCompatActivity {
                 String adminOrStudentChoice = adminOrStudent.getSelectedItem().toString();
                 final String emailText = email.getText().toString();
                 final String passwordText = passwd.getText().toString();
+                // Make user doublecheck password
                 final String passwdAuthText = passwdAuth.getText().toString();
 
                 if(emailText.isEmpty() || passwordText.isEmpty() || passwdAuthText.isEmpty()) {
@@ -53,13 +54,18 @@ public class SignUpPage extends AppCompatActivity {
                 }
                 else if(!passwordText.equals(passwdAuthText)){
                     Toast.makeText(SignUpPage.this, "Passwords are not matching", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    databaseReference.child("email").setValue(emailText);
-                    databaseReference.child("isAdmin").setValue(adminOrStudentChoice.equals("Admin"));
-                    databaseReference.child("password").setValue(passwordText);
-                    databaseReference.child("index").setValue(emailText + passwordText);
-                    Toast.makeText(SignUpPage.this, "User registered successfully", Toast.LENGTH_SHORT).show();
+                } else if (databaseReference.orderBy("email", emailText).equals(emailText)) {
+                    Toast.makeText(SignUpPage.this, "Email already used", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (adminOrStudentChoice.equals("Admin")) {
+                        Admin admin = new Admin(emailText, passwordText);
+                        databaseReference.child("admins").child(admin.getId()).setValue(admin);
+                        Toast.makeText(SignUpPage.this, "Admin registered successfully", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Student student = new Student(emailText, passwordText);
+                        databaseReference.child("students").child(student.getId()).setValue(student);
+                        Toast.makeText(SignUpPage.this, "Student registered successfully", Toast.LENGTH_SHORT).show();
+                    }
                     finish();
                 }
             }
