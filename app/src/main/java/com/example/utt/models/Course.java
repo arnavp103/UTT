@@ -52,7 +52,6 @@ public class Course {
         return sessionOffering;
    }
 
-
     public List<Course> getPrerequisites() {
         return prerequisites;
     }

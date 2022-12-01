@@ -23,6 +23,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.FragmentFirstBinding;
 import com.example.utt.models.Course;
+import com.example.utt.models.CourseEventListener;
+import com.example.utt.models.firebase.datamodel.CourseDataModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -65,7 +67,7 @@ public class FirstFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         databaseCourseCode = FirebaseDatabase.getInstance("https://b07-final-db5c5-default-rtdb.firebaseio.com")
-                .getReference("Course");
+                .getReference("courses");
         editTextName = (EditText)getView().findViewById(R.id.editCourseCode);
         editCourseName = (EditText)getView().findViewById(R.id.editCourseName);
 
@@ -76,83 +78,109 @@ public class FirstFragment extends Fragment {
         listViewCourses = (ListView)getView().findViewById(R.id.listViewCourses);
 
         sessionOffering.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view){
-            // Create new alert dialog
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Select session offering(s)");
-            builder.setCancelable(false);
-            builder.setMultiChoiceItems(sessionArray, selectedSession, new DialogInterface.OnMultiChoiceClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i, boolean b) {
-                    if (b){
-                        // Check if checkbox is selected
-                        sessionList.add(i);
-                        Collections.sort(sessionList);
-                    }
-                    else{
-                        // If checkbox is unselected, remove position from sessionList
-                        sessionList.remove(i);
-                    }
-                }
-            });
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    StringBuilder sessionOutput = new StringBuilder();
-                    for(int j = 0; j < sessionList.size(); j++) {
-                        sessionOutput.append(sessionArray[sessionList.get(j)]);
-                        // When j value is not equal to the sessionList size-1, add comma
-                        if (j != sessionList.size() - 1) {
-                            sessionOutput.append(", ");
+            @Override
+            public void onClick(View view){
+                // Create new alert dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Select session offering(s)");
+                builder.setCancelable(false);
+                builder.setMultiChoiceItems(sessionArray, selectedSession, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                        if (b){
+                            // Check if checkbox is selected
+                            sessionList.add(i);
+                            Collections.sort(sessionList);
+                        }
+                        else{
+                            // If checkbox is unselected, remove position from sessionList
+                            sessionList.remove(i);
                         }
                     }
-                    sessionOffering.setText(sessionOutput.toString());
-                }
-            });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    // Dismiss dialog
-                    dialogInterface.dismiss();
-                }
-            });
-            builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    for(int j = 0; j < selectedSession.length; j++){
-                        // Remove all selections
-                        selectedSession[j] = false;
-                        // Clear session list
-                        sessionList.clear();
-                        // Clear text view value
-                        sessionOffering.setText("");
+                });
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        StringBuilder sessionOutput = new StringBuilder();
+                        for(int j = 0; j < sessionList.size(); j++) {
+                            sessionOutput.append(sessionArray[sessionList.get(j)]);
+                            // When j value is not equal to the sessionList size-1, add comma
+                            if (j != sessionList.size() - 1) {
+                                sessionOutput.append(", ");
+                            }
+                        }
+                        sessionOffering.setText(sessionOutput.toString());
                     }
-                }
-            });
-            // Show dialog
-            builder.show();
-        }
-    });
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // Dismiss dialog
+                        dialogInterface.dismiss();
+                    }
+                });
+                builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        for(int j = 0; j < selectedSession.length; j++){
+                            // Remove all selections
+                            selectedSession[j] = false;
+                            // Clear session list
+                            sessionList.clear();
+                            // Clear text view value
+                            sessionOffering.setText("");
+                        }
+                    }
+                });
+                // Show dialog
+                builder.show();
+            }
+        });
 
-        databaseCourseCode.addValueEventListener(new ValueEventListener() {
+        CourseEventListener listener = new CourseEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onCourseAdded(Course course) {
                 courseList.clear();
-                for(DataSnapshot courseSnapshot: dataSnapshot.getChildren()){
-                    Course course = courseSnapshot.getValue(Course.class);
-                    Log.d("Database", "Received: " + dataSnapshot.toString());
-                    courseList.add(course);
+
+                for (Course courseObject : Course.getCourses().values()) {
+                    courseList.add(courseObject);
                 }
                 CourseList adapter = new CourseList(getActivity(), courseList);
                 listViewCourses.setAdapter(adapter);
             }
-            // Executed if there is some error
+
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("Database", "FailureHIII: " + error.toString());
+            public void onCourseChanged(Course course) {
+
             }
-        });
+
+            @Override
+            public void onCourseRemoved(Course course) {
+
+            }
+        };
+
+        Course.addListener(listener);
+//
+//        databaseCourseCode.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                courseList.clear();
+//                for(DataSnapshot courseSnapshot: dataSnapshot.getChildren()){
+//                    CourseDataModel course = courseSnapshot.getValue(CourseDataModel.class);
+//                    course.setKey(dataSnapshot.getKey());
+//                    Log.d("Database", "Received: " + dataSnapshot.toString());
+//                    courseList.add(course.getCourseObject());
+//                }
+//                CourseList adapter = new CourseList(getActivity(), courseList);
+//                listViewCourses.setAdapter(adapter);
+//            }
+//            // Executed if there is some error
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Log.d("Database", "FailureHIII: " + error.toString());
+//            }
+//        });
 
         buttonAdd = (Button)getView().findViewById(R.id.buttonAdd);
 

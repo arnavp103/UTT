@@ -136,6 +136,12 @@ public abstract class DatabaseHandler {
                     }
                 }).addOnFailureListener(e -> {Log.d(TAG, "Failure: " + e.toString());});
     }
+
+    public static void updateCourse(Course course) {
+        CourseDataModel output = CourseDataModel.readCourse(course);
+        updateCourse(output);
+    }
+
     /**
      * Inserts into database.courses a new course.
      * @param course The object model of the course
