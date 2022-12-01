@@ -9,8 +9,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray20">#FF121212</color>
     <color name="antique">#FFF3F2E9</color>
-    <color name="eggshell">#FFFFCCCC</color>
+    <color name="eggshell">#FFDDCCCC</color>
     <color name="slategray">#FF708090</color>
     <color name="dimgray">#FF696969</color>
     <color name="palenight">#FFFBFBFD</color>
+    <color name="navy_blue">#FF07225C</color>
+    <color name="baby_blue">#FF89CFF0</color>
+    <color name="ultramarine">#FF3F00FF</color>
 </resources>
