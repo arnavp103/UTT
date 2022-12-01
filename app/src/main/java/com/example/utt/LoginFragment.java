@@ -107,7 +107,12 @@ public class LoginFragment extends Fragment {
         });
 
         // Validate Login Credentials
-        binding.buttonLogin.setOnClickListener(this::submit);
+//        binding.buttonLogin.setOnClickListener(this::submit);
+
+        binding.buttonLogin.setOnClickListener(view2 -> {
+            this.submit(view2);
+            SharedMethods.collapseKeyboard(context);
+        });
 
         binding.signup.setOnClickListener(view1 -> {
             Intent intent = new Intent(view.getContext(), SignUpPage.class);
