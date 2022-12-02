@@ -22,7 +22,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /** This class connects directly to the firebase database
@@ -62,7 +64,7 @@ public abstract class DatabaseHandler {
         dbStudentsRef.child(student.getId()).setValue(student._getCoursesTaken());
     }
 
-    public static void getStudentData(String userId, Listener<String> callback) {
+    public static void getStudentData(String userId, Listener<Map<String, String>> callback) {
         Log.d("USER ID: ", userId);
         dbStudentsRef.orderByKey().equalTo(userId).get()
                 .addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
@@ -75,14 +77,19 @@ public abstract class DatabaseHandler {
                             callback.onFailure("Wrong num of students found");
                         }
                         else {
-                            List<String> result = new ArrayList<>();
+//                            List<String> result = new ArrayList<>();
+                            Map<String, String> result = new HashMap<>();
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
                                 Log.d("Student: ", child.toString()+" ");
 
                                 for (DataSnapshot o : child.getChildren()) {
-                                    result.add(Objects.requireNonNull(o.getValue()).toString());
+                                    result.put(
+                                            Objects.requireNonNull(o.getKey()).toString(),
+                                            Objects.requireNonNull(o.getValue()).toString()
+                                    );
+//                                    result.add(Objects.requireNonNull(o.getKey()).toString());
                                 }
-                                callback.onSuccess(dataSnapshot.toString(), result);
+                                callback.onSuccess(dataSnapshot.toString(), List.of(result));
                                 return;
                             }
                         }

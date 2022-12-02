@@ -24,6 +24,7 @@ import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
+import java.util.Map;
 
 public class LoginFragment extends Fragment {
     private FragmentLoginPageBinding binding;
@@ -55,14 +56,14 @@ public class LoginFragment extends Fragment {
         // Toast.LENGTH_SHORT).show();
         Snackbar.make(view, "Logged in as " + user.getEmail(), BaseTransientBottomBar.LENGTH_SHORT).show();
         if (user.isStudent()) {
-            DatabaseHandler.getStudentData(user.getId(), new Listener<String>() {
+            DatabaseHandler.getStudentData(user.getId(), new Listener<Map<String, String>>() {
                 @Override
-                public void onSuccess(String data, @Nullable List<String> objectModel) {
+                public void onSuccess(String data, @Nullable List<Map<String, String>> objectModel) {
                     assert objectModel != null;
                     Student s = new Student(user.getEmail(), user.getPassword());
                     s.setId(user.getId());
 
-                    Student.login(s, objectModel);
+                    Student.login(s, objectModel.get(0));
 
                     NavHostFragment.findNavController(LoginFragment.this)
                             .navigate(R.id.action_loginFragment_to_Home);

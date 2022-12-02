@@ -158,7 +158,7 @@ public class DatabaseSamples {
                 "0beans"
         );
 
-        s.addCourse(List.of("MATA41",  "CSCB36",  "CSCA08"));
+//        s.addCourse(List.of("MATA41",  "CSCB36",  "CSCA08"));
         users.add(s);
 
         s = new Student(
@@ -166,7 +166,7 @@ public class DatabaseSamples {
                 "wane"
         );
 
-        s.addCourse(List.of());
+//        s.addCourse(Map.of());
         users.add(s);
 
         s = new Student(
@@ -174,7 +174,7 @@ public class DatabaseSamples {
                 "tea"
         );
 
-        s.addCourse(List.of("CSCA08", "CSCA67"));
+//        s.addCourse(List.of("CSCA08", "CSCA67"));
         users.add(s);
 
         users.add(new User(

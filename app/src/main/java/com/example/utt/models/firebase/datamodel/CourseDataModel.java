@@ -167,8 +167,6 @@ public class CourseDataModel {
     public String getName() { return name; }
     public Map<String, Boolean> getSessionOffering() {
         Map<String, Boolean> result = new HashMap<>();
-        //for (Integer c : sessionOffering)//sessionOffering.keySet())
-        //    result.put(c.toString(), sessionOffering.get(c));
         for (int i = 0; i < sessionOffering.size(); i++) {
             result.put(Integer.toString(i), sessionOffering.get(i));
         }
