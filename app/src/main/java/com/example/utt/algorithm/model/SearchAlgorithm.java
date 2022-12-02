@@ -33,7 +33,7 @@ public class SearchAlgorithm {
                         break;
                     }
                 }
-                if (toAdd){
+                if (toAdd && !(beginningNodes.contains(target))){
                     beginningNodes.add(target);
                 }
                 //OR if you have recursed to the end of the tree and you have reached the first prerequisite
