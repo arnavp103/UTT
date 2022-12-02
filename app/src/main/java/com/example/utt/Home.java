@@ -75,12 +75,9 @@ public class Home extends Fragment {
                         .navigate(R.id.action_Home_to_addPrev);
 
                     // User Data Testing
-
-
             }
         });
     }
-
 
     @Override
     public void onDestroyView() {
