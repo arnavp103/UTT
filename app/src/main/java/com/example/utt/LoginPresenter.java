@@ -1,9 +1,9 @@
 package com.example.utt;
 
 
-public class LoginPresenter implements Presenter {
+public class LoginPresenter implements LoginModel.LoginPresenter {
 	private LoginView view;
-	private DatabaseModel model;
+	private LoginModel model;
 
 	
 	public LoginPresenter(LoginView view) {
@@ -12,26 +12,33 @@ public class LoginPresenter implements Presenter {
 	}	
 
 
-
-
 	public void query(String uname, String pword) {
-		model.queryIsUser(uname, pword, this);	
+		if(view != null) {
+			SharedMethods.collapseKeyboard(view);
+			model.queryIsUser(uname, pword, this);
+		}
 	}
+
 
 	@Override 
-	public onFinished()
+	public void onSuccess(String result) {
+		if(result) {
+			makeSnackbar("Welcome Back "+ result);
+		} else {
+			makeSnackbar("Invalid Username or Password");
+		}	
 
+	}
 
-
-
-
-
+	public void setCookie(int studentID) {
+			cookieLogin.setUserName();
+	}
 
 	public interface LoginView {
-		public makeSnackbar(String message);
-		public collapseKeyboard();
-		
+		public void makeSnackbar(String message);
 	}
+
+
 	@Override
 	public void onDestroy() {
 		view = null;
