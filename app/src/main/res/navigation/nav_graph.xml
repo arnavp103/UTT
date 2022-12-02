@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/startupTransitionFragment">
+    app:startDestination="@id/LoginFragment">
 
     <fragment
         android:id="@+id/Home"
@@ -87,19 +87,10 @@
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim" />
     <fragment
-        android:id="@+id/startupTransitionFragment"
-        android:name="com.example.utt.StartupTransitionFragment"
-        android:label="fragment_startup_transition"
-        tools:layout="@layout/fragment_startup_transition">
-        <action
-            android:id="@+id/action_startupTransitionFragment_to_LoginFragment"
-            app:destination="@id/LoginFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/firstFragment"
         android:name="com.example.utt.FirstFragment"
         android:label="fragment_first"
-        tools:layout="@layout/fragment_first" >
+        tools:layout="@layout/fragment_first">
         <action
             android:id="@+id/action_firstFragment_to_LoginFragment"
             app:destination="@id/LoginFragment" />

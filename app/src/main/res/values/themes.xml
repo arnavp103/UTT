@@ -11,7 +11,14 @@
         <item name="colorOnSecondary">@color/antique</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/gray20</item>
+        <!-- Splash screen -->
+        <item name="android:windowSplashScreenBackground">@color/navy_blue</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/logo_placeholder</item>
+        <item name="android:windowSplashScreenAnimationDuration">1000</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@color/slategray</item>
+
         <!-- Customize your theme here. -->
+        
     </style>
 <!--    <item name="android:textColor">@color/antique</item>-->
 
