@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
+    android:background="#00FFFFFF"
     android:padding="16dp"
     tools:context=".addFuture">
 
@@ -18,19 +19,19 @@
         android:hint="@string/select_future_course"
         android:padding="12dp"
         android:textColorHint="#757575"
+        app:drawableEndCompat="@drawable/ic_arrow"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:drawableEndCompat="@drawable/ic_arrow" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/addFutureCourse"
-        app:drawableEndCompat="@drawable/ic_add_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="108dp"
         android:layout_marginTop="152dp"
         android:layout_marginEnd="108dp"
         android:text="@string/add_course_future"
+        app:drawableEndCompat="@drawable/ic_add_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -48,7 +49,6 @@
 
     <Button
         android:id="@+id/home_button"
-        app:drawableEndCompat="@drawable/ic_home_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="289dp"
@@ -56,6 +56,7 @@
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="33dp"
         android:text="@string/Home"
+        app:drawableEndCompat="@drawable/ic_home_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,17 +64,30 @@
 
     <Button
         android:id="@+id/generate_timeline"
-        app:drawableEndCompat="@drawable/ic_generate_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="108dp"
         android:layout_marginEnd="108dp"
         android:layout_marginBottom="100dp"
         android:text="@string/generate"
+        app:drawableEndCompat="@drawable/ic_generate_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/courseView" />
 
+    <ImageButton
+        android:id="@+id/infoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="135dp"
+        android:layout_marginEnd="17dp"
+        android:background="#0046338A"
+        android:contentDescription="@string/information"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:src="@drawable/ic_info_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

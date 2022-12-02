@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/mock_background"
     tools:context=".Home">
 
 
@@ -48,6 +49,7 @@
         android:layout_marginStart="108dp"
         android:layout_marginEnd="108dp"
         android:layout_marginBottom="312dp"
+        android:backgroundTint="#6A675088"
         android:drawableEnd="@drawable/ic_generate_icon"
         android:text="@string/generate_timeline"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -61,6 +63,7 @@
         android:layout_marginStart="108dp"
         android:layout_marginEnd="108dp"
         android:layout_marginBottom="240dp"
+        android:background="#6A675088"
         android:drawableEnd="@drawable/ic_golf_course"
         android:text="@string/view_my_courses"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -79,7 +82,7 @@
         android:fontFamily="sans-serif-smallcaps"
         android:text="@string/welcome_to_utt"
         android:textAlignment="center"
-        android:textColor="#9370D3"
+        android:textColor="#E8E8E8"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"

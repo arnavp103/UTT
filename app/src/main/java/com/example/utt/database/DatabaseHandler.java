@@ -182,6 +182,25 @@ public abstract class DatabaseHandler {
                     }
                 });
     }
+    public static void removeCourse(Course course) {
+        CourseDataModel output = CourseDataModel.readCourse(course);
+        removeCourse(output);
+    }
+
+    public static void removeCourse(CourseDataModel course) {
+
+        dbCoursesRef.child(course.getKey()).removeValue()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {}
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, "Failure: " + e);
+                    }
+                });
+
+    }
 
     /**
      * Inserts into database.students a new student. Called by addUser()

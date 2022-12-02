@@ -76,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        DatabaseHandler.initialise();
         /// TESTING STUFF
 
         CourseEventListener render = new CourseEventListener() {
