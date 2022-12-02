@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +25,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.FragmentAddFutureBinding;
-import com.example.utt.models.Student;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,8 +36,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class addPrev extends Fragment {
@@ -42,6 +43,7 @@ public class addPrev extends Fragment {
     private TextView textView;
     private ArrayList<String> allCourses;
     private ArrayList<String> pastList;
+    //private ArrayList<String> pastListTotal;
     private Dialog dialog;
 
     //these fields are to store the code, session, and year of the course previously taken
@@ -76,6 +78,7 @@ public class addPrev extends Fragment {
             Bundle savedInstanceState
     ) {
 
+
         View v = inflater.inflate(R.layout.fragment_add_prev, container, false);
 
         textView = (TextView) v.findViewById(R.id.text_view); //this is the layout of our past courses
@@ -88,6 +91,7 @@ public class addPrev extends Fragment {
 
         //arraylist that stores past student courses
         pastList = new ArrayList<>();
+       // pastListTotal = new ArrayList<>();
 
 
         //initialize buttons and search, lists
@@ -100,11 +104,10 @@ public class addPrev extends Fragment {
         addCourse = "";
 
 
-        //Eric passes the student id
-        //Student student = new Student();
-        student_id = "";
-//        addSession = "";
-//        addYear = "";
+
+        //student_id = Student.getInstance().getId();
+        student_id = "-NIEtHul17Pb65Pp74eJ";
+
 
 
         //initialize list view
@@ -113,13 +116,21 @@ public class addPrev extends Fragment {
         course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, allCourses);
         viewAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, pastList);
 
-        loadPreviousCourses();
 
+        loadPreviousCourses();
+        //pastList.add("hi");
         courseView.setAdapter(viewAdapter);
+
+        //updates what's in the view for past courses
+
+        //viewAdapter.notifyDataSetChanged();
         //viewAdapter.notifyDataSetChanged();
 
 
         loadData();
+
+        courseView.setAdapter(viewAdapter);
+
 
 
 
@@ -160,7 +171,23 @@ public class addPrev extends Fragment {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                pastList.remove(to_remove);
+                                String code = Integer.toString(to_remove);
+                                //pastList.get(to_remove);
+
+                                //pastList.remove(to_remove);
+                                //must remove from database
+//                                DatabaseHandler.removeCourse(com.example.utt.models.Student.getCourse(code));
+                                studentCode.child(student_id).child(code).removeValue()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {}
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.d("RM", "Failure: " + e);
+                                            }
+                                        });
+
                                 viewAdapter.notifyDataSetChanged();
 
                             }
@@ -175,6 +202,40 @@ public class addPrev extends Fragment {
 
 
         //spinner filter + functionality
+        CourseEventListener lis = new CourseEventListener() {
+            @Override
+            public void onCourseAdded(Course course) {
+                loadData();
+
+            }
+
+            @Override
+            public void onCourseChanged(Course course) {
+                loadData();
+
+            }
+
+            @Override
+            public void onCourseRemoved(Course course) {
+                //loadData();
+
+                //if the course that was removed is in the list
+                //loadData again,
+                //remove from pastList and or pastListTotal
+                if (pastList.contains(course.getCode())){
+                    loadData();
+                    Toast.makeText(getContext(), "We removed a course you added as it is no longer available!", Toast.LENGTH_LONG).show();
+                    pastList.remove(course.getCode());
+                    if (pastList.contains(course.getCode())){
+                        pastList.remove(course.getCode());
+                    }
+                    viewAdapter.notifyDataSetChanged();
+
+
+                }
+
+            }
+        };
 
         textView.setOnClickListener(new View.OnClickListener() {
 
@@ -259,7 +320,12 @@ public class addPrev extends Fragment {
                 }else if (!(addCourse.isEmpty()) && !(pastList.contains(addCourse))) {
                     pastList.add(addCourse);
                     //courseView.notifyDataSetChanged();
+                    //viewAdapter.notifyDataSetChanged();
+
+                    studentCode.child(student_id).child(Integer.toString(pastList.size())).setValue(addCourse);
                     courseView.setAdapter(viewAdapter);
+
+                    //DatabaseHandler.addCourse(com.example.utt.models.Course.getCourse(addCourse));
 
 
                 }
@@ -286,16 +352,19 @@ public class addPrev extends Fragment {
         return v;
 
     }
+
     private void loadData() {
 
         courseCode.addValueEventListener(new ValueEventListener() {
             @Override
+
             // Executed every time we change something in the database
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                allCourses.clear();
                 for(DataSnapshot courseSnapshot: snapshot.getChildren()){
                     String course = (courseSnapshot.getValue(Course.class)).code + " ";
                     allCourses.add(course);
+                    course_adapter.notifyDataSetChanged();
                     //Log.i("RM", course);
 
                 }
@@ -313,38 +382,40 @@ public class addPrev extends Fragment {
     //still need to work on this, have to get student id
     //I think I need to have the field coursesTaken in student equal to pastList
     //the same goes for future list
+
+
+
     private void loadPreviousCourses() {
 
         studentCode.addValueEventListener(new ValueEventListener() {
             @Override
             // Executed every time we change something in the database
+
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //pastList.clear();
-                Map<String, String> result = new HashMap<>();
+                pastList.clear();
+
 
                 for(DataSnapshot courseSnapshot: snapshot.getChildren()){
-                    //String id = courseSnapshot.getKey();
-                    System.out.println(student_id);
+                    String id = courseSnapshot.getKey();
+                    //System.out.println(student_id);
+                    System.out.println(id);
 
 
 
-                    //if (id.equals(student_id)) {
-                    for (DataSnapshot past: courseSnapshot.getChildren()){
-                        pastList.add((String) past.getValue());
+                    if (id.equals(student_id)) {
+                        for (DataSnapshot past: courseSnapshot.getChildren()){
+
+                            pastList.add((String) past.getValue());
+
+                        }
+                            System.out.println(pastList);
+                            viewAdapter.notifyDataSetChanged();
+                            break;
                     }
-                    viewAdapter.notifyDataSetChanged();
-                    break;
-                    //}
-//                    if (id.equals(student_id)){
-//                        pastList = (ArrayList<String>) snapshot.getValue();
-//text view for headers
-//                    }
-Student.getReference.getId();
+
+
                 }
-                //System.out.println(pastList);
-
-
-
+                //System.out.println(pastListTotal);
 
 
 

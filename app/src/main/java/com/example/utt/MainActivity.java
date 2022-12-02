@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
 
-
+        DatabaseHandler.initialise();
         /// TESTING STUFF
 
         CourseEventListener render = new CourseEventListener() {

@@ -56,6 +56,7 @@ public class addFuture extends Fragment {
 
 
     private ArrayAdapter<String> viewAdapter;
+    private ArrayAdapter<String> course_adapter;
 
 
     public addFuture() {
@@ -70,6 +71,8 @@ public class addFuture extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_add_future, container, false);
 
+
+        //the textview is for the spinner
         textView = (TextView)v.findViewById(R.id.text_view);
         courseList = new ArrayList<>();
 
@@ -90,7 +93,9 @@ public class addFuture extends Fragment {
 
         //initialize list view which shows the layout of the added courses
         courseView = (ListView) v.findViewById(R.id.courseView);
+
         viewAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, futureList);
+        course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, courseList);
 
         loadData();
 
@@ -175,7 +180,7 @@ public class addFuture extends Fragment {
 
                 //Initialize array adaptor
 
-                ArrayAdapter<String> course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, courseList);
+                //ArrayAdapter<String> course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, courseList);
 
                 listView.setAdapter(course_adapter);
 
@@ -218,6 +223,32 @@ public class addFuture extends Fragment {
 
         });
 
+        CourseEventListener lis = new CourseEventListener() {
+            @Override
+            public void onCourseAdded(Course course) {
+                loadData();
+
+            }
+
+            @Override
+            public void onCourseChanged(Course course) {
+                loadData();
+
+            }
+
+            @Override
+            public void onCourseRemoved(Course course) {
+
+                if (futureList.contains(course.getCode())){
+
+                    loadData();
+                    futureList.remove(course.getCode());
+                    Toast.makeText(getContext(), "We removed a course you added as it is no longer available!", Toast.LENGTH_LONG).show();
+                    }
+
+            }
+        };
+
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -248,10 +279,12 @@ public class addFuture extends Fragment {
             @Override
             // Executed every time we change something in the database
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                courseList.clear();
                 for(DataSnapshot courseSnapshot: snapshot.getChildren()){
                     String course = (courseSnapshot.getValue(Course.class)).code + " ";
                     courseList.add(course);
+                    course_adapter.notifyDataSetChanged();
+
                     Log.i("RM", course);
 
                 }
