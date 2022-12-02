@@ -55,10 +55,8 @@ public class SignUpPage extends AppCompatActivity {
                     Toast.makeText(SignUpPage.this, "Passwords are not matching", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    databaseReference.child("email").setValue(emailText);
-                    databaseReference.child("isAdmin").setValue(adminOrStudentChoice.equals("Admin"));
-                    databaseReference.child("password").setValue(passwordText);
-                    databaseReference.child("index").setValue(emailText + passwordText);
+                    User user = new User(emailText, passwordText, adminOrStudentChoice.equals("Admin"));
+                    addUser(user);
                     Toast.makeText(SignUpPage.this, "User registered successfully", Toast.LENGTH_SHORT).show();
                     finish();
                 }
