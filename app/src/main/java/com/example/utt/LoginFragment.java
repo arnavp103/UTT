@@ -44,7 +44,7 @@ public class LoginFragment extends Fragment {
         } else {
 
             NavHostFragment.findNavController(LoginFragment.this)
-                    .navigate(R.id.action_LoginFragment_to_firstFragment);
+                    .navigate(R.id.action_loginFragment_to_Home);
         }
         return binding.getRoot();
     }

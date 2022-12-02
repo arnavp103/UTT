@@ -23,4 +23,9 @@ public class CookieLogin {
         return getSharedPreferences(ctx).getString(PREF_USER_NAME, "");
     }
 
+    public static void logout(Context ctx) {
+        SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
+        editor.remove(PREF_USER_NAME);
+        editor.apply();
+    }
 }
