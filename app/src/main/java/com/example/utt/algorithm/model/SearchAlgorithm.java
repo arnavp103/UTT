@@ -22,7 +22,9 @@ public class SearchAlgorithm {
             if (coursesTaken.contains(target)) { //already taken the course
                 continue;
             }
-            needToTake.add(target);
+            if (!(needToTake.contains(target))) {
+                needToTake.add(target);
+            }
             if ((target.getPrerequisites().size() == 0)) { //if the course you want to add to the schedule has no prerequisites
                 boolean toAdd = true;
                 for(CourseScheduling course : coursesTaken) {
