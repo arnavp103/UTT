@@ -92,7 +92,6 @@ public class SignUpPage extends AppCompatActivity {
                             });
 
 
-
                 }
             }
         });
