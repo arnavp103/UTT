@@ -13,13 +13,41 @@
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/SecondFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/fade_out"
+            />
         <action
             android:id="@+id/action_FirstFragment_to_recyclerListFragment"
-            app:destination="@id/recyclerListFragment" />
+            app:destination="@id/recyclerListFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/fade_out"/>
         <action
             android:id="@+id/action_FirstFragment_to_loginFragment"
-            app:destination="@id/LoginFragment" />
+            app:destination="@id/LoginFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/fade_out"/>
+        <action
+            android:id="@+id/action_home_to_addFuture"
+            app:destination="@id/addFuture"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/fade_out"/>
+        <action
+            android:id="@+id/action_Home_to_addPrev"
+            app:destination="@id/addPrev"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/fade_out"/>
+
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -29,7 +57,11 @@
 
         <action
             android:id="@+id/action_SecondFragment_to_Home"
-            app:destination="@id/Home" />
+            app:destination="@id/Home"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/fade_out"/>
     </fragment>
     <fragment
         android:id="@+id/addFuture"
@@ -38,7 +70,11 @@
         tools:layout="@layout/fragment_add_future">
         <action
             android:id="@+id/action_addFuture_to_Home"
-            app:destination="@id/Home" />
+            app:destination="@id/Home"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/fade_out"/>
 
     </fragment>
     <fragment
@@ -48,7 +84,11 @@
         tools:layout="@layout/fragment_add_prev">
         <action
             android:id="@+id/action_addPrev_to_Home"
-            app:destination="@id/Home" />
+            app:destination="@id/Home"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/fade_out"/>
 
     </fragment>
     <fragment
@@ -63,12 +103,63 @@
         tools:layout="@layout/fragment_login_page">
         <action
             android:id="@+id/action_loginFragment_to_Home"
-            app:destination="@id/Home" />
+            app:destination="@id/Home"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/fade_out"/>
         <action
             android:id="@+id/action_LoginFragment_to_firstFragment"
-            app:destination="@id/firstFragment" />
+            app:destination="@id/firstFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/fade_out"/>
+        <action
+            android:id="@+id/action_LoginFragment_to_signUpPage"
+            app:destination="@id/signUpPage"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/fade_out"/>
     </fragment>
     <action
         android:id="@+id/action_global_LoginFragment"
-        app:destination="@id/LoginFragment" />
+        app:destination="@id/LoginFragment"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/slide_out"
+        app:popEnterAnim="@anim/slide_in"
+        app:popExitAnim="@anim/fade_out"/>
+    <action
+        android:id="@+id/action_home_to_addFuture"
+        app:destination="@id/addFuture"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/slide_out"
+        app:popEnterAnim="@anim/slide_in"
+        app:popExitAnim="@anim/fade_out"/>
+    <fragment
+        android:id="@+id/firstFragment"
+        android:name="com.example.utt.FirstFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/fragment_first">
+        <action
+            android:id="@+id/action_firstFragment_to_LoginFragment"
+            app:destination="@id/LoginFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/fade_out"/>
+        <action
+            android:id="@+id/action_firstFragment_to_recyclerListFragment"
+            app:destination="@id/recyclerListFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/fade_out"/>
+    </fragment>
+    <activity
+        android:id="@+id/signUpPage"
+        android:name="com.example.utt.SignUpPage"
+        android:label="activity_sign_up_page"
+        tools:layout="@layout/activity_sign_up_page" />
 </navigation>

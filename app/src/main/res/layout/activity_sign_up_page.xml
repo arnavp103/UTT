@@ -133,12 +133,13 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword3"
         app:layout_constraintVertical_bias="0.0" />
 
-<!--    <ImageButton-->
-<!--        android:id="@+id/back_button"-->
-<!--        android:layout_width="50dp"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:background="@android:color/transparent"-->
-<!--        android:src="@drawable/ic_baseline_arrow_back_24"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="Back Button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -170,7 +170,13 @@ public abstract class DatabaseHandler {
         addCourse(output);
     }
 
+    public static void removeCourse(Course course) {
+        CourseDataModel output = CourseDataModel.readCourse(course);
+        removeCourse(output);
+    }
+
     public static void removeCourse(CourseDataModel course) {
+
         dbCoursesRef.child(course.getKey()).removeValue()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -181,6 +187,7 @@ public abstract class DatabaseHandler {
                         Log.d(TAG, "Failure: " + e);
                     }
                 });
+
     }
 
     /**

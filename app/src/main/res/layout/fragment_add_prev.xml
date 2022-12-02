@@ -19,22 +19,23 @@
         android:hint="@string/select_future_course"
         android:padding="12dp"
         android:textColorHint="#757575"
+        app:drawableEndCompat="@drawable/ic_arrow"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:drawableEndCompat="@drawable/ic_arrow" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/addFutureCourse"
-        app:drawableEndCompat="@drawable/ic_add_icon"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginBottom="23dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/add_course_future"
+        app:drawableEndCompat="@drawable/ic_add_icon"
         app:layout_constraintBottom_toTopOf="@+id/courseView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ListView
         android:id="@+id/courseView"
@@ -48,93 +49,34 @@
 
     <Button
         android:id="@+id/home_button"
-        app:drawableEndCompat="@drawable/ic_home_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="289dp"
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="16dp"
         android:text="@string/Home"
+        app:drawableEndCompat="@drawable/ic_home_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/save_button"
-        app:drawableEndCompat="@drawable/ic_save_icon"
+
+
+    <ImageButton
+        android:id="@+id/infoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="69dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="69dp"
-        android:layout_marginBottom="23dp"
-        android:text="@string/save_btn"
-        app:layout_constraintBottom_toTopOf="@+id/courseView"
+        android:layout_marginTop="135dp"
+        android:layout_marginEnd="17dp"
+        android:background="#0046338A"
+        android:contentDescription="@string/information"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:src="@drawable/ic_info_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/addFutureCourse"
-        app:layout_constraintTop_toBottomOf="@+id/text_view" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!--    <RadioButton-->
-<!--        android:id="@+id/radioFall"-->
-<!--        android:layout_width="95dp"-->
-<!--        android:layout_height="70dp"-->
-<!--        android:layout_marginStart="14dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_weight="1"-->
-<!--        android:buttonTint="#560ADD"-->
-<!--        android:checked="false"-->
-<!--        android:text="@string/fall"-->
-<!--        android:textSize="15sp"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/text_view" />-->
-
-<!--    <RadioButton-->
-<!--        android:id="@+id/radioWinter"-->
-<!--        android:layout_width="95dp"-->
-<!--        android:layout_height="70dp"-->
-<!--        android:layout_marginStart="10dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginEnd="10dp"-->
-<!--        android:layout_weight="1"-->
-<!--        android:buttonTint="#560ADD"-->
-<!--        android:checked="false"-->
-<!--        android:text="@string/winter"-->
-<!--        android:textSize="15sp"-->
-<!--        app:layout_constraintEnd_toStartOf="@+id/radioSummer"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/radioFall"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/text_view" />-->
-
-<!--    <RadioButton-->
-<!--        android:id="@+id/radioSummer"-->
-<!--        android:layout_width="95dp"-->
-<!--        android:layout_height="70dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginEnd="14dp"-->
-<!--        android:layout_weight="2"-->
-<!--        android:buttonTint="#560ADD"-->
-<!--        android:checked="false"-->
-<!--        android:text="@string/summer"-->
-<!--        android:textSize="15sp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/text_view" />-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/enter_year_btn"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="108dp"-->
-<!--        android:layout_marginEnd="108dp"-->
-<!--        android:layout_marginBottom="24dp"-->
-<!--        android:autofillHints=""-->
-<!--        android:ems="10"-->
-<!--        android:hint="@string/enter_year"-->
-<!--        android:inputType="number"-->
-<!--        android:minHeight="48dp"-->
-<!--        android:textColorHint="#757575"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/addFutureCourse"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

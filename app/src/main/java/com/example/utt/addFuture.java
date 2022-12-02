@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +31,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.utt.databinding.FragmentAddFutureBinding;
 import com.google.firebase.database.DataSnapshot;
@@ -50,13 +54,24 @@ public class addFuture extends Fragment {
     private ArrayList<String> futureList;
     private Dialog dialog;
     private String addCourse;
-
+    private ImageButton info;
     private Button addButton, home;
     private ListView courseView;
 
 //    private FirebaseFirestore courseCode = FirebaseFirestore.getInstance();
 
+
+
+    private DatabaseReference courseCode;
+    private FragmentAddFutureBinding binding;
+
     private ArrayAdapter<String> viewAdapter;
+    private ArrayAdapter<String> course_adapter;
+
+
+    public addFuture() {
+        // Required empty public constructor
+    }
 
 
     public addFuture() {
@@ -64,10 +79,15 @@ public class addFuture extends Fragment {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_future_courses);
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState
+    ) {
 
+        View v = inflater.inflate(R.layout.fragment_add_future, container, false);
+
+
+        //the textview is for the spinner
         textView = (TextView)v.findViewById(R.id.text_view);
         courseList = new ArrayList<>();
 
@@ -78,18 +98,20 @@ public class addFuture extends Fragment {
         futureList = new ArrayList<>();
 
         //initialize buttons and search, lists
-        courseView =  findViewById(R.id.courseView); //this is the layout that displays selected courses
-        addButton = findViewById(R.id.addFutureCourse);
-        home = findViewById(R.id.home_button);
-        //gen_time = findViewById(R.id.generate_btn);
+        addButton =(Button) v.findViewById(R.id.addFutureCourse);
+        home = (Button)v.findViewById(R.id.home_button);
+        info = v.findViewById(R.id.infoButton);
 
         addCourse = "";
 
         //initialize list view which shows the layout of the added courses
         courseView = (ListView) v.findViewById(R.id.courseView);
+
         viewAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, futureList);
+        course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, courseList);
 
         loadData();
+
 
 
         //goes to home button
@@ -99,6 +121,15 @@ public class addFuture extends Fragment {
                 NavHostFragment.findNavController(addFuture.this)
                         .navigate(R.id.action_addFuture_to_Home);//add action fragment from future courses to home
 
+
+            }
+        });
+
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(@NonNull View view) {
+
+                Toast.makeText(getContext(), "Click on the item to remove it!", Toast.LENGTH_LONG).show();
 
             }
         });
@@ -162,7 +193,7 @@ public class addFuture extends Fragment {
 
                 //Initialize array adaptor
 
-                ArrayAdapter<String> course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, courseList);
+                //ArrayAdapter<String> course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, courseList);
 
                 listView.setAdapter(course_adapter);
 
@@ -205,6 +236,32 @@ public class addFuture extends Fragment {
 
         });
 
+        CourseEventListener lis = new CourseEventListener() {
+            @Override
+            public void onCourseAdded(Course course) {
+                loadData();
+
+            }
+
+            @Override
+            public void onCourseChanged(Course course) {
+                loadData();
+
+            }
+
+            @Override
+            public void onCourseRemoved(Course course) {
+
+                if (futureList.contains(course.getCode())){
+
+                    loadData();
+                    futureList.remove(course.getCode());
+                    Toast.makeText(getContext(), "We removed a course you added as it is no longer available!", Toast.LENGTH_LONG).show();
+                    }
+
+            }
+        };
+
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -212,7 +269,7 @@ public class addFuture extends Fragment {
 
                 if (addCourse.equals("")) {
                     Toast.makeText(getContext(), "Select a valid course!", Toast.LENGTH_LONG).show();
-                } else if (!(addCourse.isEmpty()) && futureList.contains(addCourse) == false) {
+                } else if (!(addCourse.isEmpty()) && !(futureList.contains(addCourse))) {
                     futureList.add(addCourse);
                     //viewAdapter.notifyDataSetChanged();
                     //Log.i("RM", futureList.get(futureList.size()));
@@ -226,27 +283,7 @@ public class addFuture extends Fragment {
         });
 
 
-    }
-
-    public void loadCourses() {
-        DocumentReference ref = courseCode.collection("courses").document();
-
-        courseCode.collection("courses")
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
-                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            String course = ((document.toObject(Course.class)).getCode() + " ");
-
-                            courseList.add(course);
-
-                            //Log.d(TAG, p.getName() + " " + p.getAge());
-                        }
-
-                    }
-                });
+        return v;
 
     }
     private void loadData() {
@@ -255,10 +292,12 @@ public class addFuture extends Fragment {
             @Override
             // Executed every time we change something in the database
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                courseList.clear();
                 for(DataSnapshot courseSnapshot: snapshot.getChildren()){
                     String course = (courseSnapshot.getValue(ExcludedCourseDataModel.class)).getCode() + " ";
                     courseList.add(course);
+                    course_adapter.notifyDataSetChanged();
+
                     Log.i("RM", course);
 
                 }
