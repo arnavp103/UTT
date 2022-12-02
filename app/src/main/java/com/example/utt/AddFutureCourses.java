@@ -102,12 +102,8 @@ public class AddFutureCourses extends AppCompatActivity {
 
         //remove item function
         courseView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-
                 final int to_remove = i;
 
                 new AlertDialog.Builder(AddFutureCourses.this)
@@ -191,8 +187,9 @@ public class AddFutureCourses extends AppCompatActivity {
                         //set selected item on text view
                         addCourse = (String) course_adapter.getItem(i);
 
-
                         textView.setText(course_adapter.getItem(i));
+
+
 
                         dialog.dismiss();
                     }

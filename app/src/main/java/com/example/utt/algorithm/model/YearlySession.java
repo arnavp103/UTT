@@ -6,4 +6,7 @@ public class YearlySession {
         this.term = term;
     }
     public Term getTerm() { return term; }
+    public String toString() {
+        return term.name().toUpperCase().charAt(0) +  term.name().toLowerCase().substring(1);
+    }
 }
