@@ -22,7 +22,6 @@ import com.example.utt.models.Student;
 import com.example.utt.models.User;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
-import com.example.utt.CookieLogin;
 
 import java.util.List;
 
@@ -45,7 +44,7 @@ public class LoginFragment extends Fragment {
         } else {
 
             NavHostFragment.findNavController(LoginFragment.this)
-                    .navigate(R.id.action_loginFragment_to_FirstFragment);
+                    .navigate(R.id.action_LoginFragment_to_firstFragment);
         }
         return binding.getRoot();
     }

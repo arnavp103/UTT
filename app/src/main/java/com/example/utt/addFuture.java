@@ -21,28 +21,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.utt.Home;
-import com.example.utt.models.Course;
-import com.example.utt.models.firebase.datamodel.ExcludedCourseDataModel;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.utt.databinding.FragmentAddFutureBinding;
+import com.example.utt.models.Course;
+import com.example.utt.models.firebase.datamodel.ExcludedCourseDataModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -67,11 +57,6 @@ public class addFuture extends Fragment {
 
     private ArrayAdapter<String> viewAdapter;
     private ArrayAdapter<String> course_adapter;
-
-
-    public addFuture() {
-        // Required empty public constructor
-    }
 
 
     public addFuture() {
