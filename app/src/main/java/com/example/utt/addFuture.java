@@ -42,16 +42,19 @@ public class addFuture extends Fragment {
     private TextView textView;
     private ArrayList<String> courseList;
     private ArrayList<String> futureList;
+    private ArrayList<String> pastList;
     private Dialog dialog;
     private String addCourse;
     private ImageButton info;
     private Button addButton, home;
     private ListView courseView;
 
-
+    private String student_id;
 
 
     private DatabaseReference courseCode;
+    private DatabaseReference studentCode;
+
     private FragmentAddFutureBinding binding;
 
 
@@ -74,14 +77,23 @@ public class addFuture extends Fragment {
 
         //the textview is for the spinner
         textView = (TextView)v.findViewById(R.id.text_view);
+
+        //arraylist that stores all courses
         courseList = new ArrayList<>();
 
-        //setting up database retrieval for courses
-        courseCode = FirebaseDatabase.getInstance("https://utsc-b07-projcourses-default-rtdb.firebaseio.com/").getReference("courses");
-
+        //arraylist that stores past courses
+        pastList = new ArrayList<>();
 
         //arraylist that stores future student courses
         futureList = new ArrayList<>();
+
+        //setting up database retrieval for courses
+        studentCode = FirebaseDatabase.getInstance("https://utsc-b07-projcourses-default-rtdb.firebaseio.com/").getReference("students");
+        courseCode = FirebaseDatabase.getInstance("https://utsc-b07-projcourses-default-rtdb.firebaseio.com/").getReference("courses");
+
+
+        //initialize student id
+        student_id = "-NIEtHul17Pb65Pp74eJ";
 
 
         //initialize buttons and search, lists
@@ -98,6 +110,7 @@ public class addFuture extends Fragment {
         course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, courseList);
 
         loadData();
+        loadPreviousCourses();
 
 
 
@@ -180,7 +193,7 @@ public class addFuture extends Fragment {
 
                 //Initialize array adaptor
 
-                //ArrayAdapter<String> course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, courseList);
+                course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, courseList);
 
                 listView.setAdapter(course_adapter);
 
@@ -212,7 +225,6 @@ public class addFuture extends Fragment {
                         //when item selected from list
                         //set selected item on text view
                         addCourse = (String) course_adapter.getItem(i);
-
 
                         textView.setText(course_adapter.getItem(i));
 
@@ -256,7 +268,13 @@ public class addFuture extends Fragment {
 
                 if (addCourse.equals("")) {
                     Toast.makeText(getContext(), "Select a valid course!", Toast.LENGTH_LONG).show();
-                } else if (!(addCourse.isEmpty()) && !(futureList.contains(addCourse))) {
+                } else if (pastList.contains(addCourse)){
+                    Toast.makeText(getContext(), "Select a course you haven't taken!", Toast.LENGTH_LONG).show();
+                }
+                else if (futureList.contains(addCourse)){
+                    Toast.makeText(getContext(), "Select a course that you have not selected!", Toast.LENGTH_LONG).show();
+                }
+                else if (!(addCourse.isEmpty()) && !(futureList.contains(addCourse))) {
                     futureList.add(addCourse);
                     //viewAdapter.notifyDataSetChanged();
                     //Log.i("RM", futureList.get(futureList.size()));
@@ -299,6 +317,47 @@ public class addFuture extends Fragment {
         });
     }
 
+    private void loadPreviousCourses() {
+
+        studentCode.addValueEventListener(new ValueEventListener() {
+            @Override
+            // Executed every time we change something in the database
+
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                pastList.clear();
+
+
+                for(DataSnapshot courseSnapshot: snapshot.getChildren()){
+                    String id = courseSnapshot.getKey();
+                    //System.out.println(student_id);
+                    //System.out.println(id);
+
+
+
+                    if (id.equals(student_id)) {
+                        for (DataSnapshot past: courseSnapshot.getChildren()){
+                            pastList.add((String) past.getValue());
+
+                        }
+                        //System.out.println(pastList);
+
+                        break;
+                    }
+
+
+                }
+                //System.out.println(pastListTotal);
+
+
+
+            }
+            // Executed if there is some error
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+//add in some toast notification
+            }
+        });
+    }
 
     @Override
     public void onDestroyView() {

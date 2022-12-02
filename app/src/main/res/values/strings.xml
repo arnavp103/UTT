@@ -39,6 +39,7 @@
     <string name="save_btn">Save</string>
     <string name="welcome_to_utt">Welcome to UTT</string>
     <string name="information">Get Info</string>
+    <string name="add_prev_course">Add Course</string>
 
 
     <array name="courses_array">

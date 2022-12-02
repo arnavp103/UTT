@@ -22,6 +22,7 @@
             app:destination="@id/addFuture" />
         <action
             android:id="@+id/action_Home_to_addPrev"
+
             app:destination="@id/addPrev" />
 
     </fragment>
