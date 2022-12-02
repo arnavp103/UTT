@@ -83,12 +83,12 @@ public class DatabaseSamples {
 
         );
 
-        courses.add(new CourseDataModel(
-                "Design and Analysis of Data Structures",
-                "CSCB63",
-                mapSessions(List.of("Winter", "Summer")),
-                List.of("CSCB36"))
-        );
+//        courses.add(new CourseDataModel(
+//                "Design and Analysis of Data Structures",
+//                "CSCB63",
+//                mapSessions(List.of("Winter", "Summer")),
+//                List.of("CSCB36"))
+//        );
 
 //        courses.add(new CourseDataModel(
 //                "Introduction to the Theory of Computation",
@@ -97,6 +97,7 @@ public class DatabaseSamples {
 //                List.of("CSCA48", "CSCA67"))
 //        );
         // WSF
+//
         courses.add(new CourseDataModel( // Problem course as there exists MATA67
                 "Discrete Mathematics",
                 "CSCA67",
@@ -173,7 +174,7 @@ public class DatabaseSamples {
                 "tea"
         );
 
-        s.addCourse(List.of());
+        s.addCourse(List.of("CSCA08", "CSCA67"));
         users.add(s);
 
         users.add(new User(

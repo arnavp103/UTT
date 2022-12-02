@@ -1,6 +1,8 @@
 package com.example.utt.models;
 import android.util.Log;
 
+import android.util.Log;
+
 import com.google.firebase.firestore.Exclude;
 
 import java.util.ArrayList;

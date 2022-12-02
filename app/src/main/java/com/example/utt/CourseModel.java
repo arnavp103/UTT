@@ -4,6 +4,8 @@ package com.example.utt;
    Other course info should be included (11/25)
 */
 
+import com.example.utt.models.Course;
+
 import java.util.ArrayList;
 
 public class CourseModel {
@@ -18,6 +20,13 @@ public class CourseModel {
     private boolean expanded;
 
     // Constructor
+    public CourseModel(Course model) {
+        this.courseCode = model.getCode();
+        this.courseName = model.getName();
+        this.courseSession = model.getSessionOffering().toString();
+        this.coursePrereqs = model.getPrerequisites().toString();
+    }
+
     public CourseModel(String courseCode, String courseName, ArrayList<String> sessionList,
                        ArrayList<String> prereqsList) {
         this.courseCode = courseCode;

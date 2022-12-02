@@ -29,6 +29,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.FragmentAddFutureBinding;
+import com.example.utt.models.Course;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
