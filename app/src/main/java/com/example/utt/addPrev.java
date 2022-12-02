@@ -51,7 +51,7 @@ public class addPrev extends Fragment {
     private ImageButton info;
 
 
-    private Button addButton, home, save;
+    private Button addButton, home;
     private ListView courseView;
 
 
@@ -97,7 +97,6 @@ public class addPrev extends Fragment {
         //initialize buttons and search, lists
         addButton = (Button)v.findViewById(R.id.addFutureCourse);
         home = (Button)v.findViewById(R.id.home_button);
-        save = (Button) v.findViewById(R.id.save_button);
         info = v.findViewById(R.id.infoButton);
 
         //initialize our strings
@@ -329,19 +328,6 @@ public class addPrev extends Fragment {
 
 
                 }
-
-
-            }
-        });
-
-        //save button
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //Student get ID
-                //save to database
-                //save to field
 
 
             }

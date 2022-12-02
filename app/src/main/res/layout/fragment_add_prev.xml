@@ -27,14 +27,15 @@
         android:id="@+id/addFutureCourse"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginBottom="19dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/add_course_future"
         app:drawableEndCompat="@drawable/ic_add_icon"
         app:layout_constraintBottom_toTopOf="@+id/courseView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ListView
         android:id="@+id/courseView"
@@ -60,21 +61,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/save_button"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginStart="69dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="69dp"
-        android:layout_marginBottom="19dp"
-        android:text="@string/save_btn"
-        app:drawableEndCompat="@drawable/ic_save_icon"
-        app:layout_constraintBottom_toTopOf="@+id/courseView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/addFutureCourse"
-        app:layout_constraintTop_toBottomOf="@+id/text_view" />
+
 
     <ImageButton
         android:id="@+id/infoButton"
