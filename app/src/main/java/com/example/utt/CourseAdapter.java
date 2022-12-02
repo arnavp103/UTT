@@ -102,7 +102,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 //            layout.addView(tv);
 //        }
 
-        private void bind(CourseModel model) {
+        void bind(CourseModel model) {
             // Get the state
             boolean expanded = model.isExpanded();
             // Set the visibility based on state

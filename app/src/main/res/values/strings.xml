@@ -33,8 +33,7 @@
     <string name="home_futuretohome">Home</string>
     <string name="generate_future">GENERATE</string>
     <string name="homefuturetohome">futuretohome</string>
-    <string name="large_text">
-        "Material is the metaphor.\n\n"
+
     <string name="logout">Logout</string>
     <string name="login_title">Login</string>
     <string name="login_button">Login</string>

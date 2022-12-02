@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/timeline_list_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="1dp"
+    android:outlineProvider="bounds"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="1dp"
+    app:cardMaxElevation="2dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Text view to display years when course is offered -->
+        <LinearLayout
+            android:id="@+id/linLayoutYear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idYear"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_weight="1" />
+
+            <!-- Text View "Winter" header -->
+            <TextView
+                android:id="@+id/winterTextHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="Winter:"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:typeface="normal" />
+
+            <!-- Text View "Winter" courses -->
+            <TextView
+                android:id="@+id/winterCourses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:textColor="@color/black" />
+
+            <!-- Text View "Summer" header -->
+            <TextView
+                android:id="@+id/summerHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="Summer:"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <!-- Text View "Summer" courses -->
+            <TextView
+                android:id="@+id/summerCourses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:textColor="@color/black" />
+
+            <!-- Text View "Fall" header -->
+            <TextView
+                android:id="@+id/fallHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="Fall:"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <!-- Text View "Fall" courses -->
+            <TextView
+                android:id="@+id/fallCourses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <!-- Text View to display Course Name -->
+        <TextView
+            android:id="@+id/idYear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            tools:text="Year" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -55,8 +55,18 @@ public class Home extends Fragment {
         view.findViewById(R.id.searchTextNameHome).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                NavHostFragment.findNavController(FirstFragment.this)
-//                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                NavHostFragment.findNavController(Home.this)
+                        .navigate(R.id.action_SecondFragment_to_secondFragment);
+
+                //start activity for searchbar
+
+            }
+        });
+        view.findViewById(R.id.searchButtonHome).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(Home.this)
+                        .navigate(R.id.action_FirstFragment_to_recyclerListFragment);
 
                 //start activity for searchbar
 
@@ -84,11 +94,13 @@ public class Home extends Fragment {
     }
     public void HomeToGenerate()
     {
-        Intent in = new Intent(getActivity(), AddFutureCourses.class);
-        startActivity(in);
+//        Intent in = new Intent(getActivity(), AddFutureCourses.class);
+//        startActivity(in);
 //            Toast myToast = Toast.makeText(getActivity(), "We will connect this today!", Toast.LENGTH_SHORT);
 //            myToast.show();
 
+        NavHostFragment.findNavController(Home.this)
+                .navigate(R.id.action_FirstFragment_to_secondFragment);
     }
 
     @Override

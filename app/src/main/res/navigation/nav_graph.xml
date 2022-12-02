@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_loginFragment"
             app:destination="@id/LoginFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_secondFragment"
+            app:destination="@id/secondFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -30,6 +33,9 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_secondFragment"
+            app:destination="@id/secondFragment" />
     </fragment>
     <fragment
         android:id="@+id/recyclerListFragment"
@@ -64,19 +70,14 @@
         android:id="@+id/firstFragment"
         android:name="com.example.utt.FirstFragment"
         android:label="fragment_first"
-        tools:layout="@layout/fragment_first">
-        <action
-            android:id="@+id/action_firstFragment_to_secondFragment"
-            app:destination="@id/secondFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_first" />
     <fragment
         android:id="@+id/secondFragment"
         android:name="com.example.utt.SecondFragment"
         android:label="fragment_second"
-        tools:layout="@layout/fragment_second" />
-    <fragment
-        android:id="@+id/timeline"
-        android:name="com.example.utt.Timeline"
-        android:label="fragment_timeline"
-        tools:layout="@layout/fragment_timeline" />
+        tools:layout="@layout/fragment_second">
+        <action
+            android:id="@+id/action_secondFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
 </navigation>

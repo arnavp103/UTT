@@ -251,25 +251,25 @@ public class FirstFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        databaseCourses.addValueEventListener(new ValueEventListener() {
-            @Override
-            // Executed every time we change something in the database
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                courseList.clear();
-                for(DataSnapshot courseSnapshot: snapshot.getChildren()){
-                    Course course = courseSnapshot.getValue(Course.class);
-                    courseList.add(course);
-                }
-
-                CourseList adapter = new CourseList(getActivity(), courseList);
-                listViewCourses.setAdapter(adapter);
-            }
-            // Executed if there is some error
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        databaseCourses.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            // Executed every time we change something in the database
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                courseList.clear();
+//                for(DataSnapshot courseSnapshot: snapshot.getChildren()){
+//                    Course course = courseSnapshot.getValue(Course.class);
+//                    courseList.add(course);
+//                }
+//
+//                CourseList adapter = new CourseList(getActivity(), courseList);
+//                listViewCourses.setAdapter(adapter);
+//            }
+//            // Executed if there is some error
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
     }
 
     @Override

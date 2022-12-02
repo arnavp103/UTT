@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Home">
 
-
     <EditText
         android:id="@+id/searchTextNameHome"
         android:layout_width="match_parent"

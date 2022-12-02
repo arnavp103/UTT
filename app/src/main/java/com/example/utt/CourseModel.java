@@ -1,7 +1,6 @@
 package com.example.utt;
 
 /* Template for each course
-   Other course info should be included (11/25)
 */
 
 import android.util.Log;
