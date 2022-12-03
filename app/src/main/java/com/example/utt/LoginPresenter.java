@@ -4,7 +4,7 @@ import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-public class LoginPresenter implements LoginModel.LoginPresenter {
+public class LoginPresenter implements LoginModel.Presenter {
 	private final LoginView view;
 	private LoginModel model;
 
@@ -43,7 +43,7 @@ public class LoginPresenter implements LoginModel.LoginPresenter {
 		}
 	}
 
-	public interface LoginView {
+	interface LoginView {
 		public void makeSnackbar(String message);
 		public void goToAdminHome();
 		public void goToStudentHome();

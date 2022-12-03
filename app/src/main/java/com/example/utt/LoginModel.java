@@ -8,21 +8,20 @@ public class LoginModel extends BaseModel {
 	}
 
 	
-	public void queryIsUser(String uname, String pword, LoginPresenter presenter) {
+	public void queryIsUser(String uname, String pword, Presenter presenter) {
 		super.queryStudentsByName(uname).addListener(onSuccess(val -> {
-		if(val != null && val.pword == pword) {
-			presenter.onSuccess(val.uname);
-		}}).onFailure({throw new DatabaseReferenceError});
-	}
+			if(val != null && val.pword == pword) {
+				presenter.onSuccess(val.uname);
+			}}).onFailure({throw new DatabaseReferenceError});
+		}
 
-
-	public interface LoginPresenter {
+	public interface Presenter {
 
 		void onSuccess(String name);
 
 		void onFailure();
 
 	}
+	}
 
 }
-

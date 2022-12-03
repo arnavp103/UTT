@@ -25,7 +25,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
-public class LoginFragment extends Fragment implements LoginPresenter.LoginView{
+public class LoginFragment extends Fragment implements Presenter.LoginView{
     private FragmentLoginPageBinding binding;
     // username and password edit
     private EditText uEdit;
@@ -38,7 +38,7 @@ public class LoginFragment extends Fragment implements LoginPresenter.LoginView{
             Bundle savedInstanceState) {
         context = this.getContext();
         binding = FragmentLoginPageBinding.inflate(inflater, container, false);
-        LoginPresenter loginPresenter = new LoginPresenter(this);
+        Presenter loginPresenter = new Presenter(this);
 
 
         if(CookieLogin.getUserName(context).length() == 0) {
