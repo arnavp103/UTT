@@ -25,7 +25,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
-public class LoginFragment extends Fragment implements Presenter.LoginView{
+public class LoginFragment extends Fragment implements LoginPresenter.LoginView{
     private FragmentLoginPageBinding binding;
     // username and password edit
     private EditText uEdit;
@@ -38,7 +38,7 @@ public class LoginFragment extends Fragment implements Presenter.LoginView{
             Bundle savedInstanceState) {
         context = this.getContext();
         binding = FragmentLoginPageBinding.inflate(inflater, container, false);
-        Presenter loginPresenter = new Presenter(this);
+        LoginPresenter loginPresenter = new LoginPresenter(this);
 
 
         if(CookieLogin.getUserName(context).length() == 0) {
@@ -46,7 +46,7 @@ public class LoginFragment extends Fragment implements Presenter.LoginView{
         } else {
 
             NavHostFragment.findNavController(LoginFragment.this)
-                    .navigate(R.id.action_loginFragment_to_Home);
+                    .navigate(R.id.action_LoginFragment_to_Home);
         }
         return binding.getRoot();
     }
@@ -68,7 +68,7 @@ public class LoginFragment extends Fragment implements Presenter.LoginView{
                     // s.addCourse(List.of("MATA41", "CSCB36", "CSCA08", "BBBC"));
                     // DatabaseHandler.updateStudentData(s);
                     NavHostFragment.findNavController(LoginFragment.this)
-                            .navigate(R.id.action_loginFragment_to_Home);
+                            .navigate(R.id.action_LoginFragment_to_Home);
                 }
 
                 @Override
@@ -163,5 +163,21 @@ public class LoginFragment extends Fragment implements Presenter.LoginView{
         View view = this.getView();
         assert view != null;
         Snackbar.make(this.getView(), "Logged in as " + uEdit.toString(), BaseTransientBottomBar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void goToAdminHome() {
+        NavHostFragment.findNavController(LoginFragment.this)
+                .navigate(R.id.action_LoginFragment_to_firstFragment);
+    }
+
+    @Override
+    public void goToStudentHome() {
+
+    }
+
+    @Override
+    public void goToSignUp() {
+
     }
 }

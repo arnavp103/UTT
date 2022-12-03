@@ -102,7 +102,7 @@
         android:label="fragment_login_page"
         tools:layout="@layout/fragment_login_page">
         <action
-            android:id="@+id/action_loginFragment_to_Home"
+            android:id="@+id/action_LoginFragment_to_Home"
             app:destination="@id/Home"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/slide_out"
