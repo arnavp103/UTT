@@ -1,5 +1,8 @@
 package com.example.utt;
 
+
+import com.google.firebase.database.DataSnapshot;
+
 /* A bunch of concrete methods for dealing with the database
  * They should all be concrete so they can be inherited from the specific
  * models
@@ -9,15 +12,15 @@ package com.example.utt;
  * and do all the logic of handling the dataSnapshot and removing null values.
  * It sends it result to the presenter who manipulates the view accordingly
  */
-public abstract Class BaseModel {
+public abstract class BaseModel {
 	// Has the database references
-	// Databasereference dbStudents;	
+	// Databasereference dbStudents;
 	
-	public dataSnapshot queryStudentsByName(String uname) {
+	public DataSnapshot queryStudentsByName(String uname) {
 		// TODO
 	}
 
-	public dataSnapshot queryCoursesByID(int ID) {
+	public DataSnapshot queryCoursesByID(int ID) {
 		// TODO
 	}
 

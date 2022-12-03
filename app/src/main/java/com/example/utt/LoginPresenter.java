@@ -1,20 +1,24 @@
 package com.example.utt;
 
+import android.view.View;
+
+import androidx.fragment.app.Fragment;
 
 public class LoginPresenter implements LoginModel.LoginPresenter {
-	private LoginView view;
+	private final LoginView view;
 	private LoginModel model;
 
-	
+	// TODO Need to add navigation
+
 	public LoginPresenter(LoginView view) {
 		this.view = view;
-		this.model = new DatabaseModel();
+		this.model = new LoginModel();
 	}	
 
 
-	public void query(String uname, String pword) {
+	public void query(String uname, String pword, View view) {
 		if(view != null) {
-			SharedMethods.collapseKeyboard(view);
+			SharedMethods.collapseKeyboard(view.getContext());
 			model.queryIsUser(uname, pword, this);
 		}
 	}
@@ -22,28 +26,33 @@ public class LoginPresenter implements LoginModel.LoginPresenter {
 
 	@Override 
 	public void onSuccess(String result) {
-		if(result) {
-			makeSnackbar("Welcome Back "+ result);
-		} else {
-			makeSnackbar("Invalid Username or Password");
-		}	
+		view.makeSnackbar("Welcome Back, "+ result);
 
 	}
 
+	@Override
+	public void onFailure(){
+		view.makeSnackbar("Invalid Username or Password");
+	}
+
 	public void setCookie(int studentID) {
-			cookieLogin.setUserName();
+		if (view instanceof Fragment) {
+			Fragment viewFrag = (Fragment) view;
+			Integer Id = (Integer) studentID;
+			CookieLogin.setUserName(viewFrag.getContext(), Id.toString());
+		}
 	}
 
 	public interface LoginView {
 		public void makeSnackbar(String message);
+		public void goToAdminHome();
+		public void goToStudentHome();
+		public void goToSignUp();
 	}
 
-
-	@Override
 	public void onDestroy() {
-		view = null;
+		model = null;
 	}
-
 }
 
 

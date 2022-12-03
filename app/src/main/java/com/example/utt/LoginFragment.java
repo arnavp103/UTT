@@ -25,7 +25,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment implements LoginPresenter.LoginView{
     private FragmentLoginPageBinding binding;
     // username and password edit
     private EditText uEdit;
@@ -38,6 +38,8 @@ public class LoginFragment extends Fragment {
             Bundle savedInstanceState) {
         context = this.getContext();
         binding = FragmentLoginPageBinding.inflate(inflater, container, false);
+        LoginPresenter loginPresenter = new LoginPresenter(this);
+
 
         if(CookieLogin.getUserName(context).length() == 0) {
             ;   // if they don't have anything saved to shared pref continue as normal
@@ -154,5 +156,12 @@ public class LoginFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void makeSnackbar(String message) {
+        View view = this.getView();
+        assert view != null;
+        Snackbar.make(this.getView(), "Logged in as " + uEdit.toString(), BaseTransientBottomBar.LENGTH_SHORT).show();
     }
 }
