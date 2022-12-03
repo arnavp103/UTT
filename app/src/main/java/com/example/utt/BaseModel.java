@@ -2,6 +2,7 @@ package com.example.utt;
 
 
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
 
 /* A bunch of concrete methods for dealing with the database
  * They should all be concrete so they can be inherited from the specific
@@ -14,7 +15,7 @@ import com.google.firebase.database.DataSnapshot;
  */
 public abstract class BaseModel {
 	// Has the database references
-	// Databasereference dbStudents;
+	 DatabaseReference dbStudents;
 	
 	public DataSnapshot queryStudentsByName(String uname) {
 		// TODO

@@ -38,6 +38,10 @@ public class LoginPresenter implements LoginModel.Presenter {
 		CookieLogin.setUserName(context, studentID);
 	}
 
+	public String getCookie(Context context) {
+		return CookieLogin.getUserName(context);
+	}
+
 	interface LoginView {
 		public void makeSnackbar(String message);
 		public void goToAdminHome();

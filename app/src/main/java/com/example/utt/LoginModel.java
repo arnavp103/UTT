@@ -22,6 +22,4 @@ public class LoginModel extends BaseModel {
 		void onFailure();
 
 	}
-	}
-
 }
