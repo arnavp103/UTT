@@ -63,19 +63,16 @@ public class LoginFragment extends Fragment {
                     s.setId(user.getId());
 
                     Student.login(s, objectModel);
-                    // s.addCourse(List.of("MATA41", "CSCB36", "CSCA08", "BBBC"));
-                    // DatabaseHandler.updateStudentData(s);
+
                     NavHostFragment.findNavController(LoginFragment.this)
                             .navigate(R.id.action_loginFragment_to_Home);
                 }
 
                 @Override
-                public void onFailure(String data) {
-                }
+                public void onFailure(String data) {}
 
                 @Override
-                public void onComplete(String data) {
-                }
+                public void onComplete(String data) {}
             });
 
         } else if (user.getIsAdmin()) {
