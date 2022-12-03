@@ -1,8 +1,7 @@
 package com.example.utt;
 
+import android.content.Context;
 import android.view.View;
-
-import androidx.fragment.app.Fragment;
 
 public class LoginPresenter implements LoginModel.Presenter {
 	private final LoginView view;
@@ -35,12 +34,8 @@ public class LoginPresenter implements LoginModel.Presenter {
 		view.makeSnackbar("Invalid Username or Password");
 	}
 
-	public void setCookie(int studentID) {
-		if (view instanceof Fragment) {
-			Fragment viewFrag = (Fragment) view;
-			Integer Id = (Integer) studentID;
-			CookieLogin.setUserName(viewFrag.getContext(), Id.toString());
-		}
+	public void setCookie(Context context, String studentID) {
+		CookieLogin.setUserName(context, studentID);
 	}
 
 	interface LoginView {
@@ -48,6 +43,7 @@ public class LoginPresenter implements LoginModel.Presenter {
 		public void goToAdminHome();
 		public void goToStudentHome();
 		public void goToSignUp();
+		public void collapseKeyboard();
 	}
 
 	public void onDestroy() {
