@@ -85,6 +85,8 @@ public class CourseDataModel {
     }
 
     public static CourseDataModel getCourseDataModel(String courseCode) {
+        Log.d("COURSE", courses.toString());
+        Log.d("DAT","Query: '" + courseCode + "' " + courses.get(courseCode) + " ");
         return courses.get(courseCode);
     }
 
