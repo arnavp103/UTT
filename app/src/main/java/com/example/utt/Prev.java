@@ -39,7 +39,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class addPrev extends Fragment {
+public class Prev extends Fragment {
 
     private TextView textView;
     private ArrayList<String> allCourses;
@@ -49,6 +49,7 @@ public class addPrev extends Fragment {
 
     //these fields are to store the code, session, and year of the course previously taken
     private String addCourse;
+    private String addCourseKey;
     private ImageButton info;
 
 
@@ -69,7 +70,7 @@ public class addPrev extends Fragment {
     private Toast myToast;
 
 
-    public addPrev() {
+    public Prev() {
         // Required empty public constructor
     }
 
@@ -96,17 +97,18 @@ public class addPrev extends Fragment {
 
 
         //initialize buttons and search, lists
-        addButton = (Button)v.findViewById(R.id.addFutureCourse);
+        addButton = (Button)v.findViewById(R.id.addPrevCourse);
         home = (Button)v.findViewById(R.id.home_button);
         info = v.findViewById(R.id.infoButton);
 
         //initialize our strings
         addCourse = "";
+        addCourseKey = "";
 
 
 
-        //student_id = Student.getInstance().getId();
-        student_id = "-NIEtHul17Pb65Pp74eJ";
+        student_id = CookieLogin.getInstance().getUserId(requireContext());
+        //student_id = "-NIK8NoD7yfgucDNOVs7";
 
 
 
@@ -119,7 +121,7 @@ public class addPrev extends Fragment {
 
         loadPreviousCourses();
         //pastList.add("hi");
-        courseView.setAdapter(viewAdapter);
+
 
         //updates what's in the view for past courses
 
@@ -139,7 +141,7 @@ public class addPrev extends Fragment {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(@NonNull View view) {
-                NavHostFragment.findNavController(addPrev.this)
+                NavHostFragment.findNavController(Prev.this)
                         .navigate(R.id.action_addPrev_to_Home);//add action fragment from future courses to home
 
 
@@ -171,24 +173,17 @@ public class addPrev extends Fragment {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                String code = Integer.toString(to_remove);
+                                String code = pastList.get(to_remove);
                                 //pastList.get(to_remove);
 
                                 //pastList.remove(to_remove);
                                 //must remove from database
 //                                DatabaseHandler.removeCourse(com.example.utt.models.Student.getCourse(code));
-                                studentCode.child(student_id).child(code).removeValue()
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {}
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Log.d("RM", "Failure: " + e);
-                                            }
-                                        });
 
-                                viewAdapter.notifyDataSetChanged();
+                                addCourseKey = Course.getCourse(code.trim()).getKey();
+                                deleteCourse(addCourseKey);
+
+
 
                             }
                         })
@@ -225,11 +220,8 @@ public class addPrev extends Fragment {
                 if (pastList.contains(course.getCode())){
                     loadData();
                     Toast.makeText(getContext(), "We removed a course you added as it is no longer available!", Toast.LENGTH_LONG).show();
-                    pastList.remove(course.getCode());
-                    if (pastList.contains(course.getCode())){
-                        pastList.remove(course.getCode());
-                    }
-                    viewAdapter.notifyDataSetChanged();
+                    String courseKeyDelete = course.getKey();
+                    deleteCourse(courseKeyDelete);
 
 
                 }
@@ -241,7 +233,7 @@ public class addPrev extends Fragment {
 
             @Override
             public void onClick(View view) {
-
+                loadData();
 
                 //Initialize dialog
                 dialog = new Dialog(getContext());
@@ -264,7 +256,7 @@ public class addPrev extends Fragment {
 
                 //Initialize array adaptor
                 //viewAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, pastList);
-
+                course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, allCourses);
 
                 listView.setAdapter(course_adapter);
 
@@ -278,8 +270,6 @@ public class addPrev extends Fragment {
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {//if changed, filter out non-similar results
                         //Filter array list
                         course_adapter.getFilter().filter(charSequence);
-
-
                     }
 
                     @Override
@@ -295,13 +285,17 @@ public class addPrev extends Fragment {
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         //when item selected from list
                         //set selected item on text view
+
+
                         addCourse = (String) course_adapter.getItem(i);
+
 
 
                         textView.setText(course_adapter.getItem(i));
                         textView.setTextColor(Color.WHITE);
 
-
+                        listView.setAdapter(course_adapter);
+                        course_adapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
                 });
@@ -318,13 +312,20 @@ public class addPrev extends Fragment {
 
                 if (addCourse.equals("")) {
                     Toast.makeText(getContext(), "Select a valid course!", Toast.LENGTH_LONG).show();
-
+                } else if (pastList.contains(addCourse)){
+                    Toast.makeText(getContext(), "Select a course you haven't taken!", Toast.LENGTH_LONG).show();
+                }
+                else if (pastList.contains(addCourse)){
+                    Toast.makeText(getContext(), "Select a course that you have not selected!", Toast.LENGTH_LONG).show();
                 }else if (!(addCourse.isEmpty()) && !(pastList.contains(addCourse))) {
                     pastList.add(addCourse);
+
+                    addCourseKey = Course.getCourse(addCourse.trim()).getKey();
                     //courseView.notifyDataSetChanged();
                     //viewAdapter.notifyDataSetChanged();
 
-                    studentCode.child(student_id).child(Integer.toString(pastList.size())).setValue(addCourse);
+
+                    studentCode.child(student_id).child(addCourseKey).setValue(addCourse);
                     courseView.setAdapter(viewAdapter);
 
                     //DatabaseHandler.addCourse(com.example.utt.models.Course.getCourse(addCourse));
@@ -353,10 +354,13 @@ public class addPrev extends Fragment {
                 for(DataSnapshot courseSnapshot: snapshot.getChildren()){
                     String course = (courseSnapshot.getValue(ExcludedCourseDataModel.class)).getCode() + " ";
                     allCourses.add(course);
-                    course_adapter.notifyDataSetChanged();
+
+
                     //Log.i("RM", course);
 
                 }
+                course_adapter.notifyDataSetChanged();
+
 
 
             }
@@ -393,8 +397,9 @@ public class addPrev extends Fragment {
 
                     if (id.equals(student_id)) {
                         for (DataSnapshot past: courseSnapshot.getChildren()){
-
-                            pastList.add((String) past.getValue());
+                            if (!past.getKey().equals("None")) {
+                                pastList.add((String) past.getValue());
+                            }
 
                         }
                             System.out.println(pastList);
@@ -415,6 +420,22 @@ public class addPrev extends Fragment {
 //add in some toast notification
             }
         });
+    }
+
+    private void deleteCourse(String courseKey){
+        //student_id = CookieLogin.getInstance().getUserId(requireContext());
+        studentCode.child(student_id).child(courseKey).removeValue()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {}
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("RM", "Failure: " + e);
+                    }
+                });
+
+        viewAdapter.notifyDataSetChanged();
     }
 
 

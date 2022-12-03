@@ -27,6 +27,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.utt.databinding.FragmentAddFutureBinding;
 import com.example.utt.models.Course;
+import com.example.utt.models.Student;
 import com.example.utt.models.firebase.datamodel.ExcludedCourseDataModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,29 +38,33 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class addFuture extends Fragment {
+public class Future extends Fragment {
 
     private TextView textView;
     private ArrayList<String> courseList;
     private ArrayList<String> futureList;
+    private ArrayList<String> pastList;
     private Dialog dialog;
     private String addCourse;
     private ImageButton info;
     private Button addButton, home;
+    private Button generate;
     private ListView courseView;
 
-    // private FirebaseFirestore courseCode = FirebaseFirestore.getInstance();
-
+    private String student_id;
 
 
     private DatabaseReference courseCode;
+    private DatabaseReference studentCode;
+
     private FragmentAddFutureBinding binding;
+
 
     private ArrayAdapter<String> viewAdapter;
     private ArrayAdapter<String> course_adapter;
 
 
-    public addFuture() {
+    public Future() {
         // Required empty public constructor
     }
 
@@ -74,17 +79,30 @@ public class addFuture extends Fragment {
 
         //the textview is for the spinner
         textView = (TextView)v.findViewById(R.id.text_view);
+
+        //arraylist that stores all courses
         courseList = new ArrayList<>();
 
-        //setting up database retrieval for courses
-        courseCode = FirebaseDatabase.getInstance("https://utsc-b07-projcourses-default-rtdb.firebaseio.com/").getReference("courses");
+        //arraylist that stores past courses
+        pastList = new ArrayList<>();
 
         //arraylist that stores future student courses
         futureList = new ArrayList<>();
 
+        //setting up database retrieval for courses
+        studentCode = FirebaseDatabase.getInstance("https://utsc-b07-projcourses-default-rtdb.firebaseio.com/").getReference("students");
+        courseCode = FirebaseDatabase.getInstance("https://utsc-b07-projcourses-default-rtdb.firebaseio.com/").getReference("courses");
+
+
+        //initialize student id
+        //student_id = "-NIK8NoD7yfgucDNOVs7";
+        student_id = CookieLogin.getInstance().getUserId(requireContext());
+
         //initialize buttons and search, lists
         addButton =(Button) v.findViewById(R.id.addFutureCourse);
         home = (Button)v.findViewById(R.id.home_button);
+        generate = (Button)v.findViewById(R.id.generate_timeline);
+
         info = v.findViewById(R.id.infoButton);
 
         addCourse = "";
@@ -96,14 +114,15 @@ public class addFuture extends Fragment {
         course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, courseList);
 
         loadData();
+        loadPreviousCourses();
 
 
 
-        //goes to home button
+
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(@NonNull View view) {
-                NavHostFragment.findNavController(addFuture.this)
+                NavHostFragment.findNavController(Future.this)
                         .navigate(R.id.action_addFuture_to_Home);//add action fragment from future courses to home
 
 
@@ -119,11 +138,23 @@ public class addFuture extends Fragment {
             }
         });
 
+        generate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(@NonNull View view) {
+
+                Student.getInstance().setCoursesTaken(futureList);
+
+            }
+        });
 
         //remove item function
         courseView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+
                 final int to_remove = i;
 
                 new AlertDialog.Builder(getContext())
@@ -174,7 +205,7 @@ public class addFuture extends Fragment {
 
                 //Initialize array adaptor
 
-                //ArrayAdapter<String> course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, courseList);
+                course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, courseList);
 
                 listView.setAdapter(course_adapter);
 
@@ -206,10 +237,8 @@ public class addFuture extends Fragment {
                         //when item selected from list
                         //set selected item on text view
                         addCourse = (String) course_adapter.getItem(i);
+
                         textView.setText(course_adapter.getItem(i));
-                        textView.setTextColor(Color.WHITE);
-
-
 
                         dialog.dismiss();
                     }
@@ -239,7 +268,7 @@ public class addFuture extends Fragment {
                     loadData();
                     futureList.remove(course.getCode());
                     Toast.makeText(getContext(), "We removed a course you added as it is no longer available!", Toast.LENGTH_LONG).show();
-                    }
+                }
 
             }
         };
@@ -251,7 +280,13 @@ public class addFuture extends Fragment {
 
                 if (addCourse.equals("")) {
                     Toast.makeText(getContext(), "Select a valid course!", Toast.LENGTH_LONG).show();
-                } else if (!(addCourse.isEmpty()) && !(futureList.contains(addCourse))) {
+                } else if (pastList.contains(addCourse)){
+                    Toast.makeText(getContext(), "Select a course you haven't taken!", Toast.LENGTH_LONG).show();
+                }
+                else if (futureList.contains(addCourse)){
+                    Toast.makeText(getContext(), "Select a course that you have not selected!", Toast.LENGTH_LONG).show();
+                }
+                else if (!(addCourse.isEmpty()) && !(futureList.contains(addCourse))) {
                     futureList.add(addCourse);
                     //viewAdapter.notifyDataSetChanged();
                     //Log.i("RM", futureList.get(futureList.size()));
@@ -294,6 +329,47 @@ public class addFuture extends Fragment {
         });
     }
 
+    private void loadPreviousCourses() {
+
+        studentCode.addValueEventListener(new ValueEventListener() {
+            @Override
+            // Executed every time we change something in the database
+
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                pastList.clear();
+
+
+                for(DataSnapshot courseSnapshot: snapshot.getChildren()){
+                    String id = courseSnapshot.getKey();
+                    //System.out.println(student_id);
+                    //System.out.println(id);
+
+
+
+                    if (id.equals(student_id)) {
+                        for (DataSnapshot past: courseSnapshot.getChildren()){
+                            pastList.add((String) past.getValue());
+
+                        }
+                        //System.out.println(pastList);
+
+                        break;
+                    }
+
+
+                }
+                //System.out.println(pastListTotal);
+
+
+
+            }
+            // Executed if there is some error
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+//add in some toast notification
+            }
+        });
+    }
 
     @Override
     public void onDestroyView() {

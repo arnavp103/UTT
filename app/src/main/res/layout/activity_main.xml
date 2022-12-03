@@ -6,8 +6,9 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_gradient"
+    android:background="#76A7BD"
     tools:context=".MainActivity">
+
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -19,7 +20,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/navy_blue"
+            android:background="@color/gray20"
             app:popupTheme="@style/Theme.UTT.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -29,5 +30,7 @@
         android:layout_height="match_parent" />
 
     <include layout="@layout/content_main" />
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
