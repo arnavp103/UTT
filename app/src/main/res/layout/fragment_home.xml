@@ -46,9 +46,9 @@
         android:id="@+id/gen_addButton"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="108dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="20dp"
         android:backgroundTint="#6A675088"
         android:drawableEnd="@drawable/ic_generate_icon"
         android:text="@string/generate_timeline"
@@ -61,8 +61,8 @@
         android:id="@+id/view_my_courses"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:background="#6A675088"
         android:drawableEnd="@drawable/ic_golf_course"
         android:text="@string/view_my_courses"
@@ -99,14 +99,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.84" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.25" />
-
-<!--    <Button-->
+    <!--    <Button-->
 <!--        android:id="@+id/view_my_courses"-->
 <!--        android:layout_width="220dp"-->
 <!--        android:layout_height="50dp"-->
