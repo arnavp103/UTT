@@ -3,6 +3,7 @@ package com.example.utt;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.FragmentLoginPageBinding;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -34,6 +36,17 @@ public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
         loginPresenter = new LoginPresenter(this);
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (loginPresenter.getCookie(context).length() != 0) {
+            Log.d("USER", "Database Doooooo");
+            // if they don't have anything saved to shared pref continue as normal
+            loginPresenter.cookieQuery(CookieLogin.getUserId(context), this.getView());
+        }
+
     }
 
     /// The method to check if the user's credentials are valid
@@ -99,13 +112,8 @@ public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
         String username = uEdit.getText().toString();
         String password = pEdit.getText().toString();
 
-        if (loginPresenter.getCookie(context).length() != 0) {
-            // if they don't have anything saved to shared pref continue as normal
-            loginPresenter.cookieQuery(CookieLogin.getUserId(context), this.getView());
-        }
-        else {
-            loginPresenter.query(username, password, view);
-        }
+
+        loginPresenter.query(username, password, view);
         // DatabaseHandler.getUser(username, password, authCallback);
     }
 

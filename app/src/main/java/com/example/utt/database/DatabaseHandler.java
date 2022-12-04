@@ -39,6 +39,8 @@ public abstract class DatabaseHandler {
     // Connect to the firebase emulator
     private static final boolean USE_EMULATOR = false;
 
+    private static boolean databaseReady = false;
+
     // The root of the database JSON
     private static DatabaseReference dbRootRef;
     private static DatabaseReference dbCoursesRef;
@@ -49,6 +51,17 @@ public abstract class DatabaseHandler {
 
     private DatabaseHandler() {initialise();}
 
+    public interface OnReadyListener {
+        public void onReady();
+    }
+
+    private static ArrayList<OnReadyListener> onReadyListeners = new ArrayList<>();
+    public static void addOnReadyListener(OnReadyListener callback) {
+        if (databaseReady) callback.onReady();
+        else {
+            onReadyListeners.add(callback);
+        }
+    }
     /**
      * Converts plaintext string into hashed string for password storage
      * @param plain the input string
@@ -100,6 +113,7 @@ public abstract class DatabaseHandler {
                 .addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                     @Override
                     public void onSuccess(DataSnapshot dataSnapshot) {
+                        Log.d("USER", "BABABABABABA" + dataSnapshot.toString());
                         // Check length
                         int i = (int) dataSnapshot.getChildrenCount();
 
@@ -300,6 +314,9 @@ public abstract class DatabaseHandler {
         dbCoursesRef = dbRootRef.child("courses");
         dbUsersRef = dbRootRef.child("users");
         dbStudentsRef = dbRootRef.child("students");
+
+        databaseReady = true;
+        for (OnReadyListener callback : onReadyListeners) callback.onReady();
     }
 
     public static void initialise() {
@@ -310,25 +327,6 @@ public abstract class DatabaseHandler {
         attachCourseListener();
 //        generateSample();
 
-        // Testing
-        Listener<Course> testListener = new Listener<Course>() {
-            @Override
-            public void onSuccess(String data, @Nullable List<Course> objectModel) {
-                Log.d("Query Result:", "-> " + objectModel.toString());
-            }
-
-            @Override
-            public void onFailure(String data) {
-                Log.e(TAG, "Failure: " + data);
-            }
-
-            @Override
-            public void onComplete(String data) {
-
-            }
-        };
-//        queryCourseWithField("code", "CSCB", testListener);
-//        queryCourseWithField("name", "Introduction", testListener);
         Log.d(TAG, "Database initialised.");
     }
 
