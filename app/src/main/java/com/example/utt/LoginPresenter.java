@@ -1,15 +1,9 @@
 package com.example.utt;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
-
-import com.example.utt.models.Listener;
-import com.example.utt.models.User;
-
-import java.util.List;
 
 public class LoginPresenter implements LoginModel.Presenter {
 	private final LoginView view;
@@ -25,7 +19,6 @@ public class LoginPresenter implements LoginModel.Presenter {
 
 	public void query(String uname, String pword, View v) {
 		if(v != null) {
-			SharedMethods.collapseKeyboard(v.getContext());
 			model.queryIsUser(uname, pword, this);
 		}
 	}
@@ -36,15 +29,25 @@ public class LoginPresenter implements LoginModel.Presenter {
 		if (view instanceof Fragment) {
 			Fragment viewFrag = (Fragment) view;
 			setCookie(viewFrag.getContext(), userID);
+			// This can't be done unless we can get a username from userID
+			// String username = ;
+			// view.makeSnackbar("Welcome Back, " + username);
+			view.makeSnackbar("Welcome Back, " + userID);
+			view.collapseKeyboard();
+			if (accountType == AccountType.STUDENT) {
+				view.goToStudentHome();
+			}
+			else {
+				view.goToAdminHome();
+			}
 		}
 		// checkUserStatus(user.get(0), view);
-		view.makeSnackbar("Welcome Back, "+ userID);
-
 	}
 
 	@Override
 	public void onFailure(){
 		view.makeSnackbar("Invalid Username or Password");
+		view.collapseKeyboard();
 	}
 
 	public void setCookie(Context context, String studentID) {

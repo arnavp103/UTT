@@ -86,7 +86,6 @@ public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
                     (keyCode == KeyEvent.KEYCODE_ENTER)) {
                 // Perform action on key press
                 this.submit(v);
-                SharedMethods.collapseKeyboard(context);
                 // return true;
             }
             return false;
@@ -95,10 +94,7 @@ public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
         // Validate Login Credentials
         // binding.buttonLogin.setOnClickListener(this::submit);
 
-        binding.buttonLogin.setOnClickListener(view2 -> {
-            this.submit(view2);
-            SharedMethods.collapseKeyboard(context);
-        });
+        binding.buttonLogin.setOnClickListener(this::submit);
 
         binding.signup.setOnClickListener(view1 -> goToSignUp());
     }
