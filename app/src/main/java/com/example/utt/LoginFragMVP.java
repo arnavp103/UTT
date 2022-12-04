@@ -3,7 +3,6 @@ package com.example.utt;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,19 +10,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.FragmentLoginPageBinding;
-import com.example.utt.models.Listener;
-import com.example.utt.models.Student;
-import com.example.utt.models.User;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
-
-import java.util.List;
 
 public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
     private FragmentLoginPageBinding binding;
@@ -51,35 +43,35 @@ public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
     }
 
     /// The method to check if the user's credentials are valid
-    public void checkUserStatus(User user, View view) {
-        if (user.isStudent()) {
-            DatabaseHandler.getStudentData(user.getId(), new Listener<String>() {
-                @Override
-                public void onSuccess(String data, @Nullable List<String> objectModel) {
-                    assert objectModel != null;
-                    Student s = new Student(user.getEmail(), user.getPassword());
-                    s.setId(user.getId());
-
-                    Student.login(s, objectModel);
-                    // s.addCourse(List.of("MATA41", "CSCB36", "CSCA08", "BBBC"));
-                    // DatabaseHandler.updateStudentData(s);
-                    goToStudentHome();
-                }
-
-                @Override
-                public void onFailure(String data) {
-                }
-
-                @Override
-                public void onComplete(String data) {
-                }
-            });
-
-        } else if (user.getIsAdmin()) {
-            // Notify other fragments that user is Admin
-            goToAdminHome();
-        }
-    }
+//    public void checkUserStatus(User user, View view) {
+//        if (user.isStudent()) {
+//            DatabaseHandler.getStudentData(user.getId(), new Listener<String>() {
+//                @Override
+//                public void onSuccess(String data, @Nullable List<String> objectModel) {
+//                    assert objectModel != null;
+//                    Student s = new Student(user.getEmail(), user.getPassword());
+//                    s.setId(user.getId());
+//
+//                    Student.login(s, objectModel);
+//                    // s.addCourse(List.of("MATA41", "CSCB36", "CSCA08", "BBBC"));
+//                    // DatabaseHandler.updateStudentData(s);
+//                    goToStudentHome();
+//                }
+//
+//                @Override
+//                public void onFailure(String data) {
+//                }
+//
+//                @Override
+//                public void onComplete(String data) {
+//                }
+//            });
+//
+//        } else if (user.getIsAdmin()) {
+//            // Notify other fragments that user is Admin
+//            goToAdminHome();
+//        }
+//    }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -117,28 +109,7 @@ public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
         String username = uEdit.getText().toString();
         String password = pEdit.getText().toString();
 
-        Listener<User> authCallback = new Listener<User>() {
-            @Override
-            public void onSuccess(String data, List<User> user) {
-                assert user != null;
-                // Write their data to their local storage
-                checkUserStatus(user.get(0), view);
-                loginPresenter.setCookie(getContext(), user.get(0).getId());
-            }
 
-            @Override
-            public void onFailure(String data) {
-                // Toast.makeText(getActivity(), "Authentication Failed!",
-                // Toast.LENGTH_SHORT).show();
-                collapseKeyboard();
-                Log.d("AUTH FAIL", "-" + data);
-
-            }
-
-            @Override
-            public void onComplete(String data) {
-            }
-        };
         loginPresenter.query(username, password, view);
         // DatabaseHandler.getUser(username, password, authCallback);
     }
