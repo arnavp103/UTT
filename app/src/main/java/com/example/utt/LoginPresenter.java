@@ -70,10 +70,6 @@ public class LoginPresenter implements LoginModel.Presenter {
 		return CookieLogin.getUserId(context);
 	}
 
-	private void studentLogin() { }
-
-	private void adminLogin() {	}
-
 	interface LoginView {
 		public void makeSnackbar(String message);
 		public void goToAdminHome();

@@ -13,8 +13,9 @@
     <color name="slategray">#FF708090</color>
     <color name="slategray_transparent">#4D708090</color>
     <color name="dimgray">#FF696969</color>
+    <color name="darkgray">#FF434242</color>
     <color name="palenight">#FFFBFBFD</color>
     <color name="navy_blue">#FF07225C</color>
-    <color name="baby_blue">#FF89CFF0</color>
-    <color name="ultramarine">#FF3F00FF</color>
+    <color name="baby_blue">#0A87BF</color>
+    <color name="ultramarine">#394291</color>
 </resources>

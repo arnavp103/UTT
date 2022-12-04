@@ -49,7 +49,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="@color/slategray"
+        android:backgroundTint="@color/navy_blue"
         android:fontFamily="@font/fira_sans_light"
         android:text="@string/login_button"
         android:textSize="16sp"

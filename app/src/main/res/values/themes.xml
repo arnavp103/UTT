@@ -19,7 +19,7 @@
 
         <!-- Splash screen v2 (Erin's logo)-->
         <item name="android:windowSplashScreenBackground">@color/black</item>
-        <item name="android:windowSplashScreenAnimatedIcon">@drawable/logo_v2</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/estremoved</item>
         <item name="android:windowSplashScreenAnimationDuration">1000</item>
         <item name="android:windowSplashScreenIconBackgroundColor">@color/slategray</item>
 
