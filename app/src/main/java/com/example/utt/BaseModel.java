@@ -1,15 +1,10 @@
 package com.example.utt;
 
 
-import androidx.annotation.Nullable;
-
 import com.example.utt.database.DatabaseHandler;
 import com.example.utt.models.Course;
 import com.example.utt.models.Listener;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
-
-import kotlin.NotImplementedError;
 
 /* A bunch of concrete methods for dealing with the database
  * They should all be concrete so they can be inherited from the specific
@@ -24,9 +19,7 @@ public abstract class BaseModel {
 	// Has the database references
 	 DatabaseReference dbStudents;
 	
-	public void queryStudentByID(String uname) {
-		// TODO
-
+	public void queryUserByID(String uname) {
 	}
 
 	public void queryCoursesByName(String name, Listener<Course> callback) {

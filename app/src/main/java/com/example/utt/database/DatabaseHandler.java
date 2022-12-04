@@ -91,6 +91,34 @@ public abstract class DatabaseHandler {
     }
 
     /**
+     * Queries the database for a user whose ID matches the provided userID
+     * Side note, this is a quick fix for cookie login and has security issues.
+     * @param userID The user ID to compare the rows with.
+     */
+    public static void getUser(String userID, Listener<User> callback) {
+        dbUsersRef.orderByKey().equalTo(userID).get()
+                .addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                    @Override
+                    public void onSuccess(DataSnapshot dataSnapshot) {
+                        // Check length
+                        int i = (int) dataSnapshot.getChildrenCount();
+
+                        if (i > 1 || i == 0) {callback.onFailure(null);}
+                        else {
+                            User instance;
+                            for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                instance = child.getValue(User.class);
+                                assert instance != null;
+                                instance.setId(child.getKey());
+                                callback.onSuccess(dataSnapshot.toString(), List.of(instance));
+                                return;
+                            }
+                        }
+                    }
+                }).addOnFailureListener(e -> callback.onFailure(e.toString()));
+    }
+
+    /**
      * Queries the database for a user whose email and password match the given input
      * for login purposes as well as to retrieve stored courses.
      * @param email The email provided by the user
@@ -118,12 +146,7 @@ public abstract class DatabaseHandler {
                             }
                         }
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        callback.onFailure(e.toString());
-                    }
-                });
+                }).addOnFailureListener(e -> callback.onFailure(e.toString()));
     }
 
     public static void updateCourse(CourseDataModel course)  {

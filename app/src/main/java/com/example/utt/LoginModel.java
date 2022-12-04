@@ -26,6 +26,30 @@ public class LoginModel extends BaseModel {
 
 	public LoginModel(){}
 
+	public void queryUserByID(String userID, Presenter presenter) {
+		Listener<User> callback = new Listener<User>() {
+			@Override
+			public void onSuccess(String data, @Nullable List<User> objectModel) {
+				assert objectModel != null;
+				User user = objectModel.get(0);
+				Presenter.AccountType accessType = (user.isStudent()) ?
+						Presenter.AccountType.STUDENT :
+						Presenter.AccountType.ADMIN;
+
+				presenter.onSuccess(user.getId(), user.getEmail(), accessType);
+			}
+
+			@Override
+			public void onFailure(String data) {
+				presenter.onFailure();
+			}
+
+			@Override
+			public void onComplete(String data) {}
+		};
+		DatabaseHandler.getUser(userID, callback);
+	}
+
 	public void queryIsUser(String uname, String pword, Presenter presenter) {
 		Listener<User> callback = new Listener<User>() {
 			@Override
