@@ -1,7 +1,15 @@
 package com.example.utt;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
+
+import androidx.fragment.app.Fragment;
+
+import com.example.utt.models.Listener;
+import com.example.utt.models.User;
+
+import java.util.List;
 
 public class LoginPresenter implements LoginModel.Presenter {
 	private final LoginView view;
@@ -15,16 +23,42 @@ public class LoginPresenter implements LoginModel.Presenter {
 	}	
 
 
-	public void query(String uname, String pword, View view) {
-		if(view != null) {
-			SharedMethods.collapseKeyboard(view.getContext());
+	public void query(String uname, String pword, View v) {
+		if(v != null) {
+			SharedMethods.collapseKeyboard(v.getContext());
 			model.queryIsUser(uname, pword, this);
 		}
+		Listener<User> authCallback = new Listener<User>() {
+			@Override
+			public void onSuccess(String data, List<User> user) {
+
+			}
+
+			@Override
+			public void onFailure(String data) {
+				// Toast.makeText(getActivity(), "Authentication Failed!",
+				// Toast.LENGTH_SHORT).show();
+				view.collapseKeyboard();
+				Log.d("AUTH FAIL", "-" + data);
+
+			}
+
+			@Override
+			public void onComplete(String data) {
+			}
+		};
 	}
 
 
 	@Override 
 	public void onSuccess(String result) {
+
+		// Write their data to their local storage
+		if (view instanceof Fragment) {
+			Fragment viewFrag = (Fragment) view;
+			setCookie(viewFrag.getContext(), result);
+		}
+		// checkUserStatus(user.get(0), view);
 		view.makeSnackbar("Welcome Back, "+ result);
 
 	}
