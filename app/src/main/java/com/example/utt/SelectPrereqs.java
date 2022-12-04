@@ -20,6 +20,7 @@ import com.example.utt.databinding.FragmentRecyclerListBinding;
 import com.example.utt.databinding.SelectPrereqsBinding;
 import com.example.utt.models.Course;
 import com.example.utt.models.CourseEventListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -31,10 +32,9 @@ public class SelectPrereqs extends Fragment {
     private RecyclerView prereqRecyclerView;
     private PrereqAdapter prereqAdapter;
     private List<CourseModel> courseList;
+    private ArrayList<Course> prereqList;
+    private FloatingActionButton fab;
     DatabaseReference databaseCourseCode;
-    ListView listViewCourses;
-    Button doneButton;
-    //List<Course> courseList = new ArrayList<>();
 
     @Override
     public View onCreateView(
@@ -55,12 +55,23 @@ public class SelectPrereqs extends Fragment {
         prereqRecyclerView = getView().findViewById(R.id.prereqRecyclerView);
         prereqRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         prereqAdapter = new PrereqAdapter(SelectPrereqs.this);
-        prereqRecyclerView.setAdapter(prereqAdapter);
+        prereqList = new ArrayList<>();
+
+        fab = getView().findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(SelectPrereqs.this)
+                        .navigate(R.id.action_selectPrereqs2_to_firstFragment);
+            }
+        });
 
         // TESTING TASKS ---------------------------------
         Course course = new Course();
         CourseModel task = new CourseModel(course);
-        task.setCourseCode(task.getCourseCode());
+//        task.setCourseCode(task.getCourseCode());
+        task.setCourseCode("Testing");
         task.setStatus(0);
 
         courseList.add(task);
@@ -69,13 +80,6 @@ public class SelectPrereqs extends Fragment {
         prereqAdapter.setList(courseList);
         // -----------------------------------------------------
 
-//        binding.fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                NavHostFragment.findNavController(SelectPrereqs.this)
-//                        .navigate(R.id.action_selectPrereqs2_to_firstFragment);
-//            }
-//        });
         // Retrieve data from database
         CourseEventListener listener = new CourseEventListener() {
             @Override
