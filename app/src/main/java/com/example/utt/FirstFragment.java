@@ -248,9 +248,9 @@ public class FirstFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
+//    @Override
+//    public void onStart() {
+//        super.onStart();
 //        databaseCourses.addValueEventListener(new ValueEventListener() {
 //            @Override
 //            // Executed every time we change something in the database
@@ -270,7 +270,7 @@ public class FirstFragment extends Fragment {
 //
 //            }
 //        });
-    }
+//    }
 
     @Override
     public void onDestroyView() {

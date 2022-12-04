@@ -52,16 +52,16 @@ public class Home extends Fragment {
         //searchButton = getView().findViewById(R.id.searchButtonHome);
         //gotoAddCourses = getView().findViewById(R.id.gen_addButton);
 
-        view.findViewById(R.id.searchTextNameHome).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(Home.this)
-                        .navigate(R.id.action_SecondFragment_to_secondFragment);
+//        view.findViewById(R.id.searchTextNameHome).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                NavHostFragment.findNavController(Home.this)
+//                        .navigate(R.id.action_SecondFragment_to_secondFragment);
 
                 //start activity for searchbar
 
-            }
-        });
+//            }
+//        });
         view.findViewById(R.id.searchButtonHome).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

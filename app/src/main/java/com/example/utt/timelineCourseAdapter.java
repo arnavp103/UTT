@@ -1,8 +1,7 @@
 package com.example.utt;
 
-import static com.example.utt.SecondFragment.yearList;
-
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +78,7 @@ public class timelineCourseAdapter extends RecyclerView.Adapter<timelineCourseAd
         }
 
         void timelineBind(TimelineCourseModel model){
+            Log.d("TIMELINE", this + "Bind Called ------------ " + model.getYear());
             // Get the state
             boolean expanded = model.isExpanded();
             // Set the visibility based on state
@@ -93,27 +93,22 @@ public class timelineCourseAdapter extends RecyclerView.Adapter<timelineCourseAd
             fallCourses.setText(model.getFallCourses());
 //            courseName.setText(model.getCourseName());
 //            courseCode.setText(model.getCourseCode());
+            fallCourses.setVisibility(model.getFallCourses().isEmpty() ? View.GONE : View.VISIBLE);
+            fallHeader.setVisibility(model.getFallCourses().isEmpty() ? View.GONE : View.VISIBLE);
 
+            winterCourses.setVisibility(model.getWinterCourses().isEmpty() ? View.GONE : View.VISIBLE);
+            winterHeader.setVisibility(model.getWinterCourses().isEmpty() ? View.GONE : View.VISIBLE);
+
+            summerHeader.setVisibility(model.getSummerCourses().isEmpty() ? View.GONE : View.VISIBLE);
+            summerCourses.setVisibility(model.getSummerCourses().isEmpty() ? View.GONE : View.VISIBLE);
             // Use this when there are no courses offered that term
-//            for(String yearIndex: yearList) {
-//                if(yearIndex.equals(model.getYear())) {
-                    if (model.getWinterCourses().isEmpty()) {
-                        ((ViewGroup) detailsLayout).removeView(winterCourses);
-                        ((ViewGroup) detailsLayout).removeView(winterHeader);
-                    }
-                    if (model.getFallCourses().isEmpty()) {
-                        ((ViewGroup) detailsLayout).removeView(fallCourses);
-                        ((ViewGroup) detailsLayout).removeView(fallHeader);
-                    }
-                    if (model.getSummerCourses().isEmpty()) {
-//                if (winterCourses.getParent() != null || summerCourses.getParent() != null ||
-//                fallCourses.getParent() != null) {
-                        ((ViewGroup) detailsLayout).removeView(summerCourses);
-                        ((ViewGroup) detailsLayout).removeView(summerHeader);
-                    }
-//                }
+//            if (model.getWinterCourses().isEmpty()) {
+//                Log.d("TIMELINE", model.getYear() + ": Empty Winter Courses");
+//                ((ViewGroup) detailsLayout).removeView(winterCourses);
+//                ((ViewGroup) detailsLayout).removeView(winterHeader);
 //            }
         }
     }
 
 }
+
