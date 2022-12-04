@@ -49,7 +49,6 @@ public class LoginFragment extends Fragment {
             DatabaseHandler.getStudentData(user.getId(), new Listener<String>() {
                 @Override
                 public void onSuccess(String data, @Nullable List<String> objectModel) {
-                    Log.d("Fail", "Disowned");
                     assert objectModel != null;
                     Student s = new Student(user.getEmail(), user.getPassword());
                     s.setId(user.getId());
@@ -119,12 +118,10 @@ public class LoginFragment extends Fragment {
         String username = uEdit.getText().toString();
         String password = pEdit.getText().toString();
 
-        Log.d("Check", "Works");
         Listener<User> authCallback = new Listener<User>() {
             @Override
             public void onSuccess(String data, List<User> user) {
                 assert user != null;
-                Log.d("Check 2", "No Works");
                 checkUserStatus(user.get(0), view);
 
             }
@@ -138,9 +135,8 @@ public class LoginFragment extends Fragment {
             }
 
             @Override
-            public void onComplete(String data) {Log.d("Check 4", "Help");}
+            public void onComplete(String data) {}
         };
-        Log.d("Check", "Still No Works");
         DatabaseHandler.getUser(username, password, authCallback);
     }
 

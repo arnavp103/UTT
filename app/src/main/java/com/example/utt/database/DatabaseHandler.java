@@ -31,7 +31,7 @@ import java.util.Objects;
 public abstract class DatabaseHandler {
 
     private static final String emulatorURL = "https://utsc-b07-projcourse-default-rtdb.firebaseio.com";
-    private static final String databaseURL = "https://utsc-b07-projcourse-default-rtdb.firebaseio.com";
+    private static final String databaseURL = "https://utsc-b07-projcourses-default-rtdb.firebaseio.com";
 
     // Logcat Tag Name
     private static final String TAG = "DATABASE HANDLER";
