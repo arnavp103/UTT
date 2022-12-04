@@ -309,7 +309,7 @@ public abstract class DatabaseHandler {
         Log.d(TAG, "Database initialised.");
     }
 
-    private static void queryCourseWithField(String field, String code, Listener<Course> callback) {
+    public static void queryCourseWithField(String field, String code, Listener<Course> callback) {
 
         dbCoursesRef.orderByChild(field)
                 .startAt(code)

@@ -1,6 +1,11 @@
 package com.example.utt;
 
 
+import androidx.annotation.Nullable;
+
+import com.example.utt.database.DatabaseHandler;
+import com.example.utt.models.Course;
+import com.example.utt.models.Listener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 
@@ -19,18 +24,18 @@ public abstract class BaseModel {
 	// Has the database references
 	 DatabaseReference dbStudents;
 	
-	public DataSnapshot queryStudentsByName(String uname) {
+	public void queryStudentByID(String uname) {
 		// TODO
 		throw new NotImplementedError();
 	}
 
-	public DataSnapshot queryCoursesByID(int ID) {
-		// TODO
-		throw new NotImplementedError();
+	public void queryCoursesByName(String name, Listener<Course> callback) {
+		DatabaseHandler.queryCourseWithField("name", name, callback);
 	}
 
 	// add all the other database handling stuff as needed
-	public void addCourse(String courseCode) {
+	public void addCourse(Course course) {
+		DatabaseHandler.addCourse(course);
 	}
 
 	// note that every subclass of this should define their own interface of what

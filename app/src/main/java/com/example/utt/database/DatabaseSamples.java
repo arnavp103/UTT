@@ -62,14 +62,14 @@ public class DatabaseSamples {
         );
 
         courses.add(new CourseDataModel(
-                "Introduction to Compute Science II",
+                "Introduction to Computer Science II",
                 "CSCA48",
                 mapSessions(List.of("Winter", "Summer")),
                 List.of("CSCA08"))
         );
 
         courses.add(new CourseDataModel(
-                "Introduction to Compute Science I",
+                "Introduction to Computer Science I",
                 "CSCA08",
                 mapSessions(List.of("Fall", "Winter")),
                 List.of())

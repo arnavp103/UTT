@@ -30,17 +30,15 @@ public class LoginPresenter implements LoginModel.Presenter {
 		}
 	}
 
-
 	@Override 
-	public void onSuccess(String result) {
-
+	public void onSuccess(String userID, AccountType accountType) {
 		// Write their data to their local storage
 		if (view instanceof Fragment) {
 			Fragment viewFrag = (Fragment) view;
-			setCookie(viewFrag.getContext(), result);
+			setCookie(viewFrag.getContext(), userID);
 		}
 		// checkUserStatus(user.get(0), view);
-		view.makeSnackbar("Welcome Back, "+ result);
+		view.makeSnackbar("Welcome Back, "+ userID);
 
 	}
 
@@ -55,6 +53,13 @@ public class LoginPresenter implements LoginModel.Presenter {
 
 	public String getCookie(Context context) {
 		return CookieLogin.getUserName(context);
+	}
+
+	private void studentLogin() {
+	}
+
+	private void adminLogin() {
+
 	}
 
 	interface LoginView {

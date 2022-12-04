@@ -107,7 +107,6 @@ public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
         String username = uEdit.getText().toString();
         String password = pEdit.getText().toString();
 
-
         loginPresenter.query(username, password, view);
         // DatabaseHandler.getUser(username, password, authCallback);
     }

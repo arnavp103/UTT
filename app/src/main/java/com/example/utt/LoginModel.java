@@ -14,29 +14,29 @@ import java.util.List;
 
 public class LoginModel extends BaseModel {
 
-	public interface Presenter {
 
-		void onSuccess(String name);
+	public interface Presenter {
+		enum AccountType { ADMIN, STUDENT; }
+
+		void onSuccess(String userID, AccountType accessType);
 
 		void onFailure();
 
 	}
 
-	public LoginModel(){
+	public LoginModel(){}
 
-	}
-
-
-//		super.queryStudentsByName(uname).addListener(onSuccess(val -> {
-//		if(val != null && val.pword == pword) {
-//			presenter.onSuccess(val.uname);
-//		}}).onFailure(exception -> {throw new DatabaseReferenceError;});
-//	}
 	public void queryIsUser(String uname, String pword, Presenter presenter) {
 		Listener<User> callback = new Listener<User>() {
 			@Override
 			public void onSuccess(String data, @Nullable List<User> objectModel) {
-				presenter.onSuccess(objectModel.get(0).getId());
+				assert objectModel != null;
+				User user = objectModel.get(0);
+				Presenter.AccountType accessType = (user.isStudent()) ?
+						Presenter.AccountType.STUDENT :
+						Presenter.AccountType.ADMIN;
+
+				presenter.onSuccess(user.getId(), accessType);
 			}
 
 			@Override
@@ -45,9 +45,7 @@ public class LoginModel extends BaseModel {
 			}
 
 			@Override
-			public void onComplete(String data) {
-
-			}
+			public void onComplete(String data) {}
 		};
 		DatabaseHandler.getUser(uname, pword, callback);
 	}
