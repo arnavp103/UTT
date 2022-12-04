@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/LoginFragment">
+    app:startDestination="@id/firstFragment">
 
     <fragment
         android:id="@+id/FirstFragment"
@@ -91,5 +91,9 @@
         android:id="@+id/selectPrereqs2"
         android:name="com.example.utt.SelectPrereqs"
         android:label="select_prereqs"
-        tools:layout="@layout/select_prereqs" />
+        tools:layout="@layout/select_prereqs" >
+        <action
+            android:id="@+id/action_selectPrereqs2_to_firstFragment"
+            app:destination="@id/firstFragment" />
+    </fragment>
 </navigation>

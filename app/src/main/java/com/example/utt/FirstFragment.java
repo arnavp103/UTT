@@ -173,6 +173,7 @@ public class FirstFragment extends Fragment {
                 adapter.notifyDataSetChanged();
             }
 
+
             @Override
             public void onCourseRemoved(Course course) {
                 courseList.clear();
@@ -238,9 +239,17 @@ public class FirstFragment extends Fragment {
             Boolean exist = false;
             // Check if there are duplicates of a course created
             for(int i = 0; i < courseList.size(); i++){
-                Toast.makeText(getActivity(), course.getCode(),Toast.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(), course.getCode(),Toast.LENGTH_LONG).show();
                 if(course.equals(courseList.get(i))){
                     Toast.makeText(getActivity(), "Course already created",Toast.LENGTH_LONG).show();
+                    exist = true;
+                    break;
+                }
+                // Check if same course code is typed
+                else if(course.getCode().equals(courseList.get(i).getCode()) ||
+                        course.getName().equals(courseList.get(i).getName())){
+                    Toast.makeText(getActivity(), "Course code or course name already exists",
+                            Toast.LENGTH_LONG).show();
                     exist = true;
                     break;
                 }

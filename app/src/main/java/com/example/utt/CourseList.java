@@ -66,7 +66,7 @@ public class CourseList extends ArrayAdapter<Course> {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CourseDataModel.removeCourse(CourseDataModel.getCourseByCode(course.getCode()));
+                DatabaseHandler.removeCourse(CourseDataModel.getCourseByCode(course.getCode()));
                 notifyDataSetChanged();
             }
         });

@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Course {
+
+    private String key;
     private String name;
     private String courseCode;
 
@@ -40,6 +42,8 @@ public class Course {
     }
 
     //  =========== getters ===========
+    public String getKey() { return key; }
+
     public String getName() {
         return name;
     }
@@ -59,6 +63,9 @@ public class Course {
 
     // ========= setters ==========
 
+    public void setKey(String key) {
+        this.key = key;
+    }
     public void setSessionOffering(List<YearlySession> sessionOffering) {
         this.sessionOffering = sessionOffering;
     }

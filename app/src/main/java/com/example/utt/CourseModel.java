@@ -21,9 +21,10 @@ public class CourseModel {
     private ArrayList<String> sessionList;
     private ArrayList<String> prereqsList;
     private boolean expanded;
+    private int status;
     private static CourseModel currentExpanded;
 
-    final static List<String> sessionNames = List.of("Winter", "Summer", "Fall");
+    final static List<String> sessionNames = List.of("Winter", "Summer", "Fall", "NULL");
 
     // Constructor
     public CourseModel(Course model) {
@@ -33,7 +34,7 @@ public class CourseModel {
         ArrayList<String> prereqs = new ArrayList<>();
 
         for (YearlySession session : model.getSessionOffering()) {
-            sessions.add( sessionNames.get(session.getTerm().getTerm()));
+            sessions.add(sessionNames.get(session.getTerm().getTerm()));
         }
 
         for (Course course : model.getPrerequisites()) {
@@ -121,4 +122,11 @@ public class CourseModel {
         this.expanded = new_state;
     }
 
+    // For course prereq checklist
+    public int getStatus(){
+        return status;
+    }
+    public void setStatus(int status){
+        this.status = status;
+    }
 }
