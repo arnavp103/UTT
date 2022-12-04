@@ -4,6 +4,8 @@ package com.example.utt;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 
+import kotlin.NotImplementedError;
+
 /* A bunch of concrete methods for dealing with the database
  * They should all be concrete so they can be inherited from the specific
  * models
@@ -19,10 +21,12 @@ public abstract class BaseModel {
 	
 	public DataSnapshot queryStudentsByName(String uname) {
 		// TODO
+		throw new NotImplementedError();
 	}
 
 	public DataSnapshot queryCoursesByID(int ID) {
 		// TODO
+		throw new NotImplementedError();
 	}
 
 	// add all the other database handling stuff as needed

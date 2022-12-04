@@ -28,25 +28,6 @@ public class LoginPresenter implements LoginModel.Presenter {
 			SharedMethods.collapseKeyboard(v.getContext());
 			model.queryIsUser(uname, pword, this);
 		}
-		Listener<User> authCallback = new Listener<User>() {
-			@Override
-			public void onSuccess(String data, List<User> user) {
-
-			}
-
-			@Override
-			public void onFailure(String data) {
-				// Toast.makeText(getActivity(), "Authentication Failed!",
-				// Toast.LENGTH_SHORT).show();
-				view.collapseKeyboard();
-				Log.d("AUTH FAIL", "-" + data);
-
-			}
-
-			@Override
-			public void onComplete(String data) {
-			}
-		};
 	}
 
 

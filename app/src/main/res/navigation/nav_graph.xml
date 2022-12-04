@@ -98,7 +98,7 @@
         tools:layout="@layout/fragment_recycler_list" />
     <fragment
         android:id="@+id/LoginFragment"
-        android:name="com.example.utt.LoginFragment"
+        android:name="com.example.utt.LoginFragMVP"
         android:label="fragment_login_page"
         tools:layout="@layout/fragment_login_page">
         <action

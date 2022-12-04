@@ -33,8 +33,6 @@ public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
         binding = FragmentLoginPageBinding.inflate(inflater, container, false);
         loginPresenter = new LoginPresenter(this);
 
-
-//        if(CookieLogin.getUserName(context).length() == 0) {
         if (loginPresenter.getCookie(context).length() != 0) {
                // if they don't have anything saved to shared pref continue as normal
             goToStudentHome();

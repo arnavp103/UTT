@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/loginpage"
-    tools:context=".LoginFragment">
+    tools:context=".LoginFragMVP">
 
     <EditText
         android:id="@+id/editTextUsername"
