@@ -23,12 +23,13 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="378dp"
-        android:layout_height="436dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editCoursePrerequisites">
+        app:layout_constraintTop_toBottomOf="@+id/prereq">
 
         <ListView
             android:id="@+id/listViewCourses"
@@ -38,23 +39,24 @@
             android:layout_marginBottom="36dp"
             android:layout_weight="0.5"
             android:background="@color/listviewBackground"
-            android:stackFromBottom="true"
-            android:transcriptMode="alwaysScroll"
             android:focusableInTouchMode="false"
             android:isScrollContainer="false"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll"
             app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
             app:layout_constraintEnd_toEndOf="parent" />
     </LinearLayout>
 
     <EditText
         android:id="@+id/editCourseCode"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:ems="18"
         android:hint="@string/enter_course_code"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:singleLine="false"
         android:textColorHint="#757575"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +65,7 @@
     <!--Admin can add course name-->
     <EditText
         android:id="@+id/editCourseName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:ems="18"
@@ -78,7 +80,7 @@
     <!--Admin can add course session offerings-->
     <TextView
         android:id="@+id/sessionoffering"
-        android:layout_width="384dp"
+        android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_centerInParent="true"
         android:background="@android:drawable/editbox_background"
@@ -88,26 +90,13 @@
         android:hint="Select Session Offerings"
         android:padding="12dp"
         android:textColor="@android:color/black"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editCourseName" />
 
     <!--Admin can add course prerequisites-->
-    <EditText
-        android:id="@+id/editCoursePrerequisites"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:ems="18"
-        android:hint="@string/enter_course_prerequisites"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textColorHint="#757575"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sessionoffering" />
 
     <Button
         android:id="@+id/buttonNext"
@@ -125,6 +114,23 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/prereq"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/listviewBackground"
+        android:fontFamily="sans-serif"
+        android:lineSpacingExtra="10sp"
+        android:text="  Select prerequisites"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sessionoffering"
+        app:strokeWidth="2dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

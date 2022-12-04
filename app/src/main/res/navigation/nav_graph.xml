@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/LoginFragment">
+    app:startDestination="@id/firstFragment">
 
     <fragment
         android:id="@+id/FirstFragment"
@@ -70,7 +70,14 @@
         android:id="@+id/firstFragment"
         android:name="com.example.utt.FirstFragment"
         android:label="fragment_first"
-        tools:layout="@layout/fragment_first" />
+        tools:layout="@layout/fragment_first">
+        <action
+            android:id="@+id/action_firstFragment_to_secondFragment"
+            app:destination="@id/secondFragment" />
+        <action
+            android:id="@+id/action_firstFragment_to_selectPrereqs2"
+            app:destination="@id/selectPrereqs2" />
+    </fragment>
     <fragment
         android:id="@+id/secondFragment"
         android:name="com.example.utt.SecondFragment"
@@ -80,4 +87,9 @@
             android:id="@+id/action_secondFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/selectPrereqs2"
+        android:name="com.example.utt.SelectPrereqs"
+        android:label="select_prereqs"
+        tools:layout="@layout/select_prereqs" />
 </navigation>

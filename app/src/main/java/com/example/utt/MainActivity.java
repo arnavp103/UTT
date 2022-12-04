@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.fragment.app.Fragment;
@@ -59,16 +60,18 @@ public class MainActivity extends AppCompatActivity {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
         navController = Objects.requireNonNull(navHostFragment).getNavController();
         navController.addOnDestinationChangedListener((firstArg, destination, thirdArg) -> {
-            View back_button = binding.toolbar.getChildAt(2);
+            ActionBar actionBar = getSupportActionBar();
             if(destination.getId() == R.id.LoginFragment) {
                 binding.toolbar.setVisibility(View.GONE);
             }
             else {
                 binding.toolbar.setVisibility(View.VISIBLE);
-                back_button.setVisibility(View.VISIBLE);
+                assert actionBar != null;
+                actionBar.setDisplayHomeAsUpEnabled(true);
             }
-            if(destination.getId() == R.id.FirstFragment || destination.getId() == R.id.adminPlaceholder) {
-                back_button.setVisibility(View.GONE);
+            if(destination.getId() == R.id.FirstFragment || destination.getId() == R.id.firstFragment) {
+                assert actionBar != null;
+                actionBar.setDisplayHomeAsUpEnabled(false);
             }
         });
 

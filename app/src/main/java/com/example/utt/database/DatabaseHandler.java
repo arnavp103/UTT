@@ -30,8 +30,8 @@ import java.util.Objects;
  */
 public abstract class DatabaseHandler {
 
-    private static final String emulatorURL = "https://utsc-b07-projcourses.firebaseio.com";
-    private static final String databaseURL = "https://utsc-b07-projcourses-default-rtdb.firebaseio.com";
+    private static final String emulatorURL = "https://utsc-b07-projcourse-default-rtdb.firebaseio.com";
+    private static final String databaseURL = "https://b07-final-db5c5-default-rtdb.firebaseio.com";
 
     // Logcat Tag Name
     private static final String TAG = "DATABASE HANDLER";
@@ -135,6 +135,12 @@ public abstract class DatabaseHandler {
                     }
                 }).addOnFailureListener(e -> {Log.d(TAG, "Failure: " + e.toString());});
     }
+
+    public static void updateCourse(Course course) {
+        CourseDataModel output = CourseDataModel.readCourse(course);
+        updateCourse(output);
+    }
+
     /**
      * Inserts into database.courses a new course.
      * @param course The object model of the course
