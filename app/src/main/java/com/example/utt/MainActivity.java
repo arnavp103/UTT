@@ -14,25 +14,17 @@ import android.view.View;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.utt.algorithm.model.CourseScheduling;
-import com.example.utt.algorithm.model.SearchAlgorithm;
-import com.example.utt.algorithm.model.Term;
 import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.ActivityMainBinding;
 import com.example.utt.models.Course;
 import com.example.utt.models.CourseEventListener;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {

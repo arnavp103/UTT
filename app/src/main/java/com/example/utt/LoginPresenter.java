@@ -59,11 +59,15 @@ public class LoginPresenter implements LoginModel.Presenter {
 	}
 
 	public void setCookie(Context context, String studentID) {
-		CookieLogin.setUserName(context, studentID);
+		CookieLogin.setUserId(context, studentID);
 	}
 
 	public String getCookie(Context context) {
-		return CookieLogin.getUserName(context);
+		return CookieLogin.getUserId(context);
+	}
+
+	public void CookieQuery() {
+
 	}
 
 	private void studentLogin() { }
