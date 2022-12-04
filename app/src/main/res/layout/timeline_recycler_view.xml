@@ -15,6 +15,7 @@
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
+        android:id="@+id/recyclerFullItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
@@ -96,6 +97,7 @@
             android:id="@+id/idYear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableEnd="@android:drawable/arrow_down_float"
             android:textColor="@color/black"
             tools:text="Year" />
 
