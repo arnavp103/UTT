@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/LoginFragment">
+    app:startDestination="@id/firstFragment">
 
     <fragment
         android:id="@+id/FirstFragment"
@@ -40,7 +40,7 @@
         android:id="@+id/LoginFragment"
         android:name="com.example.utt.LoginFragment"
         android:label="fragment_login_page"
-        tools:layout="@layout/fragment_login_page" >
+        tools:layout="@layout/fragment_login_page">
         <action
             android:id="@+id/action_loginFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
@@ -52,7 +52,7 @@
         android:id="@+id/adminPlaceholder"
         android:name="com.example.utt.AdminPlaceholder"
         android:label="fragment_admin_placeholder"
-        tools:layout="@layout/fragment_admin_placeholder" >
+        tools:layout="@layout/fragment_admin_placeholder">
         <action
             android:id="@+id/action_adminPlaceholder_to_LoginFragment"
             app:destination="@id/LoginFragment" />
@@ -68,6 +68,9 @@
         <action
             android:id="@+id/action_firstFragment_to_secondFragment"
             app:destination="@id/secondFragment" />
+        <action
+            android:id="@+id/action_firstFragment_to_selectPrereqs2"
+            app:destination="@id/selectPrereqs2" />
     </fragment>
     <fragment
         android:id="@+id/secondFragment"
@@ -75,8 +78,8 @@
         android:label="fragment_second"
         tools:layout="@layout/fragment_second" />
     <fragment
-        android:id="@+id/timeline"
-        android:name="com.example.utt.Timeline"
-        android:label="fragment_timeline"
-        tools:layout="@layout/fragment_timeline" />
+        android:id="@+id/selectPrereqs2"
+        android:name="com.example.utt.SelectPrereqs"
+        android:label="select_prereqs"
+        tools:layout="@layout/select_prereqs" />
 </navigation>
