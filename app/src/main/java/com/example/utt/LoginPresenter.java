@@ -5,6 +5,11 @@ import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.utt.models.Student;
+import com.example.utt.models.User;
+
+import java.util.ArrayList;
+
 public class LoginPresenter implements LoginModel.Presenter {
 	private final LoginView view;
 	private LoginModel model;
@@ -24,7 +29,7 @@ public class LoginPresenter implements LoginModel.Presenter {
 	}
 
 	@Override 
-	public void onSuccess(String userID, AccountType accountType) {
+	public void onSuccess(String userID, String uname, AccountType accountType) {
 		// Write their data to their local storage
 		if (view instanceof Fragment) {
 			Fragment viewFrag = (Fragment) view;
@@ -32,12 +37,15 @@ public class LoginPresenter implements LoginModel.Presenter {
 			// This can't be done unless we can get a username from userID
 			// String username = ;
 			// view.makeSnackbar("Welcome Back, " + username);
-			view.makeSnackbar("Welcome Back, " + userID);
+			view.makeSnackbar("Welcome Back, " + uname);
 			view.collapseKeyboard();
+
 			if (accountType == AccountType.STUDENT) {
+				Student.login(new Student(uname, ""), new ArrayList<>());
 				view.goToStudentHome();
 			}
 			else {
+				User.login(new User(uname, ""));
 				view.goToAdminHome();
 			}
 		}
@@ -58,12 +66,9 @@ public class LoginPresenter implements LoginModel.Presenter {
 		return CookieLogin.getUserName(context);
 	}
 
-	private void studentLogin() {
-	}
+	private void studentLogin() { }
 
-	private void adminLogin() {
-
-	}
+	private void adminLogin() {	}
 
 	interface LoginView {
 		public void makeSnackbar(String message);

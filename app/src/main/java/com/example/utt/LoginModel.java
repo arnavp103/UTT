@@ -18,7 +18,7 @@ public class LoginModel extends BaseModel {
 	public interface Presenter {
 		enum AccountType { ADMIN, STUDENT; }
 
-		void onSuccess(String userID, AccountType accessType);
+		void onSuccess(String userID, String uname, AccountType accessType);
 
 		void onFailure();
 
@@ -36,7 +36,7 @@ public class LoginModel extends BaseModel {
 						Presenter.AccountType.STUDENT :
 						Presenter.AccountType.ADMIN;
 
-				presenter.onSuccess(user.getId(), accessType);
+				presenter.onSuccess(user.getId(), user.getEmail(), accessType);
 			}
 
 			@Override

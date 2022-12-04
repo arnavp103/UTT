@@ -26,7 +26,7 @@ public abstract class BaseModel {
 	
 	public void queryStudentByID(String uname) {
 		// TODO
-		throw new NotImplementedError();
+
 	}
 
 	public void queryCoursesByName(String name, Listener<Course> callback) {

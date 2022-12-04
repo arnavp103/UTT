@@ -304,8 +304,8 @@ public abstract class DatabaseHandler {
 
             }
         };
-        queryCourseWithField("code", "CSCB", testListener);
-        queryCourseWithField("name", "Introduction", testListener);
+//        queryCourseWithField("code", "CSCB", testListener);
+//        queryCourseWithField("name", "Introduction", testListener);
         Log.d(TAG, "Database initialised.");
     }
 
