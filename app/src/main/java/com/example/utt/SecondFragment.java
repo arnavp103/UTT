@@ -31,6 +31,7 @@ public class SecondFragment extends Fragment {
     ArrayList<Course> wantedCourses;
     ArrayList<CourseScheduling> courseSchedulingList;
     List<CourseScheduling> result;
+    public static ArrayList<String> yearList;
 
     @Override
     public View onCreateView(
@@ -99,8 +100,10 @@ public class SecondFragment extends Fragment {
 //            courseModelArrayList.add(new TimelineCourseModel());
 //        }
 
+        yearList = new ArrayList<>();
         for (Integer year : output.keySet()) {
             courseModelArrayList.add(new TimelineCourseModel(year, output.get(year)));
+//            yearList.add(year, output.keySet().toString());
         }
         // we are initializing our adapter class and passing the course list to it.
         timelineCourseAdapter courseAdapter = new timelineCourseAdapter(getContext(), courseModelArrayList);

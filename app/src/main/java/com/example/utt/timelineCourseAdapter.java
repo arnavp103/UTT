@@ -1,5 +1,7 @@
 package com.example.utt;
 
+import static com.example.utt.SecondFragment.yearList;
+
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,6 +77,7 @@ public class timelineCourseAdapter extends RecyclerView.Adapter<timelineCourseAd
             fallCourses = itemView.findViewById(R.id.fallCourses);
             detailsLayout = itemView.findViewById(R.id.linLayoutYear);
         }
+
         void timelineBind(TimelineCourseModel model){
             // Get the state
             boolean expanded = model.isExpanded();
@@ -92,20 +95,24 @@ public class timelineCourseAdapter extends RecyclerView.Adapter<timelineCourseAd
 //            courseCode.setText(model.getCourseCode());
 
             // Use this when there are no courses offered that term
-            if (model.getWinterCourses().isEmpty()) {
-                ((ViewGroup) detailsLayout).removeView(winterCourses);
-                ((ViewGroup) detailsLayout).removeView(winterHeader);
-            }
-            if (model.getFallCourses().isEmpty()) {
-                ((ViewGroup) detailsLayout).removeView(fallCourses);
-                ((ViewGroup) detailsLayout).removeView(fallHeader);
-            }
-            if (model.getSummerCourses().isEmpty()) {
+//            for(String yearIndex: yearList) {
+//                if(yearIndex.equals(model.getYear())) {
+                    if (model.getWinterCourses().isEmpty()) {
+                        ((ViewGroup) detailsLayout).removeView(winterCourses);
+                        ((ViewGroup) detailsLayout).removeView(winterHeader);
+                    }
+                    if (model.getFallCourses().isEmpty()) {
+                        ((ViewGroup) detailsLayout).removeView(fallCourses);
+                        ((ViewGroup) detailsLayout).removeView(fallHeader);
+                    }
+                    if (model.getSummerCourses().isEmpty()) {
 //                if (winterCourses.getParent() != null || summerCourses.getParent() != null ||
 //                fallCourses.getParent() != null) {
-                ((ViewGroup) detailsLayout).removeView(summerCourses);
-                ((ViewGroup) detailsLayout).removeView(summerHeader);
-            }
+                        ((ViewGroup) detailsLayout).removeView(summerCourses);
+                        ((ViewGroup) detailsLayout).removeView(summerHeader);
+                    }
+//                }
+//            }
         }
     }
 

@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="1dp"
     android:outlineProvider="bounds"
-    app:cardBackgroundColor="@color/white"
+    app:cardBackgroundColor="@color/listviewBackground"
     app:cardCornerRadius="4dp"
     app:cardElevation="1dp"
     app:cardMaxElevation="2dp"

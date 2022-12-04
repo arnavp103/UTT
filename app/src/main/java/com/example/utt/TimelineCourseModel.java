@@ -9,6 +9,7 @@ import com.example.utt.algorithm.model.Term;
 import com.example.utt.algorithm.model.YearlySession;
 import com.example.utt.models.Course;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -36,22 +37,18 @@ public class TimelineCourseModel {
         termList = new ArrayList<>();
         courses = new ArrayList<>();
         this.year = year.toString();
-        for(Term item: yearContents.keySet()){
+        for (Term item : yearContents.keySet()) {
             this.termList.add(String.valueOf(item));
-            if(item.equals(Term.WINTER)){
+            if (item.equals(Term.WINTER)) {
                 this.winterCourses = yearContents.get(item);
-            }
-            else if(item.equals(Term.SUMMER)){
+            } else if (item.equals(Term.SUMMER)) {
                 this.summerCourses = yearContents.get(item);
-            }
-            else if(item.equals(Term.FALL)){
+            } else if (item.equals(Term.FALL)) {
                 this.fallCourses = yearContents.get(item);
             }
         }
-
-//      this.termList = yearContents.get()
-
     }
+
 //    public TimelineCourseModel(CourseScheduling model) {
 //        this.courseCode = model.getCode();
 //        this.courseName = model.getName();
