@@ -33,10 +33,6 @@ public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
         binding = FragmentLoginPageBinding.inflate(inflater, container, false);
         loginPresenter = new LoginPresenter(this);
 
-        if (loginPresenter.getCookie(context).length() != 0) {
-               // if they don't have anything saved to shared pref continue as normal
-            goToStudentHome();
-        }
         return binding.getRoot();
     }
 
@@ -103,7 +99,13 @@ public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
         String username = uEdit.getText().toString();
         String password = pEdit.getText().toString();
 
-        loginPresenter.query(username, password, view);
+        if (loginPresenter.getCookie(context).length() != 0) {
+            // if they don't have anything saved to shared pref continue as normal
+            loginPresenter.cookieQuery(CookieLogin.getUserId(context), this.getView());
+        }
+        else {
+            loginPresenter.query(username, password, view);
+        }
         // DatabaseHandler.getUser(username, password, authCallback);
     }
 

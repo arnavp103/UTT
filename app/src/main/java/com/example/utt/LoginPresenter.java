@@ -28,15 +28,19 @@ public class LoginPresenter implements LoginModel.Presenter {
 		}
 	}
 
+	public void cookieQuery(String userID, View v) {
+		if(v != null) {
+			model.queryUserByID(userID, this);
+		}
+	}
+
 	@Override 
 	public void onSuccess(String userID, String uname, AccountType accountType) {
 		// Write their data to their local storage
 		if (view instanceof Fragment) {
 			Fragment viewFrag = (Fragment) view;
 			setCookie(viewFrag.getContext(), userID);
-			// This can't be done unless we can get a username from userID
-			// String username = ;
-			// view.makeSnackbar("Welcome Back, " + username);
+
 			view.makeSnackbar("Welcome Back, " + uname);
 			view.collapseKeyboard();
 
