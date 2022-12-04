@@ -70,10 +70,6 @@ public class LoginPresenter implements LoginModel.Presenter {
 		return CookieLogin.getUserId(context);
 	}
 
-	public void CookieQuery() {
-
-	}
-
 	private void studentLogin() { }
 
 	private void adminLogin() {	}

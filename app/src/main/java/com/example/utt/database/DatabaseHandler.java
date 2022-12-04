@@ -317,6 +317,7 @@ public abstract class DatabaseHandler {
 
         databaseReady = true;
         for (OnReadyListener callback : onReadyListeners) callback.onReady();
+        onReadyListeners.clear();
     }
 
     public static void initialise() {

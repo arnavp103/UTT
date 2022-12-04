@@ -34,18 +34,22 @@ public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
         context = this.getContext();
         binding = FragmentLoginPageBinding.inflate(inflater, container, false);
         loginPresenter = new LoginPresenter(this);
+        if (loginPresenter.getCookie(context).length() != 0) {
+            DatabaseHandler.addOnReadyListener(new DatabaseHandler.OnReadyListener() {
+                @Override
+                public void onReady() {
+                    // if they don't have anything saved to shared pref continue as normal
+                    loginPresenter.cookieQuery(CookieLogin.getUserId(context), getView());
 
+                }
+            });
+        }
         return binding.getRoot();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        if (loginPresenter.getCookie(context).length() != 0) {
-            Log.d("USER", "Database Doooooo");
-            // if they don't have anything saved to shared pref continue as normal
-            loginPresenter.cookieQuery(CookieLogin.getUserId(context), this.getView());
-        }
 
     }
 
