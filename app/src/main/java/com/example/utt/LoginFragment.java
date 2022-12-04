@@ -1,6 +1,5 @@
 package com.example.utt;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,9 +8,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,12 +17,9 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.FragmentLoginPageBinding;
-import com.example.utt.models.Course;
-import com.example.utt.models.CourseEventListener;
 import com.example.utt.models.Listener;
 import com.example.utt.models.Student;
 import com.example.utt.models.User;
-import com.example.utt.SharedMethods;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -55,6 +49,7 @@ public class LoginFragment extends Fragment {
             DatabaseHandler.getStudentData(user.getId(), new Listener<String>() {
                 @Override
                 public void onSuccess(String data, @Nullable List<String> objectModel) {
+                    Log.d("Fail", "Disowned");
                     assert objectModel != null;
                     Student s = new Student(user.getEmail(), user.getPassword());
                     s.setId(user.getId());
@@ -124,11 +119,14 @@ public class LoginFragment extends Fragment {
         String username = uEdit.getText().toString();
         String password = pEdit.getText().toString();
 
+        Log.d("Check", "Works");
         Listener<User> authCallback = new Listener<User>() {
             @Override
             public void onSuccess(String data, List<User> user) {
                 assert user != null;
+                Log.d("Check 2", "No Works");
                 checkUserStatus(user.get(0), view);
+
             }
 
             @Override
@@ -140,8 +138,9 @@ public class LoginFragment extends Fragment {
             }
 
             @Override
-            public void onComplete(String data) {}
+            public void onComplete(String data) {Log.d("Check 4", "Help");}
         };
+        Log.d("Check", "Still No Works");
         DatabaseHandler.getUser(username, password, authCallback);
     }
 
