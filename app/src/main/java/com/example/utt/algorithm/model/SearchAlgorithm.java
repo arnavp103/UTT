@@ -1,6 +1,8 @@
 package com.example.utt.algorithm.model;
 
 
+import android.util.Log;
+
 import com.example.utt.models.Course;
 import com.example.utt.models.firebase.datamodel.CourseDataModel;
 
@@ -38,6 +40,8 @@ public class SearchAlgorithm {
                 }
                 //OR if you have recursed to the end of the tree and you have reached the first prerequisite
             } else {
+
+                Log.d("Search Algorithm", target + " has prerequisites " + target.getPrerequisites());
                 findBeginningNodes(target.getPrerequisites());
             }
         }

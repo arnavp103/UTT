@@ -27,6 +27,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.utt.databinding.FragmentAddFutureBinding;
 import com.example.utt.models.Course;
+import com.example.utt.models.Student;
 import com.example.utt.models.firebase.datamodel.ExcludedCourseDataModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -98,6 +99,19 @@ public class addFuture extends Fragment {
         loadData();
 
 
+        ( (Button) v.findViewById(R.id.generate_timeline)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Log.d("User Registry", "->" + Student.getInstance().getId());
+                Bundle bundle = new Bundle();
+                bundle.putStringArrayList("FUTURE", futureList);
+                NavHostFragment.findNavController(addFuture.this)
+                        // .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                        .navigate(R.id.action_addFuture_to_timelineGenerateFunctionality, bundle);
+            }
+        });
+
+
 
         //goes to home button
         home.setOnClickListener(new View.OnClickListener() {
@@ -105,8 +119,6 @@ public class addFuture extends Fragment {
             public void onClick(@NonNull View view) {
                 NavHostFragment.findNavController(addFuture.this)
                         .navigate(R.id.action_addFuture_to_Home);//add action fragment from future courses to home
-
-
             }
         });
 

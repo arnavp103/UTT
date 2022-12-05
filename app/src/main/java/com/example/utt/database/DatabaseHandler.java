@@ -55,9 +55,11 @@ public abstract class DatabaseHandler {
         public void onReady();
     }
 
-    private static ArrayList<OnReadyListener> onReadyListeners = new ArrayList<>();
+    private static final ArrayList<OnReadyListener> onReadyListeners = new ArrayList<>();
     public static void addOnReadyListener(OnReadyListener callback) {
-        if (databaseReady) callback.onReady();
+        if (databaseReady) {
+            callback.onReady();
+        }
         else {
             onReadyListeners.add(callback);
         }
@@ -76,7 +78,7 @@ public abstract class DatabaseHandler {
     }
 
     public static void getStudentData(String userId, Listener<String> callback) {
-        Log.d("USER ID: ", userId);
+        Log.d("USER ID: ", "ID->" + userId);
         dbStudentsRef.orderByKey().equalTo(userId).get()
                 .addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                     @Override
@@ -316,7 +318,10 @@ public abstract class DatabaseHandler {
         dbStudentsRef = dbRootRef.child("students");
 
         databaseReady = true;
-        for (OnReadyListener callback : onReadyListeners) callback.onReady();
+        for (OnReadyListener callback : onReadyListeners) {
+            callback.onReady();
+        }
+        onReadyListeners.clear();
         onReadyListeners.clear();
     }
 
@@ -326,7 +331,7 @@ public abstract class DatabaseHandler {
 
         // Begin listening to new data provided
         attachCourseListener();
-//        generateSample();
+        generateSample();
 
         Log.d(TAG, "Database initialised.");
     }

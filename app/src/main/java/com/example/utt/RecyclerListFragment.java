@@ -22,7 +22,7 @@ public class  RecyclerListFragment extends Fragment {
     private FragmentRecyclerListBinding binding;
 
     private void loadAdapter() {
-        RecyclerView courseRV = getView().findViewById(R.id.recycler_list);
+        RecyclerView courseRV = getView().findViewById(R.id.timeline_recycler_list);
 
         // Here, we have created new array list and added data to it
         ArrayList<CourseModel> courseModelArrayList = new ArrayList<>();

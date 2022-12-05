@@ -75,6 +75,9 @@
             app:exitAnim="@anim/slide_out"
             app:popEnterAnim="@anim/slide_in"
             app:popExitAnim="@anim/fade_out"/>
+        <action
+            android:id="@+id/action_addFuture_to_timelineGenerateFunctionality"
+            app:destination="@id/timelineGenerateFunctionality" />
 
     </fragment>
     <fragment
@@ -162,4 +165,9 @@
         android:name="com.example.utt.SignUpPage"
         android:label="activity_sign_up_page"
         tools:layout="@layout/activity_sign_up_page" />
+    <fragment
+        android:id="@+id/timelineGenerateFunctionality"
+        android:name="com.example.utt.TimelineGenerateFunctionality"
+        android:label="fragment_timeline"
+        tools:layout="@layout/fragment_timeline" />
 </navigation>

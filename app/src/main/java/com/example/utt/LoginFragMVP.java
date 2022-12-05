@@ -26,6 +26,7 @@ public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
     private Context context;
     private LoginPresenter loginPresenter;
 
+
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
@@ -115,7 +116,6 @@ public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
     private void submit(View view) {
         String username = uEdit.getText().toString();
         String password = pEdit.getText().toString();
-
 
         loginPresenter.query(username, password, view);
         // DatabaseHandler.getUser(username, password, authCallback);

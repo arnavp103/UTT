@@ -1,6 +1,7 @@
 package com.example.utt;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
@@ -50,7 +51,7 @@ public class LoginPresenter implements LoginModel.Presenter {
 			view.collapseKeyboard();
 
 			if (accountType == AccountType.STUDENT) {
-				Student.login(new Student(uname, ""), new ArrayList<>());
+				Student.login(new Student(userID, uname, ""), new ArrayList<>());
 				view.goToStudentHome();
 			}
 			else {

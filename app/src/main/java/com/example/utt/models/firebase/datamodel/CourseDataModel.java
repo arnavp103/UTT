@@ -25,8 +25,8 @@ public class CourseDataModel {
     // Course-specific collection of listeners
     private List<CourseEventListener> myListeners;
 
-    private static Map<String, CourseDataModel> courses;
-    private static Map<String, String> coursesID_CODE; // Key ID -> Code
+    private static Map<String, CourseDataModel> courses = new HashMap<>();
+    private static Map<String, String> coursesID_CODE = new HashMap<>(); // Key ID -> Code
 
     // The Course object that this CourseDataModel is associated with.
     @Exclude
@@ -199,6 +199,7 @@ public class CourseDataModel {
                 // Check if prerequisite exists in the Nonexistent-Course Collection
                 if (!nonExistentCourses.containsKey(prerequisite)) {    // Course not yet in NEC
                     prerequisiteCourse = new Course();
+                    prerequisiteCourse.setCourseCode(prerequisite);
                     nonExistentCourses.put(prerequisite, prerequisiteCourse);
                     Log.d(TAG, code + " | Looking for: " + prerequisite + " | -> NEC: " + nonExistentCourses);
                 } else {    // Course exists so placeholder reference it.
@@ -309,7 +310,7 @@ public class CourseDataModel {
             }
         }
 
-        CourseDataModel result = new CourseDataModel();
+        CourseDataModel result = new ExcludedCourseDataModel();
 
         result.setName(course.getName());
         result.setCode(course.getCode());
