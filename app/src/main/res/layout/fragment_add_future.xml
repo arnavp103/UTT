@@ -8,7 +8,7 @@
 
     android:background="#00FFFFFF"
     android:padding="16dp"
-    tools:context=".addFuture">
+    tools:context=".Future">
 
     <TextView
         android:id="@+id/text_view"

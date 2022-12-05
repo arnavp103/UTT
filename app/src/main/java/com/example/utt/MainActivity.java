@@ -24,7 +24,13 @@ import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.ActivityMainBinding;
 import com.example.utt.models.Course;
 import com.example.utt.models.CourseEventListener;
+import com.example.utt.models.Student;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,7 +50,16 @@ public class MainActivity extends AppCompatActivity {
 
         DatabaseHandler.initialise();
         setSupportActionBar(binding.toolbar);
+        String cookieId = CookieLogin.getUserName(this);
 
+        if (cookieId.length() != 0) {
+            Student s = new Student("forTesting", "forTesting");
+            s.setId(cookieId);
+
+            Student.login(s, List.of());
+
+            Log.d("Already Logged in: ", cookieId);
+        }
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);

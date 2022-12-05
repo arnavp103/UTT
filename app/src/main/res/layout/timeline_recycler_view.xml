@@ -8,6 +8,7 @@
     android:layout_margin="1dp"
     android:outlineProvider="bounds"
     app:cardBackgroundColor="@color/listviewBackground"
+    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="4dp"
     app:cardElevation="1dp"
     app:cardMaxElevation="2dp"

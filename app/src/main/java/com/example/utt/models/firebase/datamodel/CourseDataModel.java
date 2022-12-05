@@ -85,6 +85,8 @@ public class CourseDataModel {
     }
 
     public static CourseDataModel getCourseDataModel(String courseCode) {
+        Log.d("COURSE", courses.toString());
+        Log.d("DAT","Query: '" + courseCode + "' " + courses.get(courseCode) + " ");
         return courses.get(courseCode);
     }
 
@@ -216,15 +218,10 @@ public class CourseDataModel {
         if (Boolean.TRUE.equals(sessionOffering.get(1))) child_sessionOfferings.add(new YearlySession(Term.SUMMER));
         if (Boolean.TRUE.equals(sessionOffering.get(2))) child_sessionOfferings.add(new YearlySession(Term.FALL));
 
-//        StringBuilder res = new StringBuilder();
-//        for (YearlySession y : child_sessionOfferings) {
-//            res.append(y.getTerm());
-//        }
-//        Log.d("Session Offering", res.toString());
-        // Check if this course exists in our nonexistant Course collection
         Course child = nonExistentCourses.remove(code);
         if (child == null) child = new Course();
 
+        child.setKey(key);
         child.setCourseCode(code);
         child.setName(name);
         child.setPrerequisites(child_prerequisites);

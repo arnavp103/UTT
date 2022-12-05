@@ -4,7 +4,10 @@ package com.example.utt;
  */
 
 import com.example.utt.algorithm.model.CourseScheduling;
+import com.example.utt.algorithm.model.Session;
 import com.example.utt.algorithm.model.Term;
+import com.example.utt.algorithm.model.YearlySession;
+import com.example.utt.models.Course;
 
 import java.util.ArrayList;
 import java.util.List;
