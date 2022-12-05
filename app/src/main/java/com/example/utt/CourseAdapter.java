@@ -87,6 +87,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 //                    }
 //                }
 //            };
+
             detailsLayout = itemView.findViewById(R.id.bababa);
             courseSessionTV = itemView.findViewById(R.id.idTVCourseSession);
             coursePrereqTV = itemView.findViewById(R.id.idTVCoursePrereqs);

@@ -59,9 +59,10 @@ public class MainActivity extends AppCompatActivity {
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
         navController = Objects.requireNonNull(navHostFragment).getNavController();
+
         navController.addOnDestinationChangedListener((firstArg, destination, thirdArg) -> {
             ActionBar actionBar = getSupportActionBar();
-            if(destination.getId() == R.id.LoginFragment) {
+            if(destination.getId() == R.id.LoginFragment || destination.getId() == R.id.selectPrereqs2) {
                 binding.toolbar.setVisibility(View.GONE);
             }
             else {

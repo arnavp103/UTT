@@ -11,10 +11,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -57,6 +59,9 @@ public class FirstFragment extends Fragment {
     List<Course> courseList = new ArrayList<>();
     private static boolean[] selectedSession;
     ArrayList<Course> prereqList;
+    SearchView courseFilter;
+    CourseList adapter;
+
     private static final ArrayList<Integer> sessionList = new ArrayList<>();
     private static final String[] sessionArray = {"Winter", "Summer", "Fall"};
 
@@ -70,6 +75,8 @@ public class FirstFragment extends Fragment {
         return binding.getRoot();
     }
 
+
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -80,12 +87,19 @@ public class FirstFragment extends Fragment {
 
         // Create multiple select option for admin to select the session offerings
         sessionOffering = getView().findViewById(R.id.sessionoffering);
+
         //Initialize selected session array
         if (selectedSession == null) selectedSession = new boolean[sessionArray.length];
         listViewCourses = (ListView)getView().findViewById(R.id.listViewCourses);
         prereqText = (Button)getView().findViewById((R.id.prereq));
-
+        courseFilter = (SearchView)getView().findViewById(R.id.courseFilter);
         populateFields();
+        courseFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                courseFilter.setIconified(false);
+            }
+        });
 
         sessionOffering.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,20 +113,20 @@ public class FirstFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i, boolean b) {
                         int counter = 0;
-                        counter++;
+                    counter++;
                         if (b && (j % counter == 0)) {
-                            // Check if checkbox is selected
-                            sessionList.add(i);
-                            Collections.sort(sessionList);
-                        }
-                        else {
-                            // If checkbox is unselected, remove position from sessionList
-                            if(i < 0) i = 0;
-                            if(i >= sessionList.size()) i = sessionList.size()-1;
-                            sessionList.remove(i);
-                        }
-                        j++;
+                        // Check if checkbox is selected
+                        sessionList.add(i);
+                        Collections.sort(sessionList);
                     }
+                        else {
+                        // If checkbox is unselected, remove position from sessionList
+                        if(i < 0) i = 0;
+                        if(i >= sessionList.size()) i = sessionList.size()-1;
+                        sessionList.remove(i);
+                    }
+                    j++;
+                }
                 });
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -145,7 +159,7 @@ public class FirstFragment extends Fragment {
             }
         });
 
-        CourseList adapter = new CourseList(getActivity(), courseList);
+        adapter = new CourseList(getActivity(), courseList);
         listViewCourses.setStackFromBottom(true);
         listViewCourses.setAdapter(adapter);
 
@@ -158,6 +172,7 @@ public class FirstFragment extends Fragment {
                 for (Course courseObject : Course.getCourses().values()) {
                     courseList.add(0, courseObject);
                 }
+                adapter.updateFullList();
                 adapter.notifyDataSetChanged();
             }
 
@@ -168,6 +183,7 @@ public class FirstFragment extends Fragment {
                 for (Course courseObject : Course.getCourses().values()) {
                     courseList.add(0, courseObject);
                 }
+                adapter.updateFullList();
                 adapter.notifyDataSetChanged();
             }
 
@@ -179,6 +195,7 @@ public class FirstFragment extends Fragment {
                 for (Course courseObject : Course.getCourses().values()) {
                     courseList.add(0, courseObject);
                 }
+                adapter.updateFullList();
                 adapter.notifyDataSetChanged();
             }
         };
@@ -189,11 +206,12 @@ public class FirstFragment extends Fragment {
             @Override
             public void onReady() {
                 courseList.clear();
-                if (Course.getCourses() != null)
+                Course.getCourses();
                 for (Course courseObject : Course.getCourses().values()) {
                     courseList.add(0, courseObject);
                 }
 
+                adapter.updateFullList();
                 adapter.notifyDataSetChanged();
             }
         });
@@ -212,20 +230,32 @@ public class FirstFragment extends Fragment {
                        .navigate(R.id.action_firstFragment_to_selectPrereqs2);
            }
        });
-//        This button is not needed right now
-//        binding.buttonNext.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                NavHostFragment.findNavController(FirstFragment.this)
-//                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
-//            }
-//        });
+
         binding.buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
                 addCourseCode();
             }
         });
+
+        courseFilter.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                filter(s);
+                return false;
+            }
+        });
+    }
+
+    private void filter(String text) {
+        ArrayList<Course> filteredList = new ArrayList<Course>();
+        adapter.getFilter().filter(text);
+
     }
 
     private void clearFields() {
@@ -237,6 +267,7 @@ public class FirstFragment extends Fragment {
         populateFields();
         prereqText.setText(R.string.select_prerequisites);
     }
+
     private void populateFields() {
         editTextName.setText(courseCode);
         editCourseName.setText(courseName);

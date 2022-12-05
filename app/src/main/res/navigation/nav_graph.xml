@@ -69,7 +69,7 @@
     <fragment
         android:id="@+id/firstFragment"
         android:name="com.example.utt.FirstFragment"
-        android:label="fragment_first"
+        android:label="Course Manager"
         tools:layout="@layout/fragment_first">
         <action
             android:id="@+id/action_firstFragment_to_secondFragment"
@@ -77,6 +77,9 @@
         <action
             android:id="@+id/action_firstFragment_to_selectPrereqs2"
             app:destination="@id/selectPrereqs2" />
+        <action
+            android:id="@+id/action_firstFragment_to_fragment_modify_course"
+            app:destination="@id/fragment_modify_course" />
     </fragment>
     <fragment
         android:id="@+id/secondFragment"
@@ -90,10 +93,25 @@
     <fragment
         android:id="@+id/selectPrereqs2"
         android:name="com.example.utt.SelectPrereqs"
-        android:label="select_prereqs"
-        tools:layout="@layout/select_prereqs" >
+        android:label="Prerequisite Selection"
+        tools:layout="@layout/select_prereqs">
         <action
             android:id="@+id/action_selectPrereqs2_to_firstFragment"
             app:destination="@id/firstFragment" />
+        <action
+            android:id="@+id/action_selectPrereqs2_to_fragment_modify_course"
+            app:destination="@id/fragment_modify_course" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_modify_course"
+        android:name="com.example.utt.fragment_modify_course"
+        android:label="Modify Course"
+        tools:layout="@layout/fragment_modify_course">
+        <action
+            android:id="@+id/action_fragment_modify_course_to_firstFragment"
+            app:destination="@id/firstFragment" />
+        <action
+            android:id="@+id/action_fragment_modify_course_to_selectPrereqs2"
+            app:destination="@id/selectPrereqs2" />
     </fragment>
 </navigation>

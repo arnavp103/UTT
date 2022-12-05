@@ -122,6 +122,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onSuccess(String data, List<User> user) {
                 assert user != null;
+                Log.d("ENTRY", "DADD");
                 checkUserStatus(user.get(0), view);
 
             }
@@ -137,9 +138,9 @@ public class LoginFragment extends Fragment {
             @Override
             public void onComplete(String data) {}
         };
+        Log.d("ENTRY", "ENTRY");
         DatabaseHandler.getUser(username, password, authCallback);
     }
-
 
     @Override
     public void onDestroyView() {

@@ -1,5 +1,6 @@
 package com.example.utt;
 
+import android.util.Log;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import com.example.utt.models.Course;
 
 import java.util.ArrayList;
@@ -24,7 +26,8 @@ public class PrereqAdapter extends RecyclerView.Adapter<PrereqAdapter.ViewHolder
         this.activity = activity;
     }
 
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+    @NonNull
+    public PrereqAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.prereq_layout, parent, false);
         return new ViewHolder(itemView);
@@ -32,7 +35,7 @@ public class PrereqAdapter extends RecyclerView.Adapter<PrereqAdapter.ViewHolder
 
     public void onBindViewHolder(ViewHolder holder, int position){
         CourseModel item = courseList.get(position);
-        prereqList = FirstFragment.courses;//new ArrayList<>();
+        prereqList = FirstFragment.courses;
 
         if (prereqList.contains(item.getCourse())) item.setStatus(1);
         holder.courseTask.setText(item.getCourseCode());
@@ -62,8 +65,20 @@ public class PrereqAdapter extends RecyclerView.Adapter<PrereqAdapter.ViewHolder
     }
 
     public void setList(List<CourseModel> list){
+        activity.emptyResultView.setVisibility(View.GONE);
         this.courseList = list;
+//        notifyDataSetChanged();
+    }
+
+    public void filterList(ArrayList<CourseModel> filterList) {
+        activity.emptyResultView.setVisibility(View.GONE);
+        courseList = filterList;
         notifyDataSetChanged();
+    }
+
+    public void emptyList() {
+        filterList(new ArrayList<>());
+        activity.emptyResultView.setVisibility(View.VISIBLE);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

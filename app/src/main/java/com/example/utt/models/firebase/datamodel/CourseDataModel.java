@@ -8,7 +8,8 @@ import com.example.utt.algorithm.model.Term;
 import com.example.utt.algorithm.model.YearlySession;
 import com.example.utt.models.Course;
 import com.example.utt.models.CourseEventListener;
-import com.google.firebase.firestore.Exclude;
+import com.google.firebase.database.Exclude;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -228,6 +229,7 @@ public class CourseDataModel {
         Course child = nonExistentCourses.remove(code);
         if (child == null) child = new Course();
 
+        child.setKey(key);
         child.setCourseCode(code);
         child.setName(name);
         child.setPrerequisites(child_prerequisites);
@@ -315,6 +317,7 @@ public class CourseDataModel {
 
         CourseDataModel result = new CourseDataModel();
 
+        result.setKey(course.getKey());
         result.setName(course.getName());
         result.setCode(course.getCode());
         result.setSessionOffering(sessions);

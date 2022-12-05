@@ -1,26 +1,19 @@
 package com.example.utt;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.preference.PreferenceFragmentCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.utt.database.DatabaseHandler;
-import com.example.utt.databinding.FragmentFirstBinding;
-import com.example.utt.databinding.FragmentRecyclerListBinding;
 import com.example.utt.databinding.SelectPrereqsBinding;
 import com.example.utt.models.Course;
 import com.example.utt.models.CourseEventListener;
@@ -29,8 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 public class SelectPrereqs extends Fragment {
     private SelectPrereqsBinding binding;
@@ -41,8 +34,32 @@ public class SelectPrereqs extends Fragment {
     private FloatingActionButton fab;
     private CheckBox checkBox;
     public static FirstFragment context;
+    private SearchView prereqFilter;
+    public TextView emptyResultView;
 
     DatabaseReference databaseCourseCode;
+
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_HIDDEN_COURSE = "HIDDEN_COURSE";
+
+    private String hiddenCourse;
+
+    // TODO: Rename and change types and number of parameters
+    public static SelectPrereqs newInstance(String courseCode) {
+        SelectPrereqs fragment = new SelectPrereqs();
+        Bundle args = new Bundle();
+        args.putString(ARG_HIDDEN_COURSE, courseCode);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            hiddenCourse = getArguments().getString(ARG_HIDDEN_COURSE);
+        }
+    }
 
     @Override
     public View onCreateView(
@@ -63,9 +80,19 @@ public class SelectPrereqs extends Fragment {
         prereqRecyclerView = getView().findViewById(R.id.prereqRecyclerView);
         checkBox = getView().findViewById(R.id.prereqCheckBox);
 
+        emptyResultView = (TextView)getView().findViewById(R.id.prereqEmptyResultText);
         prereqRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         prereqAdapter = new PrereqAdapter(SelectPrereqs.this);
         prereqRecyclerView.setAdapter(prereqAdapter);
+
+        prereqFilter = (SearchView)getView().findViewById(R.id.prereqFilter);
+        prereqFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prereqFilter.setIconified(false);
+            }
+        });
+
         prereqList = new ArrayList<>();
 
         fab = getView().findViewById(R.id.fab);
@@ -79,9 +106,7 @@ public class SelectPrereqs extends Fragment {
 ////                prereqList = prereqAdapter.getSelectedCourses();
 //                context.donePrereq(prereqAdapter.getSelectedCourses());
 
-                NavHostFragment.findNavController(SelectPrereqs.this)
-                        .navigate(R.id.action_selectPrereqs2_to_firstFragment);
-
+                NavHostFragment.findNavController(SelectPrereqs.this).navigateUp();
             }
         });
 
@@ -89,11 +114,11 @@ public class SelectPrereqs extends Fragment {
         Course course = new Course();
         CourseModel task = new CourseModel(course);
 //        task.setCourseCode(task.getCourseCode());
-        task.setCourseCode("Testing");
-        task.setStatus(0);
-
-        courseList.add(task);
-        courseList.add(task);
+//        task.setCourseCode("Testing");
+//        task.setStatus(0);
+//
+//        courseList.add(task);
+//        courseList.add(task);
 
         prereqAdapter.setList(courseList);
         // -----------------------------------------------------
@@ -105,6 +130,7 @@ public class SelectPrereqs extends Fragment {
                 courseList.clear();
 
                 for (Course courseObject : Course.getCourses().values()) {
+                    if (Objects.equals(courseObject.getCode(), hiddenCourse)) continue;
                     CourseModel tempC = new CourseModel(courseObject);
                     courseList.add(0, tempC);
                 }
@@ -122,11 +148,42 @@ public class SelectPrereqs extends Fragment {
         };
 
         Course.addListener(listener);
+
         courseList.clear();
 
         for (Course courseObject : Course.getCourses().values()) {
+            if (Objects.equals(courseObject.getCode(), hiddenCourse)) continue;
             CourseModel tempC = new CourseModel(courseObject);
             courseList.add(0, tempC);
+        }
+
+        prereqFilter.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                filter(s);
+                return false;
+            }
+        });
+    }
+
+    private void filter(String text) {
+        ArrayList<CourseModel> filteredList = new ArrayList<CourseModel>();
+
+        for (CourseModel item : courseList) {
+            if (item.getCourseName().toLowerCase().contains(text.toLowerCase()) || item.getCourseCode().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(item);
+            }
+        }
+
+        if (filteredList.isEmpty()) {
+            prereqAdapter.emptyList();
+        } else {
+            prereqAdapter.filterList(filteredList);
         }
     }
 }
