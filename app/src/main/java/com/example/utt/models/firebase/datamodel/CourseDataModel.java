@@ -79,6 +79,7 @@ public class CourseDataModel {
     // Called on persistent listeners updating course.
     public void updateCourseObject() {
         Course newContent = generateCourseObject();
+        courseObject.setKey(newContent.getKey());
         courseObject.setCourseCode(newContent.getCode());
         courseObject.setName(newContent.getName());
         courseObject.setPrerequisites(newContent.getPrerequisites());
@@ -107,6 +108,7 @@ public class CourseDataModel {
             // Transfer child
             course.setCourseObject(oldCourse.getCourseObject());
             course.updateCourseObject();
+            course.setKey(key);
 
             // Call that courses local listeners
             oldCourse.callCourseChangedListeners(course);

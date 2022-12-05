@@ -24,7 +24,6 @@ import com.example.utt.models.firebase.datamodel.CourseDataModel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class CourseList extends ArrayAdapter<Course> implements Filterable {
     Filter myFilter = new Filter() {
@@ -159,6 +158,7 @@ public class CourseList extends ArrayAdapter<Course> implements Filterable {
                 // The dialog is automatically dismissed when a dialog button is clicked.
                 .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        Log.d("Remove", course.getKey() + "->" + course);
                         DatabaseHandler.removeCourse(course);
                     }
                 })
