@@ -14,12 +14,17 @@ public class LoginPresenter implements LoginModel.Presenter {
 	private final LoginView view;
 	private LoginModel model;
 
-	// TODO Need to add navigation
 
 	public LoginPresenter(LoginView view) {
 		this.view = view;
 		this.model = new LoginModel();
 	}	
+
+  // For testing with mockito we need dependency injection with the model
+  public LoginPresenter(LoginView view, LoginModel model){
+    this.view = view;
+    this.model = model;
+  }
 
 
 	public void query(String uname, String pword, View v) {
@@ -82,33 +87,6 @@ public class LoginPresenter implements LoginModel.Presenter {
 		model = null;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
