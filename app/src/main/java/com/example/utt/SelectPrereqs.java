@@ -1,13 +1,17 @@
 package com.example.utt;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.preference.PreferenceFragmentCompat;
@@ -25,15 +29,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SelectPrereqs extends Fragment {
     private SelectPrereqsBinding binding;
     private RecyclerView prereqRecyclerView;
     private PrereqAdapter prereqAdapter;
-    private List<CourseModel> courseList;
-    private ArrayList<Course> prereqList;
+    private ArrayList<CourseModel> courseList;
+    public static ArrayList<Course> prereqList;
     private FloatingActionButton fab;
+    private CheckBox checkBox;
+    public static FirstFragment context;
+
     DatabaseReference databaseCourseCode;
 
     @Override
@@ -53,8 +61,11 @@ public class SelectPrereqs extends Fragment {
         databaseCourseCode = FirebaseDatabase.getInstance("https://b07-final-db5c5-default-rtdb.firebaseio.com")
                 .getReference("courses");
         prereqRecyclerView = getView().findViewById(R.id.prereqRecyclerView);
+        checkBox = getView().findViewById(R.id.prereqCheckBox);
+
         prereqRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         prereqAdapter = new PrereqAdapter(SelectPrereqs.this);
+        prereqRecyclerView.setAdapter(prereqAdapter);
         prereqList = new ArrayList<>();
 
         fab = getView().findViewById(R.id.fab);
@@ -62,8 +73,15 @@ public class SelectPrereqs extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Bundle b = new Bundle();
+//                b.putStringArrayList("Prereqs", prereqList);
+//                SelectPrereqs select=
+////                prereqList = prereqAdapter.getSelectedCourses();
+//                context.donePrereq(prereqAdapter.getSelectedCourses());
+
                 NavHostFragment.findNavController(SelectPrereqs.this)
                         .navigate(R.id.action_selectPrereqs2_to_firstFragment);
+
             }
         });
 

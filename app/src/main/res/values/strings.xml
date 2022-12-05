@@ -66,4 +66,5 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="timeline">TIMELINE</string>
+    <string name="select_prerequisites">Select prerequisites</string>
 </resources>

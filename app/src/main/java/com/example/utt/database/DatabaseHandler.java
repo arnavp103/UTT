@@ -39,6 +39,8 @@ public abstract class DatabaseHandler {
     // Connect to the firebase emulator
     private static final boolean USE_EMULATOR = false;
 
+    private static boolean databaseReady = false;
+
     // The root of the database JSON
     private static DatabaseReference dbRootRef;
     private static DatabaseReference dbCoursesRef;
@@ -49,6 +51,19 @@ public abstract class DatabaseHandler {
 
     private DatabaseHandler() {initialise();}
 
+    public interface OnReadyListener {
+        public void onReady();
+    }
+
+    private static final ArrayList<OnReadyListener> onReadyListeners = new ArrayList<>();
+    public static void addOnReadyListener(OnReadyListener callback) {
+        if (databaseReady) {
+            callback.onReady();
+        }
+        else {
+            onReadyListeners.add(callback);
+        }
+    }
     /**
      * Converts plaintext string into hashed string for password storage
      * @param plain the input string
@@ -91,6 +106,35 @@ public abstract class DatabaseHandler {
     }
 
     /**
+     * Queries the database for a user whose ID matches the provided userID
+     * Side note, this is a quick fix for cookie login and has security issues.
+     * @param userID The user ID to compare the rows with.
+     */
+    public static void getUser(String userID, Listener<User> callback) {
+        dbUsersRef.orderByKey().equalTo(userID).get()
+                .addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                    @Override
+                    public void onSuccess(DataSnapshot dataSnapshot) {
+                        Log.d("USER", "BABABABABABA" + dataSnapshot.toString());
+                        // Check length
+                        int i = (int) dataSnapshot.getChildrenCount();
+
+                        if (i > 1 || i == 0) {callback.onFailure(null);}
+                        else {
+                            User instance;
+                            for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                instance = child.getValue(User.class);
+                                assert instance != null;
+                                instance.setId(child.getKey());
+                                callback.onSuccess(dataSnapshot.toString(), List.of(instance));
+                                return;
+                            }
+                        }
+                    }
+                }).addOnFailureListener(e -> callback.onFailure(e.toString()));
+    }
+
+    /**
      * Queries the database for a user whose email and password match the given input
      * for login purposes as well as to retrieve stored courses.
      * @param email The email provided by the user
@@ -118,12 +162,7 @@ public abstract class DatabaseHandler {
                             }
                         }
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        callback.onFailure(e.toString());
-                    }
-                });
+                }).addOnFailureListener(e -> callback.onFailure(e.toString()));
     }
 
     public static void updateCourse(CourseDataModel course)  {
@@ -277,6 +316,13 @@ public abstract class DatabaseHandler {
         dbCoursesRef = dbRootRef.child("courses");
         dbUsersRef = dbRootRef.child("users");
         dbStudentsRef = dbRootRef.child("students");
+
+        databaseReady = true;
+        for (OnReadyListener callback : onReadyListeners) {
+            callback.onReady();
+        }
+        onReadyListeners.clear();
+        onReadyListeners.clear();
     }
 
     public static void initialise() {
@@ -287,29 +333,10 @@ public abstract class DatabaseHandler {
         attachCourseListener();
 //        generateSample();
 
-        // Testing
-        Listener<Course> testListener = new Listener<Course>() {
-            @Override
-            public void onSuccess(String data, @Nullable List<Course> objectModel) {
-                Log.d("Query Result:", "-> " + objectModel.toString());
-            }
-
-            @Override
-            public void onFailure(String data) {
-                Log.e(TAG, "Failure: " + data);
-            }
-
-            @Override
-            public void onComplete(String data) {
-
-            }
-        };
-        queryCourseWithField("code", "CSCB", testListener);
-        queryCourseWithField("name", "Introduction", testListener);
         Log.d(TAG, "Database initialised.");
     }
 
-    private static void queryCourseWithField(String field, String code, Listener<Course> callback) {
+    public static void queryCourseWithField(String field, String code, Listener<Course> callback) {
 
         dbCoursesRef.orderByChild(field)
                 .startAt(code)

@@ -25,8 +25,8 @@ public class CourseDataModel {
     // Course-specific collection of listeners
     private List<CourseEventListener> myListeners;
 
-    private static Map<String, CourseDataModel> courses;
-    private static Map<String, String> coursesID_CODE; // Key ID -> Code
+    private static Map<String, CourseDataModel> courses = new HashMap<>();
+    private static Map<String, String> coursesID_CODE = new HashMap<>(); // Key ID -> Code
 
     // The Course object that this CourseDataModel is associated with.
     @Exclude
@@ -44,7 +44,7 @@ public class CourseDataModel {
     // Constructors
     // Empty Constructor, required for API: Attaches a listener
     public CourseDataModel() {
-        if (courses == null) {coursesID_CODE = new HashMap<>(); courses = new HashMap<>();}
+        if (courses == null) {}
         if (myListeners == null) { myListeners = new ArrayList<>(); }
         prerequisites = new ArrayList<>();
         sessionOffering = List.of(false, false, false);

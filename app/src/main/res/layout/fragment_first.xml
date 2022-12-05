@@ -125,7 +125,7 @@
         android:background="@color/listviewBackground"
         android:fontFamily="sans-serif"
         android:lineSpacingExtra="10sp"
-        android:text="  Select prerequisites"
+        android:text="@string/select_prerequisites"
         android:textAlignment="viewStart"
         android:textAllCaps="false"
         android:textSize="18sp"

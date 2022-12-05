@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import com.example.utt.algorithm.model.*;
@@ -46,15 +47,18 @@ public class FirstFragment extends Fragment {
     EditText editTextName;
     EditText editCourseName;
     Button buttonAdd;
-
+    private static String courseCode = "";
+    private static String courseName = "";
+    TextView sessionOffering;
     private FragmentFirstBinding binding;
     DatabaseReference databaseCourseCode;
+    Button prereqText;
     ListView listViewCourses;
     List<Course> courseList = new ArrayList<>();
-    TextView sessionOffering;
-    boolean[] selectedSession;
-    ArrayList<Integer> sessionList = new ArrayList<>();
-    String[] sessionArray = {"Winter", "Summer", "Fall"};
+    private static boolean[] selectedSession;
+    ArrayList<Course> prereqList;
+    private static final ArrayList<Integer> sessionList = new ArrayList<>();
+    private static final String[] sessionArray = {"Winter", "Summer", "Fall"};
 
     @Override
     public View onCreateView(
@@ -77,8 +81,11 @@ public class FirstFragment extends Fragment {
         // Create multiple select option for admin to select the session offerings
         sessionOffering = getView().findViewById(R.id.sessionoffering);
         //Initialize selected session array
-        selectedSession = new boolean[sessionArray.length];
+        if (selectedSession == null) selectedSession = new boolean[sessionArray.length];
         listViewCourses = (ListView)getView().findViewById(R.id.listViewCourses);
+        prereqText = (Button)getView().findViewById((R.id.prereq));
+
+        populateFields();
 
         sessionOffering.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,16 +117,7 @@ public class FirstFragment extends Fragment {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        // Output selected session offerings
-                        StringBuilder sessionOutput = new StringBuilder();
-                        for(int j = 0; j < sessionList.size(); j++) {
-                            sessionOutput.append(sessionArray[sessionList.get(j)]);
-                            // When j value is not equal to the sessionList size-1, add comma
-                            if (j != sessionList.size() - 1) {
-                                sessionOutput.append(", ");
-                            }
-                        }
-                        sessionOffering.setText(sessionOutput.toString());
+                       displaySessions();
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -187,11 +185,29 @@ public class FirstFragment extends Fragment {
 
         Course.addListener(listener);
 
+        DatabaseHandler.addOnReadyListener(new DatabaseHandler.OnReadyListener() {
+            @Override
+            public void onReady() {
+                courseList.clear();
+                if (Course.getCourses() != null)
+                for (Course courseObject : Course.getCourses().values()) {
+                    courseList.add(0, courseObject);
+                }
+
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+
         buttonAdd = (Button)getView().findViewById(R.id.buttonAdd);
 
        binding.prereq.setOnClickListener(new View.OnClickListener(){
            @Override
            public void onClick(View view) {
+               courseCode = editTextName.getText().toString();
+               courseName = editCourseName.getText().toString();
+
+               SelectPrereqs.context = FirstFragment.this;
                NavHostFragment.findNavController(FirstFragment.this)
                        .navigate(R.id.action_firstFragment_to_selectPrereqs2);
            }
@@ -210,8 +226,44 @@ public class FirstFragment extends Fragment {
                 addCourseCode();
             }
         });
-        //courseList = new ArrayList<>();
     }
+
+    private void clearFields() {
+        courseCode = "";
+        courseName = "";
+        selectedSession = new boolean[sessionArray.length];
+        sessionList.clear();
+        courses.clear();
+        populateFields();
+        prereqText.setText(R.string.select_prerequisites);
+    }
+    private void populateFields() {
+        editTextName.setText(courseCode);
+        editCourseName.setText(courseName);
+        displaySessions();
+        if (courses == null) courses = new ArrayList<>();
+        prereqText.setText(R.string.select_prerequisites);
+        prereqText.setText(prereqText.getText() + " (" + courses.size() + ")");
+    }
+
+    private void displaySessions() {
+        // Output selected session offerings
+        StringBuilder sessionOutput = new StringBuilder();
+        for(int j = 0; j < sessionList.size(); j++) {
+            sessionOutput.append(sessionArray[sessionList.get(j)]);
+            // When j value is not equal to the sessionList size-1, add comma
+            if (j != sessionList.size() - 1) {
+                sessionOutput.append(", ");
+            }
+        }
+        sessionOffering.setText(sessionOutput.toString());
+    }
+
+    public static ArrayList<Course> courses = new ArrayList<>();
+//    public void donePrereq(ArrayList<Course> courses){
+//        Log.d("PPPPPP", courses.toString());
+//        this.courses = courses;
+//    }
 
     public void addCourseCode() {
         String code = editTextName.getText().toString().trim();
@@ -231,9 +283,9 @@ public class FirstFragment extends Fragment {
             season.add(tempSeasons);
         }
 
-        List<Course> prerequisites = null;
+        ArrayList<Course> prerequisites = courses;
         // Check if search bar is empty
-        if(!TextUtils.isEmpty(code) && !TextUtils.isEmpty(name)){
+        if(!TextUtils.isEmpty(code) && !TextUtils.isEmpty(name) && !sessionList.isEmpty()){
             // String courseID = databaseCourseCode.push().getKey();
             Course course = new Course(name, code, season, prerequisites);
             Boolean exist = false;
@@ -258,6 +310,7 @@ public class FirstFragment extends Fragment {
                 // Add the course to the database
                 DatabaseHandler.addCourse(course);
                 Toast.makeText(getActivity(), "Course added", Toast.LENGTH_LONG).show();
+                clearFields();
             }
         }
         // If no course was entered into the search bar

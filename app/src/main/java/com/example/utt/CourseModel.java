@@ -23,6 +23,8 @@ public class CourseModel {
     private boolean expanded;
     private int status;
     private static CourseModel currentExpanded;
+    private Course associatedCourse;
+
 
     final static List<String> sessionNames = List.of("Winter", "Summer", "Fall", "NULL");
 
@@ -43,8 +45,11 @@ public class CourseModel {
         setCourseSession(sessions);
         setCoursePrereqs(prereqs);
         this.expanded = false;
+
+        associatedCourse = model;
     }
 
+    public Course getCourse() { return associatedCourse; }
     public CourseModel(String courseCode, String courseName, ArrayList<String> sessionList,
                        ArrayList<String> prereqsList) {
         this.courseCode = courseCode;

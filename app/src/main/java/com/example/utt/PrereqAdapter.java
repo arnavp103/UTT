@@ -1,5 +1,6 @@
 package com.example.utt;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.utt.models.Course;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class PrereqAdapter extends RecyclerView.Adapter<PrereqAdapter.ViewHolder> {
     private List<CourseModel> courseList;
     private SelectPrereqs activity;
+    private ArrayList<Course> prereqList;
 
     public PrereqAdapter(SelectPrereqs activity){
         this.activity = activity;
@@ -27,9 +32,26 @@ public class PrereqAdapter extends RecyclerView.Adapter<PrereqAdapter.ViewHolder
 
     public void onBindViewHolder(ViewHolder holder, int position){
         CourseModel item = courseList.get(position);
+        prereqList = FirstFragment.courses;//new ArrayList<>();
+
+        if (prereqList.contains(item.getCourse())) item.setStatus(1);
         holder.courseTask.setText(item.getCourseCode());
         holder.courseTask.setChecked(toBoolean(item.getStatus()));
+        holder.courseTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+//                if((CheckBox) view)
+                if(holder.courseTask.isChecked()){
+                    prereqList.add(item.getCourse());
+                }
+                else {
+                    prereqList.remove(item.getCourse());
+                }
+            }
+        });
     }
+
+    public ArrayList<Course> getSelectedCourses() { return prereqList; }
 
     private boolean toBoolean(int n){
         return n!=0;
