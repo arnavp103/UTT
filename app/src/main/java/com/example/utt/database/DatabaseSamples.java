@@ -163,7 +163,7 @@ public class DatabaseSamples {
                 "0beans"
         );
 
-        s.addCourse(List.of("CSCB36",  "CSCA08"));
+//        s.addCourse(List.of("CSCB36",  "CSCA08"));
         users.add(s);
 
         s = new Student(

@@ -31,8 +31,8 @@ import java.util.Objects;
 public abstract class DatabaseHandler {
 
     private static final String emulatorURL = "https://utsc-b07-projcourses.firebaseio.com";
-    private static final String databaseURL = "https://utsc-b07-projcourses-default-rtdb.firebaseio.com";
-
+    private static final String databaseURL = "https://utsc-b07-projcourses-default-rtdb.firebaseio.com"; // "https://b07-final-db5c5-default-rtdb.firebaseio.com";//
+    // ("https://b07-final-db5c5-default-rtdb.firebaseio.com")
     // Logcat Tag Name
     private static final String TAG = "DATABASE HANDLER";
 
@@ -78,7 +78,7 @@ public abstract class DatabaseHandler {
     }
 
     public static void getStudentData(String userId, Listener<String> callback) {
-        Log.d("USER ID: ", "ID->" + userId);
+        Log.d("USER ID: ", userId);
         dbStudentsRef.orderByKey().equalTo(userId).get()
                 .addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                     @Override
@@ -174,6 +174,12 @@ public abstract class DatabaseHandler {
                     }
                 }).addOnFailureListener(e -> {Log.d(TAG, "Failure: " + e.toString());});
     }
+
+    public static void updateCourse(Course course) {
+        CourseDataModel output = CourseDataModel.readCourse(course);
+        updateCourse(output);
+    }
+
     /**
      * Inserts into database.courses a new course.
      * @param course The object model of the course
@@ -331,7 +337,7 @@ public abstract class DatabaseHandler {
 
         // Begin listening to new data provided
         attachCourseListener();
-        generateSample();
+//        generateSample();
 
         Log.d(TAG, "Database initialised.");
     }

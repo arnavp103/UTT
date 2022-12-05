@@ -203,7 +203,7 @@ public class CourseDataModel {
                     nonExistentCourses.put(prerequisite, prerequisiteCourse);
                     Log.d(TAG, code + " | Looking for: " + prerequisite + " | -> NEC: " + nonExistentCourses);
                 } else {    // Course exists so placeholder reference it.
-                    prerequisiteCourse = nonExistentCourses.get(code);
+                    prerequisiteCourse = nonExistentCourses.get(prerequisite);
                 }
             }
             Log.d("Adding: ", prerequisite + " " + prerequisiteCourse);
