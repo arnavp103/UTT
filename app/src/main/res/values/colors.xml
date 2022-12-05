@@ -17,4 +17,6 @@
     <color name="navy_blue">#FF07225C</color>
     <color name="baby_blue">#FF89CFF0</color>
     <color name="ultramarine">#FF3F00FF</color>
+    <color name="listviewBackground">#BBE5F4</color>
+    <color name="screenBack">#DBF2FA</color>
 </resources>

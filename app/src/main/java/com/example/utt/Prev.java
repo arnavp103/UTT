@@ -181,18 +181,8 @@ public class Prev extends Fragment {
                                 //pastList.remove(to_remove);
                                 //must remove from database
 //                                DatabaseHandler.removeCourse(com.example.utt.models.Student.getCourse(code));
-                                studentCode.child(student_id).child(addCourseKey).removeValue()
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {}
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Log.d("RM", "Failure: " + e);
-                                            }
-                                        });
-
-                                viewAdapter.notifyDataSetChanged();
+                                addCourseKey = Course.getCourse(code.trim() ).getKey();
+                                deleteCourse(addCourseKey);
 
                             }
                         })
@@ -226,14 +216,12 @@ public class Prev extends Fragment {
                 //if the course that was removed is in the list
                 //loadData again,
                 //remove from pastList and or pastListTotal
+                Toast.makeText(getContext(), "A course was removed!", Toast.LENGTH_LONG).show();
                 if (pastList.contains(course.getCode())){
                     loadData();
                     Toast.makeText(getContext(), "We removed a course you added as it is no longer available!", Toast.LENGTH_LONG).show();
-                    pastList.remove(course.getCode());
-                    if (pastList.contains(course.getCode())){
-                        pastList.remove(course.getCode());
-                    }
-                    viewAdapter.notifyDataSetChanged();
+                    String courseKeyDelete = course.getKey();
+                    deleteCourse(courseKeyDelete);
 
 
                 }
@@ -360,6 +348,7 @@ public class Prev extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 allCourses.clear();
                 for(DataSnapshot courseSnapshot: snapshot.getChildren()){
+
                     String course = (courseSnapshot.getValue(ExcludedCourseDataModel.class)).getCode() + " ";
                     allCourses.add(course);
                     course_adapter.notifyDataSetChanged();
@@ -402,8 +391,9 @@ public class Prev extends Fragment {
 
                     if (id.equals(student_id)) {
                         for (DataSnapshot past: courseSnapshot.getChildren()){
-
-                            pastList.add((String) past.getValue());
+                            if (!(past.getKey().equals("None"))) {
+                                pastList.add((String) past.getValue());
+                            }
 
                         }
                             System.out.println(pastList);
@@ -426,6 +416,21 @@ public class Prev extends Fragment {
         });
     }
 
+    private void deleteCourse(String courseKey){
+        //addCourseKey = Course.getCourse(addCourse.trim() ).getKey();
+        studentCode.child(student_id).child(courseKey).removeValue()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {}
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("RM", "Failure: " + e);
+                    }
+                });
+
+        viewAdapter.notifyDataSetChanged();
+    }
 
 
 

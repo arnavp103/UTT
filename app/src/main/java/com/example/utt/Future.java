@@ -348,7 +348,9 @@ public class Future extends Fragment {
 
                     if (id.equals(student_id)) {
                         for (DataSnapshot past: courseSnapshot.getChildren()){
-                            pastList.add((String) past.getValue());
+                            if (!(past.getKey().equals("None"))) {
+                                pastList.add((String) past.getValue());
+                            }
 
                         }
                         //System.out.println(pastList);

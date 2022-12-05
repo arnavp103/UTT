@@ -52,9 +52,9 @@ public class Course {
         return courseCode;
     }
 
-   public List<YearlySession> getSessionOffering() {
+    public List<YearlySession> getSessionOffering() {
         return sessionOffering;
-   }
+    }
 
 
     public List<Course> getPrerequisites() {
