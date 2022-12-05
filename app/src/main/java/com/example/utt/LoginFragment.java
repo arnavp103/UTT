@@ -39,12 +39,12 @@ public class LoginFragment extends Fragment {
         context = this.getContext();
         binding = FragmentLoginPageBinding.inflate(inflater, container, false);
 
-        if(CookieLogin.getUserName(context).length() == 0) {
+        if(CookieLogin.getUserId(context).length() == 0) {
             ;   // if they don't have anything saved to shared pref continue as normal
         } else {
 
             NavHostFragment.findNavController(LoginFragment.this)
-                    .navigate(R.id.action_loginFragment_to_Home);
+                    .navigate(R.id.action_LoginFragment_to_Home);
         }
         return binding.getRoot();
     }
@@ -65,7 +65,7 @@ public class LoginFragment extends Fragment {
                     Student.login(s, objectModel);
 
                     NavHostFragment.findNavController(LoginFragment.this)
-                            .navigate(R.id.action_loginFragment_to_Home);
+                            .navigate(R.id.action_LoginFragment_to_Home);
                 }
 
                 @Override
@@ -127,7 +127,7 @@ public class LoginFragment extends Fragment {
                 assert user != null;
                 // Write their data to their local storage
                 checkUserStatus(user.get(0), view);
-                CookieLogin.setUserName(getContext(), user.get(0).getId());
+                CookieLogin.setUserId(getContext(), user.get(0).getId());
             }
 
             @Override
