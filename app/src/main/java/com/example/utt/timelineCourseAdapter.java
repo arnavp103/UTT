@@ -11,7 +11,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import static com.example.utt.SecondFragment.yearList;
+
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -47,7 +51,7 @@ public class timelineCourseAdapter extends RecyclerView.Adapter<timelineCourseAd
     public void onBindViewHolder(@NonNull timetableViewHolder holder, int position) {
         TimelineCourseModel model = courseModelArrayList.get(position);
         // Allow card to expand when clicked
-        holder.year.setOnClickListener(view1 -> {
+        holder.recyclerFullItem.setOnClickListener(view1 -> {
             boolean expanded = !model.isExpanded();
             model.setExpanded(expanded);
             notifyItemChanged(position);
@@ -80,6 +84,7 @@ public class timelineCourseAdapter extends RecyclerView.Adapter<timelineCourseAd
         private final TextView winterCourses;
         private final TextView summerCourses;
         private final TextView fallCourses;
+        private final RelativeLayout recyclerFullItem;
         private final LinearLayout detailsLayout;
 
 
@@ -92,10 +97,12 @@ public class timelineCourseAdapter extends RecyclerView.Adapter<timelineCourseAd
             winterCourses = itemView.findViewById(R.id.winterCourses);
             summerCourses = itemView.findViewById(R.id.summerCourses);
             fallCourses = itemView.findViewById(R.id.fallCourses);
+            recyclerFullItem = itemView.findViewById(R.id.recyclerFullItem);
             detailsLayout = itemView.findViewById(R.id.linLayoutYear);
         }
 
         void timelineBind(TimelineCourseModel model){
+            Log.d("TIMELINE", this + "Bind Called ------------ " + model.getYear());
 //            Log.d("TIMELINE", this + "Bind Called ------------ " + model.getYear());
             // Get the state
             boolean expanded = model.isExpanded();
@@ -125,6 +132,13 @@ public class timelineCourseAdapter extends RecyclerView.Adapter<timelineCourseAd
 //                ((ViewGroup) detailsLayout).removeView(winterCourses);
 //                ((ViewGroup) detailsLayout).removeView(winterHeader);
 //            }
+//            if (model.getWinterCourses().isEmpty()) {
+//                Log.d("TIMELINE", model.getYear() + ": Empty Winter Courses");
+//                ((ViewGroup) detailsLayout).removeView(winterCourses);
+//                ((ViewGroup) detailsLayout).removeView(winterHeader);
+//            }
+
+
         }
     }
 

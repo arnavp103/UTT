@@ -66,7 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main);
         navController = Objects.requireNonNull(navHostFragment).getNavController();
+
         navController.addOnDestinationChangedListener((firstArg, destination, thirdArg) -> {
+            ActionBar actionBar = getSupportActionBar();
+            if(destination.getId() == R.id.LoginFragment || destination.getId() == R.id.selectPrereqs2) {
             // The back_button should be referenced with a better method
             ActionBar actionBar = getSupportActionBar();
             if(destination.getId() == R.id.LoginFragment) {
@@ -78,6 +81,9 @@ public class MainActivity extends AppCompatActivity {
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }
             if(destination.getId() == R.id.Home || destination.getId() == R.id.firstFragment) {
+                assert actionBar != null;
+                actionBar.setDisplayHomeAsUpEnabled(false);
+            if(destination.getId() == R.id.FirstFragment || destination.getId() == R.id.firstFragment) {
                 assert actionBar != null;
                 actionBar.setDisplayHomeAsUpEnabled(false);
             }
