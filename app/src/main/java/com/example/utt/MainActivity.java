@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
-            CookieLogin.logout(this);
+            CookieLogin.getInstance().logout(this);
             Navigation.findNavController(this, R.id.nav_host_fragment_content_main).navigate(R.id.action_global_LoginFragment);
             return true;
         }

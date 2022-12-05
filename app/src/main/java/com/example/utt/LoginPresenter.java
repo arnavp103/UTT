@@ -11,14 +11,19 @@ import com.example.utt.models.User;
 import java.util.ArrayList;
 
 public class LoginPresenter implements LoginModel.Presenter {
+	public CookieLogin cookieLogin = CookieLogin.getInstance();
 	private final LoginView view;
-	private LoginModel model;
+	public LoginModel model;
 
 	// TODO Need to add navigation
 
 	public LoginPresenter(LoginView view) {
+		this(view, new LoginModel());
+	}
+
+	public LoginPresenter(LoginView view, LoginModel model) {
 		this.view = view;
-		this.model = new LoginModel();
+		this.model = model;
 	}	
 
 
@@ -63,11 +68,11 @@ public class LoginPresenter implements LoginModel.Presenter {
 	}
 
 	public void setCookie(Context context, String studentID) {
-		CookieLogin.setUserId(context, studentID);
+		cookieLogin.setUserId(context, studentID);
 	}
 
 	public String getCookie(Context context) {
-		return CookieLogin.getUserId(context);
+		return cookieLogin.getUserId(context);
 	}
 
 	interface LoginView {

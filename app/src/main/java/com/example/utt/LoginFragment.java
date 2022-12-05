@@ -39,7 +39,7 @@ public class LoginFragment extends Fragment {
         context = this.getContext();
         binding = FragmentLoginPageBinding.inflate(inflater, container, false);
 
-        if(CookieLogin.getUserId(context).length() == 0) {
+        if(CookieLogin.getInstance().getUserId(context).length() == 0) {
             ;   // if they don't have anything saved to shared pref continue as normal
         } else {
 
@@ -127,7 +127,7 @@ public class LoginFragment extends Fragment {
                 assert user != null;
                 // Write their data to their local storage
                 checkUserStatus(user.get(0), view);
-                CookieLogin.setUserId(getContext(), user.get(0).getId());
+                CookieLogin.getInstance().setUserId(getContext(), user.get(0).getId());
             }
 
             @Override

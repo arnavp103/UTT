@@ -39,7 +39,7 @@ public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
                 @Override
                 public void onReady() {
                     // if they don't have anything saved to shared pref continue as normal
-                    loginPresenter.cookieQuery(CookieLogin.getUserId(context), getView());
+                    loginPresenter.cookieQuery(CookieLogin.getInstance().getUserId(context), getView());
 
                 }
             });
