@@ -25,10 +25,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.FragmentAddFutureBinding;
 import com.example.utt.models.Course;
-import com.example.utt.models.Student;
 import com.example.utt.models.firebase.datamodel.ExcludedCourseDataModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -301,7 +299,7 @@ public class addPrev extends Fragment {
 
 
                         textView.setText(course_adapter.getItem(i));
-                        textView.setTextColor(Color.White);
+                        textView.setTextColor(Color.WHITE);
 
 
                         dialog.dismiss();

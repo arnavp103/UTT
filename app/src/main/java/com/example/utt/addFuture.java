@@ -206,8 +206,8 @@ public class addFuture extends Fragment {
                         //when item selected from list
                         //set selected item on text view
                         addCourse = (String) course_adapter.getItem(i);
-
                         textView.setText(course_adapter.getItem(i));
+                        textView.setTextColor(Color.WHITE);
 
 
 
