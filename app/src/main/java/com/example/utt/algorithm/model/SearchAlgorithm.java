@@ -71,7 +71,7 @@ public class SearchAlgorithm {
             }
             int c = 0;
             CourseScheduling addCourse = new CourseScheduling(course.getName(), course.getCode(),
-                                                                course.getSessionOffering(), course.getPrerequisites());
+                    course.getSessionOffering(), course.getPrerequisites());
             addCourse.sessionBeingTaken.term = termToTake;
             addCourse.sessionBeingTaken.year = yearToTake;
 

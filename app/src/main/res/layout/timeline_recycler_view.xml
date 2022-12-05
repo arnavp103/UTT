@@ -1,40 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!--This is a template for all cards in RecyclerView.-->
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list_item"
+    android:id="@+id/timeline_list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="1dp"
     android:outlineProvider="bounds"
-    app:cardBackgroundColor="@color/white"
+    app:cardBackgroundColor="@color/listviewBackground"
     app:cardCornerRadius="4dp"
     app:cardElevation="1dp"
     app:cardMaxElevation="2dp"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true">
 
-    <!-- In the above cardview widget cardelevation property will give elevation to your card view
-        card corner radius will provide radius to your card view card background color will give
-        background color to your card view card max elevation will give the cardview maximum
-        elevation card prevent corner overlap will add padding to CardView on v20 and before to
-        prevent intersections between the Card content and rounded corners. Card use compact padding
-        will add padding in API v21+ as well to have the same measurements with previous versions -->
-
     <RelativeLayout
+        android:id="@+id/recyclerFullItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <!-- Text View to display Course Code -->
-
+        <!-- Text view to display years when course is offered -->
         <LinearLayout
-            android:id="@+id/bababa"
+            android:id="@+id/linLayoutYear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/idTVCourseName"
+            android:layout_below="@id/idYear"
             android:orientation="vertical">
 
             <Space
@@ -42,76 +36,70 @@
                 android:layout_height="10dp"
                 android:layout_weight="1" />
 
+            <!-- Text View "Winter" header -->
             <TextView
-                android:id="@+id/idTVCoursePrereqsHeader"
+                android:id="@+id/winterTextHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:text="Prerequisites:"
+                android:text="Winter:"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:typeface="normal" />
 
+            <!-- Text View "Winter" courses -->
             <TextView
-                android:id="@+id/idTVCoursePrereqs"
+                android:id="@+id/winterCourses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:textColor="@color/black" />
 
+            <!-- Text View "Summer" header -->
             <TextView
-                android:id="@+id/idTVCourseSessionHeader"
+                android:id="@+id/summerHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:text="Course Offerings:"
+                android:text="Summer:"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
+            <!-- Text View "Summer" courses -->
             <TextView
-                android:id="@+id/idTVCourseSession"
+                android:id="@+id/summerCourses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:textColor="@color/black" />
 
-            <LinearLayout
-                android:id="@+id/actionButtons"
+            <!-- Text View "Fall" header -->
+            <TextView
+                android:id="@+id/fallHeader"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="Fall:"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="@color/purple_700"
-                    android:text="Modify"
-                    android:textSize="15sp" />
-            </LinearLayout>
-
+            <!-- Text View "Fall" courses -->
+            <TextView
+                android:id="@+id/fallCourses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:textColor="@color/black" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/idTVCourseCode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            tools:text="CSCB07" />
 
         <!-- Text View to display Course Name -->
         <TextView
-            android:id="@+id/idTVCourseName"
+            android:id="@+id/idYear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/idTVCourseCode"
+            android:drawableEnd="@android:drawable/arrow_down_float"
             android:textColor="@color/black"
-            tools:text="crop" />
-
-        <!-- Text View to display Course Sessions -->
+            tools:text="Year" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

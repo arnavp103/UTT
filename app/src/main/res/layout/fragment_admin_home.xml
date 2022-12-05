@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/screenBack"
+    android:padding="16dp"
+    tools:context=".AdminHome">
+
+    <SearchView
+        android:id="@+id/courseFilter"
+        style="@android:style/Widget.Material.Light.SearchView"
+        android:layout_width="0dp"
+        android:layout_height="43dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonAdd"
+        app:layout_constraintEnd_toStartOf="@+id/buttonAdd"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.UTT.AppBarOverlay"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editCourseName" />
+
+    <!--Admin can add course code-->
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="-30dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/prereq">
+
+        <ListView
+            android:id="@+id/listViewCourses"
+            style="@style/Base.CardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            android:layout_weight="0.5"
+            android:background="@color/white"
+            android:focusableInTouchMode="false"
+            android:isScrollContainer="false"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll"
+            app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editCourseCode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:autofillHints=""
+        android:ems="18"
+        android:hint="@string/enter_course_code"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:singleLine="false"
+        android:textColorHint="#757575"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--Admin can add course name-->
+    <EditText
+        android:id="@+id/editCourseName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:ems="18"
+        android:hint="@string/enterCourseName"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editCourseCode" />
+
+    <!--Admin can add course session offerings-->
+    <TextView
+        android:id="@+id/sessionoffering"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_centerInParent="true"
+        android:background="@android:drawable/editbox_background"
+        android:drawableEnd="@android:drawable/arrow_down_float"
+        android:drawablePadding="16dp"
+        android:ems="18"
+        android:hint="Select Session Offerings"
+        android:padding="12dp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editCourseName" />
+
+    <!--Admin can add course prerequisites-->
+
+    <Button
+        android:id="@+id/buttonAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_course"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/prereq"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/listviewBackground"
+        android:fontFamily="sans-serif"
+        android:lineSpacingExtra="10sp"
+        android:text="@string/select_prerequisites"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sessionoffering"
+        app:strokeWidth="2dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

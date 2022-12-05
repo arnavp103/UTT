@@ -122,12 +122,8 @@ public class addFuture extends Fragment {
 
         //remove item function
         courseView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-
                 final int to_remove = i;
 
                 new AlertDialog.Builder(getContext())
@@ -211,8 +207,9 @@ public class addFuture extends Fragment {
                         //set selected item on text view
                         addCourse = (String) course_adapter.getItem(i);
 
-
                         textView.setText(course_adapter.getItem(i));
+
+
 
                         dialog.dismiss();
                     }

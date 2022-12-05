@@ -21,4 +21,6 @@
     <color name="edittext_text_gray">#AFAFAF</color>
     <color name="edittext_fill_gray">#F3F3F3</color>
     <color name="button_color">#777DFF</color>
+    <color name="listviewBackground">#BBE5F4</color>
+    <color name="screenBack">#DBF2FA</color>
 </resources>

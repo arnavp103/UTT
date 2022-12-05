@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.example.utt.algorithm.model.Term;
 import com.example.utt.algorithm.model.YearlySession;
 import com.example.utt.models.firebase.datamodel.CourseDataModel;
+import com.google.firebase.database.Exclude;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Map;
 
 public class Course {
 
+    @Exclude
     private String key;
     private String name;
     private String courseCode;
@@ -42,6 +44,7 @@ public class Course {
     }
 
     //  =========== getters ===========
+    @Exclude
     public String getKey() { return key; }
 
     public String getName() {
@@ -52,9 +55,9 @@ public class Course {
         return courseCode;
     }
 
-   public List<YearlySession> getSessionOffering() {
+    public List<YearlySession> getSessionOffering() {
         return sessionOffering;
-   }
+    }
 
 
     public List<Course> getPrerequisites() {

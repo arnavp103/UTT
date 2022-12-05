@@ -11,6 +11,31 @@
     <string name="addPrev_label">View My Courses</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="enter_course_code">Enter course code</string>
+    <string name="add_course">Add course</string>
+    <string name="search">Search</string>
+    <string name="back">Back</string>
+    <string name="enter_course_name">Enter course name</string>
+    <string name="add_course_name">Add course name</string>
+    <string name="enter_name">Enter course name</string>
+    <string name="enterName">Enter course name</string>
+    <string name="text">Text</string>
+    <string name="textview">Textview</string>
+    <string name="enterCourseName">Enter course name</string>
+    <string name="enter_course_session_offerings">Enter course session offerings</string>
+    <string name="enter_course_prerequisites">Enter course prerequisites</string>
+    <string name="textView3">textView3</string>
+
+    <string name="generate_timeline">Generate Timeline</string>
+    <string name="select_course">select_add_future</string>
+    <string name="enter_course_code_home">Enter Course Code</string>
+    <string name="deleteFuturebtn">deleteFuture</string>
+    <string name="select_course_future">Select Course</string>
+    <string name="add_course_future">Add Course</string>
+    <string name="home_futuretohome">Home</string>
+    <string name="generate_future">GENERATE</string>
+    <string name="homefuturetohome">futuretohome</string>
+
     <string name="logout">Logout</string>
     <string name="login_title">Login</string>
     <string name="login_button">Login</string>
@@ -25,17 +50,6 @@
     <string name="Add_course">add_course_student</string>
     <string name="Text">text_student</string>
     <string name="Textview">textview_student</string>
-    <string name="enter_course_code">course_code</string>
-    <string name="generate_timeline">Generate Timeline</string>
-    <string name="search">Search</string>
-    <string name="select_course">Select Course </string>
-    <string name="enter_course_code_home">Enter Course Code</string>
-    <string name="deleteFuturebtn">Delete</string>
-    <string name="select_course_future">Select Course</string>
-    <string name="add_course_future">Add Course</string>
-    <string name="home_futuretohome">Home</string>
-    <string name="generate_future">GENERATE</string>
-    <string name="homefuturetohome">Home</string>
     <string name="Home">Home</string>
     <string name="select_future_course">Select Course</string>
     <string name="generate">Generate</string>
@@ -72,16 +86,27 @@
     </array>
 
     <string name="Search">Search</string>
-    <string name="enterName">Enter Name</string>
-    <string name="add_course_name">Add Course Name</string>
-    <string name="back">Back</string>
-    <string name="text">Text</string>
-    <string name="textview">Text View</string>
-    <string name="textView3">Text View 3</string>
     <string name="login_subtitle">Please sign in to continue</string>
     <string name="sign_up_button">Sign up</string>
     <string name="email_field">Email</string>
     <string name="password_field">Password</string>
 
     <!-- TODO: Remove or change this placeholder text -->
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="timeline">TIMELINE</string>
+    <string name="modify_course">Modify</string>
+    <string name="select_prerequisites">Select prerequisites</string>
 </resources>

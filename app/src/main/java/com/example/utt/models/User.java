@@ -8,6 +8,9 @@ import androidx.annotation.NonNull;
 import com.example.utt.database.DatabaseHandler;
 import com.google.firebase.database.Exclude;
 
+import java.util.ArrayList;
+import java.util.List;
+
 // We shouldn't generate multiple of these.
 public class User {
     private String email;

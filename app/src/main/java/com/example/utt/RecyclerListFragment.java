@@ -70,7 +70,6 @@ public class  RecyclerListFragment extends Fragment {
 
         for (Course course : courses.values()) courseModelArrayList.add(new CourseModel(course));
 
-
         // we are initializing our adapter class and passing our arraylist to it.
         CourseAdapter courseAdapter = new CourseAdapter(getContext(), courseModelArrayList);
 

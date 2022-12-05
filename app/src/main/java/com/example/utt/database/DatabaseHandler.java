@@ -32,7 +32,7 @@ public abstract class DatabaseHandler {
 
     private static final String emulatorURL = "https://utsc-b07-projcourses.firebaseio.com";
     private static final String databaseURL = "https://utsc-b07-projcourses-default-rtdb.firebaseio.com";
-
+        // ("https://b07-final-db5c5-default-rtdb.firebaseio.com")
     // Logcat Tag Name
     private static final String TAG = "DATABASE HANDLER";
 
@@ -55,9 +55,11 @@ public abstract class DatabaseHandler {
         public void onReady();
     }
 
-    private static ArrayList<OnReadyListener> onReadyListeners = new ArrayList<>();
+    private static final ArrayList<OnReadyListener> onReadyListeners = new ArrayList<>();
     public static void addOnReadyListener(OnReadyListener callback) {
-        if (databaseReady) callback.onReady();
+        if (databaseReady) {
+            callback.onReady();
+        }
         else {
             onReadyListeners.add(callback);
         }
@@ -172,6 +174,12 @@ public abstract class DatabaseHandler {
                     }
                 }).addOnFailureListener(e -> {Log.d(TAG, "Failure: " + e.toString());});
     }
+
+    public static void updateCourse(Course course) {
+        CourseDataModel output = CourseDataModel.readCourse(course);
+        updateCourse(output);
+    }
+
     /**
      * Inserts into database.courses a new course.
      * @param course The object model of the course
@@ -316,7 +324,9 @@ public abstract class DatabaseHandler {
         dbStudentsRef = dbRootRef.child("students");
 
         databaseReady = true;
-        for (OnReadyListener callback : onReadyListeners) callback.onReady();
+        for (OnReadyListener callback : onReadyListeners) {
+            callback.onReady();
+        }
         onReadyListeners.clear();
     }
 

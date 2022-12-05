@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/screenBack"
+    tools:context=".SelectPrereqs">
+
+    <TextView
+        android:id="@+id/selectPrereqText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="Select Prerequisites"
+        android:textColor="@android:color/black"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/prereqRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:nestedScrollingEnabled="true"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/prereqFilter" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:src="@drawable/ic_baseline_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <SearchView
+        android:id="@+id/prereqFilter"
+        style="@android:style/Widget.Material.Light.SearchView"
+        android:layout_width="0dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectPrereqText" />
+
+    <TextView
+        android:id="@+id/prereqEmptyResultText"
+        android:layout_width="0dp"
+        android:layout_height="78dp"
+        android:fontFamily="@font/fira_sans_bold_italic"
+        android:gravity="center"
+        android:text="No Results Found."
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/prereqFilter"
+        tools:visibility="gone" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

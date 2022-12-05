@@ -143,7 +143,6 @@ public class LoginFragment extends Fragment {
             public void onComplete(String data) {
             }
         };
-
         DatabaseHandler.getUser(username, password, authCallback);
     }
 

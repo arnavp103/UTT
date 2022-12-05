@@ -8,7 +8,8 @@ import com.example.utt.algorithm.model.Term;
 import com.example.utt.algorithm.model.YearlySession;
 import com.example.utt.models.Course;
 import com.example.utt.models.CourseEventListener;
-import com.google.firebase.firestore.Exclude;
+import com.google.firebase.database.Exclude;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,8 +26,8 @@ public class CourseDataModel {
     // Course-specific collection of listeners
     private List<CourseEventListener> myListeners;
 
-    private static Map<String, CourseDataModel> courses;
-    private static Map<String, String> coursesID_CODE; // Key ID -> Code
+    private static Map<String, CourseDataModel> courses = new HashMap<>();
+    private static Map<String, String> coursesID_CODE = new HashMap<>(); // Key ID -> Code
 
     // The Course object that this CourseDataModel is associated with.
     @Exclude
@@ -44,7 +45,7 @@ public class CourseDataModel {
     // Constructors
     // Empty Constructor, required for API: Attaches a listener
     public CourseDataModel() {
-        if (courses == null) {coursesID_CODE = new HashMap<>(); courses = new HashMap<>();}
+        if (courses == null) {}
         if (myListeners == null) { myListeners = new ArrayList<>(); }
         prerequisites = new ArrayList<>();
         sessionOffering = List.of(false, false, false);
@@ -78,6 +79,7 @@ public class CourseDataModel {
     // Called on persistent listeners updating course.
     public void updateCourseObject() {
         Course newContent = generateCourseObject();
+        courseObject.setKey(newContent.getKey());
         courseObject.setCourseCode(newContent.getCode());
         courseObject.setName(newContent.getName());
         courseObject.setPrerequisites(newContent.getPrerequisites());
@@ -106,6 +108,7 @@ public class CourseDataModel {
             // Transfer child
             course.setCourseObject(oldCourse.getCourseObject());
             course.updateCourseObject();
+            course.setKey(key);
 
             // Call that courses local listeners
             oldCourse.callCourseChangedListeners(course);
@@ -133,8 +136,8 @@ public class CourseDataModel {
         oldCourse.callCourseRemovedListeners();
 
         // Remove the references
-//        courses.remove(course.code);
-//        coursesID_CODE.remove(course.key);
+        courses.remove(course.code);
+        coursesID_CODE.remove(course.key);
         if (listeners != null) for (CourseEventListener obj : listeners) obj.onCourseRemoved(oldCourse.getCourseObject());
 
     }
@@ -179,6 +182,10 @@ public class CourseDataModel {
         for (int i = 0; i < prerequisites.size(); i++)
             result.put(Integer.toString(i), prerequisites.get(i));
         return result;
+    }
+
+    static public CourseDataModel getCourseByCode(String code) {
+        return courses.get(code);
     }
 
     // Contains the courses that are prerequisites or have been recently deleted
@@ -304,8 +311,9 @@ public class CourseDataModel {
             }
         }
 
-        CourseDataModel result = new CourseDataModel();
+        CourseDataModel result = new ExcludedCourseDataModel();
 
+        result.setKey(course.getKey());
         result.setName(course.getName());
         result.setCode(course.getCode());
         result.setSessionOffering(sessions);
