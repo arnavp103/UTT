@@ -16,43 +16,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.utt.algorithm.model.Term;
+import com.example.utt.algorithm.model.YearlySession;
 import com.example.utt.database.DatabaseHandler;
-import com.example.utt.databinding.FragmentFirstBinding;
+import com.example.utt.databinding.FragmentAdminHomeBinding;
 import com.example.utt.models.Course;
-import com.example.utt.models.Student;
-import com.example.utt.models.User;
 import com.example.utt.models.CourseEventListener;
-import com.example.utt.models.firebase.datamodel.CourseDataModel;
-import com.example.utt.models.firebase.datamodel.ExcludedCourseDataModel;
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.Exclude;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Transaction;
-import com.google.firebase.database.ValueEventListener;
 
-import com.example.utt.algorithm.model.*;
-
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
-public class FirstFragment extends Fragment {
+public class AdminHome extends Fragment {
     EditText editTextName;
     EditText editCourseName;
     Button buttonAdd;
     private static String courseCode = "";
     private static String courseName = "";
     TextView sessionOffering;
-    private FragmentFirstBinding binding;
+    private FragmentAdminHomeBinding binding;
     DatabaseReference databaseCourseCode;
     Button prereqText;
     ListView listViewCourses;
@@ -71,7 +58,7 @@ public class FirstFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentFirstBinding.inflate(inflater, container, false);
+        binding = FragmentAdminHomeBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -225,8 +212,8 @@ public class FirstFragment extends Fragment {
                courseCode = editTextName.getText().toString();
                courseName = editCourseName.getText().toString();
 
-               SelectPrereqs.context = FirstFragment.this;
-               NavHostFragment.findNavController(FirstFragment.this)
+               SelectPrereqs.context = AdminHome.this;
+               NavHostFragment.findNavController(AdminHome.this)
                        .navigate(R.id.action_firstFragment_to_selectPrereqs2);
            }
        });

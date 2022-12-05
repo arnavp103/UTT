@@ -14,7 +14,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.utt.databinding.SelectPrereqsBinding;
 import com.example.utt.models.Course;
 import com.example.utt.models.CourseEventListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -22,7 +21,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Objects;
 
 public class SelectPrereqs extends Fragment {
@@ -33,7 +31,7 @@ public class SelectPrereqs extends Fragment {
     public static ArrayList<Course> prereqList;
     private FloatingActionButton fab;
     private CheckBox checkBox;
-    public static FirstFragment context;
+    public static AdminHome context;
     private SearchView prereqFilter;
     public TextView emptyResultView;
 

@@ -1,20 +1,16 @@
 package com.example.utt;
 
-import android.util.Log;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import com.example.utt.models.Course;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PrereqAdapter extends RecyclerView.Adapter<PrereqAdapter.ViewHolder> {
@@ -35,7 +31,7 @@ public class PrereqAdapter extends RecyclerView.Adapter<PrereqAdapter.ViewHolder
 
     public void onBindViewHolder(ViewHolder holder, int position){
         CourseModel item = courseList.get(position);
-        prereqList = FirstFragment.courses;
+        prereqList = AdminHome.courses;
 
         if (prereqList.contains(item.getCourse())) item.setStatus(1);
         holder.courseTask.setText(item.getCourseCode());

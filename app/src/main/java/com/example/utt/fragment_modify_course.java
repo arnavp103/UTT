@@ -3,13 +3,6 @@ package com.example.utt;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,21 +10,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.utt.algorithm.model.Term;
 import com.example.utt.algorithm.model.YearlySession;
 import com.example.utt.database.DatabaseHandler;
-import com.example.utt.databinding.FragmentFirstBinding;
 import com.example.utt.databinding.FragmentModifyCourseBinding;
 import com.example.utt.models.Course;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -103,9 +98,9 @@ public class fragment_modify_course extends Fragment {
         newCourseName = desiredCourse.getName();
         newCourseCode = desiredCourse.getCode();
         courseKey = desiredCourse.getKey();
-        FirstFragment.courses.clear();
+        AdminHome.courses.clear();
         sessionList.clear();
-        for (Course prereq : desiredCourse.getPrerequisites()) FirstFragment.courses.add(prereq);
+        for (Course prereq : desiredCourse.getPrerequisites()) AdminHome.courses.add(prereq);
         for (YearlySession session : desiredCourse.getSessionOffering()) {
             selectedSession[session.getTerm().getTerm()] = true;
             sessionList.add(session.getTerm().getTerm());
@@ -230,7 +225,7 @@ public class fragment_modify_course extends Fragment {
             season.add(tempSeasons);
         }
 
-        List<Course> prerequisites = FirstFragment.courses;
+        List<Course> prerequisites = AdminHome.courses;
         // Check if search bar is empty
         if(!TextUtils.isEmpty(code) && !TextUtils.isEmpty(name) && !sessionList.isEmpty()){
             // String courseID = databaseCourseCode.push().getKey();
@@ -263,7 +258,7 @@ public class fragment_modify_course extends Fragment {
         newCourseName = "";
         selectedSession = new boolean[sessionArray.length];
         sessionList.clear();
-        FirstFragment.courses.clear();
+        AdminHome.courses.clear();
         populateFields();
         prereqText.setText(R.string.select_prerequisites);
     }
@@ -272,9 +267,9 @@ public class fragment_modify_course extends Fragment {
         editTextName.setText(newCourseCode);
         editCourseName.setText(newCourseName);
         displaySessions();
-        if (FirstFragment.courses == null) FirstFragment.courses = new ArrayList<>();
+        if (AdminHome.courses == null) AdminHome.courses = new ArrayList<>();
         prereqText.setText(R.string.select_prerequisites);
-        prereqText.setText(prereqText.getText() + " (" + FirstFragment.courses.size() + ")");
+        prereqText.setText(prereqText.getText() + " (" + AdminHome.courses.size() + ")");
     }
 
     private void displaySessions() {
@@ -293,7 +288,7 @@ public class fragment_modify_course extends Fragment {
 
     @Override
     public void onDestroy() {
-        FirstFragment.courses.clear();
+        AdminHome.courses.clear();
         super.onDestroy();
     }
 }

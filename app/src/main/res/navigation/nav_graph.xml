@@ -68,9 +68,9 @@
         app:destination="@id/LoginFragment" />
     <fragment
         android:id="@+id/firstFragment"
-        android:name="com.example.utt.FirstFragment"
+        android:name="com.example.utt.AdminHome"
         android:label="Course Manager"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_admin_home">
         <action
             android:id="@+id/action_firstFragment_to_secondFragment"
             app:destination="@id/secondFragment" />
