@@ -18,4 +18,7 @@
     <color name="navy_blue">#FF07225C</color>
     <color name="baby_blue">#0A87BF</color>
     <color name="ultramarine">#394291</color>
+    <color name="edittext_text_gray">#AFAFAF</color>
+    <color name="edittext_fill_gray">#F3F3F3</color>
+    <color name="button_color">#777DFF</color>
 </resources>

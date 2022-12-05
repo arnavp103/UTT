@@ -1,4 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="landscape">0.4</dimen>
+    <dimen name="textSize16">16sp</dimen>
 </resources>

@@ -1,61 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginpage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/loginpage"
     tools:context=".LoginFragMVP">
 
     <EditText
         android:id="@+id/editTextUsername"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/edit_text_border"
         android:ems="10"
+        android:gravity="center_vertical"
         android:hint="@string/username"
         android:inputType="text"
-        android:textAlignment="center"
-        android:textColor="@color/antique"
-        android:textColorHint="@color/antique"
-        app:layout_constraintEnd_toStartOf="@+id/buttonEndGuideline"
-        app:layout_constraintStart_toStartOf="@+id/buttonStartGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/titleLogin" />
+        android:paddingStart="8dp"
+        android:textColor="@color/edittext_text_gray"
+        android:textColorHint="@color/edittext_text_gray"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/email_field" />
+<!--    android:textAlignment="center"-->
+
+    <!--    android:textAlignment="center"-->
 
     <EditText
         android:id="@+id/editTextTextPassword"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/edit_text_border"
         android:ems="10"
+        android:gravity="center_vertical"
         android:hint="@string/password"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
+        android:paddingStart="8dp"
         android:shadowColor="#340B0A0A"
-        android:textAlignment="center"
-        android:textColor="@color/antique"
-        android:textColorHint="@color/antique"
-        app:layout_constraintEnd_toStartOf="@+id/buttonEndGuideline"
-        app:layout_constraintStart_toStartOf="@+id/buttonStartGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
+        android:textColor="@color/edittext_text_gray"
+        android:textColorHint="@color/edittext_text_gray"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/pw_field" />
 
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="@color/navy_blue"
+        android:layout_marginTop="96dp"
+        android:background="@drawable/pill_bg"
         android:fontFamily="@font/fira_sans_light"
         android:text="@string/login_button"
+        android:textColor="@color/antique"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/buttonEndGuideline"
         app:layout_constraintStart_toStartOf="@+id/buttonStartGuideline"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
+
         tools:ignore="DuplicateSpeakableTextCheck" />
 
 
@@ -65,33 +70,32 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:fontFamily="@font/fira_sans_medium_italic"
+        android:fontFamily="@font/fira_sans_light"
         android:text="@string/login_title"
-        android:textAlignment="center"
+        android:gravity="center_vertical"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/eggshell"
-        android:textSize="60sp"
+        android:textColor="@color/ultramarine"
+        android:textSize="30sp"
         app:layout_constraintEnd_toStartOf="@+id/titleEndGuideline"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/titleStartGuideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toTopOf="@+id/titleTopGuideline" />
 
 
     <Button
         android:id="@+id/signup"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
 
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="36dp"
-        android:backgroundTint="@color/slategray"
-        android:fontFamily="@font/fira_sans_light"
-        android:text="Register"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/fira_sans_medium"
+        android:text="@string/sign_up_button"
+        android:textColor="@color/button_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonEndGuideline"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.061"
         app:layout_constraintStart_toStartOf="@+id/buttonStartGuideline"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
         app:layout_constraintVertical_bias="0.0" />
@@ -130,5 +134,68 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.9" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:elevation="-2dp"
+        android:src="@drawable/login_block"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
+        app:layout_constraintEnd_toStartOf="@+id/titleEndGuideline"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/titleStartGuideline"
+        app:layout_constraintTop_toTopOf="@+id/titleTopGuideline"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_subtitle"
+        android:textColor="@color/edittext_text_gray"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/titleLogin" />
+
+    <TextView
+        android:id="@+id/email_field"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/email_field"
+        android:textColor="@color/ultramarine"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/subtitle" />
+
+    <TextView
+        android:id="@+id/pw_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/password_field"
+        android:textColor="@color/ultramarine"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

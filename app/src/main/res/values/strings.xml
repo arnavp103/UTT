@@ -15,8 +15,8 @@
     <string name="login_title">Login</string>
     <string name="login_button">Login</string>
     <string name="signup_nav">Sign up</string>
-    <string name="username">Username</string>
-    <string name="password">Password</string>
+    <string name="username">Enter your email</string>
+    <string name="password">Enter your password</string>
     <string name="invalid_login">Incorrect username or password</string>
 
     <!-- compilation error fix below -->
@@ -78,6 +78,10 @@
     <string name="text">Text</string>
     <string name="textview">Text View</string>
     <string name="textView3">Text View 3</string>
+    <string name="login_subtitle">Please sign in to continue</string>
+    <string name="sign_up_button">Sign up</string>
+    <string name="email_field">Email</string>
+    <string name="password_field">Password</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

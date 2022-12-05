@@ -2,13 +2,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <solid
-        android:color="@android:color/transparent"/>
+        android:color="@color/edittext_fill_gray"/>
     <corners
         android:bottomRightRadius="12dp"
         android:bottomLeftRadius="12dp"
         android:topLeftRadius="12dp"
         android:topRightRadius="12dp"/>
     <stroke
-        android:color="@color/antique"
+        android:color="@color/edittext_fill_gray"
         android:width="2dp"/>
 </shape>

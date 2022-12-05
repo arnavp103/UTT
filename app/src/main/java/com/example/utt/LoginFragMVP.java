@@ -3,7 +3,6 @@ package com.example.utt;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +33,7 @@ public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
         context = this.getContext();
         binding = FragmentLoginPageBinding.inflate(inflater, container, false);
         loginPresenter = new LoginPresenter(this);
+
         if (loginPresenter.getCookie(context).length() != 0) {
             DatabaseHandler.addOnReadyListener(new DatabaseHandler.OnReadyListener() {
                 @Override
