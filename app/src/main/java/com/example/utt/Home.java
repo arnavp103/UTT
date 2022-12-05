@@ -1,23 +1,16 @@
 package com.example.utt;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.fragment.NavHostFragment;
 
-
 import com.example.utt.databinding.FragmentHomeBinding;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.example.utt.models.Student;
 
 //import com.google.firebase.database.DataSnapshot;
 //import com.google.firebase.database.DatabaseError;
@@ -36,15 +29,14 @@ public class Home extends Fragment {
    // DatabaseReference databaseCourses;
    //private FirebaseFirestore courseCode = FirebaseFirestore.getInstance();
 
-
-
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
         binding = FragmentHomeBinding.inflate(inflater, container, false);
+        String email = Student.getInstance().getEmail();
+        ((AppCompatActivity) requireContext()).getSupportActionBar().setTitle("Welcome, " + email);
         return binding.getRoot();
 
     }
@@ -87,11 +79,6 @@ public class Home extends Fragment {
 
             }
         });
-
-
-
-
-
     }
 
 
@@ -100,6 +87,8 @@ public class Home extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+
 
     public void HomeToGenerate(View view) {
     }

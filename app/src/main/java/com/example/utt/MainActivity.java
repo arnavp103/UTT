@@ -136,8 +136,4 @@ public class MainActivity extends AppCompatActivity {
 
         return sb;
     }
-
-    private void addToMenu(Menu menu) {
-
-    }
 }
