@@ -14,6 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.utt.databinding.SelectPrereqsBinding;
 import com.example.utt.models.Course;
 import com.example.utt.models.CourseEventListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
