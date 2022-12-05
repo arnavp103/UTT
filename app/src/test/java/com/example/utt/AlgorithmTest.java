@@ -410,12 +410,6 @@ public class AlgorithmTest {
         assertEquals(2024, result2.get(7).sessionBeingTaken.year);
     }
 
-
-
-
-
-
-
     @Test
     public void testAlgorithm3() {
         List<Course> a08Prerequisites = new ArrayList<>();
@@ -703,6 +697,38 @@ public class AlgorithmTest {
         SearchAlgorithm search2 = new SearchAlgorithm(coursesTaken2);
         search2.findBeginningNodes(targets2);
         List<CourseScheduling> result2 = search2.search(Term.FALL, 2022);
+
+        assertEquals("CSCA67", result2.get(0).getCode());
+        assertEquals(Term.WINTER, result2.get(0).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(0).sessionBeingTaken.year);
+
+        assertEquals("PHLA11", result2.get(1).getCode());
+        assertEquals(Term.FALL, result2.get(1).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(1).sessionBeingTaken.year);
+
+        assertEquals("CSCB07", result2.get(2).getCode());
+        assertEquals(Term.SUMMER, result2.get(2).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(2).sessionBeingTaken.year);
+
+        assertEquals("CSCB09", result2.get(3).getCode());
+        assertEquals(Term.WINTER, result2.get(3).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(3).sessionBeingTaken.year);
+
+        assertEquals("CSCB36", result2.get(4).getCode());
+        assertEquals(Term.SUMMER, result2.get(4).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(4).sessionBeingTaken.year);
+
+        assertEquals("CSCC24", result2.get(5).getCode());
+        assertEquals(Term.WINTER, result2.get(5).sessionBeingTaken.term);
+        assertEquals(2024, result2.get(5).sessionBeingTaken.year);
+
+        assertEquals("CSCB63", result2.get(6).getCode());
+        assertEquals(Term.WINTER, result2.get(6).sessionBeingTaken.term);
+        assertEquals(2024, result2.get(6).sessionBeingTaken.year);
+
+        assertEquals("CSCC63", result2.get(7).getCode());
+        assertEquals(Term.FALL, result2.get(7).sessionBeingTaken.term);
+        assertEquals(2024, result2.get(7).sessionBeingTaken.year);
         int jkl = 0;
     }
     @Test
@@ -831,6 +857,38 @@ public class AlgorithmTest {
         SearchAlgorithm search2 = new SearchAlgorithm(coursesTaken2);
         search2.findBeginningNodes(targets2);
         List<CourseScheduling> result2 = search2.search(Term.FALL, 2022);
+
+        assertEquals("CSCA67", result2.get(0).getCode());
+        assertEquals(Term.WINTER, result2.get(0).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(0).sessionBeingTaken.year);
+
+        assertEquals("PHLA11", result2.get(1).getCode());
+        assertEquals(Term.FALL, result2.get(1).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(1).sessionBeingTaken.year);
+
+        assertEquals("CSCB07", result2.get(2).getCode());
+        assertEquals(Term.SUMMER, result2.get(2).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(2).sessionBeingTaken.year);
+
+        assertEquals("CSCB09", result2.get(3).getCode());
+        assertEquals(Term.WINTER, result2.get(3).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(3).sessionBeingTaken.year);
+
+        assertEquals("CSCB36", result2.get(4).getCode());
+        assertEquals(Term.SUMMER, result2.get(4).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(4).sessionBeingTaken.year);
+
+        assertEquals("CSCC24", result2.get(5).getCode());
+        assertEquals(Term.WINTER, result2.get(5).sessionBeingTaken.term);
+        assertEquals(2024, result2.get(5).sessionBeingTaken.year);
+
+        assertEquals("CSCB63", result2.get(6).getCode());
+        assertEquals(Term.WINTER, result2.get(6).sessionBeingTaken.term);
+        assertEquals(2024, result2.get(6).sessionBeingTaken.year);
+
+        assertEquals("CSCC63", result2.get(7).getCode());
+        assertEquals(Term.FALL, result2.get(7).sessionBeingTaken.term);
+        assertEquals(2024, result2.get(7).sessionBeingTaken.year);
         int jkl = 0;
     }
     @Test
@@ -959,6 +1017,38 @@ public class AlgorithmTest {
         SearchAlgorithm search2 = new SearchAlgorithm(coursesTaken2);
         search2.findBeginningNodes(targets2);
         List<CourseScheduling> result2 = search2.search(Term.FALL, 2022);
+
+        assertEquals("CSCA67", result2.get(0).getCode());
+        assertEquals(Term.WINTER, result2.get(0).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(0).sessionBeingTaken.year);
+
+        assertEquals("PHLA11", result2.get(1).getCode());
+        assertEquals(Term.FALL, result2.get(1).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(1).sessionBeingTaken.year);
+
+        assertEquals("CSCB07", result2.get(2).getCode());
+        assertEquals(Term.SUMMER, result2.get(2).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(2).sessionBeingTaken.year);
+
+        assertEquals("CSCB09", result2.get(3).getCode());
+        assertEquals(Term.WINTER, result2.get(3).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(3).sessionBeingTaken.year);
+
+        assertEquals("CSCB36", result2.get(4).getCode());
+        assertEquals(Term.SUMMER, result2.get(4).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(4).sessionBeingTaken.year);
+
+        assertEquals("CSCC24", result2.get(5).getCode());
+        assertEquals(Term.WINTER, result2.get(5).sessionBeingTaken.term);
+        assertEquals(2024, result2.get(5).sessionBeingTaken.year);
+
+        assertEquals("CSCB63", result2.get(6).getCode());
+        assertEquals(Term.WINTER, result2.get(6).sessionBeingTaken.term);
+        assertEquals(2024, result2.get(6).sessionBeingTaken.year);
+
+        assertEquals("CSCC63", result2.get(7).getCode());
+        assertEquals(Term.FALL, result2.get(7).sessionBeingTaken.term);
+        assertEquals(2024, result2.get(7).sessionBeingTaken.year);
         int jkl = 0;
     }
 
@@ -1088,6 +1178,38 @@ public class AlgorithmTest {
         SearchAlgorithm search2 = new SearchAlgorithm(coursesTaken2);
         search2.findBeginningNodes(targets2);
         List<CourseScheduling> result2 = search2.search(Term.FALL, 2022);
+
+        assertEquals("CSCA67", result2.get(0).getCode());
+        assertEquals(Term.WINTER, result2.get(0).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(0).sessionBeingTaken.year);
+
+        assertEquals("PHLA11", result2.get(1).getCode());
+        assertEquals(Term.FALL, result2.get(1).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(1).sessionBeingTaken.year);
+
+        assertEquals("CSCB07", result2.get(2).getCode());
+        assertEquals(Term.SUMMER, result2.get(2).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(2).sessionBeingTaken.year);
+
+        assertEquals("CSCB09", result2.get(3).getCode());
+        assertEquals(Term.WINTER, result2.get(3).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(3).sessionBeingTaken.year);
+
+        assertEquals("CSCB36", result2.get(4).getCode());
+        assertEquals(Term.SUMMER, result2.get(4).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(4).sessionBeingTaken.year);
+
+        assertEquals("CSCC24", result2.get(5).getCode());
+        assertEquals(Term.WINTER, result2.get(5).sessionBeingTaken.term);
+        assertEquals(2024, result2.get(5).sessionBeingTaken.year);
+
+        assertEquals("CSCB63", result2.get(6).getCode());
+        assertEquals(Term.WINTER, result2.get(6).sessionBeingTaken.term);
+        assertEquals(2024, result2.get(6).sessionBeingTaken.year);
+
+        assertEquals("CSCC63", result2.get(7).getCode());
+        assertEquals(Term.FALL, result2.get(7).sessionBeingTaken.term);
+        assertEquals(2024, result2.get(7).sessionBeingTaken.year);
         int jkl = 0;
     }
 
@@ -1217,6 +1339,38 @@ public class AlgorithmTest {
         SearchAlgorithm search2 = new SearchAlgorithm(coursesTaken2);
         search2.findBeginningNodes(targets2);
         List<CourseScheduling> result2 = search2.search(Term.FALL, 2022);
+
+        assertEquals("CSCA67", result2.get(0).getCode());
+        assertEquals(Term.WINTER, result2.get(0).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(0).sessionBeingTaken.year);
+
+        assertEquals("PHLA11", result2.get(1).getCode());
+        assertEquals(Term.FALL, result2.get(1).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(1).sessionBeingTaken.year);
+
+        assertEquals("CSCB07", result2.get(2).getCode());
+        assertEquals(Term.SUMMER, result2.get(2).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(2).sessionBeingTaken.year);
+
+        assertEquals("CSCB09", result2.get(3).getCode());
+        assertEquals(Term.WINTER, result2.get(3).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(3).sessionBeingTaken.year);
+
+        assertEquals("CSCB36", result2.get(4).getCode());
+        assertEquals(Term.SUMMER, result2.get(4).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(4).sessionBeingTaken.year);
+
+        assertEquals("CSCC24", result2.get(5).getCode());
+        assertEquals(Term.WINTER, result2.get(5).sessionBeingTaken.term);
+        assertEquals(2024, result2.get(5).sessionBeingTaken.year);
+
+        assertEquals("CSCB63", result2.get(6).getCode());
+        assertEquals(Term.WINTER, result2.get(6).sessionBeingTaken.term);
+        assertEquals(2024, result2.get(6).sessionBeingTaken.year);
+
+        assertEquals("CSCC63", result2.get(7).getCode());
+        assertEquals(Term.FALL, result2.get(7).sessionBeingTaken.term);
+        assertEquals(2024, result2.get(7).sessionBeingTaken.year);
         int jkl = 0;
     }
     @Test
@@ -1345,6 +1499,38 @@ public class AlgorithmTest {
         SearchAlgorithm search2 = new SearchAlgorithm(coursesTaken2);
         search2.findBeginningNodes(targets2);
         List<CourseScheduling> result2 = search2.search(Term.FALL, 2022);
+
+        assertEquals("CSCA67", result2.get(0).getCode());
+        assertEquals(Term.WINTER, result2.get(0).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(0).sessionBeingTaken.year);
+
+        assertEquals("PHLA11", result2.get(1).getCode());
+        assertEquals(Term.FALL, result2.get(1).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(1).sessionBeingTaken.year);
+
+        assertEquals("CSCB07", result2.get(2).getCode());
+        assertEquals(Term.SUMMER, result2.get(2).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(2).sessionBeingTaken.year);
+
+        assertEquals("CSCB09", result2.get(3).getCode());
+        assertEquals(Term.WINTER, result2.get(3).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(3).sessionBeingTaken.year);
+
+        assertEquals("CSCB36", result2.get(4).getCode());
+        assertEquals(Term.SUMMER, result2.get(4).sessionBeingTaken.term);
+        assertEquals(2023, result2.get(4).sessionBeingTaken.year);
+
+        assertEquals("CSCC24", result2.get(5).getCode());
+        assertEquals(Term.WINTER, result2.get(5).sessionBeingTaken.term);
+        assertEquals(2024, result2.get(5).sessionBeingTaken.year);
+
+        assertEquals("CSCB63", result2.get(6).getCode());
+        assertEquals(Term.WINTER, result2.get(6).sessionBeingTaken.term);
+        assertEquals(2024, result2.get(6).sessionBeingTaken.year);
+
+        assertEquals("CSCC63", result2.get(7).getCode());
+        assertEquals(Term.FALL, result2.get(7).sessionBeingTaken.term);
+        assertEquals(2024, result2.get(7).sessionBeingTaken.year);
         int jkl = 0;
     }
 }
