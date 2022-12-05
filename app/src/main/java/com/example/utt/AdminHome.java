@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -25,6 +26,7 @@ import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.FragmentAdminHomeBinding;
 import com.example.utt.models.Course;
 import com.example.utt.models.CourseEventListener;
+import com.example.utt.models.User;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -59,6 +61,8 @@ public class AdminHome extends Fragment {
     ) {
 
         binding = FragmentAdminHomeBinding.inflate(inflater, container, false);
+        String email = User.getInstance().getEmail();
+        ((AppCompatActivity) requireContext()).getSupportActionBar().setTitle("Welcome, " + email);
         return binding.getRoot();
     }
 

@@ -5,11 +5,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -196,14 +194,14 @@ public class SecondFragment extends Fragment {
         Log.d("INFORMATION", output.toString());
         loadAdapter(result);
 
-        binding.buttonBack.setOnClickListener(view1 -> NavHostFragment.findNavController(SecondFragment.this)
-                .navigate(R.id.action_SecondFragment_to_Home));
-        binding.buttonAddName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) { addCourseName(); }
-        });
-        listCourseName = (ListView)getView().findViewById(R.id.listCourseName);
-        courseList = new ArrayList<>();
+//        binding.buttonBack.setOnClickListener(view1 -> NavHostFragment.findNavController(SecondFragment.this)
+//                .navigate(R.id.action_SecondFragment_to_Home));
+//        binding.buttonAddName.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) { addCourseName(); }
+//        });
+//        listCourseName = (ListView)getView().findViewById(R.id.listCourseName);
+//        courseList = new ArrayList<>();
     }
 
     @Override

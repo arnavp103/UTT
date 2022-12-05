@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 assert actionBar != null;
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }
-            if(destination.getId() == R.id.Home || destination.getId() == R.id.firstFragment) {
+            if(destination.getId() == R.id.StudentHome || destination.getId() == R.id.firstFragment) {
                 assert actionBar != null;
                 actionBar.setDisplayHomeAsUpEnabled(false);
             }

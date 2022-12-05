@@ -56,8 +56,8 @@ public class FirstFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         databaseCourses = FirebaseDatabase.getInstance("https://b07-final-db5c5-default-rtdb.firebaseio.com").getReference("Course");
-        editTextName = (EditText)getView().findViewById(R.id.editTextName);
-        buttonAdd = (Button)getView().findViewById(R.id.buttonAdd);
+        editTextName = (EditText) requireView().findViewById(R.id.editTextName);
+        buttonAdd = (Button) requireView().findViewById(R.id.buttonAdd);
 
         binding.buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
