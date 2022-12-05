@@ -301,6 +301,8 @@ public class addPrev extends Fragment {
 
 
                         textView.setText(course_adapter.getItem(i));
+                        textView.setTextColor(Color.White);
+
 
                         dialog.dismiss();
                     }

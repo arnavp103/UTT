@@ -48,7 +48,7 @@ public class addFuture extends Fragment {
     private Button addButton, home;
     private ListView courseView;
 
-//    private FirebaseFirestore courseCode = FirebaseFirestore.getInstance();
+    // private FirebaseFirestore courseCode = FirebaseFirestore.getInstance();
 
 
 
