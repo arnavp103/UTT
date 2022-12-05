@@ -315,7 +315,7 @@ public class CourseDataModel {
             }
         }
 
-        CourseDataModel result = new CourseDataModel();
+        CourseDataModel result = new ExcludedCourseDataModel();
 
         result.setKey(course.getKey());
         result.setName(course.getName());

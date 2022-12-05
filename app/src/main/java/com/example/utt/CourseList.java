@@ -42,11 +42,11 @@ public class CourseList extends ArrayAdapter<Course> implements Filterable {
                     Course item = fullList.get(i);
                     //do whatever you wanna do here
                     //adding result set output array
-//                    for (Course item : courseList) {
-                        if (item.getName().toLowerCase().contains(filterString) || item.getCode().toLowerCase().contains(filterString)) {
-//                            filteredList.add(item);
-                            tempList.add(item);
-                        }
+                    if (item.getName().toLowerCase().contains(filterString) || item.getCode().toLowerCase().contains(filterString)) {
+                        tempList.add(item);
+                    }
+
+                    Log.d("FILETRING:", item.toString());
 
                     i++;
                 }
@@ -101,55 +101,71 @@ public class CourseList extends ArrayAdapter<Course> implements Filterable {
 
         LayoutInflater inflater = context.getLayoutInflater();
         View listViewItem = inflater.inflate(R.layout.list_layout, null, true);
-        if (convertView != null) {
-            TextView textViewCode = (TextView) listViewItem.findViewById(R.id.textViewCode);
-            TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewName);
-            TextView textViewSeason = (TextView) listViewItem.findViewById(R.id.textViewSeason);
-            listViewItem.setVisibility(View.VISIBLE);
-            Course course = courseList.get(position);
-            textViewCode.setText(course.getCode());
-            textViewName.setText(course.getName());
-            String sessionOutput = "Offered: ";
-            for (int i = 0; i < course.getSessionOffering().size(); i++) {
-                sessionOutput += course.getSessionOffering().get(i).toString();
-                if ((i + 1) != course.getSessionOffering().size()) {
-                    sessionOutput += ", ";
-                }
+        TextView textViewCode = (TextView) listViewItem.findViewById(R.id.textViewCode);
+        TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewName);
+        TextView textViewSeason = (TextView) listViewItem.findViewById(R.id.textViewSeason);
+        listViewItem.setVisibility(View.VISIBLE);
+        Course course = courseList.get(position);
+        textViewCode.setText(course.getCode());
+        textViewName.setText(course.getName());
+        String sessionOutput = "Offered: ";
+        for (int i = 0; i < course.getSessionOffering().size(); i++) {
+            sessionOutput += course.getSessionOffering().get(i).toString();
+            if ((i + 1) != course.getSessionOffering().size()) {
+                sessionOutput += ", ";
             }
-
-            textViewSeason.setText(sessionOutput);
-
-            String prereqs = "Prerequisites: ";
-
-            for (int i = 0; i < course.getPrerequisites().size(); i++) {
-                prereqs += course.getPrerequisites().get(i).getCode();
-
-                if (i != course.getPrerequisites().size() - 1) {
-                    prereqs += ", ";
-                }
-            }
-
-            ((TextView) listViewItem.findViewById(R.id.coursePrerequisites)).setText(prereqs);
-
-            ImageView edit = listViewItem.findViewById(R.id.deleteCourse);
-
-            edit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    DatabaseHandler.removeCourse(CourseDataModel.getCourseByCode(course.getCode()));
-                    notifyDataSetChanged();
-                }
-            });
-
-            listViewItem.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    verifyModify(course, view);
-                }
-            });
-
         }
+
+        textViewSeason.setText(sessionOutput);
+
+        String prereqs = "Prerequisites: ";
+
+        for (int i = 0; i < course.getPrerequisites().size(); i++) {
+            prereqs += course.getPrerequisites().get(i).getCode();
+
+            if (i != course.getPrerequisites().size() - 1) {
+                prereqs += ", ";
+            }
+        }
+
+        ((TextView) listViewItem.findViewById(R.id.coursePrerequisites)).setText(prereqs);
+
+        ImageView edit = listViewItem.findViewById(R.id.deleteCourse);
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                verifyDelete(CourseDataModel.getCourseByCode(course.getCode()));
+                notifyDataSetChanged();
+            }
+        });
+
+        listViewItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                verifyModify(course, view);
+            }
+        });
+
         return listViewItem;
+    }
+
+    private void verifyDelete(CourseDataModel course) {
+        new AlertDialog.Builder(this.getContext())
+                .setTitle("Delete Course")
+                .setMessage("Are you sure you want to delete this course?")
+
+                // Specifying a listener allows you to take an action before dismissing the dialog.
+                // The dialog is automatically dismissed when a dialog button is clicked.
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        DatabaseHandler.removeCourse(course);
+                    }
+                })
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton("Cancel", null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     private void verifyModify(Course course, View view) {

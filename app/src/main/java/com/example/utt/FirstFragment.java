@@ -206,7 +206,7 @@ public class FirstFragment extends Fragment {
             @Override
             public void onReady() {
                 courseList.clear();
-                Course.getCourses();
+
                 for (Course courseObject : Course.getCourses().values()) {
                     courseList.add(0, courseObject);
                 }
@@ -253,9 +253,7 @@ public class FirstFragment extends Fragment {
     }
 
     private void filter(String text) {
-        ArrayList<Course> filteredList = new ArrayList<Course>();
         adapter.getFilter().filter(text);
-
     }
 
     private void clearFields() {
@@ -340,6 +338,7 @@ public class FirstFragment extends Fragment {
             if(exist == false) {
                 // Add the course to the database
                 DatabaseHandler.addCourse(course);
+                Log.d("OKEY ", String.valueOf(course));
                 Toast.makeText(getActivity(), "Course added", Toast.LENGTH_LONG).show();
                 clearFields();
             }
