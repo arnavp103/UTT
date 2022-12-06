@@ -44,7 +44,7 @@ public class Home extends Fragment {
     public void onStart() {
         super.onStart();
         String email = Student.getInstance().getEmail();
-        Objects.requireNonNull(((AppCompatActivity) requireContext()).getSupportActionBar()).setTitle("Welcome, " + email);
+        Objects.requireNonNull(((AppCompatActivity) requireContext()).getSupportActionBar()).setTitle("Welcome " + email);
 
     }
 

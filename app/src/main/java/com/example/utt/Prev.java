@@ -363,6 +363,7 @@ public class Prev extends Fragment {
                 allCourses.clear();
                 for(DataSnapshot courseSnapshot: snapshot.getChildren()){
 
+                    if (courseSnapshot.getChildrenCount() == 1) continue;
                     String course = (courseSnapshot.getValue(ExcludedCourseDataModel.class)).getCode() + " ";
                     allCourses.add(course);
 

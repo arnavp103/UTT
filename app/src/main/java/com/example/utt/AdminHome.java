@@ -139,7 +139,7 @@ public class AdminHome extends Fragment {
 
         binding = FragmentAdminHomeBinding.inflate(inflater, container, false);
         String email = User.getInstance().getEmail();
-        ((AppCompatActivity) requireContext()).getSupportActionBar().setTitle("Welcome, " + email);
+        ((AppCompatActivity) requireContext()).getSupportActionBar().setTitle("Welcome " + email);
         return binding.getRoot();
     }
 
