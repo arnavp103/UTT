@@ -13,14 +13,18 @@
         android:id="@+id/text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
 
+        android:layout_marginStart="16dp"
         android:layout_marginTop="80dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/edittext_fill_gray"
         android:hint="@string/select_future_course"
         android:padding="12dp"
-        android:textColorHint="#757575"
+        android:textColor="#3D3D3D"
+        android:textColorHint="@color/button_color"
         app:drawableEndCompat="@drawable/ic_arrow"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/courseView"
+        app:layout_constraintStart_toStartOf="@+id/courseView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -61,20 +65,20 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-
     <ImageButton
         android:id="@+id/infoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="135dp"
         android:layout_marginEnd="17dp"
         android:background="#0046338A"
         android:contentDescription="@string/information"
         android:minWidth="48dp"
         android:minHeight="48dp"
         android:src="@drawable/ic_info_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/addPrevCourse"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/addPrevCourse"
+        app:layout_constraintTop_toTopOf="@+id/addPrevCourse" />
 
 
 

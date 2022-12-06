@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -119,7 +120,16 @@ public class Prev extends Fragment {
         courseView = (ListView) v.findViewById(R.id.courseView);
 
         course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, allCourses);
-        viewAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, pastList);
+        viewAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, pastList){
+            @NonNull
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView text = (TextView) view.findViewById(android.R.id.text1);
+                text.setTextColor(Color.WHITE);
+                return view;
+            }
+        };
 
 
         loadPreviousCourses();
@@ -258,8 +268,8 @@ public class Prev extends Fragment {
                 ListView listView = dialog.findViewById(R.id.list_view);
 
                 //Initialize array adapter
-                viewAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, pastList);
-                course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, allCourses);
+//                viewAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, pastList);
+//                course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, allCourses);
 
                 listView.setAdapter(course_adapter);
 
@@ -293,7 +303,7 @@ public class Prev extends Fragment {
 
 
                         textView.setText(course_adapter.getItem(i));
-                        textView.setTextColor(Color.WHITE);
+//                        textView.setTextColor(Color.WHITE);
 
                         listView.setAdapter(course_adapter);
                         course_adapter.notifyDataSetChanged();
