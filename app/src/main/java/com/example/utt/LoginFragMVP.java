@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.utt.database.DatabaseHandler;
 import com.example.utt.databinding.FragmentLoginPageBinding;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -26,6 +25,7 @@ public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
     private Context context;
     private LoginPresenter loginPresenter;
 
+
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
@@ -35,14 +35,7 @@ public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
         loginPresenter = new LoginPresenter(this);
 
         if (loginPresenter.getCookie(context).length() != 0) {
-            DatabaseHandler.addOnReadyListener(new DatabaseHandler.OnReadyListener() {
-                @Override
-                public void onReady() {
-                    // if they don't have anything saved to shared pref continue as normal
-                    loginPresenter.cookieQuery(CookieLogin.getInstance().getUserId(context), getView());
-
-                }
-            });
+            loginPresenter.checkCookie(context);
         }
         return binding.getRoot();
     }
@@ -116,7 +109,6 @@ public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
         String username = uEdit.getText().toString();
         String password = pEdit.getText().toString();
 
-
         loginPresenter.query(username, password, view);
         // DatabaseHandler.getUser(username, password, authCallback);
     }
@@ -137,7 +129,7 @@ public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
     @Override
     public void goToAdminHome() {
         NavHostFragment.findNavController(LoginFragMVP.this)
-                .navigate(R.id.action_LoginFragment_to_firstFragment);
+                .navigate(R.id.action_LoginFragment_to_adminPlaceholder);
     }
 
     @Override

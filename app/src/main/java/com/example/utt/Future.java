@@ -116,16 +116,11 @@ public class Future extends Fragment {
         loadData();
         loadPreviousCourses();
 
-
-
-
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(@NonNull View view) {
                 NavHostFragment.findNavController(Future.this)
                         .navigate(R.id.action_addFuture_to_Home);//add action fragment from future courses to home
-
-
             }
         });
 
@@ -143,7 +138,11 @@ public class Future extends Fragment {
             public void onClick(@NonNull View view) {
 
                 Student.getInstance().setCoursesTaken(futureList);
-
+                Bundle bundle = new Bundle();
+                bundle.putStringArrayList("FUTURE", futureList);
+                NavHostFragment.findNavController(Future.this)
+                        // .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                        .navigate(R.id.action_addFuture_to_timelineGenerateFunctionality, bundle);
             }
         });
 
@@ -220,7 +219,6 @@ public class Future extends Fragment {
                         //Filter array list
                         course_adapter.getFilter().filter(charSequence);
 
-
                     }
 
                     @Override
@@ -291,8 +289,6 @@ public class Future extends Fragment {
                     //viewAdapter.notifyDataSetChanged();
                     //Log.i("RM", futureList.get(futureList.size()));
                     courseView.setAdapter(viewAdapter);
-
-
                 }
 
 
@@ -304,6 +300,7 @@ public class Future extends Fragment {
 
     }
     private void loadData() {
+
 
         courseCode.addValueEventListener(new ValueEventListener() {
             @Override
@@ -331,6 +328,7 @@ public class Future extends Fragment {
 
     private void loadPreviousCourses() {
 
+
         studentCode.addValueEventListener(new ValueEventListener() {
             @Override
             // Executed every time we change something in the database
@@ -348,7 +346,9 @@ public class Future extends Fragment {
 
                     if (id.equals(student_id)) {
                         for (DataSnapshot past: courseSnapshot.getChildren()){
-                            pastList.add((String) past.getValue());
+                            if (!(past.getKey().equals("None"))) {
+                                pastList.add((String) past.getValue());
+                            }
 
                         }
                         //System.out.println(pastList);

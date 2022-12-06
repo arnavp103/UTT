@@ -1,6 +1,16 @@
 package com.example.utt;
 
-import static com.example.utt.SecondFragment.yearList;
+import android.content.Context;
+import android.graphics.Typeface;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Typeface;
 import android.util.Log;
@@ -29,7 +39,7 @@ public class timelineCourseAdapter extends RecyclerView.Adapter<timelineCourseAd
 
     @NonNull
     @Override
-    public timelineCourseAdapter.timetableViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public timetableViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // to inflate the layout for each item of recycler view.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.timeline_recycler_view,
                 parent, false);
@@ -37,7 +47,7 @@ public class timelineCourseAdapter extends RecyclerView.Adapter<timelineCourseAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull timelineCourseAdapter.timetableViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull timetableViewHolder holder, int position) {
         TimelineCourseModel model = courseModelArrayList.get(position);
         // Allow card to expand when clicked
         holder.recyclerFullItem.setOnClickListener(view1 -> {
@@ -48,6 +58,14 @@ public class timelineCourseAdapter extends RecyclerView.Adapter<timelineCourseAd
             holder.timelineBind(model);
         });
         holder.timelineBind(model);
+    }
+
+    public ArrayList<String> getCourses() {
+        ArrayList<String> result = new ArrayList<>();
+        for (TimelineCourseModel time : courseModelArrayList) {
+            result.add(time.getCourseCode());
+        }
+        return result;
     }
 
     @Override
@@ -84,6 +102,7 @@ public class timelineCourseAdapter extends RecyclerView.Adapter<timelineCourseAd
 
         void timelineBind(TimelineCourseModel model){
             Log.d("TIMELINE", this + "Bind Called ------------ " + model.getYear());
+//            Log.d("TIMELINE", this + "Bind Called ------------ " + model.getYear());
             // Get the state
             boolean expanded = model.isExpanded();
             // Set the visibility based on state
@@ -112,9 +131,15 @@ public class timelineCourseAdapter extends RecyclerView.Adapter<timelineCourseAd
 //                ((ViewGroup) detailsLayout).removeView(winterCourses);
 //                ((ViewGroup) detailsLayout).removeView(winterHeader);
 //            }
+//            if (model.getWinterCourses().isEmpty()) {
+//                Log.d("TIMELINE", model.getYear() + ": Empty Winter Courses");
+//                ((ViewGroup) detailsLayout).removeView(winterCourses);
+//                ((ViewGroup) detailsLayout).removeView(winterHeader);
+//            }
 
 
         }
     }
 
 }
+

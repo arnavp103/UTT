@@ -15,16 +15,18 @@ public class LoginPresenter implements LoginModel.Presenter {
 	private final LoginView view;
 	public LoginModel model;
 
-	// TODO Need to add navigation
 
 	public LoginPresenter(LoginView view) {
 		this(view, new LoginModel());
+		this.model = new LoginModel();
 	}
+
 
 	public LoginPresenter(LoginView view, LoginModel model) {
 		this.view = view;
 		this.model = model;
 	}	
+
 
 
 	public void query(String uname, String pword, View v) {
@@ -33,13 +35,21 @@ public class LoginPresenter implements LoginModel.Presenter {
 		}
 	}
 
-	public void cookieQuery(String userID, View v) {
-		if(v != null) {
-			model.queryUserByID(userID, this);
-		}
+	public void cookieQuery(String userID) {
+		model.queryUserByID(userID, this);
 	}
 
-	@Override 
+	public void checkCookie(Context context) {
+		LoginModel.addOnReadyListener(new LoginModel.OnReadyListener() {
+			@Override
+			public void onReady() {
+				// if they don't have anything saved to shared pref continue as normal
+				cookieQuery(CookieLogin.getInstance().getUserId(context));
+			}
+		});
+	}
+
+	@Override
 	public void onSuccess(String userID, String uname, AccountType accountType) {
 		// Write their data to their local storage
 		if (view instanceof Fragment) {
@@ -50,10 +60,9 @@ public class LoginPresenter implements LoginModel.Presenter {
 			view.collapseKeyboard();
 
 			if (accountType == AccountType.STUDENT) {
-				Student.login(new Student(uname, ""), new ArrayList<>());
+				Student.login(new Student(userID, uname, ""), new ArrayList<>());
 				view.goToStudentHome();
-			}
-			else {
+			} else {
 				User.login(new User(uname, ""));
 				view.goToAdminHome();
 			}
@@ -62,7 +71,7 @@ public class LoginPresenter implements LoginModel.Presenter {
 	}
 
 	@Override
-	public void onFailure(){
+	public void onFailure() {
 		view.makeSnackbar("Invalid Username or Password");
 		view.collapseKeyboard();
 	}
@@ -76,44 +85,17 @@ public class LoginPresenter implements LoginModel.Presenter {
 	}
 
 	interface LoginView {
-		public void makeSnackbar(String message);
-		public void goToAdminHome();
-		public void goToStudentHome();
-		public void goToSignUp();
-		public void collapseKeyboard();
+		void makeSnackbar(String message);
+		void goToAdminHome();
+		void goToStudentHome();
+		void goToSignUp();
+		void collapseKeyboard();
 	}
 
 	public void onDestroy() {
 		model = null;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

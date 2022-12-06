@@ -12,6 +12,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.utt.databinding.FragmentHomeBinding;
 import com.example.utt.models.Student;
 
+import java.util.Objects;
+
 //import com.google.firebase.database.DataSnapshot;
 //import com.google.firebase.database.DatabaseError;
 //import com.google.firebase.database.DatabaseReference;
@@ -35,9 +37,14 @@ public class Home extends Fragment {
             Bundle savedInstanceState
     ) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        String email = Student.getInstance().getEmail();
-        ((AppCompatActivity) requireContext()).getSupportActionBar().setTitle("Welcome, " + email);
         return binding.getRoot();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        String email = Student.getInstance().getEmail();
+        Objects.requireNonNull(((AppCompatActivity) requireContext()).getSupportActionBar()).setTitle("Welcome, " + email);
 
     }
 
@@ -46,24 +53,6 @@ public class Home extends Fragment {
         //searchTextName = getView().findViewById(R.id.searchTextNameHome);
         //searchButton = getView().findViewById(R.id.searchButtonHome);
         //gotoAddCourses = getView().findViewById(R.id.gen_addButton);
-
-//        view.findViewById(R.id.searchTextNameHome).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                NavHostFragment.findNavController(Home.this)
-//                        .navigate(R.id.action_SecondFragment_to_secondFragment);
-
-                //start activity for searchbar
-
-//            }
-//        });
-//        view.findViewById(R.id.searchButtonHome).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                NavHostFragment.findNavController(Home.this)
-//                        .navigate(R.id.action_FirstFragment_to_recyclerListFragment);
-//            }
-//        });
 
 //search button
 
@@ -74,19 +63,21 @@ public class Home extends Fragment {
 //              myToast.show();
                 NavHostFragment.findNavController(Home.this)
                         .navigate(R.id.action_home_to_addFuture);//add action fragment from future courses to home
+
+
             }
         });
 
-                view.findViewById(R.id.view_my_courses).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        NavHostFragment.findNavController(Home.this)
-                                .navigate(R.id.action_Home_to_addPrev);
+        view.findViewById(R.id.view_my_courses).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(Home.this)
+                        .navigate(R.id.action_Home_to_addPrev);
 
-                        // User Data Testing
-                    }
-                });
+                    // User Data Testing
             }
+        });
+    }
 
     @Override
     public void onDestroyView() {
