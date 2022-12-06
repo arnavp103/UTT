@@ -141,13 +141,12 @@ public class LoginPresenterTest {
         presenter.cookieLogin = login;
 
         String userId = "boba";
-        when(login.getInstance()).thenReturn(login);
         when(login.getUserId(context)).thenReturn(userId);
         Mockito.doNothing().when(loginModel).queryUserByID(userId, presenter);
 
         try {
-            presenter.checkCookie(context);
             assertTrue(true);
+            presenter.checkCookie(context);
         } catch (Exception e) {
             fail();
         }
