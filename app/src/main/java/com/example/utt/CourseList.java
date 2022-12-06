@@ -1,5 +1,6 @@
 package com.example.utt;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -20,6 +21,7 @@ import androidx.navigation.Navigation;
 
 import com.example.utt.database.DatabaseHandler;
 import com.example.utt.models.Course;
+import com.example.utt.models.CourseEventListener;
 import com.example.utt.models.firebase.datamodel.CourseDataModel;
 
 import java.util.ArrayList;
@@ -118,12 +120,18 @@ public class CourseList extends ArrayAdapter<Course> implements Filterable {
         textViewSeason.setText(sessionOutput);
 
         String prereqs = "Prerequisites: ";
+        if (course.getPrerequisites() != null){
+            for (int i = 0; i < course.getPrerequisites().size(); i++) {
+                if (course.getPrerequisites().size() <= i) continue;
+                if (course.getPrerequisites().get(i).getName().equals("Missing")){
+                    continue;
+                }
 
-        for (int i = 0; i < course.getPrerequisites().size(); i++) {
-            prereqs += course.getPrerequisites().get(i).getCode();
+                prereqs += course.getPrerequisites().get(i).getCode();
 
-            if (i != course.getPrerequisites().size() - 1) {
-                prereqs += ", ";
+                if (i != course.getPrerequisites().size() - 1) {
+                    prereqs += ", ";
+                }
             }
         }
 

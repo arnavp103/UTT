@@ -205,5 +205,11 @@
             app:exitAnim="@anim/slide_out"
             app:popEnterAnim="@anim/slide_in"
             app:popExitAnim="@anim/fade_out"/>
+        <action
+            android:id="@+id/action_fragment_modify_course_to_firstFragment"
+            app:destination="@id/firstFragment" />
+        <action
+            android:id="@+id/action_fragment_modify_course_to_firstFragment2"
+            app:destination="@id/firstFragment" />
     </fragment>
 </navigation>
