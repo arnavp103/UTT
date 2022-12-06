@@ -1533,4 +1533,104 @@ public class AlgorithmTest {
         assertEquals(2024, result2.get(7).sessionBeingTaken.year);
         int jkl = 0;
     }
+    
+    @Test
+    public void testTreeTraversal2(){
+        List<Course> aPrerequisites = new ArrayList<>();
+        List<YearlySession> asessionOfferings = new ArrayList<>();
+        YearlySession b = new YearlySession(Term.WINTER);
+        YearlySession a = new YearlySession(Term.FALL);
+        asessionOfferings.add(b);
+        asessionOfferings.add(a);
+        Course a1 = new Course("a", "a",
+                asessionOfferings, aPrerequisites);
+
+        List<Course> cPrerequisites = new ArrayList<>();
+        List<YearlySession> csessionOfferings = new ArrayList<>();
+        YearlySession e = new YearlySession(Term.WINTER);
+        YearlySession f = new YearlySession(Term.FALL);
+        csessionOfferings.add(e);
+        csessionOfferings.add(f);
+        cPrerequisites.add(a1);
+        Course c1 = new Course("c", "d",
+                csessionOfferings, cPrerequisites);
+
+        List<Course> dPrerequisites = new ArrayList<>();
+        List<YearlySession> dsessionOfferings = new ArrayList<>();
+        YearlySession g = new YearlySession(Term.WINTER);
+        YearlySession h = new YearlySession(Term.FALL);
+        dsessionOfferings.add(g);
+        dsessionOfferings.add(h);
+        dPrerequisites.add(a1);
+        Course d1 = new Course("d", "d",
+                dsessionOfferings, dPrerequisites);
+
+        List<Course> ePrerequisites = new ArrayList<>();
+        List<YearlySession> esessionOfferings = new ArrayList<>();
+        YearlySession i = new YearlySession(Term.WINTER);
+        YearlySession j = new YearlySession(Term.FALL);
+        esessionOfferings.add(i);
+        esessionOfferings.add(j);
+        ePrerequisites.add(c1);
+        ePrerequisites.add(d1);
+        Course e1 = new Course("e", "e",
+                esessionOfferings, ePrerequisites);
+
+        List<Course> bPrerequisites = new ArrayList<>();
+        List<YearlySession> bsessionOfferings = new ArrayList<>();
+        YearlySession c = new YearlySession(Term.WINTER);
+        YearlySession d = new YearlySession(Term.FALL);
+        bsessionOfferings.add(c);
+        bsessionOfferings.add(d);
+        Course b1 = new Course("b", "b",
+                bsessionOfferings, bPrerequisites);
+
+        List<Course> fPrerequisites = new ArrayList<>();
+        List<YearlySession> fsessionOfferings = new ArrayList<>();
+        YearlySession k = new YearlySession(Term.WINTER);
+        YearlySession l = new YearlySession(Term.FALL);
+        fsessionOfferings.add(k);
+        fsessionOfferings.add(l);
+        fPrerequisites.add(b1);
+        Course f1 = new Course("f", "f",
+                fsessionOfferings, fPrerequisites);
+
+        List<Course> gPrerequisites = new ArrayList<>();
+        List<YearlySession> gsessionOfferings = new ArrayList<>();
+        YearlySession m = new YearlySession(Term.WINTER);
+        YearlySession n = new YearlySession(Term.FALL);
+        gsessionOfferings.add(m);
+        gsessionOfferings.add(n);
+        gPrerequisites.add(b1);
+        Course g1 = new Course("g", "g",
+                gsessionOfferings, gPrerequisites);
+
+        List<Course> hPrerequisites = new ArrayList<>();
+        List<YearlySession> hsessionOfferings = new ArrayList<>();
+        YearlySession o = new YearlySession(Term.WINTER);
+        YearlySession p = new YearlySession(Term.FALL);
+        hsessionOfferings.add(o);
+        hsessionOfferings.add(p);
+        hPrerequisites.add(f1);
+        hPrerequisites.add(g1);
+        Course h1 = new Course("h", "h",
+                hsessionOfferings, hPrerequisites);
+
+        CourseScheduling aa1 = new CourseScheduling(a1.getName(), a1.getCode(), a1.getSessionOffering(), a1.getPrerequisites());
+        aa1.sessionBeingTaken.term = Term.WINTER;
+        aa1.sessionBeingTaken.year = 2022;
+
+        CourseScheduling bb1 = new CourseScheduling(b1.getName(), b1.getCode(), b1.getSessionOffering(), b1.getPrerequisites());
+        bb1.sessionBeingTaken.term = Term.WINTER;
+        bb1.sessionBeingTaken.year = 2022;
+
+        List<Course> targets2 = new ArrayList<>();
+
+        ArrayList<CourseScheduling> coursesTaken2 = new ArrayList<CourseScheduling>();
+        targets2.add(e1);
+        targets2.add(h1);
+        SearchAlgorithm search2 = new SearchAlgorithm(coursesTaken2);
+        search2.findBeginningNodes(targets2);
+        List<CourseScheduling> result2 = search2.search(Term.FALL, 2022);
+    }
 }
