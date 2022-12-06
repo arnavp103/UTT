@@ -5,6 +5,7 @@ import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.utt.database.DatabaseHandler;
 import com.example.utt.models.Student;
 import com.example.utt.models.User;
 
@@ -14,8 +15,6 @@ public class LoginPresenter implements LoginModel.Presenter {
 	public CookieLogin cookieLogin = CookieLogin.getInstance();
 	private final LoginView view;
 	public LoginModel model;
-
-	// TODO Need to add navigation
 
 	public LoginPresenter(LoginView view) {
 		this(view, new LoginModel());
@@ -33,13 +32,21 @@ public class LoginPresenter implements LoginModel.Presenter {
 		}
 	}
 
-	public void cookieQuery(String userID, View v) {
-		if(v != null) {
-			model.queryUserByID(userID, this);
-		}
+	public void cookieQuery(String userID) {
+		model.queryUserByID(userID, this);
 	}
 
-	@Override 
+	public void checkCookie(Context context) {
+		DatabaseHandler.addOnReadyListener(new DatabaseHandler.OnReadyListener() {
+			@Override
+			public void onReady() {
+				// if they don't have anything saved to shared pref continue as normal
+				cookieQuery(CookieLogin.getInstance().getUserId(context));
+			}
+		});
+	}
+
+	@Override
 	public void onSuccess(String userID, String uname, AccountType accountType) {
 		// Write their data to their local storage
 		if (view instanceof Fragment) {
@@ -52,8 +59,7 @@ public class LoginPresenter implements LoginModel.Presenter {
 			if (accountType == AccountType.STUDENT) {
 				Student.login(new Student(uname, ""), new ArrayList<>());
 				view.goToStudentHome();
-			}
-			else {
+			} else {
 				User.login(new User(uname, ""));
 				view.goToAdminHome();
 			}
@@ -62,7 +68,7 @@ public class LoginPresenter implements LoginModel.Presenter {
 	}
 
 	@Override
-	public void onFailure(){
+	public void onFailure() {
 		view.makeSnackbar("Invalid Username or Password");
 		view.collapseKeyboard();
 	}

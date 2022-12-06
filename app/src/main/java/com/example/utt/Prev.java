@@ -289,8 +289,6 @@ public class Prev extends Fragment {
 
                         addCourse = (String) course_adapter.getItem(i);
 
-
-
                         textView.setText(course_adapter.getItem(i));
                         textView.setTextColor(Color.WHITE);
 
@@ -402,9 +400,9 @@ public class Prev extends Fragment {
                             }
 
                         }
-                            System.out.println(pastList);
-                            viewAdapter.notifyDataSetChanged();
-                            break;
+                        System.out.println(pastList);
+                        viewAdapter.notifyDataSetChanged();
+                        break;
                     }
 
 

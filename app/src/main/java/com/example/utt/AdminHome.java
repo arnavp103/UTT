@@ -336,7 +336,7 @@ public class AdminHome extends Fragment {
         }
         // If no course was entered into the search bar
         else{
-            Toast.makeText(getActivity(), "Enter course information", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Missing Course Information", Toast.LENGTH_LONG).show();
         }
     }
 //

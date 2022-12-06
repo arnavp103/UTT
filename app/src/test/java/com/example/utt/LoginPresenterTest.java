@@ -9,13 +9,12 @@ import android.content.Context;
 import android.view.View;
 
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 
 public class LoginPresenterTest {
 
-    private class TestLoginPresenter extends LoginPresenter {
+    private static class TestLoginPresenter extends LoginPresenter {
         public TestLoginPresenter(LoginView view, LoginModel model) {
             super(view, model);
         }
@@ -121,7 +120,7 @@ public class LoginPresenterTest {
         Mockito.doNothing().when(loginModel).queryUserByID(userId, presenter);
 
         try {
-            presenter.cookieQuery(userId, view);
+            presenter.cookieQuery(userId);
             assertTrue(true);
         } catch (Exception e) {
             fail();
@@ -145,7 +144,7 @@ public class LoginPresenterTest {
         Mockito.doNothing().when(loginModel).queryUserByID(userId, presenter);
 
         try {
-            presenter.cookieQuery(userId, null);
+            presenter.cookieQuery(userId);
             assertTrue(true);
         } catch (Exception e) {
             fail();
