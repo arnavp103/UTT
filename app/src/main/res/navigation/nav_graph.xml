@@ -135,24 +135,20 @@
         tools:layout="@layout/fragment_modify_course">
         <action
             android:id="@+id/action_fragment_modify_course_to_selectPrereqs2"
-<<<<<<< HEAD
-            app:destination="@id/selectPrereqs2"
+            app:destination="@id/FragmentSelectPrerequisites"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/slide_out"
             app:popEnterAnim="@anim/slide_in"
             app:popExitAnim="@anim/fade_out"/>
         <action
             android:id="@+id/action_fragment_modify_course_to_firstFragment"
-            app:destination="@id/firstFragment" />
+            app:destination="@id/adminHome" />
         <action
-            android:id="@+id/action_fragment_modify_course_to_firstFragment2"
-            app:destination="@id/firstFragment" />
-=======
+            android:id="@+id/action_fragment_modify_course_to_adminHome"
             app:destination="@id/FragmentSelectPrerequisites" />
         <action
             android:id="@+id/action_FragmentModifyCourse_to_adminHome"
             app:destination="@id/adminHome" />
->>>>>>> cfb7f8d2d0f9da186484a4d056416b161801a525
     </fragment>
     <activity
         android:id="@+id/FragmentSignUp"

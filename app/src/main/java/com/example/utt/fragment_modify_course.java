@@ -210,7 +210,7 @@ public class fragment_modify_course extends Fragment {
                 modifyCourseCode(desiredCourse.getKey());
                 NavHostFragment.findNavController(fragment_modify_course.this)
                         // .navigate(R.id.action_FirstFragment_to_SecondFragment);
-                        .navigate(R.id.action_fragment_modify_course_to_firstFragment2);
+                        .navigate(R.id.action_FragmentModifyCourse_to_adminHome);
 
             }
         });

@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -110,7 +111,16 @@ public class Future extends Fragment {
         //initialize list view which shows the layout of the added courses
         courseView = (ListView) v.findViewById(R.id.courseView);
 
-        viewAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, futureList);
+        viewAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, futureList) {
+            @NonNull
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView text = (TextView) view.findViewById(android.R.id.text1);
+                text.setTextColor(Color.WHITE);
+                return view;
+            }
+        };
         course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, courseList);
 
         loadData();
