@@ -5,7 +5,7 @@
     android:id="@+id/listCourses"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/antique"
+    android:background="@drawable/background_gradient"
     android:padding="16dp"
     tools:context=".TimelineGenerateFunctionality">
 
@@ -17,9 +17,10 @@
         android:fontFamily="sans-serif"
         android:text="@string/timeline"
         android:textAlignment="center"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="34sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
