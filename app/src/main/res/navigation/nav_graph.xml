@@ -103,6 +103,9 @@
         <action
             android:id="@+id/action_adminHome_to_FragmentModifyCourse"
             app:destination="@id/FragmentModifyCourse" />
+        <action
+            android:id="@+id/action_adminHome_to_FragmentSelectPrerequisites"
+            app:destination="@id/FragmentSelectPrerequisites" />
     </fragment>
     <action
         android:id="@+id/action_global_LoginFragment"

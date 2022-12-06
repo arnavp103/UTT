@@ -96,6 +96,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.utt.algorithm.model.Term;
 import com.example.utt.algorithm.model.YearlySession;
@@ -318,7 +319,21 @@ public class AdminHome extends Fragment {
                 return false;
             }
         });
+
+        binding.prereq.setOnClickListener(new View.OnClickListener(){
+           @Override
+           public void onClick(View view) {
+               courseCode = editTextName.getText().toString();
+               courseName = editCourseName.getText().toString();
+
+               SelectPrereqs.context = AdminHome.this;
+               NavHostFragment.findNavController(AdminHome.this)
+                       .navigate(R.id.action_adminHome_to_FragmentSelectPrerequisites);
+           }
+       });
     }
+
+
 
     private void filter(String text) {
         adapter.getFilter().filter(text);
