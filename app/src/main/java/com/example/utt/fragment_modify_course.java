@@ -193,6 +193,11 @@ public class fragment_modify_course extends Fragment {
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putString("HIDDEN_COURSE", desiredCourse.getCode());
+                for (Course c : desiredCourse.getPrerequisites()) {
+                    if(c.getCode() == "Missing"){
+                        AdminHome.courses.remove(c);
+                    }
+                }
 
                 NavHostFragment.findNavController(fragment_modify_course.this)
                         .navigate(R.id.action_fragment_modify_course_to_selectPrereqs2, bundle);
@@ -203,6 +208,10 @@ public class fragment_modify_course extends Fragment {
             @Override
             public void onClick(View view){
                 modifyCourseCode(desiredCourse.getKey());
+                NavHostFragment.findNavController(fragment_modify_course.this)
+                        // .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                        .navigate(R.id.action_fragment_modify_course_to_firstFragment2);
+
             }
         });
     }

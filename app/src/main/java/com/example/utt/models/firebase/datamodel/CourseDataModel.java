@@ -208,7 +208,11 @@ public class CourseDataModel {
                 // Check if prerequisite exists in the Nonexistent-Course Collection
                 if (!nonExistentCourses.containsKey(prerequisite)) {    // Course not yet in NEC
                     prerequisiteCourse = new Course();
+<<<<<<< HEAD
+                    prerequisiteCourse.setCourseCode(code);
+=======
                     prerequisiteCourse.setCourseCode(prerequisite);
+>>>>>>> cfb7f8d2d0f9da186484a4d056416b161801a525
                     nonExistentCourses.put(prerequisite, prerequisiteCourse);
 //                    Log.d(TAG, code + " | Looking for: " + prerequisite + " | -> NEC: " + nonExistentCourses);
                 } else {    // Course exists so placeholder reference it.
