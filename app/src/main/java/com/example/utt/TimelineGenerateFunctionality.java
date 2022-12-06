@@ -203,8 +203,6 @@ public class TimelineGenerateFunctionality extends Fragment {
         wantedCourses.clear();
         for (String courseCode : futureCourses) {
             wantedCourses.add(Course.getCourse(courseCode.trim()));
-            Log.d("Checking Course: ", "___" + courseCode);
-            Log.d("Adding Course", "-> " + Course.getCourse(courseCode.trim()) + " : " + Course.getCourse(courseCode.trim()).getPrerequisites());
         }
         search.findBeginningNodes(wantedCourses);
         result = search.search(Term.FALL, 2022);

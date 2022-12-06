@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import static com.example.utt.SecondFragment.yearList;
 
 import android.graphics.Typeface;
 import android.util.Log;

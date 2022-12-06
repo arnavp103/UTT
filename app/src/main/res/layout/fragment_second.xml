@@ -5,85 +5,83 @@
     android:id="@+id/listCourses"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/screenBack"
+    android:background="@color/antique"
     android:padding="16dp"
-    tools:context=".SecondFragment">
+    tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout2"
-        android:layout_width="0dp"
-    <TextView
-        android:id="@+id/timelineText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.UTT.AppBarOverlay"
-        app:layout_constraintBottom_toTopOf="@+id/listCourseName"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="50dp"
-        android:fontFamily="sans-serif"
-        android:text="@string/timeline"
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <com.google.android.material.appbar.AppBarLayout-->
+<!--        android:id="@+id/appBarLayout2"-->
+<!--        android:layout_width="0dp"/>-->
+<!--    <TextView-->
+<!--        android:id="@+id/timelineText"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:theme="@style/Theme.UTT.AppBarOverlay"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/listCourseName"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        android:fontFamily="sans-serif"-->
+<!--        android:text="@string/timeline"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textColor="@android:color/black"-->
+<!--        android:textSize="34sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <ListView
-        android:id="@+id/listCourseName"
-        android:layout_width="409dp"
-        android:layout_height="681dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/appBarLayout2" />
+<!--    <ListView-->
+<!--        android:id="@+id/listCourseName"-->
+<!--        android:layout_width="409dp"-->
+<!--        android:layout_height="681dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/appBarLayout2" />-->
 
-    <EditText
-        android:id="@+id/courseName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/enterName"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textColorHint="#757575"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAddName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+<!--    <EditText-->
+<!--        android:id="@+id/courseName"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:ems="10"-->
+<!--        android:hint="@string/enterName"-->
+<!--        android:inputType="textPersonName"-->
+<!--        android:minHeight="48dp"-->
+<!--        android:textColorHint="#757575"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/buttonAddName"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:autofillHints="" />-->
 
-    <Button
-        android:id="@+id/buttonAddName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add_course_name"
-    <RelativeLayout
-        android:layout_width="412dp"
-        android:layout_height="626dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timelineText">
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <Button-->
+<!--        android:id="@+id/buttonAddName"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/add_course_name"-->
+<!--    <RelativeLayout-->
+<!--        android:layout_width="412dp"-->
+<!--        android:layout_height="626dp"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/timelineText"/>-->
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/timeline_recycler_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="-6dp"
-            android:clipToPadding="false"
-            android:padding="8dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-    </RelativeLayout>
-    <Button
-        android:id="@+id/buttonBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/timeline_recycler_list"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_marginStart="-6dp"-->
+<!--            android:clipToPadding="false"-->
+<!--            android:padding="8dp"-->
+<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />-->
 
+<!--    <Button-->
+<!--        android:id="@+id/buttonBack"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/back"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
+<!--</RelativeLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,8 +35,10 @@ public class Home extends Fragment {
             Bundle savedInstanceState
     ) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        String email = Student.getInstance().getEmail();
-        ((AppCompatActivity) requireContext()).getSupportActionBar().setTitle("Welcome, " + email);
+        if (((AppCompatActivity) requireContext()).getSupportActionBar() != null) {
+            String email = Student.getInstance().getEmail();
+            ((AppCompatActivity) requireContext()).getSupportActionBar().setTitle("Welcome, " + email);
+        }
         return binding.getRoot();
 
     }

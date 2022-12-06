@@ -284,17 +284,17 @@ public class AdminHome extends Fragment {
 
         buttonAdd = (Button)getView().findViewById(R.id.buttonAdd);
 
-       binding.prereq.setOnClickListener(new View.OnClickListener(){
-           @Override
-           public void onClick(View view) {
-               courseCode = editTextName.getText().toString();
-               courseName = editCourseName.getText().toString();
-
-               SelectPrereqs.context = AdminHome.this;
-               NavHostFragment.findNavController(AdminHome.this)
-                       .navigate(R.id.action_firstFragment_to_selectPrereqs2);
-           }
-       });
+//       binding.prereq.setOnClickListener(new View.OnClickListener(){
+//           @Override
+//           public void onClick(View view) {
+//               courseCode = editTextName.getText().toString();
+//               courseName = editCourseName.getText().toString();
+//
+//               SelectPrereqs.context = AdminHome.this;
+//               NavHostFragment.findNavController(AdminHome.this)
+//                       .navigate(R.id.action_firstFragment_to_selectPrereqs2);
+//           }
+//       });
 
         binding.buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override

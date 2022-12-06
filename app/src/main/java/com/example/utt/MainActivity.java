@@ -25,12 +25,8 @@ import com.example.utt.databinding.ActivityMainBinding;
 import com.example.utt.models.Course;
 import com.example.utt.models.CourseEventListener;
 import com.example.utt.models.Student;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         DatabaseHandler.initialise();
         setSupportActionBar(binding.toolbar);
-        String cookieId = CookieLogin.getUserName(this);
+        String cookieId = CookieLogin.getUserId(this);
 
         if (cookieId.length() != 0) {
             Student s = new Student("forTesting", "forTesting");
@@ -68,26 +64,27 @@ public class MainActivity extends AppCompatActivity {
         navController = Objects.requireNonNull(navHostFragment).getNavController();
 
         navController.addOnDestinationChangedListener((firstArg, destination, thirdArg) -> {
-            ActionBar actionBar = getSupportActionBar();
-            if(destination.getId() == R.id.LoginFragment || destination.getId() == R.id.selectPrereqs2) {
-            // The back_button should be referenced with a better method
-            ActionBar actionBar = getSupportActionBar();
-            if(destination.getId() == R.id.LoginFragment) {
-                binding.toolbar.setVisibility(View.GONE);
-            }
-            else {
-                binding.toolbar.setVisibility(View.VISIBLE);
-                assert actionBar != null;
-                actionBar.setDisplayHomeAsUpEnabled(true);
-            }
-            if(destination.getId() == R.id.Home || destination.getId() == R.id.firstFragment) {
-                assert actionBar != null;
-                actionBar.setDisplayHomeAsUpEnabled(false);
-            if(destination.getId() == R.id.FirstFragment || destination.getId() == R.id.firstFragment) {
-                assert actionBar != null;
-                actionBar.setDisplayHomeAsUpEnabled(false);
-            }
-        });
+                    ActionBar actionBar = getSupportActionBar();
+                    if (destination.getId() == R.id.LoginFragment || destination.getId() == R.id.FragmentSelectPrerequisites) {
+                        // The back_button should be referenced with a better method
+                        if (destination.getId() == R.id.LoginFragment) {
+                            binding.toolbar.setVisibility(View.GONE);
+                        } else {
+                            binding.toolbar.setVisibility(View.VISIBLE);
+                            assert actionBar != null;
+                            actionBar.setDisplayHomeAsUpEnabled(true);
+                        }
+                        if (destination.getId() == R.id.Home || destination.getId() == R.id.Home) {
+                            assert actionBar != null;
+                            actionBar.setDisplayHomeAsUpEnabled(false);
+                            if (destination.getId() == R.id.firstFragment) {
+                                assert actionBar != null;
+                                actionBar.setDisplayHomeAsUpEnabled(false);
+                            }
+                        }
+                    }
+                });
+
 
         /// TESTING STUFF
 
@@ -149,7 +146,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private CharSequence menuIconWithText(Drawable r, String title) {
-
         r.setBounds(0, 0, r.getIntrinsicWidth(), r.getIntrinsicHeight());
         SpannableString sb = new SpannableString("    " + title);
         ImageSpan imageSpan = new ImageSpan(r, ImageSpan.ALIGN_BOTTOM);

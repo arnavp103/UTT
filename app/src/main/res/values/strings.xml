@@ -51,14 +51,7 @@
     <string name="reply_title">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="timeline">TIMELINE</string>
-    <string name="modify_course">Modify</string>
-    <string name="select_prerequisites">Select prerequisites</string>
+
     <string name="winter">Winter</string>
     <string name="summer">Summer</string>
     <string name="fall">Fall</string>
@@ -100,7 +93,22 @@
     <string name="email_field">Email</string>
     <string name="password_field">Password</string>
 
-    <string name="timeline">Timeline</string>
 
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="timeline">TIMELINE</string>
+    <string name="modify_course">Modify</string>
+    <string name="select_prerequisites">Select prerequisites</string>
     <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="add_course">Add course</string>
+    <string name="enter_course_name">Enter course name</string>
+    <string name="enterCourseName">Enter course name</string>
+    <string name="enter_course_session_offerings">Enter course session offerings</string>
+    <string name="enter_course_prerequisites">Enter course prerequisites</string>
+
 </resources>

@@ -137,7 +137,7 @@ public class LoginFragMVP extends Fragment implements LoginPresenter.LoginView{
     @Override
     public void goToAdminHome() {
         NavHostFragment.findNavController(LoginFragMVP.this)
-                .navigate(R.id.action_LoginFragment_to_firstFragment);
+                .navigate(R.id.action_LoginFragment_to_adminPlaceholder);
     }
 
     @Override

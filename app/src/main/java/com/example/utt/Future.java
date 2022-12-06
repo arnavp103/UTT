@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -116,22 +117,6 @@ public class Future extends Fragment {
         loadData();
         loadPreviousCourses();
 
-
-
-        ( (Button) v.findViewById(R.id.generate_timeline)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Log.d("User Registry", "->" + Student.getInstance().getId());
-                Bundle bundle = new Bundle();
-                bundle.putStringArrayList("FUTURE", futureList);
-                NavHostFragment.findNavController(addFuture.this)
-                        // .navigate(R.id.action_FirstFragment_to_SecondFragment);
-                        .navigate(R.id.action_addFuture_to_timelineGenerateFunctionality, bundle);
-            }
-        });
-
-
-
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(@NonNull View view) {
@@ -154,7 +139,11 @@ public class Future extends Fragment {
             public void onClick(@NonNull View view) {
 
                 Student.getInstance().setCoursesTaken(futureList);
-
+                Bundle bundle = new Bundle();
+                bundle.putStringArrayList("FUTURE", futureList);
+                NavHostFragment.findNavController(Future.this)
+                        // .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                        .navigate(R.id.action_addFuture_to_timelineGenerateFunctionality, bundle);
             }
         });
 
@@ -231,7 +220,6 @@ public class Future extends Fragment {
                         //Filter array list
                         course_adapter.getFilter().filter(charSequence);
 
-
                     }
 
                     @Override
@@ -302,8 +290,6 @@ public class Future extends Fragment {
                     //viewAdapter.notifyDataSetChanged();
                     //Log.i("RM", futureList.get(futureList.size()));
                     courseView.setAdapter(viewAdapter);
-
-
                 }
 
 

@@ -47,6 +47,7 @@ public class TimelineCourseModel {
                 this.fallCourses = yearContents.get(item);
             }
         }
+        expanded = true;
     }
 
 //    public TimelineCourseModel(CourseScheduling model) {

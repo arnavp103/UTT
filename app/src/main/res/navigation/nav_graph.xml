@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/firstFragment">
+    app:startDestination="@id/LoginFragment">
 
     <fragment
         android:id="@+id/Home"
@@ -11,58 +11,31 @@
         android:label="@string/home_label"
         tools:layout="@layout/fragment_home">
 
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/slide_out"
-            app:popEnterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/fade_out"
-            />
-        <action
-            android:id="@+id/action_FirstFragment_to_recyclerListFragment"
-            app:destination="@id/recyclerListFragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/slide_out"
-            app:popEnterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/fade_out"/>
+
         <action
             android:id="@+id/action_FirstFragment_to_loginFragment"
             app:destination="@id/LoginFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/slide_out"
             app:popEnterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/fade_out"/>
+            app:popExitAnim="@anim/fade_out" />
         <action
             android:id="@+id/action_home_to_addFuture"
             app:destination="@id/addFuture"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/slide_out"
             app:popEnterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/fade_out"/>
+            app:popExitAnim="@anim/fade_out" />
         <action
             android:id="@+id/action_Home_to_addPrev"
             app:destination="@id/addPrev"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/slide_out"
             app:popEnterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/fade_out"/>
+            app:popExitAnim="@anim/fade_out" />
 
     </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.utt.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
 
-        <action
-            android:id="@+id/action_SecondFragment_to_Home"
-            app:destination="@id/Home"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/slide_out"
-            app:popEnterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/fade_out"/>
-    </fragment>
     <fragment
         android:id="@+id/addFuture"
         android:name="com.example.utt.Future"
@@ -74,10 +47,10 @@
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/slide_out"
             app:popEnterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/fade_out"/>
+            app:popExitAnim="@anim/fade_out" />
         <action
             android:id="@+id/action_addFuture_to_timelineGenerateFunctionality"
-            app:destination="@id/timelineGenerateFunctionality" />
+            app:destination="@id/FragmentTimelineGenerate" />
 
     </fragment>
     <fragment
@@ -91,14 +64,10 @@
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/slide_out"
             app:popEnterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/fade_out"/>
+            app:popExitAnim="@anim/fade_out" />
 
     </fragment>
-    <fragment
-        android:id="@+id/recyclerListFragment"
-        android:name="com.example.utt.RecyclerListFragment"
-        android:label="fragment_recycler_list"
-        tools:layout="@layout/fragment_recycler_list" />
+
     <fragment
         android:id="@+id/LoginFragment"
         android:name="com.example.utt.LoginFragMVP"
@@ -110,30 +79,37 @@
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/slide_out"
             app:popEnterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/fade_out"/>
+            app:popExitAnim="@anim/fade_out" />
         <action
             android:id="@+id/action_LoginFragment_to_adminPlaceholder"
-            app:destination="@id/adminPlaceholder" />
+            app:destination="@id/adminHome"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
-        android:id="@+id/adminPlaceholder"
-        android:name="com.example.utt.AdminPlaceholder"
-        android:label="fragment_admin_placeholder"
-        tools:layout="@layout/fragment_admin_placeholder">
+        android:id="@+id/adminHome"
+        android:name="com.example.utt.AdminHome"
+        android:label="Admin Manager"
+        tools:layout="@layout/fragment_admin_home">
         <action
             android:id="@+id/action_LoginFragment_to_firstFragment"
             app:destination="@id/firstFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/slide_out"
             app:popEnterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/fade_out"/>
+            app:popExitAnim="@anim/fade_out" />
         <action
             android:id="@+id/action_LoginFragment_to_signUpPage"
-            app:destination="@id/signUpPage"
+            app:destination="@id/FragmentSignUp"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/slide_out"
             app:popEnterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/fade_out"/>
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_adminHome_self"
+            app:destination="@id/adminHome" />
     </fragment>
     <action
         android:id="@+id/action_global_LoginFragment"
@@ -141,56 +117,30 @@
         app:enterAnim="@anim/fade_in"
         app:exitAnim="@anim/slide_out"
         app:popEnterAnim="@anim/slide_in"
-        app:popExitAnim="@anim/fade_out"/>
+        app:popExitAnim="@anim/fade_out" />
     <action
         android:id="@+id/action_home_to_addFuture"
         app:destination="@id/addFuture"
         app:enterAnim="@anim/fade_in"
         app:exitAnim="@anim/slide_out"
         app:popEnterAnim="@anim/slide_in"
-        app:popExitAnim="@anim/fade_out"/>
+        app:popExitAnim="@anim/fade_out" />
     <fragment
         android:id="@+id/firstFragment"
         android:name="com.example.utt.AdminHome"
         android:label="Course Manager"
         tools:layout="@layout/fragment_admin_home">
-        <action
-            android:id="@+id/action_firstFragment_to_secondFragment"
-            app:destination="@id/secondFragment" />
+
         <action
             android:id="@+id/action_firstFragment_to_selectPrereqs2"
-            app:destination="@id/selectPrereqs2" />
+            app:destination="@id/FragmentSelectPrerequisites" />
         <action
             android:id="@+id/action_firstFragment_to_fragment_modify_course"
-            app:destination="@id/fragment_modify_course" />
+            app:destination="@id/FragmentModifyCourse" />
     </fragment>
+
     <fragment
-        android:id="@+id/secondFragment"
-        android:name="com.example.utt.SecondFragment"
-        android:label="fragment_second"
-        tools:layout="@layout/fragment_second">
-        android:name="com.example.utt.FirstFragment"
-        android:label="fragment_first"
-        tools:layout="@layout/fragment_first">
-        <action
-            android:id="@+id/action_firstFragment_to_LoginFragment"
-            app:destination="@id/LoginFragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/slide_out"
-            app:popEnterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/fade_out"/>
-        <action
-            android:id="@+id/action_firstFragment_to_recyclerListFragment"
-            app:destination="@id/recyclerListFragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/slide_out"
-            app:popEnterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/fade_out"/>
-            android:id="@+id/action_secondFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/selectPrereqs2"
+        android:id="@+id/FragmentSelectPrerequisites"
         android:name="com.example.utt.SelectPrereqs"
         android:label="Prerequisite Selection"
         tools:layout="@layout/select_prereqs">
@@ -199,10 +149,10 @@
             app:destination="@id/firstFragment" />
         <action
             android:id="@+id/action_selectPrereqs2_to_fragment_modify_course"
-            app:destination="@id/fragment_modify_course" />
+            app:destination="@id/FragmentModifyCourse" />
     </fragment>
     <fragment
-        android:id="@+id/fragment_modify_course"
+        android:id="@+id/FragmentModifyCourse"
         android:name="com.example.utt.fragment_modify_course"
         android:label="Modify Course"
         tools:layout="@layout/fragment_modify_course">
@@ -211,16 +161,16 @@
             app:destination="@id/firstFragment" />
         <action
             android:id="@+id/action_fragment_modify_course_to_selectPrereqs2"
-            app:destination="@id/selectPrereqs2" />
+            app:destination="@id/FragmentSelectPrerequisites" />
     </fragment>
     <activity
-        android:id="@+id/signUpPage"
+        android:id="@+id/FragmentSignUp"
         android:name="com.example.utt.SignUpPage"
         android:label="activity_sign_up_page"
         tools:layout="@layout/activity_sign_up_page" />
     <fragment
-        android:id="@+id/timelineGenerateFunctionality"
+        android:id="@+id/FragmentTimelineGenerate"
         android:name="com.example.utt.TimelineGenerateFunctionality"
-        android:label="fragment_timeline"
+        android:label="Timeline"
         tools:layout="@layout/fragment_timeline" />
 </navigation>
