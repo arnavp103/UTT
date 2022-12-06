@@ -42,7 +42,11 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     implementation 'androidx.navigation:navigation-ui:2.5.3'
     implementation 'com.google.firebase:firebase-database:20.1.0'
+
+    implementation 'androidx.preference:preference:1.2.0'
     // testing
+
+
     testImplementation 'junit:junit:4.13.2'
     testImplementation "org.mockito:mockito-core:2.25.0"
     testImplementation "org.mockito.kotlin:mockito-kotlin:4.1.0"

@@ -5,7 +5,6 @@ import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.utt.database.DatabaseHandler;
 import com.example.utt.models.Student;
 import com.example.utt.models.User;
 
@@ -16,14 +15,18 @@ public class LoginPresenter implements LoginModel.Presenter {
 	private final LoginView view;
 	public LoginModel model;
 
+
 	public LoginPresenter(LoginView view) {
 		this(view, new LoginModel());
+		this.model = new LoginModel();
 	}
+
 
 	public LoginPresenter(LoginView view, LoginModel model) {
 		this.view = view;
 		this.model = model;
 	}	
+
 
 
 	public void query(String uname, String pword, View v) {
@@ -37,7 +40,7 @@ public class LoginPresenter implements LoginModel.Presenter {
 	}
 
 	public void checkCookie(Context context) {
-		DatabaseHandler.addOnReadyListener(new DatabaseHandler.OnReadyListener() {
+		LoginModel.addOnReadyListener(new LoginModel.OnReadyListener() {
 			@Override
 			public void onReady() {
 				// if they don't have anything saved to shared pref continue as normal
@@ -57,7 +60,7 @@ public class LoginPresenter implements LoginModel.Presenter {
 			view.collapseKeyboard();
 
 			if (accountType == AccountType.STUDENT) {
-				Student.login(new Student(uname, ""), new ArrayList<>());
+				Student.login(new Student(userID, uname, ""), new ArrayList<>());
 				view.goToStudentHome();
 			} else {
 				User.login(new User(uname, ""));
@@ -82,44 +85,17 @@ public class LoginPresenter implements LoginModel.Presenter {
 	}
 
 	interface LoginView {
-		public void makeSnackbar(String message);
-		public void goToAdminHome();
-		public void goToStudentHome();
-		public void goToSignUp();
-		public void collapseKeyboard();
+		void makeSnackbar(String message);
+		void goToAdminHome();
+		void goToStudentHome();
+		void goToSignUp();
+		void collapseKeyboard();
 	}
 
 	public void onDestroy() {
 		model = null;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -196,7 +196,7 @@ public class CourseDataModel {
     // TODO - Simplify this
     // Called by setKey()
     protected Course generateCourseObject() {
-        Log.d(TAG, "Generating Course Object for " + code);
+//        Log.d(TAG, "Generating Course Object for " + code);
         // Convert to the required types
         List<Course> child_prerequisites = new ArrayList<>();
         List<YearlySession> child_sessionOfferings = new ArrayList<>();
@@ -208,13 +208,14 @@ public class CourseDataModel {
                 // Check if prerequisite exists in the Nonexistent-Course Collection
                 if (!nonExistentCourses.containsKey(prerequisite)) {    // Course not yet in NEC
                     prerequisiteCourse = new Course();
+                    prerequisiteCourse.setCourseCode(prerequisite);
                     nonExistentCourses.put(prerequisite, prerequisiteCourse);
-                    Log.d(TAG, code + " | Looking for: " + prerequisite + " | -> NEC: " + nonExistentCourses);
+//                    Log.d(TAG, code + " | Looking for: " + prerequisite + " | -> NEC: " + nonExistentCourses);
                 } else {    // Course exists so placeholder reference it.
-                    prerequisiteCourse = nonExistentCourses.get(code);
+                    prerequisiteCourse = nonExistentCourses.get(prerequisite);
                 }
             }
-            Log.d("Adding: ", prerequisite + " " + prerequisiteCourse);
+//            Log.d("Adding: ", prerequisite + " " + prerequisiteCourse);
             child_prerequisites.add(prerequisiteCourse);
             //CourseDataModel.getCourses().get(prerequisite));
         }

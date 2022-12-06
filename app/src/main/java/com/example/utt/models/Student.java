@@ -1,11 +1,9 @@
 package com.example.utt.models;
-import android.util.Log;
 
 import android.util.Log;
 
 import com.google.firebase.firestore.Exclude;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +18,10 @@ public class Student extends User {
     public Student(String email, String password) {
         super(email, password);
     }
+    public Student(String id, String email, String password) {
+        super(email, password);
+        setId(id);
+    }
 
     public static void logout() {
         // TODO - implement.
@@ -28,6 +30,7 @@ public class Student extends User {
     public static void login(Student user, List<String> coursesTaken) {
         if (currentStudent != null) logout();
         currentStudent = user;
+        Log.d("Instantiating: ", "new user: " + user + " with id: " + user.getId());
         user.setCoursesTaken(coursesTaken);
     }
 
@@ -61,8 +64,10 @@ public class Student extends User {
     @Exclude
     public Map<String, String> _getCoursesTaken() {
         Map<String, String> result = new HashMap<>();
-        for (int i = 0; i < coursesTaken.size(); i++) {
-            result.put(Integer.toString(i), coursesTaken.get(i));
+        if (coursesTaken != null) {
+            for (int i = 0; i < coursesTaken.size(); i++) {
+                result.put(Integer.toString(i), coursesTaken.get(i));
+            }
         }
         return (result.size() == 0) ? Map.of("0","None") : result;
     }

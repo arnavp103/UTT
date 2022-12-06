@@ -44,6 +44,18 @@ public class MainActivity extends AppCompatActivity {
 
         DatabaseHandler.initialise();
         setSupportActionBar(binding.toolbar);
+        String cookieId = CookieLogin.getInstance().getUserId(this);
+//
+//        if (cookieId.length() != 0) {
+//            // get the uname of the user given the id
+//
+//            Student s = new Student("forTesting", "forTesting");
+//            s.setId(cookieId);
+//
+//            Student.login(s, List.of());
+//
+//            Log.d("Already Logged in: ", cookieId);
+//        }
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
@@ -53,8 +65,9 @@ public class MainActivity extends AppCompatActivity {
         navController = Objects.requireNonNull(navHostFragment).getNavController();
 
         navController.addOnDestinationChangedListener((firstArg, destination, thirdArg) -> {
+
             ActionBar actionBar = getSupportActionBar();
-            if(destination.getId() == R.id.LoginFragment || destination.getId() == R.id.selectPrereqs2) {
+            if(destination.getId() == R.id.LoginFragment || destination.getId() == R.id.FragmentSelectPrerequisites) {
                 binding.toolbar.setVisibility(View.GONE);
             }
             else {
@@ -62,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 assert actionBar != null;
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }
-            if(destination.getId() == R.id.StudentHome || destination.getId() == R.id.firstFragment) {
+            if(destination.getId() == R.id.StudentHome || destination.getId() == R.id.adminHome) {
                 assert actionBar != null;
                 actionBar.setDisplayHomeAsUpEnabled(false);
             }
@@ -112,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
+
             CookieLogin.getInstance().logout(this);
             Navigation.findNavController(this, R.id.nav_host_fragment_content_main).navigate(R.id.action_global_LoginFragment);
             return true;
@@ -128,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private CharSequence menuIconWithText(Drawable r, String title) {
-
         r.setBounds(0, 0, r.getIntrinsicWidth(), r.getIntrinsicHeight());
         SpannableString sb = new SpannableString("    " + title);
         ImageSpan imageSpan = new ImageSpan(r, ImageSpan.ALIGN_BOTTOM);
@@ -137,7 +150,4 @@ public class MainActivity extends AppCompatActivity {
         return sb;
     }
 
-    private void addToMenu(Menu menu) {
-
-    }
 }

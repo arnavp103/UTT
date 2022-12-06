@@ -2,6 +2,7 @@ package com.example.utt;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -37,6 +38,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
 
 
 public class Prev extends Fragment {
@@ -104,6 +106,7 @@ public class Prev extends Fragment {
         //initialize our strings
         addCourse = "";
         addCourseKey = "";
+
 
 
 
@@ -179,8 +182,7 @@ public class Prev extends Fragment {
                                 //pastList.remove(to_remove);
                                 //must remove from database
 //                                DatabaseHandler.removeCourse(com.example.utt.models.Student.getCourse(code));
-
-                                addCourseKey = Course.getCourse(code.trim()).getKey();
+                                addCourseKey = Course.getCourse(code.trim() ).getKey();
                                 deleteCourse(addCourseKey);
 
 
@@ -217,6 +219,7 @@ public class Prev extends Fragment {
                 //if the course that was removed is in the list
                 //loadData again,
                 //remove from pastList and or pastListTotal
+                Toast.makeText(getContext(), "A course was removed!", Toast.LENGTH_LONG).show();
                 if (pastList.contains(course.getCode())){
                     loadData();
                     Toast.makeText(getContext(), "We removed a course you added as it is no longer available!", Toast.LENGTH_LONG).show();
@@ -254,8 +257,8 @@ public class Prev extends Fragment {
                 EditText editText = dialog.findViewById(R.id.edit_text);
                 ListView listView = dialog.findViewById(R.id.list_view);
 
-                //Initialize array adaptor
-                //viewAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, pastList);
+                //Initialize array adapter
+                viewAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, pastList);
                 course_adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, allCourses);
 
                 listView.setAdapter(course_adapter);
@@ -286,8 +289,8 @@ public class Prev extends Fragment {
                         //when item selected from list
                         //set selected item on text view
 
-
                         addCourse = (String) course_adapter.getItem(i);
+
 
                         textView.setText(course_adapter.getItem(i));
                         textView.setTextColor(Color.WHITE);
@@ -322,7 +325,6 @@ public class Prev extends Fragment {
                     //courseView.notifyDataSetChanged();
                     //viewAdapter.notifyDataSetChanged();
 
-
                     studentCode.child(student_id).child(addCourseKey).setValue(addCourse);
                     courseView.setAdapter(viewAdapter);
 
@@ -350,6 +352,7 @@ public class Prev extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 allCourses.clear();
                 for(DataSnapshot courseSnapshot: snapshot.getChildren()){
+
                     String course = (courseSnapshot.getValue(ExcludedCourseDataModel.class)).getCode() + " ";
                     allCourses.add(course);
 
@@ -395,7 +398,7 @@ public class Prev extends Fragment {
 
                     if (id.equals(student_id)) {
                         for (DataSnapshot past: courseSnapshot.getChildren()){
-                            if (!past.getKey().equals("None")) {
+                            if (!(past.getKey().equals("None"))) {
                                 pastList.add((String) past.getValue());
                             }
 

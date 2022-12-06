@@ -1,16 +1,12 @@
 package com.example.utt.database;
 
 import com.example.utt.algorithm.model.Term;
-import com.example.utt.algorithm.model.YearlySession;
-import com.example.utt.models.Course;
-import com.example.utt.models.firebase.datamodel.CourseDataModel;
 import com.example.utt.models.Student;
 import com.example.utt.models.User;
+import com.example.utt.models.firebase.datamodel.CourseDataModel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class DatabaseSamples {
     public static void generate() {
@@ -69,14 +65,14 @@ public class DatabaseSamples {
         );
 
         courses.add(new CourseDataModel(
-                "Introduction to Computer Science II",
+                "Introduction to Compute Science II",
                 "CSCA48",
                 mapSessions(List.of("Winter", "Summer")),
                 List.of())
         );
 
         courses.add(new CourseDataModel(
-                "Introduction to Computer Science I",
+                "Introduction to Compute Science I",
                 "CSCA08",
                 mapSessions(List.of("Fall", "Winter")),
                 List.of())
@@ -163,7 +159,7 @@ public class DatabaseSamples {
                 "0beans"
         );
 
-        s.addCourse(List.of("CSCB36",  "CSCA08"));
+//        s.addCourse(List.of("CSCB36",  "CSCA08"));
         users.add(s);
 
         s = new Student(

@@ -6,7 +6,8 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#76A7BD"
+    android:background="@drawable/background_gradient"
+
     tools:context=".MainActivity">
 
 

@@ -5,9 +5,9 @@
     android:id="@+id/listCourses"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/screenBack"
+    android:background="@color/antique"
     android:padding="16dp"
-    tools:context=".SecondFragment">
+    tools:context=".TimelineGenerateFunctionality">
 
     <TextView
         android:id="@+id/timelineText"
@@ -17,7 +17,7 @@
         android:fontFamily="sans-serif"
         android:text="@string/timeline"
         android:textAlignment="center"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
-        android:layout_width="412dp"
+        android:layout_width="0dp"
         android:layout_height="626dp"
         android:layout_marginTop="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,9 +38,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="-6dp"
+            android:layout_marginStart="0dp"
             android:clipToPadding="false"
-            android:padding="8dp"
+            android:padding="8px"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </RelativeLayout>
 
