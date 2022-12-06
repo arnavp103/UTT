@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
+
 import android.content.Context;
 import android.view.View;
 
@@ -128,6 +129,30 @@ public class LoginPresenterTest {
     }
 
     @Test
+    public void testCheckCookie() {
+        LoginPresenter.LoginView loginView = Mockito.mock(LoginPresenter.LoginView.class);
+        View view = Mockito.mock(View.class);
+        CookieLogin login = Mockito.mock(CookieLogin.class);
+        LoginModel loginModel = Mockito.mock(LoginModel.class);
+        Context context = Mockito.mock(Context.class);
+
+        LoginPresenter presenter = new TestLoginPresenter(loginView, loginModel);
+
+        presenter.cookieLogin = login;
+
+        String userId = "boba";
+        when(login.getUserId(context)).thenReturn(userId);
+        Mockito.doNothing().when(loginModel).queryUserByID(userId, presenter);
+
+        try {
+            assertTrue(true);
+            presenter.checkCookie(context);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
     public void testCookieQueryNoView() {
         LoginPresenter.LoginView loginView = Mockito.mock(LoginPresenter.LoginView.class);
         View view = Mockito.mock(View.class);
@@ -174,6 +199,7 @@ public class LoginPresenterTest {
             fail();
         }
     }
+
     @Test
     public void testGetCookiePass() {
 //        public String getCookie(Context context) {
